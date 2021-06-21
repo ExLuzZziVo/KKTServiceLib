@@ -33,7 +33,7 @@ namespace MercuryKKTServiceLib.Types.Operations.Fiscal.Receipt.AddPositionToOpen
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(ProductName)).GetDisplayName()),
+                        GetType().GetProperty(nameof(ProductName)).GetDisplayName()),
                     nameof(name));
             }
 
@@ -41,7 +41,7 @@ namespace MercuryKKTServiceLib.Types.Operations.Fiscal.Receipt.AddPositionToOpen
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("DigitRangeValuesError"),
-                        this.GetType().GetProperty(nameof(Price)).GetDisplayName(), 0, 21474836),
+                        GetType().GetProperty(nameof(Price)).GetDisplayName(), 0, 21474836),
                     nameof(price));
             }
 
@@ -49,7 +49,7 @@ namespace MercuryKKTServiceLib.Types.Operations.Fiscal.Receipt.AddPositionToOpen
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("DigitRangeValuesError"),
-                        this.GetType().GetProperty(nameof(Qty)).GetDisplayName(), 0.001, 214748),
+                        GetType().GetProperty(nameof(Qty)).GetDisplayName(), 0.001, 214748),
                     nameof(quantity));
             }
 
@@ -62,10 +62,22 @@ namespace MercuryKKTServiceLib.Types.Operations.Fiscal.Receipt.AddPositionToOpen
         }
 
         /// <summary>
-        /// Код товара (маркировка)
+        /// Код товара
         /// </summary>
-        [Display(Name = "Код товара (маркировка)")]
+        /// <remarks>
+        /// Будет проигнорировано, если <see cref="MarkingCode"/> имеет значение
+        /// </remarks>
+        [Display(Name = "Код товара")]
         public string NomenclatureCode { get; set; }
+
+        /// <summary>
+        /// Маркировка товара
+        /// </summary>
+        /// <remarks>
+        /// Если этот параметр будет задан, то значение <see cref="NomenclatureCode"/> будет проигнорировано
+        /// </remarks>
+        [Display(Name = "Маркировка товара")]
+        public string MarkingCode { get; set; }
 
         /// <summary>
         /// Наименование предмета расчета
@@ -417,7 +429,7 @@ namespace MercuryKKTServiceLib.Types.Operations.Fiscal.Receipt.AddPositionToOpen
                         new ValidationResult(
                             string.Format(
                                 ErrorStrings.ResourceManager.GetString("AgentPropertiesRequirementValidationError"),
-                                this.GetType().GetProperty(nameof(Agent)).GetDisplayName()) +
+                                GetType().GetProperty(nameof(Agent)).GetDisplayName()) +
                             agentValidationResults.Aggregate(string.Empty,
                                 (current, c) => current + "\n\t" + c.ErrorMessage))
                     };
@@ -431,9 +443,9 @@ namespace MercuryKKTServiceLib.Types.Operations.Fiscal.Receipt.AddPositionToOpen
             bool isRequired)
         {
             return new ValidationResult(string.Format(
-                (isRequired
+                isRequired
                     ? ErrorStrings.ResourceManager.GetString("AgentPropertyIsRequiredValidationError")
-                    : ErrorStrings.ResourceManager.GetString("AgentPropertyIsNotRequiredValidationError")),
+                    : ErrorStrings.ResourceManager.GetString("AgentPropertyIsNotRequiredValidationError"),
                 agentType.GetDisplayName(),
                 typeof(AgentParams).GetProperty(invalidPropertyName).GetDisplayName()));
         }

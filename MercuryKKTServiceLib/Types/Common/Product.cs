@@ -21,9 +21,7 @@ namespace MercuryKKTServiceLib.Types.Common
         }
 
         [JsonConstructor]
-        private Product()
-        {
-        }
+        private Product() { }
 
         /// <summary>
         /// Код товара
@@ -71,10 +69,54 @@ namespace MercuryKKTServiceLib.Types.Common
         public decimal? Price { get; set; }
 
         /// <summary>
+        /// Сумма акциза, включенная в стоимость предмета расчета
+        /// </summary>
+        /// <remarks>
+        /// Версия базы ККТ: <b>0.3</b>
+        /// </remarks>
+        /// <list type="bullet">
+        /// <item>Должно лежать в диапазоне: 0.01-21474836</item>
+        /// </list>
+        [Display(Name = "Сумма акциза, включенная в стоимость предмета расчета")]
+        [JsonConverter(typeof(MoneyConverter))]
+        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ErrorStrings),
+            ErrorMessageResourceName = "DigitRangeValuesError")]
+        public decimal? ExciseAmount { get; set; }
+
+        /// <summary>
+        /// Код страны происхождения
+        /// </summary>
+        /// <remarks>
+        /// Версия базы ККТ: <b>0.3</b>
+        /// </remarks>
+        /// <list type="bullet">
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.CountryOfOriginCodePattern"/></item>
+        /// </list>
+        [RegularExpression(RegexHelper.CountryOfOriginCodePattern, ErrorMessageResourceType = typeof(ErrorStrings),
+            ErrorMessageResourceName = "StringFormatError")]
+        [Display(Name = "Код страны происхождения")]
+        public string CountryOfOrigin { get; set; }
+
+        /// <summary>
+        /// Регистрационный номер таможенной декларации
+        /// </summary>
+        /// <remarks>
+        /// Версия базы ККТ: <b>0.3</b>
+        /// </remarks>
+        /// <list type="bullet">
+        /// <item>Максимальная длина: 32</item>
+        /// </list>
+        [MaxLength(32, ErrorMessageResourceType = typeof(ErrorStrings),
+            ErrorMessageResourceName = "StringMaxLengthError")]
+        [Display(Name = "Регистрационный номер таможенной декларации")]
+        public string CustomsDeclaration { get; set; }
+
+        /// <summary>
         /// Маркированный товар
         /// </summary>
         /// <remarks>
         /// Значение по умолчанию: false
+        /// Версия базы ККТ: <b>0.2</b>
         /// </remarks>
         [Display(Name = "Маркированный товар")]
         public bool? Marked { get; set; } = false;
@@ -108,7 +150,8 @@ namespace MercuryKKTServiceLib.Types.Common
         /// <remarks>
         /// Значение по умолчанию: true
         /// </remarks>
-        [Display(Name = "Штучный товар")] public bool? Undivided { get; set; } = true;
+        [Display(Name = "Штучный товар")]
+        public bool? Undivided { get; set; } = true;
 
         /// <summary>
         /// Система налогообложения
@@ -122,11 +165,13 @@ namespace MercuryKKTServiceLib.Types.Common
         /// <remarks>
         /// Значение по умолчанию: <see cref="WatType.None"/>
         /// </remarks>
-        [Display(Name = "Налоговая ставка")] public WatType? TaxCode { get; set; } = WatType.None;
+        [Display(Name = "Налоговая ставка")]
+        public WatType? TaxCode { get; set; } = WatType.None;
 
         /// <summary>
         /// Платёжный агент
         /// </summary>
-        [Display(Name = "Платёжный агент")] public AgentType? Agent { get; set; }
+        [Display(Name = "Платёжный агент")]
+        public AgentType? Agent { get; set; }
     }
 }

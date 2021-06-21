@@ -113,6 +113,41 @@ namespace MercuryKKTServiceLib.Types.Enums
         /// <summary>
         /// Залог
         /// </summary>
-        [Display(Name = "Залог")] Deposit = 19
+        [Display(Name = "Залог")] Deposit = 19,
+
+        /// <summary>
+        /// Расход
+        /// </summary>
+        [Display(Name = "Расход")] Consumption = 20,
+
+        /// <summary>
+        /// Взносы на ОПС ИП
+        /// </summary>
+        [Display(Name = "Взносы на ОПС ИП")] SoleProprietorCpiContributions = 21,
+
+        /// <summary>
+        /// Вносы на ОПС
+        /// </summary>
+        [Display(Name = "Вносы на ОПС")] CpiContributions = 22,
+
+        /// <summary>
+        /// Взносы на ОМС ИП
+        /// </summary>
+        [Display(Name = "Взносы на ОМС ИП")] SoleProprietorCmiContributions = 23,
+
+        /// <summary>
+        /// Взносы на ОМС
+        /// </summary>
+        [Display(Name = "Взносы на ОМС")] CmiContributions = 24,
+
+        /// <summary>
+        /// Взносы на ОСС
+        /// </summary>
+        [Display(Name = "Взносы на ОСС")] CsiContributions = 25,
+
+        /// <summary>
+        /// Платеж казино
+        /// </summary>
+        [Display(Name = "Платеж казино")] CasinoPayment = 26
     }
 }

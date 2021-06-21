@@ -1,7 +1,19 @@
+using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-namespace MercuryKKTServiceLib.Types.Operations.KKT.SetDateTime
+namespace MercuryKKTServiceLib.Types.Operations.KKT.GetDateTime
 {
-    [Description("Результат установки даты и времени ККТ")]
-    public class SetDateTimeResult: OperationResult { }
+    [Description("Результат запроса даты и времени ККТ")]
+    public class GetDateTimeResult : OperationResult
+    {
+        /// <summary>
+        /// Дата и время ККТ
+        /// </summary>
+        [Display(Name = "Дата и время ККТ")]
+        [JsonConverter(typeof(IsoDateTimeConverter))]
+        public DateTime? DateTime { get; set; }
+    }
 }

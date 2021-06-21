@@ -17,6 +17,6 @@ namespace MercuryKKTServiceLib.Types.Operations
         /// Фискальный признак документа
         /// </summary>
         [Display(Name = "Фискальный признак документа")]
-        public uint FiscalSign { get; set; }
+        public string FiscalSign { get; set; }
     }
 }

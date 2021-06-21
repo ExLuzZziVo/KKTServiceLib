@@ -26,7 +26,7 @@ var sessionKey = new OpenSessionOperation("COM2").Execute(null);
 
 var result = new <Операция>.Execute(sessionKey);
 
-new CloseSessionOperation(sessionKey).Execute(sessionKey);
+new CloseSessionOperation().Execute(sessionKey);
 ```
 Все доступные операции находятся в пространстве имен <b>MercuryKKTServiceLib.Types.Operations</b>
 
