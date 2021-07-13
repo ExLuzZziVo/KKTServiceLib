@@ -10,7 +10,7 @@ namespace MercuryKKTServiceLib.Types.Converters
     {
         public override void WriteJson(JsonWriter writer, decimal value, JsonSerializer serializer)
         {
-            writer.WriteValue((int) Math.Round(value, 2, MidpointRounding.AwayFromZero) * 100);
+            writer.WriteValue((int) (Math.Round(value, 2, MidpointRounding.AwayFromZero) * 100));
         }
 
         public override decimal ReadJson(JsonReader reader, Type objectType, decimal existingValue,
