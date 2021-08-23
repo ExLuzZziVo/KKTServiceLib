@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AtolKKTServiceLib", "AtolKKTServiceLib\AtolKKTServiceLib.csproj", "{EE5CFAB9-85FE-4F95-A361-6DFB454ED05E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KKTServiceLib.Atol", "KKTServiceLib.Atol\KKTServiceLib.Atol.csproj", "{EE5CFAB9-85FE-4F95-A361-6DFB454ED05E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MercuryKKTServiceLib", "MercuryKKTServiceLib\MercuryKKTServiceLib.csproj", "{926A8239-E86A-4FEA-B2CE-F98F2D1F72E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KKTServiceLib.Mercury", "KKTServiceLib.Mercury\KKTServiceLib.Mercury.csproj", "{926A8239-E86A-4FEA-B2CE-F98F2D1F72E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KKTServiceLib.Shared", "KKTServiceLib.Shared\KKTServiceLib.Shared.csproj", "{F590250F-D3F5-4024-BEEA-1E02EFD58167}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KKTServiceLib.Shared", "KKTServiceLib.Shared\KKTServiceLib.Shared.csproj", "{F590250F-D3F5-4024-BEEA-1E02EFD58167}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
