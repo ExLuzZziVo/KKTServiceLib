@@ -28,11 +28,12 @@ namespace KKTServiceLib.Atol.Types.Common.Document
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("RequiredError"),
-                        this.GetType().GetProperty(nameof(Barcode)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Barcode)).GetDisplayName()),
                     nameof(barcodeValue));
             }
 
             var isBarcodeValueValid = false;
+
             switch (barcodeType)
             {
                 case BarcodeType.EAN8:

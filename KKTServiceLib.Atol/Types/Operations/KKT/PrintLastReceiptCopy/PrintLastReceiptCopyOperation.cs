@@ -12,8 +12,6 @@ namespace KKTServiceLib.Atol.Types.Operations.KKT.PrintLastReceiptCopy
         /// <summary>
         /// Печать копии последнего чека
         /// </summary>
-        public PrintLastReceiptCopyOperation() : base("printLastReceiptCopy")
-        {
-        }
+        public PrintLastReceiptCopyOperation() : base("printLastReceiptCopy") { }
     }
 }

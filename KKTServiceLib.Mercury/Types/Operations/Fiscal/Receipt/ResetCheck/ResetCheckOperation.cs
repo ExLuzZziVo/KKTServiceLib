@@ -8,8 +8,6 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.ResetCheck
         /// <summary>
         /// Аннулирование (сброс) текущего чека
         /// </summary>
-        public ResetCheckOperation() : base("ResetCheck")
-        {
-        }
+        public ResetCheckOperation() : base("ResetCheck") { }
     }
 }

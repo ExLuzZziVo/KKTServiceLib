@@ -11,11 +11,11 @@ using KKTServiceLib.Shared.Resources;
 
 namespace KKTServiceLib.Atol.Types.Common
 {
-    [Description("Код маркировки")]
+    [Description("Код маркировки (ФФД < 1.2)")]
     public class MarkingCodeParams
     {
         /// <summary>
-        /// Код маркировки
+        /// Код маркировки (ФФД < 1.2)
         /// </summary>
         /// <param name="mark">Base64-представление значения кода маркировки</param>
         public MarkingCodeParams(string mark)
@@ -24,7 +24,7 @@ namespace KKTServiceLib.Atol.Types.Common
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Mark)).GetDisplayName()), nameof(mark));
+                        GetType().GetProperty(nameof(Mark)).GetDisplayName()), nameof(mark));
             }
 
             Mark = mark;

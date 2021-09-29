@@ -8,8 +8,6 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.GetKKTDatabaseP
         /// <summary>
         /// Получение прогресса выполнения операции с базой данных ККТ
         /// </summary>
-        public GetKKTDatabaseProgressOperation() : base("GetProgress")
-        {
-        }
+        public GetKKTDatabaseProgressOperation() : base("GetProgress") { }
     }
 }

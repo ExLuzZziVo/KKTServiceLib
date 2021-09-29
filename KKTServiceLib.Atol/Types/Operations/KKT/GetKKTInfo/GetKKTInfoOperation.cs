@@ -12,8 +12,6 @@ namespace KKTServiceLib.Atol.Types.Operations.KKT.GetKKTInfo
         /// <summary>
         /// Запрос информации о ККТ
         /// </summary>
-        public GetKKTInfoOperation() : base("getDeviceInfo")
-        {
-        }
+        public GetKKTInfoOperation() : base("getDeviceInfo") { }
     }
 }

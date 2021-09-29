@@ -12,8 +12,6 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Shift.GetShiftStatus
         /// <summary>
         /// Запрос состояния смены
         /// </summary>
-        public GetShiftStatusOperation() : base("getShiftStatus")
-        {
-        }
+        public GetShiftStatusOperation() : base("getShiftStatus") { }
     }
 }

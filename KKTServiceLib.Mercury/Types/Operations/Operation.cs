@@ -70,8 +70,11 @@ namespace KKTServiceLib.Mercury.Types.Operations
             SessionKey = sessionKey;
 
             var validationResults = Validate();
+
             if (validationResults.Count() != 0)
+            {
                 throw new ExtendedValidationException(validationResults);
+            }
 
             var jsonData = JsonConvert.SerializeObject(this,
                 Formatting.None,
@@ -84,7 +87,9 @@ namespace KKTServiceLib.Mercury.Types.Operations
             var jsonResult = InecrmanServiceConnector.SendJson(jsonData, driverUrl);
 
             if (jsonResult.IsNullOrEmptyOrWhiteSpace())
+            {
                 return default;
+            }
 
             var result = JsonConvert.DeserializeObject<T>(jsonResult);
 

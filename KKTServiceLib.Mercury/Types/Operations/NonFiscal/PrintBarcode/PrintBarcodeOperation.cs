@@ -23,11 +23,12 @@ namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintBarcode
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Value)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Value)).GetDisplayName()),
                     nameof(barcodeValue));
             }
 
             var isBarcodeValueValid = false;
+
             switch (barcodeType)
             {
                 case BarcodeType.EAN8:

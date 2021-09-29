@@ -38,7 +38,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
         [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Тип открываемого чека")]
         public FiscalReceiptType CheckType { get; }
-        
+
         /// <summary>
         /// Система налогообложения
         /// </summary>
@@ -155,7 +155,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
                         {
                             new ValidationResult(string.Format(
                                 ErrorStrings.ResourceManager.GetString("RequiredError"),
-                                this.GetType().GetProperty(nameof(CorrectionInfo)).GetDisplayName()))
+                                GetType().GetProperty(nameof(CorrectionInfo)).GetDisplayName()))
                         };
                     }
                     else if (CorrectionInfo.CorrectionType == CorrectionReceiptCorrectionType.Instruction &&
@@ -165,7 +165,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
                         {
                             new ValidationResult(string.Format(
                                 ErrorStrings.ResourceManager.GetString("RequiredError"),
-                                this.GetType().GetProperty(nameof(CorrectionInfo.CauseDocNum)).GetDisplayName()))
+                                GetType().GetProperty(nameof(CorrectionInfo.CauseDocNum)).GetDisplayName()))
                         };
                     }
 

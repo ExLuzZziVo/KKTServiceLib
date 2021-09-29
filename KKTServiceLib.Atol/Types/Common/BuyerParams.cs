@@ -1,9 +1,13 @@
 #region
 
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using KKTServiceLib.Atol.Types.Enums;
 using KKTServiceLib.Shared.Helpers;
 using KKTServiceLib.Shared.Resources;
+using KKTServiceLib.Shared.Types.Converters;
+using Newtonsoft.Json;
 
 #endregion
 
@@ -40,5 +44,59 @@ namespace KKTServiceLib.Atol.Types.Common
         /// </summary>
         [Display(Name = "Наименование покупателя")]
         public string Name { get; set; }
+
+        /// <summary>
+        /// Дата рождения
+        /// </summary>
+        /// <remarks>
+        /// Только для ФФД ≥ 1.2
+        /// </remarks>
+        [Display(Name = "Дата рождения")]
+        [JsonConverter(typeof(CustomDateTimeConverter), "dd.MM.yyyy")]
+        public DateTime? BirthDate { get; set; }
+
+        /// <summary>
+        /// Гражданство
+        /// </summary>
+        /// <list type="bullet">
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.CountryOfOriginCodePattern"/></item>
+        /// <item>Максимальная длина: 3</item>
+        /// </list>
+        /// <remarks>
+        /// Только для ФФД ≥ 1.2
+        /// </remarks>
+        [Display(Name = "Гражданство")]
+        [MaxLength(3, ErrorMessageResourceType = typeof(ErrorStrings),
+            ErrorMessageResourceName = "StringMaxLengthError")]
+        [RegularExpression(RegexHelper.CountryOfOriginCodePattern, ErrorMessageResourceType = typeof(ErrorStrings),
+            ErrorMessageResourceName = "StringFormatError")]
+        public string Citizenship { get; set; }
+
+        /// <summary>
+        /// Код вида документа, удостоверяющего личность
+        /// </summary>
+        /// <remarks>
+        /// Только для ФФД ≥ 1.2
+        /// </remarks>
+        [Display(Name = "Код вида документа, удостоверяющего личность")]
+        public IdentityDocumentType? IdentityDocumentCode { get; set; }
+
+        /// <summary>
+        /// Данные документа, удостоверяющего личность
+        /// </summary>
+        /// <remarks>
+        /// Только для ФФД ≥ 1.2
+        /// </remarks>
+        [Display(Name = "Данные документа, удостоверяющего личность")]
+        public string IdentityDocumentData { get; set; }
+
+        /// <summary>
+        /// Адрес покупателя/клиента
+        /// </summary>
+        /// <remarks>
+        /// Только для ФФД ≥ 1.2
+        /// </remarks>
+        [Display(Name = "Адрес покупателя/клиента")]
+        public string Address { get; set; }
     }
 }

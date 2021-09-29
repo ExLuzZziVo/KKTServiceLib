@@ -23,11 +23,11 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Cash.CreateCashManipulat
         public CreateCashManipulationOperation(CashManipulationType type, OperatorParams operatorParams,
             decimal cashSum) : base(type.ToString())
         {
-            if (cashSum < (decimal) 0.01 || cashSum > 21474836)
+            if (cashSum < (decimal)0.01 || cashSum > 21474836)
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("DigitRangeValuesError"),
-                        this.GetType().GetProperty(nameof(Cash)).GetDisplayName(), 0.01, 21474836),
+                        GetType().GetProperty(nameof(Cash)).GetDisplayName(), 0.01, 21474836),
                     nameof(cashSum));
             }
 

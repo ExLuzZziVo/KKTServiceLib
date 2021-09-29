@@ -16,9 +16,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <summary>
         /// Текстовый элемент
         /// </summary>
-        public TextDocumentParams() : base(PrintDocumentType.Text)
-        {
-        }
+        public TextDocumentParams() : base(PrintDocumentType.Text) { }
 
         /// <summary>
         /// Текстовый элемент

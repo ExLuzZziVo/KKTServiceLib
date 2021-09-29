@@ -8,8 +8,6 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.GetKKTStatus
         /// <summary>
         /// Запрос состояния ККТ
         /// </summary>
-        public GetKKTStatusOperation() : base("GetStatus")
-        {
-        }
+        public GetKKTStatusOperation() : base("GetStatus") { }
     }
 }

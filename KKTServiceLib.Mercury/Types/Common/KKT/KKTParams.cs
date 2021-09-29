@@ -25,7 +25,7 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(RegNum)).GetDisplayName()),
+                        GetType().GetProperty(nameof(RegNum)).GetDisplayName()),
                     nameof(registrationNumber));
             }
 
@@ -34,7 +34,7 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Address)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Address)).GetDisplayName()),
                     nameof(address));
             }
 
@@ -43,7 +43,7 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Location)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Location)).GetDisplayName()),
                     nameof(location));
             }
 
@@ -55,9 +55,7 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
         }
 
         [JsonConstructor]
-        private KKTParams()
-        {
-        }
+        private KKTParams() { }
 
         /// <summary>
         /// Регистрационный номер ККТ

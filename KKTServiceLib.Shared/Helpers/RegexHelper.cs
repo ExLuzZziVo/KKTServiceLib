@@ -105,6 +105,36 @@
         public const string BarcodeCODE39_EXTENDEDPattern = @"^[\x00-\x7F]*$";
 
         /// <summary>
+        /// Код меховых изделий
+        /// </summary>
+        public const string BarcodeFurPattern = @"^[A-Z]{2}-[0-9]{6}-[A-Z]{10}$";
+
+        /// <summary>
+        /// ЕГАИС-2.0
+        /// </summary>
+        public const string BarcodeEgais20Pattern = @"^[0-9A-Z]{68}$";
+
+        /// <summary>
+        /// ЕГАИС-3.0
+        /// </summary>
+        public const string BarcodeEgais30Pattern = @"^[0-9A-Z]{150}$";
+
+        /// <summary>
+        /// Реквизиты 1304 - 1306 (GS1.0, GS1.M, КМК)
+        /// </summary>
+        public const string BarcodeTags1304_1306Pattern = @"^01[0-9]{14}21[0-9a-zA-Z]{1,20}$";
+
+        /// <summary>
+        /// Реквизит 1308 (ЕГАИС-2.0)
+        /// </summary>
+        public const string BarcodeTag1308Pattern = @"^[0-9A-Z]{23}$";
+
+        /// <summary>
+        /// Реквизит 1309 (ЕГАИС-3.0)
+        /// </summary>
+        public const string BarcodeTag1309Pattern = @"^[0-9A-Z]{14}$";
+
+        /// <summary>
         /// Номер телефона
         /// </summary>
         public const string PhoneNumberPattern = @"^[+][1-9]\d{10}$";
@@ -114,6 +144,11 @@
         /// </summary>
         public const string IPAddressPattern =
             @"^(0[0-7]{10,11}|0(x|X)[0-9a-fA-F]{8}|(\b4\d{8}[0-5]\b|\b[1-3]?\d{8}\d?\b)|((2[0-5][0-5]|1\d{2}|[1-9]\d?)|(0(x|X)[0-9a-fA-F]{2})|(0[0-7]{3}))(\.((2[0-5][0-5]|1\d{2}|\d\d?)|(0(x|X)[0-9a-fA-F]{2})|(0[0-7]{3}))){3})$";
+
+        /// <summary>
+        /// IP-адрес или Url-адрес
+        /// </summary>
+        public const string IPAddressOrUrlPattern = IPAddressPattern + "|" + UrlPattern;
 
         /// <summary>
         /// Email
@@ -130,5 +165,10 @@
         /// Код страны происхождения
         /// </summary>
         public const string CountryOfOriginCodePattern = @"^\d{3}$";
+
+        /// <summary>
+        /// Base64
+        /// </summary>
+        public const string Base64Pattern = @"^(?:[A-Za-z\d+/]{4})*(?:[A-Za-z\d+/]{3}=|[A-Za-z\d+/]{2}==)?$";
     }
 }

@@ -35,6 +35,9 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <param name="defaultTaxationType">Система налогообложения по умолчанию</param>
         /// <param name="ofdChannel">Канал обмена с ОФД</param>
         /// <param name="ffdVersion">Версия ФФД</param>
+        /// <param name="insurance">Признак осуществления страховой деятельности</param>
+        /// <param name="marking">Признак торговли маркированными товарами</param>
+        /// <param name="pawnShop">Признак осуществления ломбардной деятельности</param>
         public KKTParams(string registrationNumber,
             string address,
             bool encryption,
@@ -50,14 +53,17 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
             bool lottery,
             TaxationType defaultTaxationType,
             OfdChannelType ofdChannel,
-            FfdVersionType ffdVersion)
+            FfdVersionType ffdVersion,
+            bool insurance,
+            bool marking,
+            bool pawnShop)
         {
             if (registrationNumber.IsNullOrEmptyOrWhiteSpace())
             {
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(RegistrationNumber)).GetDisplayName()),
+                        GetType().GetProperty(nameof(RegistrationNumber)).GetDisplayName()),
                     nameof(registrationNumber));
             }
 
@@ -65,7 +71,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(address)).GetDisplayName()),
+                        GetType().GetProperty(nameof(address)).GetDisplayName()),
                     nameof(address));
             }
 
@@ -73,7 +79,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(FnsUrl)).GetDisplayName()),
+                        GetType().GetProperty(nameof(FnsUrl)).GetDisplayName()),
                     nameof(fnsUrl));
             }
 
@@ -93,12 +99,13 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
             DefaultTaxationType = defaultTaxationType;
             OfdChannel = ofdChannel;
             FfdVersion = ffdVersion;
+            Insurance = insurance;
+            Marking = marking;
+            PawnShop = pawnShop;
         }
 
         [JsonConstructor]
-        private KKTParams()
-        {
-        }
+        private KKTParams() { }
 
         /// <summary>
         /// Регистрационный номер ККТ
@@ -269,5 +276,35 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Место расчетов")]
         public string PaymentsAddress { get; }
+
+        /// <summary>
+        /// Признак осуществления страховой деятельности
+        /// </summary>
+        /// <list type="bullet">
+        /// <item>Обязательное поле</item>
+        /// </list>
+        [Display(Name = "Признак осуществления страховой деятельности")]
+        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        public bool Insurance { get; }
+
+        /// <summary>
+        /// Признак торговли маркированными товарами
+        /// </summary>
+        /// <list type="bullet">
+        /// <item>Обязательное поле</item>
+        /// </list>
+        [Display(Name = "Признак торговли маркированными товарами")]
+        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        public bool Marking { get; }
+
+        /// <summary>
+        /// Признак осуществления ломбардной деятельности
+        /// </summary>
+        /// <list type="bullet">
+        /// <item>Обязательное поле</item>
+        /// </list>
+        [Display(Name = "Признак осуществления ломбардной деятельности")]
+        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        public bool PawnShop { get; }
     }
 }

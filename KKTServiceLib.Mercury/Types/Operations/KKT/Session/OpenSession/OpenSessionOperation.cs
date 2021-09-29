@@ -22,10 +22,10 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.Session.OpenSession
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(PortName)).GetDisplayName()),
+                        GetType().GetProperty(nameof(PortName)).GetDisplayName()),
                     nameof(portName));
             }
-            
+
             PortName = portName;
         }
 

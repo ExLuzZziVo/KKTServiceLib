@@ -23,7 +23,7 @@ namespace KKTServiceLib.Atol.Types.Common
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Name)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Name)).GetDisplayName()),
                     nameof(name));
             }
 

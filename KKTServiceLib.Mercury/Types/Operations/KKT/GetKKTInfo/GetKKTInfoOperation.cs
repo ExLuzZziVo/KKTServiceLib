@@ -8,8 +8,6 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.GetKKTInfo
         /// <summary>
         /// Запрос информации о ККТ
         /// </summary>
-        public GetKKTInfoOperation() : base("GetCommonInfo")
-        {
-        }
+        public GetKKTInfoOperation() : base("GetCommonInfo") { }
     }
 }

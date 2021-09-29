@@ -12,8 +12,6 @@ namespace KKTServiceLib.Atol.Types.Operations.KKT.GetKKTStatus
         /// <summary>
         /// Запрос состояния ККТ
         /// </summary>
-        public GetKKTStatusOperation() : base("getDeviceStatus")
-        {
-        }
+        public GetKKTStatusOperation() : base("getDeviceStatus") { }
     }
 }

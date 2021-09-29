@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using KKTServiceLib.Atol.Types.Common;
 using KKTServiceLib.Atol.Types.Common.KKT;
+using KKTServiceLib.Atol.Types.Common.MarkingCodes;
 using KKTServiceLib.Atol.Types.Enums;
 using KKTServiceLib.Shared.Helpers;
 using KKTServiceLib.Shared.Resources;
@@ -25,9 +26,10 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.KKTRegistration.RegisterKKT
         /// <param name="organizationParams">Информация об организации-пользователе</param>
         /// <param name="kktParams">Параметры ККТ</param>
         /// <param name="ofdParams">Параметры ОФД</param>
+        /// <param name="ismParams">Параметры ИСМ (ФФД ≥ 1.2)</param>
         /// <param name="kktRegistrationReason">Причина перерегистрации ККТ</param>
         public RegisterKKTOperation(KKTRegistrationType type, OperatorParams operatorParams,
-            OrganizationParams organizationParams, KKTParams kktParams, OfdParams ofdParams,
+            OrganizationParams organizationParams, KKTParams kktParams, OfdParams ofdParams, IsmParams ismParams = null,
             KKTRegistrationReason? kktRegistrationReason = null) : base(type.ToString()
             .ToLowerFirstChar())
         {
@@ -42,6 +44,8 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.KKTRegistration.RegisterKKT
             }
 
             Reason = kktRegistrationReason;
+
+            Ism = ismParams;
         }
 
         /// <summary>
@@ -106,6 +110,17 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.KKTRegistration.RegisterKKT
         [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Параметры ОФД")]
         public OfdParams Ofd { get; }
+
+        /// <summary>
+        /// Параметры ИСМ
+        /// </summary>
+        /// <remarks>
+        /// Только для ФФД ≥ 1.2
+        /// </remarks>
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+            ErrorMessageResourceName = "ComplexObjectValidationError")]
+        [Display(Name = "Параметры ИСМ")]
+        public IsmParams Ism { get; }
 
         /// <summary>
         /// Электронный отчет

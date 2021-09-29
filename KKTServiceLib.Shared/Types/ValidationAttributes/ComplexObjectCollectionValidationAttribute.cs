@@ -25,9 +25,14 @@ namespace KKTServiceLib.Shared.Types.ValidationAttributes
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (!(value is IEnumerable collectionToCheck)) return ValidationResult.Success;
+            if (!(value is IEnumerable collectionToCheck))
+            {
+                return ValidationResult.Success;
+            }
+
             var index = 0;
             var validationResults = new List<ValidationResult>();
+
             foreach (var item in collectionToCheck)
             {
                 if (item == null && !AllowNullItems)
@@ -43,11 +48,15 @@ namespace KKTServiceLib.Shared.Types.ValidationAttributes
                     var itemValidationResults = new List<ValidationResult>();
                     var itemValidationContext = new ValidationContext(item);
                     Validator.TryValidateObject(item, itemValidationContext, itemValidationResults, true);
+
                     foreach (var vr in itemValidationResults)
+                    {
                         vr.ErrorMessage =
                             string.Format(
                                 ErrorStrings.ResourceManager.GetString("ComplexObjectCollectionValidationError_Index"),
                                 index) + vr.ErrorMessage;
+                    }
+
                     validationResults.AddRange(itemValidationResults);
                 }
 

@@ -7,8 +7,6 @@ namespace KKTServiceLib.Shared.Types.Common
     [JsonArray]
     public class JsonArrayReadOnlyDictionary<TKey, TValue> : ReadOnlyDictionary<TKey, TValue>
     {
-        public JsonArrayReadOnlyDictionary(IDictionary<TKey, TValue> dictionary) : base(dictionary)
-        {
-        }
+        public JsonArrayReadOnlyDictionary(IDictionary<TKey, TValue> dictionary) : base(dictionary) { }
     }
 }

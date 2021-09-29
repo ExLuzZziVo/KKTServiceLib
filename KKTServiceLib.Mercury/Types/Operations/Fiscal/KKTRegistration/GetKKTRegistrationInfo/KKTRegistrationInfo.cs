@@ -50,11 +50,11 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.GetKKTRe
         [MinLength(1, ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "MinLengthError")]
         [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
         public ISet<TaxationType> TaxSystem { get; } =
-            #if NETSTANDARD2_0
+#if NETSTANDARD2_0
             new HashSet<TaxationType>();
-            #else
+#else
             new HashSet<TaxationType>(Enum.GetNames(typeof(TaxationType)).Length);
-            #endif
+#endif
 
         /// <summary>
         /// Агенты, в роли которых может выступать владелец ККТ

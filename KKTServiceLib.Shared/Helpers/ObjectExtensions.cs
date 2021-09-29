@@ -27,7 +27,10 @@ namespace KKTServiceLib.Shared.Helpers
         public static string ToLowerFirstChar(this string str)
         {
             if (str.IsNullOrEmptyOrWhiteSpace())
+            {
                 return string.Empty;
+            }
+
             return char.ToLowerInvariant(str[0]) + str.Substring(1);
         }
 
@@ -84,14 +87,16 @@ namespace KKTServiceLib.Shared.Helpers
         {
             if (propertyInfo != null)
             {
-                var displayAttr = ((DisplayAttribute) propertyInfo
+                var displayAttr = (DisplayAttribute)propertyInfo
                     .GetCustomAttributes(typeof(DisplayAttribute), false)
-                    .FirstOrDefault());
+                    .FirstOrDefault();
+
                 var resourceManager =
                     displayAttr?.ResourceType
                         ?.GetProperty(@"ResourceManager",
                             BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
                         ?.GetValue(null, null) as ResourceManager;
+
                 return resourceManager?.GetString(displayAttr.Name, cultureInfo) ??
                        displayAttr?.GetName() ?? propertyInfo.Name;
             }

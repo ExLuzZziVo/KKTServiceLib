@@ -25,7 +25,7 @@ namespace KKTServiceLib.Mercury.Types.Common
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Name)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Name)).GetDisplayName()),
                     nameof(name));
             }
 
@@ -34,7 +34,7 @@ namespace KKTServiceLib.Mercury.Types.Common
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Inn)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Inn)).GetDisplayName()),
                     nameof(vatin));
             }
 
@@ -43,7 +43,7 @@ namespace KKTServiceLib.Mercury.Types.Common
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Url)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Url)).GetDisplayName()),
                     nameof(host));
             }
 
@@ -54,9 +54,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         }
 
         [JsonConstructor]
-        private OfdParams()
-        {
-        }
+        private OfdParams() { }
 
         /// <summary>
         /// Наименование ОФД

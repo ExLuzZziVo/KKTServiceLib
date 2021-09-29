@@ -12,8 +12,6 @@ namespace KKTServiceLib.Atol.Types.Operations.NonFiscal.GetOfdExchangeStatus
         /// <summary>
         /// Запрос состояния обмена с ОФД
         /// </summary>
-        public GetOfdExchangeStatusOperation() : base("ofdExchangeStatus")
-        {
-        }
+        public GetOfdExchangeStatusOperation() : base("ofdExchangeStatus") { }
     }
 }

@@ -26,7 +26,7 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
             if (agents?.Any() != true)
             {
                 throw new ArgumentException(string.Format(ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        this.GetType().GetProperty(nameof(Agents)).GetDisplayName(), 1),
+                        GetType().GetProperty(nameof(Agents)).GetDisplayName(), 1),
                     nameof(agents));
             }
 
@@ -93,7 +93,7 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
                     {
                         agentValidationResults.Add(new ValidationResult(string.Format(
                             ErrorStrings.ResourceManager.GetString("RequiredError"),
-                            this.GetType().GetProperty(nameof(PayingAgent)).GetDisplayName())));
+                            GetType().GetProperty(nameof(PayingAgent)).GetDisplayName())));
                     }
                 }
                 else
@@ -102,7 +102,7 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
                     {
                         agentValidationResults.Add(new ValidationResult(string.Format(
                             ErrorStrings.ResourceManager.GetString("MustBeNullError"),
-                            this.GetType().GetProperty(nameof(PayingAgent)).GetDisplayName())));
+                            GetType().GetProperty(nameof(PayingAgent)).GetDisplayName())));
                     }
                 }
 
@@ -113,7 +113,7 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
                     {
                         agentValidationResults.Add(new ValidationResult(string.Format(
                             ErrorStrings.ResourceManager.GetString("RequiredError"),
-                            this.GetType().GetProperty(nameof(MoneyTransferOperator)).GetDisplayName())));
+                            GetType().GetProperty(nameof(MoneyTransferOperator)).GetDisplayName())));
                     }
                 }
                 else
@@ -122,7 +122,7 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
                     {
                         agentValidationResults.Add(new ValidationResult(string.Format(
                             ErrorStrings.ResourceManager.GetString("MustBeNullError"),
-                            this.GetType().GetProperty(nameof(MoneyTransferOperator)).GetDisplayName())));
+                            GetType().GetProperty(nameof(MoneyTransferOperator)).GetDisplayName())));
                     }
                 }
 
@@ -133,7 +133,7 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
                     {
                         agentValidationResults.Add(new ValidationResult(string.Format(
                             ErrorStrings.ResourceManager.GetString("RequiredError"),
-                            this.GetType().GetProperty(nameof(ReceivePaymentsOperator)).GetDisplayName())));
+                            GetType().GetProperty(nameof(ReceivePaymentsOperator)).GetDisplayName())));
                     }
                 }
                 else
@@ -142,7 +142,7 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
                     {
                         agentValidationResults.Add(new ValidationResult(string.Format(
                             ErrorStrings.ResourceManager.GetString("MustBeNullError"),
-                            this.GetType().GetProperty(nameof(ReceivePaymentsOperator)).GetDisplayName())));
+                            GetType().GetProperty(nameof(ReceivePaymentsOperator)).GetDisplayName())));
                     }
                 }
             }

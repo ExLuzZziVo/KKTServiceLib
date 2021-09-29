@@ -21,7 +21,7 @@ namespace KKTServiceLib.Mercury.Types.Common.Document
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(AttrName)).GetDisplayName()),
+                        GetType().GetProperty(nameof(AttrName)).GetDisplayName()),
                     nameof(name));
             }
 
@@ -30,7 +30,7 @@ namespace KKTServiceLib.Mercury.Types.Common.Document
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(AttrValue)).GetDisplayName()),
+                        GetType().GetProperty(nameof(AttrValue)).GetDisplayName()),
                     nameof(value));
             }
 

@@ -152,6 +152,36 @@ namespace KKTServiceLib.Atol.Types.Enums
         /// <summary>
         /// Платеж казино
         /// </summary>
-        [Display(Name = "Платеж казино")] CasinoPayment = 26
+        [Display(Name = "Платеж казино")] CasinoPayment = 26,
+
+        /// <summary>
+        /// Выдача денежных средств
+        /// </summary>
+        [Display(Name = "Выдача денежных средств")]
+        FundsIssuance = 27,
+
+        /// <summary>
+        /// Подакцизный товар, не имеющий код маркировки
+        /// </summary>
+        [Display(Name = "Подакцизный товар, не имеющий код маркировки")]
+        ExciseWithoutMarking = 30,
+
+        /// <summary>
+        /// Подакцизный товар, имеющий код маркировки
+        /// </summary>
+        [Display(Name = "Подакцизный товар, имеющий код маркировки")]
+        ExciseWithMarking = 31,
+
+        /// <summary>
+        /// Товар, не имеющий код маркировки
+        /// </summary>
+        [Display(Name = "Товар, не имеющий код маркировки")]
+        CommodityWithoutMarking = 32,
+
+        /// <summary>
+        /// Товар, имеющий код маркировки
+        /// </summary>
+        [Display(Name = "Товар, имеющий код маркировки")]
+        CommodityWithMarking = 33
     }
 }

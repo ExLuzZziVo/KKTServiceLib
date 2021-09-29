@@ -22,6 +22,7 @@ namespace KKTServiceLib.Mercury.Helpers
             request.Method = "POST";
             request.ContentType = "application/json; charset=utf-8";
             request.ContentLength = data.Length;
+
             using (var str = request.GetRequestStream())
             {
                 str.Write(data, 0, data.Length);

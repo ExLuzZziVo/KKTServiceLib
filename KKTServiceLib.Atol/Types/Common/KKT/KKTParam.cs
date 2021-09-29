@@ -24,9 +24,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         }
 
         [JsonConstructor]
-        private KKTSettingsResultParam()
-        {
-        }
+        private KKTSettingsResultParam() { }
 
         /// <summary>
         /// Номер настройки

@@ -46,7 +46,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.Register
             if (taxationTypes?.Any() != true)
             {
                 throw new ArgumentException(string.Format(ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        this.GetType().GetProperty(nameof(TaxSystem)).GetDisplayName(), 1),
+                        GetType().GetProperty(nameof(TaxSystem)).GetDisplayName(), 1),
                     nameof(taxationTypes));
             }
 

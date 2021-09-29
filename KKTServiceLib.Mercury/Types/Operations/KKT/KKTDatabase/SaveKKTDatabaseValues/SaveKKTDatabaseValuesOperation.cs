@@ -13,9 +13,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.SaveKKTDatabase
         /// <summary>
         /// Запись товаров в базу данных ККТ
         /// </summary>
-        public SaveKKTDatabaseValuesOperation() : base("WriteGoodsBase")
-        {
-        }
+        public SaveKKTDatabaseValuesOperation() : base("WriteGoodsBase") { }
 
         /// <summary>
         /// Товары

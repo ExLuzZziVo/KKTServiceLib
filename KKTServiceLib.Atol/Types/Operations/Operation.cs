@@ -58,8 +58,11 @@ namespace KKTServiceLib.Atol.Types.Operations
         public virtual T Execute(Fptr fptr)
         {
             var validationResults = Validate();
+
             if (validationResults.Count() != 0)
+            {
                 throw new ExtendedValidationException(validationResults);
+            }
 
             var jsonData = JsonConvert.SerializeObject(this,
                 Formatting.Indented,
@@ -91,7 +94,9 @@ namespace KKTServiceLib.Atol.Types.Operations
             var jsonResult = fptr.getParamString(Constants.LIBFPTR_PARAM_JSON_DATA);
 
             if (jsonResult.IsNullOrEmptyOrWhiteSpace())
+            {
                 return default;
+            }
 
             var result = JsonConvert.DeserializeObject<T>(jsonResult);
 

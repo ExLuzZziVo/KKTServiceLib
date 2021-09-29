@@ -20,7 +20,7 @@ namespace KKTServiceLib.Mercury.Types.Common
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(CashierName)).GetDisplayName()),
+                        GetType().GetProperty(nameof(CashierName)).GetDisplayName()),
                     nameof(name));
             }
 

@@ -12,8 +12,6 @@ namespace KKTServiceLib.Atol.Types.Operations.NonFiscal.CashDrawer.OpenCashDrawe
         /// <summary>
         /// Открыть денежный ящик
         /// </summary>
-        public OpenCashDrawerOperation() : base("openCashDrawer")
-        {
-        }
+        public OpenCashDrawerOperation() : base("openCashDrawer") { }
     }
 }

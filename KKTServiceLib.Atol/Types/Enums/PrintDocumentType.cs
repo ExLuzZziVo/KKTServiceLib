@@ -46,6 +46,12 @@ namespace KKTServiceLib.Atol.Types.Enums
         /// Картинка из памяти ККТ
         /// </summary>
         [Display(Name = "Картинка из памяти ККТ")]
-        PictureFromMemory
+        PictureFromMemory,
+
+        /// <summary>
+        /// Картинка (массив пикселей)
+        /// </summary>
+        [Display(Name = "Картинка (массив пикселей)")]
+        Pixels
     }
 }

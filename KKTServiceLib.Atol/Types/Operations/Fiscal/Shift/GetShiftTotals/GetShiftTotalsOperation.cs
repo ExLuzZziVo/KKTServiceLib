@@ -12,8 +12,6 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Shift.GetShiftTotals
         /// <summary>
         /// Запрос сменных итогов
         /// </summary>
-        public GetShiftTotalsOperation() : base("getShiftTotals")
-        {
-        }
+        public GetShiftTotalsOperation() : base("getShiftTotals") { }
     }
 }

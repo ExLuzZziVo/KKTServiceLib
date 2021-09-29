@@ -12,8 +12,6 @@ namespace KKTServiceLib.Atol.Types.Operations.NonFiscal.GetOverallTotals
         /// <summary>
         /// Запрос необнуляемых итогов
         /// </summary>
-        public GetOverallTotalsOperation() : base("getOverallTotals")
-        {
-        }
+        public GetOverallTotalsOperation() : base("getOverallTotals") { }
     }
 }

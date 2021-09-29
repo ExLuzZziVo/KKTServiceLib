@@ -26,7 +26,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintEgaisSlip
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(KPP)).GetDisplayName()),
+                        GetType().GetProperty(nameof(KPP)).GetDisplayName()),
                     nameof(kpp));
             }
 
@@ -35,7 +35,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintEgaisSlip
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Url)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Url)).GetDisplayName()),
                     nameof(url));
             }
 
@@ -44,7 +44,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintEgaisSlip
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Sign)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Sign)).GetDisplayName()),
                     nameof(sign));
             }
 

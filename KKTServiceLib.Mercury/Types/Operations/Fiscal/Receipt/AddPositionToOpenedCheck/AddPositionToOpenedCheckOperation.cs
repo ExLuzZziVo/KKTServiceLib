@@ -206,7 +206,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         [JsonConverter(typeof(MoneyConverter))]
         [Range(0, 21474836, ErrorMessageResourceType = typeof(ErrorStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
-        public decimal? Sum => Price * (decimal) Qty;
+        public decimal? Sum => Price * (decimal)Qty;
 
         /// <summary>
         /// Сумма акциза, включенная в стоимость предмета расчета

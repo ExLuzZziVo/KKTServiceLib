@@ -15,10 +15,15 @@ namespace KKTServiceLib.Shared.Types.ValidationAttributes
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (value == null) return ValidationResult.Success;
+            if (value == null)
+            {
+                return ValidationResult.Success;
+            }
+
             var validationResults = new List<ValidationResult>();
             var objectValidationContext = new ValidationContext(value);
             Validator.TryValidateObject(value, objectValidationContext, validationResults, true);
+
             return validationResults.Any()
                 ? new ValidationResult(string.Format(ErrorMessageString, validationContext.DisplayName) +
                                        validationResults.Aggregate(string.Empty,

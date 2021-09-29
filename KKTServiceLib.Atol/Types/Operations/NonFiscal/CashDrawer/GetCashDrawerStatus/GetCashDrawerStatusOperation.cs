@@ -12,8 +12,6 @@ namespace KKTServiceLib.Atol.Types.Operations.NonFiscal.CashDrawer.GetCashDrawer
         /// <summary>
         /// Запрос состояния денежного ящика
         /// </summary>
-        public GetCashDrawerStatusOperation() : base("getCashDrawerStatus")
-        {
-        }
+        public GetCashDrawerStatusOperation() : base("getCashDrawerStatus") { }
     }
 }

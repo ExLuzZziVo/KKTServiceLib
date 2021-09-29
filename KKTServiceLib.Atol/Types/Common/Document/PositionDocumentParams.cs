@@ -13,14 +13,14 @@ using KKTServiceLib.Shared.Types.ValidationAttributes;
 
 namespace KKTServiceLib.Atol.Types.Common.Document
 {
-    [Description("Товарная позиция")]
+    [Description("Предмет расчета (ФФД < 1.2)")]
     public class PositionDocumentParams : DocumentParams
     {
         private MarkingCodeParams _markingCode;
-        private object _nomenclatureCode;
+        protected object _nomenclatureCode;
 
         /// <summary>
-        /// Предмет расчета
+        /// Предмет расчета (ФФД < 1.2)
         /// </summary>
         /// <param name="name">Наименование</param>
         /// <param name="price">Цена единицы</param>
@@ -36,7 +36,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Name)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Name)).GetDisplayName()),
                     nameof(name));
             }
 
@@ -44,7 +44,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("DigitRangeValuesError"),
-                        this.GetType().GetProperty(nameof(Price)).GetDisplayName(), 0, decimal.MaxValue),
+                        GetType().GetProperty(nameof(Price)).GetDisplayName(), 0, decimal.MaxValue),
                     nameof(price));
             }
 
@@ -52,7 +52,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("DigitRangeValuesError"),
-                        this.GetType().GetProperty(nameof(Price)).GetDisplayName(), 0.001, double.MaxValue),
+                        GetType().GetProperty(nameof(Price)).GetDisplayName(), 0.001, double.MaxValue),
                     nameof(price));
             }
 
@@ -81,7 +81,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <item>Обязательное поле</item>
         /// <item>Должно лежать в диапазоне: 0-<see cref="decimal.MaxValue"/></item>
         /// </list>
-        [Range(0, (double) decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Цена единицы предмета расчета")]
@@ -110,9 +110,9 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Стоимость предмета расчета")]
-        [Range(0, (double) decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
-        public decimal Amount => Price * (decimal) Quantity;
+        public decimal Amount => Price * (decimal)Quantity;
 
         /// <summary>
         /// Информационная скидка
@@ -121,7 +121,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <item>Должно лежать в диапазоне: 0-<see cref="decimal.MaxValue"/></item>
         /// </list>
         [Display(Name = "Информационная скидка")]
-        [Range(0, (double) decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal? InfoDiscountAmount { get; set; }
 
@@ -254,7 +254,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <item>Должно лежать в диапазоне: 0.01-<see cref="decimal.MaxValue"/></item>
         /// </list>
         [Display(Name = "Сумма акциза, включенная в стоимость предмета расчета")]
-        [Range(0.01, (double) decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0.01, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal? ExciseSum { get; set; }
 
@@ -265,7 +265,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.CountryOfOriginCodePattern"/></item>
         /// </list>
         [RegularExpression(RegexHelper.CountryOfOriginCodePattern, ErrorMessageResourceType = typeof(ErrorStrings),
-        ErrorMessageResourceName = "StringFormatError")]
+            ErrorMessageResourceName = "StringFormatError")]
         [Display(Name = "Код страны происхождения")]
         public string CountryCode { get; set; }
 

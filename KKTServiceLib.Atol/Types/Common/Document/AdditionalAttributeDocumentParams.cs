@@ -24,7 +24,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Value)).GetDisplayName()), nameof(value));
+                        GetType().GetProperty(nameof(Value)).GetDisplayName()), nameof(value));
             }
 
             Value = value;

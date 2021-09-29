@@ -25,7 +25,7 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
             if (phones?.Any() != true)
             {
                 throw new ArgumentException(string.Format(ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        this.GetType().GetProperty(nameof(Phones)).GetDisplayName(), 1),
+                        GetType().GetProperty(nameof(Phones)).GetDisplayName(), 1),
                     nameof(phones));
             }
 

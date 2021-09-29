@@ -13,7 +13,7 @@ namespace KKTServiceLib.Shared.Types.Converters
         /// <param name="dateTimeFormat">Формат даты и времени</param>
         public CustomDateTimeConverter(string dateTimeFormat)
         {
-            base.DateTimeFormat = dateTimeFormat;
+            DateTimeFormat = dateTimeFormat;
         }
     }
 }

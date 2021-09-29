@@ -20,6 +20,6 @@ namespace KKTServiceLib.Mercury.Types.Enums
         /// Перерегистрация ККТ
         /// </summary>
         [Display(Name = "Перерегистрация ККТ")]
-        ReregisterKKT,
+        ReregisterKKT
     }
 }

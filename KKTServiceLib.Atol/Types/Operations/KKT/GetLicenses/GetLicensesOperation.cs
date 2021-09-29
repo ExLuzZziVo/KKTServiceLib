@@ -12,8 +12,6 @@ namespace KKTServiceLib.Atol.Types.Operations.KKT.GetLicenses
         /// <summary>
         /// Запрос введенных в ККТ лицензий/кодов защиты
         /// </summary>
-        public GetLicensesOperation() : base("getLicenses")
-        {
-        }
+        public GetLicensesOperation() : base("getLicenses") { }
     }
 }

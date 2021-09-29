@@ -10,9 +10,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.Service.CloseInactivePorts
         /// <summary>
         /// Закрытие неактивных портов
         /// </summary>
-        public CloseInactivePortsOperation() : base("ClosePorts")
-        {
-        }
+        public CloseInactivePortsOperation() : base("ClosePorts") { }
 
         /// <summary>
         /// Сессионный ключ

@@ -38,7 +38,7 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <item>Должно лежать в диапазоне: 0-<see cref="decimal.MaxValue"/></item>
         /// </list>
         [Display(Name = "Сумма налога")]
-        [Range(0, (double) decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal? Sum { get; set; }
     }

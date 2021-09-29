@@ -25,7 +25,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Name)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Name)).GetDisplayName()),
                     nameof(name));
             }
 
@@ -33,7 +33,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Value)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Value)).GetDisplayName()),
                     nameof(value));
             }
 

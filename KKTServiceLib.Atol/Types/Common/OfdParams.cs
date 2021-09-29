@@ -30,7 +30,7 @@ namespace KKTServiceLib.Atol.Types.Common
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Name)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Name)).GetDisplayName()),
                     nameof(name));
             }
 
@@ -39,16 +39,16 @@ namespace KKTServiceLib.Atol.Types.Common
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Vatin)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Vatin)).GetDisplayName()),
                     nameof(vatin));
             }
 
-            if (host.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(host, RegexHelper.UrlPattern))
+            if (host.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(host, RegexHelper.IPAddressOrUrlPattern))
             {
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Host)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Host)).GetDisplayName()),
                     nameof(host));
             }
 
@@ -57,7 +57,7 @@ namespace KKTServiceLib.Atol.Types.Common
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Dns)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Dns)).GetDisplayName()),
                     nameof(dns));
             }
 
@@ -69,9 +69,7 @@ namespace KKTServiceLib.Atol.Types.Common
         }
 
         [JsonConstructor]
-        private OfdParams()
-        {
-        }
+        private OfdParams() { }
 
         /// <summary>
         /// Название ОФД
@@ -101,10 +99,10 @@ namespace KKTServiceLib.Atol.Types.Common
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.UrlPattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.IPAddressOrUrlPattern"/></item>
         /// </list>
         [RegularExpression(
-            RegexHelper.UrlPattern,
+            RegexHelper.IPAddressOrUrlPattern,
             ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "StringFormatError")]
         [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Адрес сервера ОФД")]

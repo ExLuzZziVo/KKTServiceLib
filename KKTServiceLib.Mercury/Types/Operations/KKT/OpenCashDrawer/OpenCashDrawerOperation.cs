@@ -8,8 +8,6 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.OpenCashDrawer
         /// <summary>
         /// Открыть денежный ящик
         /// </summary>
-        public OpenCashDrawerOperation() : base("OpenBox")
-        {
-        }
+        public OpenCashDrawerOperation() : base("OpenBox") { }
     }
 }

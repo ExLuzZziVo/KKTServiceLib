@@ -1,11 +1,9 @@
 #region
 
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.RegularExpressions;
-using KKTServiceLib.Shared.Helpers;
 using KKTServiceLib.Shared.Resources;
 
 #endregion
@@ -34,7 +32,9 @@ namespace KKTServiceLib.Shared.Types.ValidationAttributes
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             if (!(value is IEnumerable<string> collectionToCheck))
+            {
                 return ValidationResult.Success;
+            }
 
             var index = 0;
 

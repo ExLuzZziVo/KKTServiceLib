@@ -21,7 +21,10 @@ namespace KKTServiceLib.Shared.Types.Exceptions
         /// <param name="errors">Список ошибок в виде коллекции объектов <see cref="ValidationResult"/></param>
         public ExtendedValidationException(IEnumerable<ValidationResult> errors)
         {
-            foreach (var ve in errors) _validationErrors.Add(ve.ErrorMessage);
+            foreach (var ve in errors)
+            {
+                _validationErrors.Add(ve.ErrorMessage);
+            }
         }
 
         /// <summary>
@@ -37,7 +40,7 @@ namespace KKTServiceLib.Shared.Types.Exceptions
         /// Исключение, возникающее при ошибках проверки всех полей данных объекта
         /// </summary>
         /// <param name="message">Текст ошибки</param>
-        public ExtendedValidationException(string message): base(message)
+        public ExtendedValidationException(string message) : base(message)
         {
             _validationErrors.Add(message);
         }
@@ -46,5 +49,7 @@ namespace KKTServiceLib.Shared.Types.Exceptions
         /// Список всех ошибок валидации
         /// </summary>
         public IEnumerable<string> ValidationErrors => _validationErrors;
+
+        public override string Message => string.Join("\n", _validationErrors);
     }
 }

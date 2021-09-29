@@ -22,7 +22,7 @@ namespace KKTServiceLib.Mercury.Types.Common
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(BuyerName)).GetDisplayName()),
+                        GetType().GetProperty(nameof(BuyerName)).GetDisplayName()),
                     nameof(name));
             }
 
@@ -31,7 +31,7 @@ namespace KKTServiceLib.Mercury.Types.Common
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(BuyerINN)).GetDisplayName()),
+                        GetType().GetProperty(nameof(BuyerINN)).GetDisplayName()),
                     nameof(vatin));
             }
 

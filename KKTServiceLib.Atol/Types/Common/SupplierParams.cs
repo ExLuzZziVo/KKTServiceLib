@@ -29,20 +29,20 @@ namespace KKTServiceLib.Atol.Types.Common
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Name)).GetDisplayName()), nameof(name));
+                        GetType().GetProperty(nameof(Name)).GetDisplayName()), nameof(name));
             }
 
             if (vatin.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(vatin, RegexHelper.VatinPattern))
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Vatin)).GetDisplayName()), nameof(vatin));
+                        GetType().GetProperty(nameof(Vatin)).GetDisplayName()), nameof(vatin));
             }
 
             if (phones?.Any() != true)
             {
                 throw new ArgumentException(string.Format(ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        this.GetType().GetProperty(nameof(Phones)).GetDisplayName(), 1),
+                        GetType().GetProperty(nameof(Phones)).GetDisplayName(), 1),
                     nameof(phones));
             }
 

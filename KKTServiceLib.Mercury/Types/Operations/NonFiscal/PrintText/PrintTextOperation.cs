@@ -20,10 +20,10 @@ namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintText
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Text)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Text)).GetDisplayName()),
                     nameof(text));
             }
-            
+
             Text = text;
         }
 

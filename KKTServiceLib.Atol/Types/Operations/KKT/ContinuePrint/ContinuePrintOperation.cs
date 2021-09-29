@@ -12,8 +12,6 @@ namespace KKTServiceLib.Atol.Types.Operations.KKT.ContinuePrint
         /// <summary>
         /// Допечатать документ
         /// </summary>
-        public ContinuePrintOperation() : base("continuePrint")
-        {
-        }
+        public ContinuePrintOperation() : base("continuePrint") { }
     }
 }

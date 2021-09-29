@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using KKTServiceLib.Atol.Types.Common;
 using KKTServiceLib.Atol.Types.Common.KKT;
+using KKTServiceLib.Atol.Types.Common.MarkingCodes;
 
 #endregion
 
@@ -29,5 +30,11 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.KKTRegistration.GetKKTRegis
         /// </summary>
         [Display(Name = "Параметры ОФД")]
         public OfdParams Ofd { get; set; }
+
+        /// <summary>
+        /// Параметры ИСМ
+        /// </summary>
+        [Display(Name = "Параметры ИСМ")]
+        public IsmParams Ism { get; set; }
     }
 }

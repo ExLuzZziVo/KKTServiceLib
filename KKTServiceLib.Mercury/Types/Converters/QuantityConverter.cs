@@ -10,15 +10,15 @@ namespace KKTServiceLib.Mercury.Types.Converters
     {
         public override void WriteJson(JsonWriter writer, double value, JsonSerializer serializer)
         {
-            writer.WriteValue((int) (Math.Round(value, 4, MidpointRounding.AwayFromZero) * 10000));
+            writer.WriteValue((int)(Math.Round(value, 4, MidpointRounding.AwayFromZero) * 10000));
         }
 
         public override double ReadJson(JsonReader reader, Type objectType, double existingValue, bool hasExistingValue,
             JsonSerializer serializer)
         {
-            var value = (long?) reader.Value;
+            var value = (long?)reader.Value;
 
-            return value == null ? 0 : (double) value / 10000;
+            return value == null ? 0 : (double)value / 10000;
         }
     }
 }

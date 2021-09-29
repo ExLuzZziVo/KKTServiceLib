@@ -25,7 +25,7 @@ namespace KKTServiceLib.Mercury.Types.Common.Agent
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(SupplierINN)).GetDisplayName()),
+                        GetType().GetProperty(nameof(SupplierINN)).GetDisplayName()),
                     nameof(supplierVatin));
             }
 

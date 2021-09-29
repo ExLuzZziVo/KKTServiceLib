@@ -25,7 +25,7 @@ namespace KKTServiceLib.Atol.Types.Common
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Email)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Email)).GetDisplayName()),
                     nameof(email));
             }
 

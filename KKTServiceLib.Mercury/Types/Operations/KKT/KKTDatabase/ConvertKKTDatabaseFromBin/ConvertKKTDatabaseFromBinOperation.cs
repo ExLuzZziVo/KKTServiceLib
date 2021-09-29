@@ -21,7 +21,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.ConvertKKTDatab
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Base)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Base)).GetDisplayName()),
                     nameof(base64Content));
             }
 

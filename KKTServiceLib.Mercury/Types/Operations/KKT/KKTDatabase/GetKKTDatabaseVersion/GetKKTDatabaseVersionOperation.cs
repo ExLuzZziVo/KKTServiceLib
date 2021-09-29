@@ -8,8 +8,6 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.GetKKTDatabaseV
         /// <summary>
         /// Получение версии базы данных ККТ
         /// </summary>
-        public GetKKTDatabaseVersionOperation() : base("GetBaseVer")
-        {
-        }
+        public GetKKTDatabaseVersionOperation() : base("GetBaseVer") { }
     }
 }

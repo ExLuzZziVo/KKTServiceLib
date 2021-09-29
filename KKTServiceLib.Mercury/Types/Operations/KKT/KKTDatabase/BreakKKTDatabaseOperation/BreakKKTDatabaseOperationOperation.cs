@@ -8,8 +8,6 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.BreakKKTDatabas
         /// <summary>
         /// Прерывание текущей операции с базой данных ККТ
         /// </summary>
-        public BreakKKTDatabaseOperationOperation() : base("BreakOperation")
-        {
-        }
+        public BreakKKTDatabaseOperationOperation() : base("BreakOperation") { }
     }
 }

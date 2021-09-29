@@ -1,5 +1,6 @@
 #region
 
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -21,6 +22,12 @@ namespace KKTServiceLib.Atol.Types.Common.Exchange
         /// </summary>
         [Display(Name = "Номер ФД, на котором произошла ошибка")]
         public uint DocumentNumber { get; set; }
+
+        /// <summary>
+        /// Дата и время последнего успешного соединения с ОФД
+        /// </summary>
+        [Display(Name = "Дата и время последнего успешного соединения с ОФД")]
+        public DateTime LastSuccessConnectionDateTime { get; set; }
 
         /// <summary>
         /// Ошибка сети

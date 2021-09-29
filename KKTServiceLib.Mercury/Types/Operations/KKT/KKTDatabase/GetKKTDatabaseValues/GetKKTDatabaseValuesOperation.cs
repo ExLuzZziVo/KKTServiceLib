@@ -8,8 +8,6 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.GetKKTDatabaseV
         /// <summary>
         /// Получение товаров в результате чтения базы данных ККТ
         /// </summary>
-        public GetKKTDatabaseValuesOperation() : base("GetGoodsBase")
-        {
-        }
+        public GetKKTDatabaseValuesOperation() : base("GetGoodsBase") { }
     }
 }

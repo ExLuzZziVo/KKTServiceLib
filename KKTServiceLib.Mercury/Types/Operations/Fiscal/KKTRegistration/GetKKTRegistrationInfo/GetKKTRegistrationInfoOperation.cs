@@ -8,8 +8,6 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.GetKKTRe
         /// <summary>
         /// Запрос параметров регистрации ККТ
         /// </summary>
-        public GetKKTRegistrationInfoOperation() : base("GetRegistrationInfo")
-        {
-        }
+        public GetKKTRegistrationInfoOperation() : base("GetRegistrationInfo") { }
     }
 }

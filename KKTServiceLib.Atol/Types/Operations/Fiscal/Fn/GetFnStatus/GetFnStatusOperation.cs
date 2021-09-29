@@ -12,8 +12,6 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Fn.GetFnStatus
         /// <summary>
         /// Запрос состояния ФН
         /// </summary>
-        public GetFnStatusOperation() : base("getFnStatus")
-        {
-        }
+        public GetFnStatusOperation() : base("getFnStatus") { }
     }
 }

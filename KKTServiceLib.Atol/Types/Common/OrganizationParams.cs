@@ -32,7 +32,7 @@ namespace KKTServiceLib.Atol.Types.Common
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Name)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Name)).GetDisplayName()),
                     nameof(name));
             }
 
@@ -41,7 +41,7 @@ namespace KKTServiceLib.Atol.Types.Common
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Vatin)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Vatin)).GetDisplayName()),
                     nameof(vatin));
             }
 
@@ -50,14 +50,14 @@ namespace KKTServiceLib.Atol.Types.Common
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Address)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Address)).GetDisplayName()),
                     nameof(address));
             }
 
             if (taxationTypes?.Any() != true)
             {
                 throw new ArgumentException(string.Format(ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        this.GetType().GetProperty(nameof(TaxationTypes)).GetDisplayName(), 1),
+                        GetType().GetProperty(nameof(TaxationTypes)).GetDisplayName(), 1),
                     nameof(taxationTypes));
             }
 
@@ -68,9 +68,7 @@ namespace KKTServiceLib.Atol.Types.Common
         }
 
         [JsonConstructor]
-        private OrganizationParams()
-        {
-        }
+        private OrganizationParams() { }
 
         /// <summary>
         /// Название организации-пользователя

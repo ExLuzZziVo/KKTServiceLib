@@ -13,9 +13,13 @@ namespace KKTServiceLib.Mercury.Types.Converters
         public override void WriteJson(JsonWriter writer, string value, JsonSerializer serializer)
         {
             if (Regex.IsMatch(value, RegexHelper.BarcodePattern))
+            {
                 writer.WriteValue(long.Parse(value));
+            }
             else
+            {
                 throw new ArgumentOutOfRangeException(nameof(value));
+            }
         }
 
         public override string ReadJson(JsonReader reader, Type objectType, string existingValue, bool hasExistingValue,

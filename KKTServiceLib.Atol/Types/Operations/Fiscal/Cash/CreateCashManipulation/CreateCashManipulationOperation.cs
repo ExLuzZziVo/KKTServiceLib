@@ -26,11 +26,11 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Cash.CreateCashManipulation
         public CreateCashManipulationOperation(CashManipulationType type, OperatorParams operatorParams,
             decimal cashSum) : base(type.ToString().ToLowerFirstChar())
         {
-            if (cashSum < (decimal) 0.01)
+            if (cashSum < (decimal)0.01)
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("DigitRangeValuesError"),
-                        this.GetType().GetProperty(nameof(CashSum)).GetDisplayName(), 0.01, decimal.MaxValue),
+                        GetType().GetProperty(nameof(CashSum)).GetDisplayName(), 0.01, decimal.MaxValue),
                     nameof(cashSum));
             }
 
@@ -59,7 +59,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Cash.CreateCashManipulation
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Сумма наличных")]
-        [Range(0.01, (double) decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0.01, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal CashSum { get; }
 

@@ -28,14 +28,13 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateCorrectionRec
         /// </summary>
         /// <param name="type">Тип чека коррекции</param>
         /// <param name="correctionType">Способ коррекции</param>
-        /// <param name="correctionDescription">Описание коррекции</param>
         /// <param name="correctionBaseDate">Дата совершения корректируемого расчета</param>
         /// <param name="operatorParams">Оператор (кассир)</param>
         /// <param name="taxationType">Система налогообложения</param>
         /// <param name="items">Элементы документа (предметы расчета и тд.)</param>
         /// <param name="payments">Оплаты</param>
         public CreateCorrectionReceiptOperation(CorrectionReceiptType type,
-            CorrectionReceiptCorrectionType correctionType, string correctionDescription, DateTime correctionBaseDate,
+            CorrectionReceiptCorrectionType correctionType, DateTime correctionBaseDate,
             OperatorParams operatorParams,
             TaxationType taxationType, DocumentParams[] items, PaymentParams[] payments) : base(type.ToString()
             .ToLowerFirstChar())
@@ -45,7 +44,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateCorrectionRec
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        this.GetType().GetProperty(nameof(Items)).GetDisplayName(), 1),
+                        GetType().GetProperty(nameof(Items)).GetDisplayName(), 1),
                     nameof(items));
             }
 
@@ -53,20 +52,11 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateCorrectionRec
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        this.GetType().GetProperty(nameof(Payments)).GetDisplayName(), 1),
+                        GetType().GetProperty(nameof(Payments)).GetDisplayName(), 1),
                     nameof(payments));
             }
 
-            if (correctionDescription.IsNullOrEmptyOrWhiteSpace())
-            {
-                throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(CorrectionBaseName)).GetDisplayName()),
-                    nameof(correctionDescription));
-            }
-
             CorrectionType = correctionType;
-            CorrectionBaseName = correctionDescription;
             CorrectionBaseDate = correctionBaseDate;
             Operator = operatorParams ?? throw new ArgumentNullException(nameof(operatorParams));
             Items = items;
@@ -101,16 +91,6 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateCorrectionRec
         [Display(Name = "Тип коррекции")]
         [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
         public CorrectionReceiptCorrectionType CorrectionType { get; }
-
-        /// <summary>
-        /// Описание коррекции
-        /// </summary>
-        /// <list type="bullet">
-        /// <item>Обязательное поле</item>
-        /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [Display(Name = "Описание коррекции")]
-        public string CorrectionBaseName { get; }
 
         /// <summary>
         /// Дата совершения корректируемого расчета
@@ -149,10 +129,19 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateCorrectionRec
         public TaxationType TaxationType { get; }
 
         /// <summary>
-        /// Место проведения расчета
+        /// Место проведения расчетов
         /// </summary>
+        /// <list type="bullet">
+        /// <item>Обязательное поле, если чек является электронным</item>
+        /// </list>
         [Display(Name = "Место проведения расчета")]
         public string PaymentsPlace { get; set; }
+
+        /// <summary>
+        /// Адрес расчётов
+        /// </summary>
+        [Display(Name = "Адрес расчётов")]
+        public string PaymentsAddress { get; set; }
 
         /// <summary>
         /// Номер автомата
@@ -235,7 +224,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateCorrectionRec
         /// <item>Должно лежать в диапазоне: 0.01-<see cref="decimal.MaxValue"/></item>
         /// </list>
         [Display(Name = "Итог чека")]
-        [Range(0.01, (double) decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0.01, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal? Total { get; set; }
 
@@ -266,7 +255,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateCorrectionRec
                 {
                     new ValidationResult(string.Format(
                         ErrorStrings.ResourceManager.GetString("RequiredError"),
-                        this.GetType().GetProperty(nameof(CorrectionBaseNumber)).GetDisplayName()))
+                        GetType().GetProperty(nameof(CorrectionBaseNumber)).GetDisplayName()))
                 };
             }
 

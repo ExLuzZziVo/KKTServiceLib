@@ -23,11 +23,11 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <param name="sum">Сумма</param>
         public PaymentParams(PaymentType type, decimal sum)
         {
-            if (sum < (decimal) 0.01)
+            if (sum < (decimal)0.01)
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("DigitRangeValuesError"),
-                        this.GetType().GetProperty(nameof(Sum)).GetDisplayName(), 0.01, decimal.MaxValue),
+                        GetType().GetProperty(nameof(Sum)).GetDisplayName(), 0.01, decimal.MaxValue),
                     nameof(sum));
             }
 
@@ -54,7 +54,7 @@ namespace KKTServiceLib.Atol.Types.Common
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Сумма расчета")]
-        [Range(0.01, (double) decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0.01, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal Sum { get; }
 

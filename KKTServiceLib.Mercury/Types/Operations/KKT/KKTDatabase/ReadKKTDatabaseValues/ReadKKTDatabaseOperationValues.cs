@@ -8,8 +8,6 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.ReadKKTDatabase
         /// <summary>
         /// Начать чтение товаров из базы данных ККТ
         /// </summary>
-        public ReadKKTDatabaseOperationValues() : base("ReadGoodsBase")
-        {
-        }
+        public ReadKKTDatabaseOperationValues() : base("ReadGoodsBase") { }
     }
 }

@@ -27,7 +27,7 @@ namespace KKTServiceLib.Atol.Types.Operations.NonFiscal.CreateNonFiscalDocument
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        this.GetType().GetProperty(nameof(Items)).GetDisplayName(), 1),
+                        GetType().GetProperty(nameof(Items)).GetDisplayName(), 1),
                     nameof(items));
             }
 

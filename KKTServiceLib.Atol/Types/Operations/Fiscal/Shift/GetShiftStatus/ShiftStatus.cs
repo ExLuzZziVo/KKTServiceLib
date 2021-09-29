@@ -12,6 +12,12 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Shift.GetShiftStatus
     public class ShiftStatus
     {
         /// <summary>
+        /// Количество ФД за смену
+        /// </summary>
+        [Display(Name = "Количество ФД за смену")]
+        public uint DocumentsCount { get; set; }
+
+        /// <summary>
         /// Дата и время истечения смены
         /// </summary>
         [Display(Name = "Дата и время истечения смены")]

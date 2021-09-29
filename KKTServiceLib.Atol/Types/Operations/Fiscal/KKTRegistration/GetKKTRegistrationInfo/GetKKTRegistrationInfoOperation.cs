@@ -12,8 +12,6 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.KKTRegistration.GetKKTRegis
         /// <summary>
         /// Запрос параметров регистрации ККТ
         /// </summary>
-        public GetKKTRegistrationInfoOperation() : base("getRegistrationInfo")
-        {
-        }
+        public GetKKTRegistrationInfoOperation() : base("getRegistrationInfo") { }
     }
 }

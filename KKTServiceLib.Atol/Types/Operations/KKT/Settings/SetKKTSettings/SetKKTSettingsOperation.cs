@@ -25,7 +25,7 @@ namespace KKTServiceLib.Atol.Types.Operations.KKT.Settings.SetKKTSettings
             if (deviceParameters?.Any() != true)
             {
                 throw new ArgumentException(string.Format(ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        this.GetType().GetProperty(nameof(DeviceParameters)).GetDisplayName(), 1),
+                        GetType().GetProperty(nameof(DeviceParameters)).GetDisplayName(), 1),
                     nameof(deviceParameters));
             }
 

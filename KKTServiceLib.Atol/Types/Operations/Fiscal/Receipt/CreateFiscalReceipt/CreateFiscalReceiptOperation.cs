@@ -38,7 +38,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
                 throw new ArgumentException(
                     string.Format(
                         ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        this.GetType().GetProperty(nameof(Items)).GetDisplayName(), 1),
+                        GetType().GetProperty(nameof(Items)).GetDisplayName(), 1),
                     nameof(items));
             }
 
@@ -46,7 +46,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        this.GetType().GetProperty(nameof(Payments)).GetDisplayName(), 1),
+                        GetType().GetProperty(nameof(Payments)).GetDisplayName(), 1),
                     nameof(payments));
             }
 
@@ -69,12 +69,6 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         public bool Electronically { get; set; }
 
         /// <summary>
-        /// Использовать при регистрации чека ставку налога 18%
-        /// </summary>
-        [Display(Name = "Использовать при регистрации чека ставку налога 18%")]
-        public bool UserVAT18 { get; set; }
-
-        /// <summary>
         /// Система налогообложения
         /// </summary>
         /// <list type="bullet">
@@ -85,10 +79,19 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         public TaxationType TaxationType { get; }
 
         /// <summary>
-        /// Место проведения расчета
+        /// Место проведения расчётов
         /// </summary>
-        [Display(Name = "Место проведения расчета")]
+        /// <list type="bullet">
+        /// <item>Обязательное поле, если чек является электронным</item>
+        /// </list>
+        [Display(Name = "Место проведения расчётов")]
         public string PaymentsPlace { get; set; }
+
+        /// <summary>
+        /// Адрес расчётов
+        /// </summary>
+        [Display(Name = "Адрес расчётов")]
+        public string PaymentsAddress { get; set; }
 
         /// <summary>
         /// Номер автомата
@@ -141,6 +144,28 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         public SupplierParams SupplierInfo { get; set; }
 
         /// <summary>
+        /// Сведения об операции
+        /// </summary>
+        /// <remarks>
+        /// Только для ФФД ≥ 1.2
+        /// </remarks>
+        [Display(Name = "Сведения об операции")]
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+            ErrorMessageResourceName = "ComplexObjectValidationError")]
+        public OperationParams OperationInfo { get; set; }
+
+        /// <summary>
+        /// Отраслевой реквизит
+        /// </summary>
+        /// <remarks>
+        /// Только для ФФД ≥ 1.2
+        /// </remarks>
+        [Display(Name = "Отраслевой реквизит")]
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+            ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
+        public IndustryRequisiteParams[] IndustryInfo { get; set; }
+
+        /// <summary>
         /// Элементы документа
         /// </summary>
         /// <list type="bullet">
@@ -183,7 +208,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// <item>Должно лежать в диапазоне: 0.01-<see cref="decimal.MaxValue"/></item>
         /// </list>
         [Display(Name = "Итог чека")]
-        [Range(0.01, (double) decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0.01, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal? Total { get; set; }
 
@@ -202,6 +227,15 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
         [Display(Name = "Элементы для печати после документа")]
         public ICommonDocumentElement[] PostItems { get; set; }
+
+        /// <summary>
+        /// Предварительно проверить имеющиеся в чеке КМ
+        /// </summary>
+        /// <remarks>
+        /// Только для ФФД ≥ 1.2
+        /// </remarks>
+        [Display(Name = "Предварительно проверить имеющиеся в чеке КМ")]
+        public bool? ValidateMarkingCodes { get; set; }
 
         protected override IEnumerable<ValidationResult> Validate()
         {

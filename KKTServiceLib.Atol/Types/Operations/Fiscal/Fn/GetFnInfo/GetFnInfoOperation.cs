@@ -12,8 +12,6 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Fn.GetFnInfo
         /// <summary>
         /// Запрос информации о ФН
         /// </summary>
-        public GetFnInfoOperation() : base("getFnInfo")
-        {
-        }
+        public GetFnInfoOperation() : base("getFnInfo") { }
     }
 }

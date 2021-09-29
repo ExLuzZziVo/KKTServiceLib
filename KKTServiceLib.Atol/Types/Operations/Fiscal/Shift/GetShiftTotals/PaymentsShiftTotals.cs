@@ -11,12 +11,6 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Shift.GetShiftTotals
     public class PaymentsShiftTotals
     {
         /// <summary>
-        /// Количество чеков
-        /// </summary>
-        [Display(Name = "Количество чеков")]
-        public int Count { get; set; }
-
-        /// <summary>
         /// Общая сумма чеков
         /// </summary>
         [Display(Name = "Общая сумма чеков")]

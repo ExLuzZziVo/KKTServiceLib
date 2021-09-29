@@ -32,11 +32,6 @@ namespace KKTServiceLib.Atol.Types.Enums
         UsnIncomeOutcome,
 
         /// <summary>
-        /// ЕНВД
-        /// </summary>
-        [Display(Name = "ЕНВД")] Envd,
-
-        /// <summary>
         /// Единый сельскохозяйственный налог
         /// </summary>
         [Display(Name = "Единый сельскохозяйственный налог")]

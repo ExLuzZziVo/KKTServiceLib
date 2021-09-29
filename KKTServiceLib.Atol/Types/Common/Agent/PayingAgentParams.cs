@@ -27,14 +27,14 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
             {
                 throw new ArgumentException(
                     string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        this.GetType().GetProperty(nameof(Operation)).GetDisplayName()),
+                        GetType().GetProperty(nameof(Operation)).GetDisplayName()),
                     nameof(operation));
             }
 
             if (phones?.Any() != true)
             {
                 throw new ArgumentException(string.Format(ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        this.GetType().GetProperty(nameof(Phones)).GetDisplayName(), 1),
+                        GetType().GetProperty(nameof(Phones)).GetDisplayName(), 1),
                     nameof(phones));
             }
 

@@ -24,7 +24,7 @@ namespace KKTServiceLib.Atol.Types.Operations.KKT.Settings.ReadKKTSettings
             if (keys?.Any() != true)
             {
                 throw new ArgumentException(string.Format(ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        this.GetType().GetProperty(nameof(Keys)).GetDisplayName(), 1),
+                        GetType().GetProperty(nameof(Keys)).GetDisplayName(), 1),
                     nameof(keys));
             }
 
