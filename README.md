@@ -14,7 +14,7 @@ var result = new <Операция>.Execute(fptr);
 
 fptr.close();
 ```
-Все доступные операции находятся в пространстве имен <b>AtolKKTServiceLib.Types.Operations</b>
+Все доступные операции находятся в пространстве имен <b>KKTServiceLib.Atol.Types.Operations</b>
 
 <b>ККТ Меркурий</b>
 
@@ -28,7 +28,7 @@ var result = new <Операция>.Execute(sessionKey);
 
 new CloseSessionOperation().Execute(sessionKey);
 ```
-Все доступные операции находятся в пространстве имен <b>MercuryKKTServiceLib.Types.Operations</b>
+Все доступные операции находятся в пространстве имен <b>KKTServiceLib.Mercury.Types.Operations</b>
 
 <b>Работу чего необходимо проверить</b>
 
