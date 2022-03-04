@@ -14,8 +14,11 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Shift.GetShiftStatus
         /// <summary>
         /// Количество ФД за смену
         /// </summary>
+        /// <remarks>
+        /// Параметр возвращается только при закрытой смене. Параметр недоступен для ККТ 5.0 с ПО ниже 5.7.20
+        /// </remarks>
         [Display(Name = "Количество ФД за смену")]
-        public uint DocumentsCount { get; set; }
+        public uint? DocumentsCount { get; set; }
 
         /// <summary>
         /// Дата и время истечения смены

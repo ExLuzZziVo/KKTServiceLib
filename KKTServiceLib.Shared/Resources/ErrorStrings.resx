@@ -132,7 +132,7 @@
     <value>Дата в параметре '{0}' введена некорректно</value>
   </data>
     <data name="DigitRangeValuesError" xml:space="preserve">
-    <value>Параметр '{0}' должен иметь значение не менее {1}  и не более {2}</value>
+    <value>Параметр '{0}' должен иметь значение не менее {1} и не более {2}</value>
   </data>
     <data name="ComplexObjectCollectionValidationError" xml:space="preserve">
     <value>Последовательность '{0}' содержит элементы со следующими ошибками</value>
@@ -185,4 +185,7 @@
     <data name="AgentInPositionValidationError" xml:space="preserve">
     <value>При проверке данных агента в предмете расчета {0} возникли следующие ошибки</value>
   </data>
+    <data name="MustBeEqualError" xml:space="preserve">
+        <value>Параметр '{0}' должен быть равен следующим значениям: {1}</value>
+    </data>
 </root>

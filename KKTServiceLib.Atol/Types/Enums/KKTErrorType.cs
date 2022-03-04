@@ -74,9 +74,9 @@ namespace KKTServiceLib.Atol.Types.Enums
         LIBFPTR_ERROR_NOT_CONFIGURED = 010,
 
         /// <summary>
-        /// Не поддерживается в данной версии (драйвера или ККТ)
+        /// Не поддерживается в данной версии
         /// </summary>
-        [Display(Name = "Не поддерживается в данной версии (драйвера или ККТ)")]
+        [Display(Name = "Не поддерживается в данной версии")]
         LIBFPTR_ERROR_NOT_SUPPORTED = 011,
 
         /// <summary>
@@ -559,9 +559,9 @@ namespace KKTServiceLib.Atol.Types.Enums
         LIBFPTR_ERROR_RECORD_NOT_FOUND_IN_JOURNAL = 093,
 
         /// <summary>
-        /// Некорректный код или номер кода защиты ККТ
+        /// Некорректный код защиты / лицензия или номер
         /// </summary>
-        [Display(Name = "Некорректный код или номер кода защиты ККТ")]
+        [Display(Name = "Некорректный код защиты / лицензия или номер")]
         LIBFPTR_ERROR_INVALID_LICENSE = 094,
 
         /// <summary>
@@ -571,9 +571,9 @@ namespace KKTServiceLib.Atol.Types.Enums
         LIBFPTR_ERROR_NEED_FULL_RESET = 095,
 
         /// <summary>
-        /// Команда не разрешена введенными кодами защиты ККТ
+        /// Команда не разрешена введенными кодами защиты / лицензиями ККТ
         /// </summary>
-        [Display(Name = "Команда не разрешена введенными кодами защиты ККТ")]
+        [Display(Name = "Команда не разрешена введенными кодами защиты / лицензиями ККТ")]
         LIBFPTR_ERROR_DENIED_BY_LICENSE = 096,
 
         /// <summary>
@@ -736,9 +736,9 @@ namespace KKTServiceLib.Atol.Types.Enums
         LIBFPTR_ERROR_FN_NO_MORE_DATA = 123,
 
         /// <summary>
-        /// Переполнение ФН (итог чека/смены)
+        /// Переполнение ФН (итог чека)
         /// </summary>
-        [Display(Name = "Переполнение ФН (итог чека/смены)")]
+        [Display(Name = "Переполнение ФН (итог чека)")]
         LIBFPTR_ERROR_FN_TOTAL_OVERFLOW = 124,
 
         /// <summary>
@@ -995,15 +995,15 @@ namespace KKTServiceLib.Atol.Types.Enums
         LIBFPTR_ERROR_INVALID_AGENT_FISCAL_PROPERTY = 167,
 
         /// <summary>
-        /// Недопустимое сочетания реквизитов 1002 и 1056
+        /// Недопустимое сочетание реквизитов 1002 и 1056
         /// </summary>
-        [Display(Name = "Недопустимое сочетания реквизитов 1002 и 1056")]
+        [Display(Name = "Недопустимое сочетание реквизитов 1002 и 1056")]
         LIBFPTR_ERROR_INVALID_FISCAL_PROPERTY_VALUE_1002_1056 = 168,
 
         /// <summary>
-        /// Недопустимое сочетания реквизитов 1002 и 1017
+        /// Недопустимое сочетание реквизитов 1002 и 1017
         /// </summary>
-        [Display(Name = "Недопустимое сочетания реквизитов 1002 и 1017")]
+        [Display(Name = "Недопустимое сочетание реквизитов 1002 и 1017")]
         LIBFPTR_ERROR_INVALID_FISCAL_PROPERTY_VALUE_1002_1017 = 169,
 
         /// <summary>
@@ -1088,21 +1088,21 @@ namespace KKTServiceLib.Atol.Types.Enums
         LIBFPTR_ERROR_INVALID_MAC_ADDRESS = 183,
 
         /// <summary>
-        /// Неверный тип (номер) скрипта
+        /// Неверный тип (номер) шаблона
         /// </summary>
-        [Display(Name = "Неверный тип (номер) скрипта")]
+        [Display(Name = "Неверный тип (номер) шаблона")]
         LIBFPTR_ERROR_INVALID_SCRIPT_NUMBER = 184,
 
         /// <summary>
-        /// Загруженные скрипты повреждены или отсутствуют
+        /// Загруженные шаблоны повреждены или отсутствуют
         /// </summary>
-        [Display(Name = "Загруженные скрипты повреждены или отсутствуют")]
+        [Display(Name = "Загруженные шаблоны повреждены или отсутствуют")]
         LIBFPTR_ERROR_SCRIPTS_FAULT = 185,
 
         /// <summary>
-        /// Несовместимая версия загруженных скриптов
+        /// Несовместимая версия загруженных шаблонов
         /// </summary>
-        [Display(Name = "Несовместимая версия загруженных скриптов")]
+        [Display(Name = "Несовместимая версия загруженных шаблонов")]
         LIBFPTR_ERROR_INVALID_SCRIPTS_VERSION = 186,
 
         /// <summary>
@@ -1160,9 +1160,9 @@ namespace KKTServiceLib.Atol.Types.Enums
         LIBFPTR_ERROR_FISCAL_PROPERTIES_COMBINATION = 195,
 
         /// <summary>
-        /// Ошибка регистрации кассира
+        /// Не удалось зарегистрировать кассира
         /// </summary>
-        [Display(Name = "Ошибка регистрации кассира")]
+        [Display(Name = "Не удалось зарегистрировать кассира")]
         LIBFPTR_ERROR_OPERATOR_LOGIN = 196,
 
         /// <summary>
@@ -1392,9 +1392,9 @@ namespace KKTServiceLib.Atol.Types.Enums
         LIBFPTR_ERROR_INVALID_SCRIPT_NAME = 234,
 
         /// <summary>
-        /// Кол-во позиций с реквизитом 1162 в автономном режиме превысило разрешенный лимит
+        /// Кол-во позиций с реквизитом 1162/1163 в автономном режиме превысило разрешенный лимит
         /// </summary>
-        [Display(Name = "Кол-во позиций с реквизитом 1162 в автономном режиме превысило разрешенный лимит")]
+        [Display(Name = "Кол-во позиций с реквизитом 1162/1163 в автономном режиме превысило разрешенный лимит")]
         LIBFPTR_ERROR_INVALID_POSITIONS_COUNT_WITH_1162 = 235,
 
         /// <summary>
@@ -1416,9 +1416,9 @@ namespace KKTServiceLib.Atol.Types.Enums
         LIBFPTR_ERROR_INVALID_UC_IDX = 238,
 
         /// <summary>
-        /// Не задано ни одно значение тега для формирования счетчика
+        /// Неверный размер универсального счетчика
         /// </summary>
-        [Display(Name = "Не задано ни одно значение тега для формирования счетчика")]
+        [Display(Name = "Неверный размер универсального счетчика")]
         LIBFPTR_ERROR_INVALID_UC_EMPTY_FILTER = 239,
 
         /// <summary>
@@ -1434,9 +1434,312 @@ namespace KKTServiceLib.Atol.Types.Enums
         LIBFPTR_ERROR_CONNECTION_LOST = 241,
 
         /// <summary>
-        /// Ошибка парсинга чека/запроса
+        /// Ошибка универсальных счетчиков
         /// </summary>
-        [Display(Name = "Ошибка парсинга чека/запроса")]
+        [Display(Name = "Ошибка универсальных счетчиков")]
+        LIBFPTR_ERROR_UNIVERSAL_COUNTERS_FAULT = 242,
+
+        /// <summary>
+        /// Некорректная сумма налога
+        /// </summary>
+        [Display(Name = "Некорректная сумма налога")]
+        LIBFPTR_ERROR_INVALID_TAX_SUM = 243,
+
+        /// <summary>
+        /// Некорректное значение типа кода маркировки
+        /// </summary>
+        [Display(Name = "Некорректное значение типа кода маркировки")]
+        LIBFPTR_ERROR_INVALID_MARKING_CODE_TYPE = 244,
+
+        /// <summary>
+        /// Аппаратная ошибка при сохранении лицензии
+        /// </summary>
+        [Display(Name = "Аппаратная ошибка при сохранении лицензии")]
+        LIBFPTR_ERROR_LICENSE_HARD_FAULT = 245,
+
+        /// <summary>
+        /// Подпись лицензии некорректна
+        /// </summary>
+        [Display(Name = "Подпись лицензии некорректна")]
+        LIBFPTR_ERROR_LICENSE_INVALID_SIGN = 246,
+
+        /// <summary>
+        /// Лицензия не подходит для данной ККТ
+        /// </summary>
+        [Display(Name = "Лицензия не подходит для данной ККТ")]
+        LIBFPTR_ERROR_LICENSE_INVALID_SERIAL = 247,
+
+        /// <summary>
+        /// Срок действия лицензии истёк
+        /// </summary>
+        [Display(Name = "Срок действия лицензии истёк")]
+        LIBFPTR_ERROR_LICENSE_INVALID_TIME = 248,
+
+        /// <summary>
+        /// Документ был отменен
+        /// </summary>
+        [Display(Name = "Документ был отменен")]
+        LIBFPTR_ERROR_DOCUMENT_CANCELED = 249,
+
+        /// <summary>
+        /// Некорректные параметры скрипта
+        /// </summary>
+        [Display(Name = "Некорректные параметры скрипта")]
+        LIBFPTR_ERROR_INVALID_SCRIPT_PARAMS = 250,
+
+        /// <summary>
+        /// Длина клише превышает максимальное значение
+        /// </summary>
+        [Display(Name = "Длина клише превышает максимальное значение")]
+        LIBFPTR_ERROR_CLICHE_TOO_LONG = 251,
+
+        /// <summary>
+        /// Ошибка таблицы товаров
+        /// </summary>
+        [Display(Name = "Ошибка таблицы товаров")]
+        LIBFPTR_ERROR_COMMODITIES_TABLE_FAULT = 252,
+
+        /// <summary>
+        /// Общая ошибка таблицы товаров
+        /// </summary>
+        [Display(Name = "Общая ошибка таблицы товаров")]
+        LIBFPTR_ERROR_COMMODITIES_TABLE = 253,
+
+        /// <summary>
+        /// Некорректный тег для таблицы товаров
+        /// </summary>
+        [Display(Name = "Некорректный тег для таблицы товаров")]
+        LIBFPTR_ERROR_COMMODITIES_TABLE_INVALID_TAG = 254,
+
+        /// <summary>
+        /// Некорректный размер тега для таблицы товаров
+        /// </summary>
+        [Display(Name = "Некорректный размер тега для таблицы товаров")]
+        LIBFPTR_ERROR_COMMODITIES_TABLE_INVALID_TAG_SIZE = 255,
+
+        /// <summary>
+        /// Нет данных по тегу в таблице товаров
+        /// </summary>
+        [Display(Name = "Нет данных по тегу в таблице товаров")]
+        LIBFPTR_ERROR_COMMODITIES_TABLE_NO_TAG_DATA = 256,
+
+        /// <summary>
+        /// Нет места в динамической области памяти таблицы товаров
+        /// </summary>
+        [Display(Name = "Нет места в динамической области памяти таблицы товаров")]
+        LIBFPTR_ERROR_COMMODITIES_TABLE_NO_FREE_MEMORY = 257,
+
+        /// <summary>
+        /// Ошибка чтения/записи данных кеша
+        /// </summary>
+        [Display(Name = "Ошибка чтения/записи данных кеша")]
+        LIBFPTR_ERROR_INVALID_CACHE = 258,
+
+        /// <summary>
+        /// Функции планировщика заданий не доступны
+        /// </summary>
+        [Display(Name = "Функции планировщика заданий не доступны")]
+        LIBFPTR_ERROR_SCHEDULER_NOT_READY = 259,
+
+        /// <summary>
+        /// Неизвестный тип задания планировщика
+        /// </summary>
+        [Display(Name = "Неизвестный тип задания планировщика")]
+        LIBFPTR_ERROR_SCHEDULER_INVALID_TASK = 260,
+
+        /// <summary>
+        /// Отсутствует позиция оплаты
+        /// </summary>
+        [Display(Name = "Отсутствует позиция оплаты")]
+        LIBFPTR_ERROR_MINIPOS_NO_POSITION_PAYMENT = 261,
+
+        /// <summary>
+        /// Таймаут выполнения команды истек
+        /// </summary>
+        [Display(Name = "Таймаут выполнения команды истек")]
+        LIBFPTR_ERROR_MINIPOS_COMMAND_TIME_OUT = 262,
+
+        /// <summary>
+        /// Режим ФР выключен
+        /// </summary>
+        [Display(Name = "Режим ФР выключен")] LIBFPTR_ERROR_MINIPOS_MODE_FR_DISABLED = 263,
+
+        /// <summary>
+        /// Не найдена запись в OTP
+        /// </summary>
+        [Display(Name = "Не найдена запись в OTP")]
+        LIBFPTR_ERROR_ENTRY_NOT_FOUND_IN_OTP = 264,
+
+        /// <summary>
+        /// Подакцизный товар без акциза зарегистрирован в чеке
+        /// </summary>
+        [Display(Name = "Подакцизный товар без акциза зарегистрирован в чеке")]
+        LIBFPTR_ERROR_EXCISABLE_COMMODITY_WITHOUT_EXCISE = 265,
+
+        /// <summary>
+        /// Данный тип штрихкода не поддерживается
+        /// </summary>
+        [Display(Name = "Данный тип штрихкода не поддерживается")]
+        LIBFPTR_ERROR_BARCODE_TYPE_NOT_SUPPORTED = 266,
+
+        /// <summary>
+        /// Размер данных штрихкода и текста превышает допустимый
+        /// </summary>
+        [Display(Name = "Размер данных штрихкода и текста превышает допустимый")]
+        LIBFPTR_ERROR_OVERLAY_DATA_OVERFLOW = 267,
+
+        /// <summary>
+        /// Ошибка чтения адреса модуля и сегмента
+        /// </summary>
+        [Display(Name = "Ошибка чтения адреса модуля и сегмента")]
+        LIBFPTR_ERROR_INVALID_MODULE_ADDRESS = 268,
+
+        /// <summary>
+        /// Данная модель ККТ не поддерживается
+        /// </summary>
+        [Display(Name = "Данная модель ККТ не поддерживается")]
+        LIBFPTR_ERROR_ECR_MODEL_NOT_SUPPORTED = 269,
+
+        /// <summary>
+        /// Процедура проверки КМ уже запущена
+        /// </summary>
+        [Display(Name = "Процедура проверки КМ уже запущена")]
+        LIBFPTR_ERROR_MARKING_CODE_VALIDATION_IN_PROGRESS = 401,
+
+        /// <summary>
+        /// Ошибка соединения с сервером
+        /// </summary>
+        [Display(Name = "Ошибка соединения с сервером")]
+        LIBFPTR_ERROR_NO_CONNECTION_WITH_SERVER = 402,
+
+        /// <summary>
+        /// Процедура проверки КМ прервана
+        /// </summary>
+        [Display(Name = "Процедура проверки КМ прервана")]
+        LIBFPTR_ERROR_MARKING_CODE_VALIDATION_CANCELED = 403,
+
+        /// <summary>
+        /// Некорректное значение статуса КМ
+        /// </summary>
+        [Display(Name = "Некорректное значение статуса КМ")]
+        LIBFPTR_ERROR_INVALID_MARKING_CODE_STATUS = 404,
+
+        /// <summary>
+        /// Неверный код GS1
+        /// </summary>
+        [Display(Name = "Неверный код GS1")] LIBFPTR_ERROR_INVALID_GS1 = 405,
+
+        /// <summary>
+        /// Запрещена работа с маркированным товарами
+        /// </summary>
+        [Display(Name = "Запрещена работа с маркированным товарами")]
+        LIBFPTR_ERROR_MARKING_WORK_DENIED = 406,
+
+        /// <summary>
+        /// Работа с маркированными товарами временно заблокирована
+        /// </summary>
+        [Display(Name = "Работа с маркированными товарами временно заблокирована")]
+        LIBFPTR_ERROR_MARKING_WORK_TEMPORARY_BLOCKED = 407,
+
+        /// <summary>
+        /// Переполнена таблица хранения КМ
+        /// </summary>
+        [Display(Name = "Переполнена таблица хранения КМ")]
+        LIBFPTR_ERROR_MARKS_OVERFLOW = 408,
+
+        /// <summary>
+        /// Некорректный код маркировки
+        /// </summary>
+        [Display(Name = "Некорректный код маркировки")]
+        LIBFPTR_ERROR_INVALID_MARKING_CODE = 409,
+
+        /// <summary>
+        /// Неверное состояние
+        /// </summary>
+        [Display(Name = "Неверное состояние")] LIBFPTR_ERROR_INVALID_STATE = 410,
+
+        /// <summary>
+        /// Ошибка обмена с сервером ОФД или ИСМ
+        /// </summary>
+        [Display(Name = "Ошибка обмена с сервером ОФД или ИСМ")]
+        LIBFPTR_ERROR_OFD_EXCHANGE = 411,
+
+        /// <summary>
+        /// Некорректное значение единиц измерения
+        /// </summary>
+        [Display(Name = "Некорректное значение единиц измерения")]
+        LIBFPTR_ERROR_INVALID_MEASUREMENT_UNIT = 412,
+
+        /// <summary>
+        /// Операция не разрешена в данной версии ФФД
+        /// </summary>
+        [Display(Name = "Операция не разрешена в данной версии ФФД")]
+        LIBFPTR_ERROR_OPERATION_DENIED_IN_CURRENT_FFD = 413,
+
+        /// <summary>
+        /// Операция не разрешена, при регистрации не был установлен признак ТМТ
+        /// </summary>
+        [Display(Name = "Операция не разрешена, при регистрации не был установлен признак ТМТ")]
+        LIBFPTR_ERROR_MARKING_OPERATION_DENIED = 414,
+
+        /// <summary>
+        /// Нет данных для отправки
+        /// </summary>
+        [Display(Name = "Нет данных для отправки")]
+        LIBFPTR_ERROR_NO_DATA_TO_SEND = 415,
+
+        /// <summary>
+        /// Нет маркированных позиций в чеке
+        /// </summary>
+        [Display(Name = "Нет маркированных позиций в чеке")]
+        LIBFPTR_ERROR_NO_MARKED_POSITION = 416,
+
+        /// <summary>
+        /// Имеются неотправленные уведомления
+        /// </summary>
+        [Display(Name = "Имеются неотправленные уведомления")]
+        LIBFPTR_ERROR_HAS_NOT_SEND_NOTICES = 417,
+
+        /// <summary>
+        /// Требуется повторное проведение процедуры обновления ключей
+        /// </summary>
+        [Display(Name = "Требуется повторное проведение процедуры обновления ключей")]
+        LIBFPTR_ERROR_UPDATE_KEYS_REQUIRED = 418,
+
+        /// <summary>
+        /// Ошибка сервиса обновления ключей проверки КМ
+        /// </summary>
+        [Display(Name = "Ошибка сервиса обновления ключей проверки КМ")]
+        LIBFPTR_ERROR_UPDATE_KEYS_SERVICE = 419,
+
+        /// <summary>
+        /// КМ не проверен в ФН
+        /// </summary>
+        [Display(Name = "КМ не проверен в ФН")]
+        LIBFPTR_ERROR_MARK_NOT_CHECKED = 420,
+
+        /// <summary>
+        /// Истёк таймаут проверки КМ
+        /// </summary>
+        [Display(Name = "Истёк таймаут проверки КМ")]
+        LIBFPTR_ERROR_MARK_CHECK_TIMEOUT_EXPIRED = 421,
+
+        /// <summary>
+        /// Данный КМ отсутствует в таблице
+        /// </summary>
+        [Display(Name = "Данный КМ отсутствует в таблице")]
+        LIBFPTR_ERROR_NO_MARKING_CODE_IN_TABLE = 422,
+
+        /// <summary>
+        /// Выполняется проверка КМ
+        /// </summary>
+        [Display(Name = "Выполняется проверка КМ")]
+        LIBFPTR_ERROR_CHEKING_MARK_IN_PROGRESS = 423,
+
+        /// <summary>
+        /// Ошибка парсинга запроса
+        /// </summary>
+        [Display(Name = "Ошибка парсинга запроса")]
         LIBFPTR_ERROR_RECEIPT_PARSE_ERROR = 501,
 
         /// <summary>
@@ -1449,6 +1752,30 @@ namespace KKTServiceLib.Atol.Types.Enums
         /// Ошибка скрипта драйвера
         /// </summary>
         [Display(Name = "Ошибка скрипта драйвера")]
-        LIBFPTR_ERROR_DRIVER_SCRIPT_ERROR = 503
+        LIBFPTR_ERROR_DRIVER_SCRIPT_ERROR = 503,
+
+        /// <summary>
+        /// Функция проверки задания не найдена
+        /// </summary>
+        [Display(Name = "Функция проверки задания не найдена")]
+        LIBFPTR_ERROR_VALIDATE_FUNC_NOT_FOUND = 504,
+
+        /// <summary>
+        /// Устройство на сервере удалённого подключения занято другим клиентом
+        /// </summary>
+        [Display(Name = "Устройство на сервере удалённого подключения занято другим клиентом")]
+        LIBFPTR_ERROR_RCP_SERVER_BUSY = 601,
+
+        /// <summary>
+        /// Некорректная версия протокола обмена с сервером удалённого подключения
+        /// </summary>
+        [Display(Name = "Некорректная версия протокола обмена с сервером удалённого подключения")]
+        LIBFPTR_ERROR_RCP_SERVER_VERSION = 602,
+
+        /// <summary>
+        /// Ошибка обмена с сервером удалённого подключения
+        /// </summary>
+        [Display(Name = "Ошибка обмена с сервером удалённого подключения")]
+        LIBFPTR_ERROR_RCP_SERVER_EXCHANGE = 603
     }
 }

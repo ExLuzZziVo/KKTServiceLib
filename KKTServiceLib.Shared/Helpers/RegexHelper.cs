@@ -105,7 +105,7 @@
         public const string BarcodeCODE39_EXTENDEDPattern = @"^[\x00-\x7F]*$";
 
         /// <summary>
-        /// Код меховых изделий
+        /// Код маркировки меховых изделий
         /// </summary>
         public const string BarcodeFurPattern = @"^[A-Z]{2}-[0-9]{6}-[A-Z]{10}$";
 

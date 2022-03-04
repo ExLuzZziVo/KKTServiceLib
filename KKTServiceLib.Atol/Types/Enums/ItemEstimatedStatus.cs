@@ -30,15 +30,15 @@ namespace KKTServiceLib.Atol.Types.Enums
         ItemPieceReturn = 3,
 
         /// <summary>
-        /// Часть товара, возвращена
+        /// Часть мерного товара, возвращена
         /// </summary>
-        [Display(Name = "Часть товара, возвращена")]
+        [Display(Name = "Часть мерного товара, возвращена")]
         ItemDryReturn = 4,
 
         /// <summary>
-        /// Статус товара, не изменился
+        /// Статус товара не изменился
         /// </summary>
-        [Display(Name = "Статус товара, не изменился")]
+        [Display(Name = "Статус товара не изменился")]
         ItemStatusUnchanged = 255
     }
 }

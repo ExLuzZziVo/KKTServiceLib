@@ -28,7 +28,7 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
         }
 
         [JsonConstructor]
-        private KKTWorkParams() { }
+        protected internal KKTWorkParams() { }
 
         /// <summary>
         /// Шифрование данных

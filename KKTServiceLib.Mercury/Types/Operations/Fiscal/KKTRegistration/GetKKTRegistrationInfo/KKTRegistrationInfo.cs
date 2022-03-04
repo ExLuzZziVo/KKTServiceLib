@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using KKTServiceLib.Mercury.Types.Common;
-using KKTServiceLib.Mercury.Types.Common.KKT;
 using KKTServiceLib.Mercury.Types.Enums;
 using KKTServiceLib.Shared.Resources;
 using Newtonsoft.Json;
@@ -31,7 +30,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.GetKKTRe
         /// Параметры ККТ
         /// </summary>
         [Display(Name = "Параметры ККТ")]
-        public KKTParams Kkt { get; set; }
+        public KKTParamsInfo Kkt { get; set; }
 
         /// <summary>
         /// Параметры ОФД

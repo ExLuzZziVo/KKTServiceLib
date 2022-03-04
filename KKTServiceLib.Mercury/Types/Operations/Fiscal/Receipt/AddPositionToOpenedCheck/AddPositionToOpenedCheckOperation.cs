@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using KKTServiceLib.Mercury.Types.Common.Agent;
+using KKTServiceLib.Mercury.Types.Common.MarkingCodes;
 using KKTServiceLib.Mercury.Types.Converters;
 using KKTServiceLib.Mercury.Types.Enums;
 using KKTServiceLib.Shared.Helpers;
@@ -62,7 +63,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         }
 
         /// <summary>
-        /// Код товара
+        /// Код товара (ФФД < 1.2)
         /// </summary>
         /// <remarks>
         /// Будет проигнорировано, если <see cref="MarkingCode"/> имеет значение
@@ -71,13 +72,21 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         public string NomenclatureCode { get; set; }
 
         /// <summary>
-        /// Маркировка товара
+        /// Маркировка товара (ФФД < 1.2)
         /// </summary>
         /// <remarks>
         /// Если этот параметр будет задан, то значение <see cref="NomenclatureCode"/> будет проигнорировано
         /// </remarks>
         [Display(Name = "Маркировка товара")]
         public string MarkingCode { get; set; }
+
+        /// <summary>
+        /// Информация о маркированном товаре (ФФД ≥ 1.2)
+        /// </summary>
+        [Display(Name = "Информация о маркированном товаре")]
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+            ErrorMessageResourceName = "ComplexObjectValidationError")]
+        public MarkingCodeFullInfo McInfo { get; set; }
 
         /// <summary>
         /// Наименование предмета расчета
@@ -102,6 +111,12 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         [Display(Name = "Количество предмета расчета")]
         [JsonConverter(typeof(QuantityConverter))]
         public double Qty { get; }
+
+        /// <summary>
+        /// Мера количества товара (ФФД ≥ 1.2)
+        /// </summary>
+        [Display(Name = "Мера количества товара")]
+        public ItemUnitType? MeasureUnit { get; set; }
 
         /// <summary>
         /// Номер отдела (секции)
@@ -433,6 +448,41 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
                             agentValidationResults.Aggregate(string.Empty,
                                 (current, c) => current + "\n\t" + c.ErrorMessage))
                     };
+                }
+            }
+
+            if (McInfo?.Part != null)
+            {
+                var partValidationResults = new List<ValidationResult>(8);
+
+                partValidationResults.AddRange(McInfo.Part.Validate());
+
+                if (Qty != 1)
+                {
+                    partValidationResults.Add(new ValidationResult(string.Format(
+                        ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
+                        GetType().GetProperty(nameof(Qty)).GetDisplayName(), 1)));
+                }
+
+                if (MeasureUnit != ItemUnitType.Piece)
+                {
+                    partValidationResults.Add(new ValidationResult(string.Format(
+                        ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
+                        GetType().GetProperty(nameof(Qty)).GetDisplayName(), ItemUnitType.Piece.GetDisplayName())));
+                }
+
+                if (!(McInfo.PlannedStatus == ItemEstimatedStatus.ItemDryForSale ||
+                      McInfo.PlannedStatus == ItemEstimatedStatus.ItemDryReturn))
+                {
+                    partValidationResults.Add(new ValidationResult(string.Format(
+                        ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
+                        GetType().GetProperty(nameof(McInfo.PlannedStatus)).GetDisplayName(),
+                        $"{ItemEstimatedStatus.ItemDryForSale.GetDisplayName()}, {ItemEstimatedStatus.ItemDryReturn.GetDisplayName()}")));
+                }
+
+                if (partValidationResults.Any())
+                {
+                    validationResults = validationResults.Concat(partValidationResults);
                 }
             }
 

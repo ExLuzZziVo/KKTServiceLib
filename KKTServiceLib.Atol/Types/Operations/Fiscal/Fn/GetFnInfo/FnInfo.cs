@@ -20,6 +20,18 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Fn.GetFnInfo
         public string Serial { get; set; }
 
         /// <summary>
+        /// Версия ФН
+        /// </summary>
+        [Display(Name = "Версия ФН")]
+        public string Version { get; set; }
+
+        /// <summary>
+        /// Исполнение ФН (только для ФН-М)
+        /// </summary>
+        [Display(Name = "Исполнение ФН (только для ФН-М)")]
+        public string Execution { get; set; }
+
+        /// <summary>
         /// Количество проведенных регистраций
         /// </summary>
         [Display(Name = "Количество проведенных регистраций")]

@@ -34,6 +34,12 @@ namespace KKTServiceLib.Atol.Types.Enums
         /// Область заполнена более чем на 90%
         /// </summary>
         [Display(Name = "Область заполнена более чем на 90%")]
-        More90
+        More90,
+
+        /// <summary>
+        /// Область полностью заполнена
+        /// </summary>
+        [Display(Name = "Область полностью заполнена")]
+        OutOfMemory
     }
 }

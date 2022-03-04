@@ -4,7 +4,7 @@ using KKTServiceLib.Atol.Types.Common.MarkingCodes;
 
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.AcceptMarkingCode
 {
-    [Description("Результат подтверждения реализации КМ")]
+    [Description("Результат подтверждения операции с КМ")]
     public class AcceptMarkingCodeResult
     {
         /// <summary>

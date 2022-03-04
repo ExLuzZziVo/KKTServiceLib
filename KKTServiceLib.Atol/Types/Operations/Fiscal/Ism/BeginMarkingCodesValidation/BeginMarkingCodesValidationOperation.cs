@@ -29,7 +29,8 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.BeginMarkingCodesValida
 
             if (markingCodeParams.Any(mcp => mcp.IsPositionMarkingCodeParams))
             {
-                throw new ArgumentException(Resources.ErrorStrings.ResourceManager.GetString("MarkingCodeCheckTypeError"));
+                throw new ArgumentException(
+                    Resources.ErrorStrings.ResourceManager.GetString("MarkingCodeCheckTypeError"));
             }
 
             Params = markingCodeParams;

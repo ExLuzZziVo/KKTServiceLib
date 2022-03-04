@@ -18,7 +18,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.ForceAddMarkingCodesToB
         /// Локальная проверка
         /// </summary>
         [Display(Name = "Локальная проверка")]
-        public BeginMarkingCodeValidationResult OfflineValidation { get; set; }
+        public MarkingCodeCheckOfflineValidationResult OfflineValidation { get; set; }
 
         /// <summary>
         /// Результат сохранения КМ в таблице ФН-М в случае успешной проверки

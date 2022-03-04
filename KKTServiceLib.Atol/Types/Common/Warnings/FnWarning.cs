@@ -39,5 +39,11 @@ namespace KKTServiceLib.Atol.Types.Common.Warnings
         /// </summary>
         [Display(Name = "Критическая ошибка ФН")]
         public bool CriticalError { get; set; }
+
+        /// <summary>
+        /// ФН содержит URI сервера ОКП
+        /// </summary>
+        [Display(Name = "ФН содержит URI сервера ОКП")]
+        public bool FnContainsKeysUpdaterServerUri { get; set; }
     }
 }

@@ -160,7 +160,7 @@ namespace KKTServiceLib.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Параметр &apos;{0}&apos; должен иметь значение не менее {1}  и не более {2}.
+        ///   Looks up a localized string similar to Параметр &apos;{0}&apos; должен иметь значение не менее {1} и не более {2}.
         /// </summary>
         public static string DigitRangeValuesError {
             get {
@@ -183,6 +183,15 @@ namespace KKTServiceLib.Shared.Resources {
         public static string MinLengthError {
             get {
                 return ResourceManager.GetString("MinLengthError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Параметр &apos;{0}&apos; должен быть равен следующим значениям: {1}.
+        /// </summary>
+        public static string MustBeEqualError {
+            get {
+                return ResourceManager.GetString("MustBeEqualError", resourceCulture);
             }
         }
         

@@ -60,8 +60,9 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
         /// <param name="itemUnits">Мера количества товара</param>
         /// <param name="itemQuantity">Количество товара</param>
         /// <param name="itemFractionalAmount">Дробное количество маркированного товара</param>
-        public MarkingCodeParams_12(string imc, int imcModeProcessing, ImcType imcType, ItemUnitType itemUnits,
-            int itemQuantity, string itemFractionalAmount = null)
+        public MarkingCodeParams_12(string imc, int imcModeProcessing, ImcType imcType,
+            ItemEstimatedStatus? itemEstimatedStatus = null, ItemUnitType? itemUnits = null,
+            int? itemQuantity = null, string itemFractionalAmount = null)
         {
             if (imc.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(imc, RegexHelper.Base64Pattern))
             {
@@ -69,6 +70,16 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
                     string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
                         GetType().GetProperty(nameof(Imc)).GetDisplayName()),
                     nameof(imc));
+            }
+
+            if (itemQuantity != null && itemUnits != null &&
+                !(itemEstimatedStatus == Enums.ItemEstimatedStatus.ItemDryForSale ||
+                  itemEstimatedStatus == Enums.ItemEstimatedStatus.ItemDryReturn))
+            {
+                throw new ArgumentOutOfRangeException(nameof(itemEstimatedStatus), string.Format(
+                    ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
+                    GetType().GetProperty(nameof(ItemEstimatedStatus)).GetDisplayName(),
+                    $"{Enums.ItemEstimatedStatus.ItemDryForSale.GetDisplayName()}, {Enums.ItemEstimatedStatus.ItemDryReturn.GetDisplayName()}"));
             }
 
             if (itemQuantity < 0)
@@ -110,6 +121,7 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
             Imc = imc;
             ImcModeProcessing = imcModeProcessing;
             ImcType = imcType;
+            ItemEstimatedStatus = itemEstimatedStatus;
             ItemQuantity = itemQuantity;
             ItemFractionalAmount = itemFractionalAmount;
             ItemUnits = itemUnits;

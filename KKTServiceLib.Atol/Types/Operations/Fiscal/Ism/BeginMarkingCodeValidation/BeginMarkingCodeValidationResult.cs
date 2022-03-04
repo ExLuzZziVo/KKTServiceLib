@@ -1,6 +1,6 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using KKTServiceLib.Atol.Types.Enums;
+using KKTServiceLib.Atol.Types.Common.MarkingCodes;
 
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.BeginMarkingCodeValidation
 {
@@ -8,21 +8,9 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.BeginMarkingCodeValidat
     public class BeginMarkingCodeValidationResult
     {
         /// <summary>
-        /// Проверка КМ в ФН
+        /// Локальная проверка
         /// </summary>
-        [Display(Name = "Проверка КМ в ФН")]
-        public bool FmCheck { get; set; }
-
-        /// <summary>
-        /// Результат проверки
-        /// </summary>
-        [Display(Name = "Результат проверки")]
-        public bool FmCheckResult { get; set; }
-
-        /// <summary>
-        /// Причина ошибки проверки
-        /// </summary>
-        [Display(Name = "Причина ошибки проверки")]
-        public MarkingCodeCheckResult FmCheckErrorReason { get; set; }
+        [Display(Name = "Локальная проверка")]
+        public MarkingCodeCheckOfflineValidationResult OfflineValidation { get; set; }
     }
 }

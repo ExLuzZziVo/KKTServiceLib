@@ -55,7 +55,7 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
         }
 
         [JsonConstructor]
-        private KKTParams() { }
+        protected internal KKTParams() { }
 
         /// <summary>
         /// Регистрационный номер ККТ

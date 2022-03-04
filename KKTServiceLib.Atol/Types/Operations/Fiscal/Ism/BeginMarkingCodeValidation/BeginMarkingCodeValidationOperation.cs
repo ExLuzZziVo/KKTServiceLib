@@ -15,7 +15,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.BeginMarkingCodeValidat
         /// </summary>
         /// <param name="markingCodeParams">КМ для проверки</param>
         public BeginMarkingCodeValidationOperation(MarkingCodeParams_12 markingCodeParams) : base(
-            "beginMarkingCodeValidation ")
+            "beginMarkingCodeValidation")
         {
             if (markingCodeParams == null)
             {
@@ -24,7 +24,8 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.BeginMarkingCodeValidat
 
             if (markingCodeParams.IsPositionMarkingCodeParams)
             {
-                throw new ArgumentException(Resources.ErrorStrings.ResourceManager.GetString("MarkingCodeCheckTypeError"));
+                throw new ArgumentException(
+                    Resources.ErrorStrings.ResourceManager.GetString("MarkingCodeCheckTypeError"));
             }
 
             Params = markingCodeParams;

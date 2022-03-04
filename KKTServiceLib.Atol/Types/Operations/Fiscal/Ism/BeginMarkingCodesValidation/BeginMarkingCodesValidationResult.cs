@@ -1,7 +1,6 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using KKTServiceLib.Atol.Types.Common.MarkingCodes;
-using KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.BeginMarkingCodeValidation;
 using KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.GetMarkingCodeValidationStatus;
 
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.BeginMarkingCodesValidation
@@ -13,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.BeginMarkingCodesValida
         /// Локальная проверка
         /// </summary>
         [Display(Name = "Локальная проверка")]
-        public BeginMarkingCodeValidationResult OfflineValidation { get; set; }
+        public MarkingCodeCheckOfflineValidationResult OfflineValidation { get; set; }
 
         /// <summary>
         /// Результат сохранения КМ в таблице ФН-М в случае успешной проверки

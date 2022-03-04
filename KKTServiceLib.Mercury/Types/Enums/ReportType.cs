@@ -8,9 +8,33 @@ namespace KKTServiceLib.Mercury.Types.Enums
     public enum ReportType : byte
     {
         /// <summary>
-        /// Общий отчёт за смену
+        /// Полный отчёт за смену из ФН
         /// </summary>
-        [Display(Name = "Общий отчёт за смену")]
-        XReport = 1
+        [Display(Name = "Полный отчёт за смену из ФН")]
+        XReport = 1,
+
+        /// <summary>
+        /// Отчёт за смену по кассирам из ФН
+        /// </summary>
+        [Display(Name = "Отчёт за смену по кассирам из ФН")]
+        ByOperators = 2,
+
+        /// <summary>
+        /// Отчёт за смену по товарам из ФН
+        /// </summary>
+        [Display(Name = "Отчёт за смену по товарам из ФН")]
+        ByGoods = 3,
+
+        /// <summary>
+        /// Отчёт за смену по товарам и кассирам из ФН
+        /// </summary>
+        [Display(Name = "Отчёт за смену по товарам и кассирам из ФН")]
+        ByGoodsAndOperators = 4,
+
+        /// <summary>
+        /// Полный отчёт за смену из ККТ
+        /// </summary>
+        [Display(Name = "Полный отчёт за смену из ККТ")]
+        ByShift = 5
     }
 }

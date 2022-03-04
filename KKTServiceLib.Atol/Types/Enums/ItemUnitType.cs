@@ -79,9 +79,9 @@ namespace KKTServiceLib.Atol.Types.Enums
         [Display(Name = "Кубический метр")] CubicMeter = 42,
 
         /// <summary>
-        /// Киловатт час
+        /// Киловатт-час
         /// </summary>
-        [Display(Name = "Киловатт час")] KilowattHour = 50,
+        [Display(Name = "Киловатт-час")] KilowattHour = 50,
 
         /// <summary>
         /// Гигакалория

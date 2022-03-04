@@ -154,6 +154,39 @@ namespace KKTServiceLib.Mercury.Types.Common
         public bool? Undivided { get; set; } = true;
 
         /// <summary>
+        /// Мера количества товара
+        /// </summary>
+        /// <remarks>
+        /// Версия базы ККТ: <b>0.4</b>
+        /// </remarks>
+        [Display(Name = "Мера количества товара")]
+        public ItemUnitType? MeasureUnit { get; set; }
+
+        /// <summary>
+        /// Количество частей в маркированном товаре
+        /// </summary>
+        /// <remarks>
+        /// Версия базы ККТ: <b>0.4</b>
+        /// </remarks>
+        [Display(Name = "Количество частей в маркированном товаре")]
+        public int? PartsCount { get; set; }
+
+        /// <summary>
+        /// Цена за одну часть маркированного товара (указывается при частичной продаже маркированного товара)
+        /// </summary>
+        /// <remarks>
+        /// Версия базы ККТ: <b>0.4</b>
+        /// </remarks>
+        /// <list type="bullet">
+        /// <item>Должно лежать в диапазоне: 0-21474836</item>
+        /// </list>
+        [Display(Name = "Цена за одну часть маркированного товара")]
+        [JsonConverter(typeof(MoneyConverter))]
+        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ErrorStrings),
+            ErrorMessageResourceName = "DigitRangeValuesError")]
+        public decimal? PartPrice { get; set; }
+
+        /// <summary>
         /// Система налогообложения
         /// </summary>
         [Display(Name = "Система налогообложения")]

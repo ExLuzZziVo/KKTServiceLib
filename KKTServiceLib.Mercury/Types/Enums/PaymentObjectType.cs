@@ -148,6 +148,36 @@ namespace KKTServiceLib.Mercury.Types.Enums
         /// <summary>
         /// Платеж казино
         /// </summary>
-        [Display(Name = "Платеж казино")] CasinoPayment = 26
+        [Display(Name = "Платеж казино")] CasinoPayment = 26,
+
+        /// <summary>
+        /// Выдача денежных средств
+        /// </summary>
+        [Display(Name = "Выдача денежных средств")]
+        FundsIssuance = 27,
+
+        /// <summary>
+        /// Подакцизный товар, подлежащий маркировке (без КМ)
+        /// </summary>
+        [Display(Name = "Подакцизный товар, подлежащий маркировке (без КМ)")]
+        ExciseWithoutMarking = 30,
+
+        /// <summary>
+        /// Подакцизный товар, подлежащий маркировке (с КМ)
+        /// </summary>
+        [Display(Name = "Подакцизный товар, подлежащий маркировке (с КМ)")]
+        ExciseWithMarking = 31,
+
+        /// <summary>
+        /// Товар, подлежащий маркировке (без КМ)
+        /// </summary>
+        [Display(Name = "Товар, подлежащий маркировке (без КМ)")]
+        CommodityWithoutMarking = 32,
+
+        /// <summary>
+        /// Товар, подлежащий маркировке (с КМ)
+        /// </summary>
+        [Display(Name = "Товар, подлежащий маркировке (с КМ)")]
+        CommodityWithMarking = 33
     }
 }

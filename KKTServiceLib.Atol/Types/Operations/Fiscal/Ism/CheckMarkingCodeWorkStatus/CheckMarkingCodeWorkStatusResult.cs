@@ -8,39 +8,13 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.CheckMarkingCodeWorkSta
     public class CheckMarkingCodeWorkStatusResult
     {
         /// <summary>
-        /// Состояние проверки КМ
+        /// Состояние работы ФН с КМ
         /// </summary>
-        [Display(Name = "Состояние проверки КМ")]
-        public MarkingCodeCheckCurrentStatus Status { get; set; }
+        public FnMarkingCodeWorkStatus Fm { get; set; }
 
         /// <summary>
-        /// Количество проверок КМ
+        /// Состояние работы ККТ с КМ
         /// </summary>
-        [Display(Name = "Количество проверок КМ")]
-        public uint CheckingCount { get; set; }
-
-        /// <summary>
-        /// Количество реализованных КМ
-        /// </summary>
-        [Display(Name = "Количество реализованных КМ")]
-        public uint SoldImcCount { get; set; }
-
-        /// <summary>
-        /// Начато формирование уведомления
-        /// </summary>
-        [Display(Name = "Начато формирование уведомления")]
-        public bool NoticeIsBegin { get; set; }
-
-        /// <summary>
-        /// Ресурс области уведомлений
-        /// </summary>
-        [Display(Name = "Ресурс области уведомлений")]
-        public MarkingCodeCheckMemoryStatus NoticeFreeMemory { get; set; }
-
-        /// <summary>
-        /// Количество неотправленных уведомлений
-        /// </summary>
-        [Display(Name = "Количество неотправленных уведомлений")]
-        public uint NoticeCount { get; set; }
+        public KKTMarkingCodeWorkStatus Ecr { get; set; }
     }
 }
