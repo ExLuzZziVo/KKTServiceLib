@@ -1737,6 +1737,24 @@ namespace KKTServiceLib.Atol.Types.Enums
         LIBFPTR_ERROR_CHEKING_MARK_IN_PROGRESS = 423,
 
         /// <summary>
+        /// Адрес сервера ИСМ не задан
+        /// </summary>
+        [Display(Name = "Адрес сервера ИСМ не задан")]
+        LIBFPTR_ERROR_INVALID_SERVER_ADDRESS = 424,
+        
+        /// <summary>
+        /// Истёк таймаут обновления ключей проверки
+        /// </summary>
+        [Display(Name = "Истёк таймаут обновления ключей проверки")]
+        LIBFPTR_ERROR_UPDATE_KEYS_TIMEOUT = 425,
+        
+        /// <summary>
+        /// Данный реквизит разрешён только для маркированной позиции
+        /// </summary>
+        [Display(Name = "Данный реквизит разрешён только для маркированной позиции")]
+        LIBFPTR_ERROR_PROPERTY_FOR_MARKING_POSITION_ONLY = 426,
+        
+        /// <summary>
         /// Ошибка парсинга запроса
         /// </summary>
         [Display(Name = "Ошибка парсинга запроса")]

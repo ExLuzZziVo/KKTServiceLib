@@ -184,6 +184,17 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
         public string ItemFractionalAmount { get; }
 
         /// <summary>
+        /// Идентификатор маркированного товара
+        /// </summary>
+        /// <list type="bullet">
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.Base64Pattern"/></item>
+        /// </list>
+        [Display(Name = "Идентификатор маркированного товара")]
+        [RegularExpression(RegexHelper.Base64Pattern, ErrorMessageResourceType = typeof(ErrorStrings),
+            ErrorMessageResourceName = "StringFormatError")]
+        public string ImcBarcode { get; set; }
+        
+        /// <summary>
         /// Результат проверки сведений о товаре
         /// </summary>
         [Display(Name = "Результат проверки сведений о товаре")]
