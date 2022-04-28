@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using KKTServiceLib.Mercury.Helpers;
 using KKTServiceLib.Shared.Helpers;
 using KKTServiceLib.Shared.Resources;
@@ -29,8 +32,13 @@ namespace KKTServiceLib.Mercury.Types.Operations
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Сессионный ключ")]
-        public string SessionKey { get; protected set; }
+        public virtual string SessionKey { get; protected set; }
 
+        /// <summary>
+        /// Костыль, который необходим после обновления библиотеки <see cref="System.ComponentModel.DataAnnotations"/> и/или net6.0. Значение по умолчанию: true
+        /// </summary>
+        protected bool IsSessionKeyRequired { get; set; } = true;
+        
         /// <summary>
         /// Имя команды
         /// </summary>
@@ -55,8 +63,29 @@ namespace KKTServiceLib.Mercury.Types.Operations
         }
 
         /// <summary>
-        /// Запуск выбранной задачи
+        /// Запуск выбранной операции
         /// </summary>
+        /// <param name="sessionKey">Сессионный ключ</param>
+        /// <param name="driverUrl">Адрес службы Inecrman</param>
+        /// <exception cref="ExtendedValidationException">Выбрасывает исключение, если задача не прошла проверку перед отправкой на выполнение</exception>
+        /// <exception cref="KKTExecuteOperationException">Выбрасывает исключение, если выполнение задачи не удалось</exception>
+        /// <remarks>
+        /// Значение <paramref name="driverUrl"/> по умолчанию: "http://127.0.0.1:50010/api.json". Метод остался синхронным для совместимости
+        /// </remarks>
+        /// <returns>Возвращает результат выполнения операции</returns>
+        public virtual T Execute(string sessionKey, string driverUrl = "http://127.0.0.1:50010/api.json")
+        {
+            var jsonData = CheckAndSerialize(sessionKey);
+
+            var jsonResult = InecrmanServiceConnector.SendJson(jsonData, driverUrl);
+
+            return ProcessJsonResult(jsonResult);
+        }
+
+        /// <summary>
+        /// Асинхронный запуск выбранной операции, используя <see cref="HttpClient"/>
+        /// </summary>
+        /// <param name="httpClient">HttpClient</param>
         /// <param name="sessionKey">Сессионный ключ</param>
         /// <param name="driverUrl">Адрес службы Inecrman</param>
         /// <exception cref="ExtendedValidationException">Выбрасывает исключение, если задача не прошла проверку перед отправкой на выполнение</exception>
@@ -64,10 +93,32 @@ namespace KKTServiceLib.Mercury.Types.Operations
         /// <remarks>
         /// Значение <paramref name="driverUrl"/> по умолчанию: "http://127.0.0.1:50010/api.json"
         /// </remarks>
-        /// <returns>Возвращает результат выполнения задачи</returns>
-        public virtual T Execute(string sessionKey, string driverUrl = "http://127.0.0.1:50010/api.json")
+        /// <returns>Задача, асинхронно возвращающая результат выполнения выбранной операции, использовавшей <see cref="HttpClient"/></returns>
+        public virtual async Task<T> ExecuteAsync(HttpClient httpClient, string sessionKey,
+            string driverUrl = "http://127.0.0.1:50010/api.json")
         {
-            SessionKey = sessionKey;
+            var jsonData = CheckAndSerialize(sessionKey);
+
+            var jsonResult = await InecrmanServiceConnector.SendJsonAsync(httpClient, jsonData, driverUrl);
+
+            return ProcessJsonResult(jsonResult);
+        }
+
+        /// <summary>
+        /// Вспомогательный метод для избежания дублирования кода
+        /// </summary>
+        protected string CheckAndSerialize(string sessionKey)
+        {
+            // Костыль. См. описание IsSessionKeyRequired
+            if (IsSessionKeyRequired)
+            {
+                if (sessionKey.IsNullOrEmptyOrWhiteSpace())
+                {
+                    throw new ArgumentNullException(nameof(sessionKey));
+                }
+                
+                SessionKey = sessionKey;
+            }
 
             var validationResults = Validate();
 
@@ -76,16 +127,26 @@ namespace KKTServiceLib.Mercury.Types.Operations
                 throw new ExtendedValidationException(validationResults);
             }
 
-            var jsonData = JsonConvert.SerializeObject(this,
+            // Костыль. См. описание IsSessionKeyRequired
+            if (!IsSessionKeyRequired)
+            {
+                SessionKey = null;
+            }
+            
+            return JsonConvert.SerializeObject(this,
                 Formatting.None,
                 new JsonSerializerSettings
                 {
                     NullValueHandling = NullValueHandling.Ignore, TypeNameHandling = TypeNameHandling.None,
                     ContractResolver = new CamelCasePropertyNamesContractResolver()
                 });
-
-            var jsonResult = InecrmanServiceConnector.SendJson(jsonData, driverUrl);
-
+        }
+        
+        /// <summary>
+        /// Вспомогательный метод для избежания дублирования кода
+        /// </summary>
+        protected T ProcessJsonResult(string jsonResult)
+        {
             if (jsonResult.IsNullOrEmptyOrWhiteSpace())
             {
                 return default;

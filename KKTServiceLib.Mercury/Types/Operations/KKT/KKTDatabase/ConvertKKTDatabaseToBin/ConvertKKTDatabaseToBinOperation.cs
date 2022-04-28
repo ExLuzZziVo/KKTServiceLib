@@ -19,6 +19,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.ConvertKKTDatab
         public ConvertKKTDatabaseToBinOperation(KKTDatabaseVersion kktDatabaseVersion) : base("ConvertBaseToBin")
         {
             BaseVer = kktDatabaseVersion;
+            IsSessionKeyRequired = false;
         }
 
         /// <summary>
@@ -26,7 +27,8 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.ConvertKKTDatab
         /// </summary>
         [JsonIgnore]
         [Display(Name = "Сессионный ключ")]
-        public new string SessionKey { get; } = null;
+        [Required(AllowEmptyStrings = true)]
+        public override string SessionKey { get; protected set; } = string.Empty;
 
         /// <summary>
         /// Версия внутренней базы товаров ККТ

@@ -26,6 +26,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.ConvertKKTDatab
             }
 
             Base = base64Content;
+            IsSessionKeyRequired = false;
         }
 
         /// <summary>
@@ -33,7 +34,8 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.ConvertKKTDatab
         /// </summary>
         [JsonIgnore]
         [Display(Name = "Сессионный ключ")]
-        public new string SessionKey { get; } = null;
+        [Required(AllowEmptyStrings = true)]
+        public override string SessionKey { get; protected set; } = string.Empty;
 
         /// <summary>
         /// База товаров ККТ в base64

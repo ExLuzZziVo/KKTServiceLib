@@ -27,6 +27,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.Session.OpenSession
             }
 
             PortName = portName;
+            IsSessionKeyRequired = false;
         }
 
         /// <summary>
@@ -34,7 +35,8 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.Session.OpenSession
         /// </summary>
         [Display(Name = "Сессионный ключ")]
         [JsonProperty(NullValueHandling = NullValueHandling.Include)]
-        public new string SessionKey { get; } = null;
+        [Required(AllowEmptyStrings = true)]
+        public override string SessionKey { get; protected set; } = string.Empty;
 
         /// <summary>
         /// Имя порта

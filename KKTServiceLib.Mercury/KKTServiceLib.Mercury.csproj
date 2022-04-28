@@ -10,14 +10,15 @@
         <Description>Библиотека для работы с кассами Меркурий через JSON</Description>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
-        <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+        <PackageReference Include="System.Net.Http" Version="4.3.4" Condition="'$(TargetFramework)' == 'net48'"/>
     </ItemGroup>
     <ItemGroup>
-        <Folder Include="Types\Operations\Fiscal\Receipt"/>
-        <Folder Include="Types\Operations\NonFiscal"/>
+        <Folder Include="Types\Operations\Fiscal\Receipt" />
+        <Folder Include="Types\Operations\NonFiscal" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\KKTServiceLib.Shared\KKTServiceLib.Shared.csproj"/>
+        <ProjectReference Include="..\KKTServiceLib.Shared\KKTServiceLib.Shared.csproj" />
     </ItemGroup>
 </Project>

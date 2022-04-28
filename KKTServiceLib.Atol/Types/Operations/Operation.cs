@@ -49,12 +49,12 @@ namespace KKTServiceLib.Atol.Types.Operations
         }
 
         /// <summary>
-        /// Запуск выбранной задачи
+        /// Запуск выбранной операции
         /// </summary>
         /// <param name="fptr">Экземпляр драйвера ККТ АТОЛ</param>
         /// <exception cref="ExtendedValidationException">Выбрасывает исключение, если задача не прошла проверку перед отправкой на выполнение</exception>
         /// <exception cref="KKTExecuteOperationException">Выбрасывает исключение, если выполнение задачи не удалось</exception>
-        /// <returns>Возвращает результат выполнения задачи</returns>
+        /// <returns>Возвращает результат выполнения операции</returns>
         public virtual T Execute(Fptr fptr)
         {
             var validationResults = Validate();
