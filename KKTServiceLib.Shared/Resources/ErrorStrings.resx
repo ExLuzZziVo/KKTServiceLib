@@ -188,4 +188,7 @@
     <data name="MustBeEqualError" xml:space="preserve">
         <value>Параметр '{0}' должен быть равен следующим значениям: {1}</value>
     </data>
+    <data name="MaxLengthError" xml:space="preserve">
+        <value>Количество элементов в последовательности '{0}' должно быть не более {1}</value>
+    </data>
 </root>

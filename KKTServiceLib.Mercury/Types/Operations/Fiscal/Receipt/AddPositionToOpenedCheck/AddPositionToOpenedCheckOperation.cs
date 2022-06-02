@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using KKTServiceLib.Mercury.Types.Common;
 using KKTServiceLib.Mercury.Types.Common.Agent;
 using KKTServiceLib.Mercury.Types.Common.MarkingCodes;
 using KKTServiceLib.Mercury.Types.Converters;
@@ -253,6 +254,19 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public AgentParams Agent { get; set; }
+
+        /// <summary>
+        /// Отраслевой реквизит
+        /// </summary>
+        /// <list type="bullet">
+        /// <item>Максимальное кол-во элементов: 3</item>
+        /// </list>
+        [Display(Name = "Отраслевой реквизит")]
+        [MaxLength(3, ErrorMessageResourceType = typeof(ErrorStrings),
+            ErrorMessageResourceName = "MaxLengthError")]
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+            ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
+        public IndustryRequisiteParams[] IndustryAttribute { get; set; }
 
         protected override IEnumerable<ValidationResult> Validate()
         {

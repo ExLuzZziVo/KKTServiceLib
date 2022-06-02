@@ -178,6 +178,15 @@ namespace KKTServiceLib.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Количество элементов в последовательности &apos;{0}&apos; должно быть не более {1}.
+        /// </summary>
+        public static string MaxLengthError {
+            get {
+                return ResourceManager.GetString("MaxLengthError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Количество элементов в последовательности &apos;{0}&apos; должно быть не менее {1}.
         /// </summary>
         public static string MinLengthError {

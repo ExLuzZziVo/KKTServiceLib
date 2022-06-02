@@ -6,18 +6,18 @@ using KKTServiceLib.Shared.Resources;
 
 #endregion
 
-namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Fn.PrintFnDocumentByNumber
+namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.PrintFnDocumentByNumber
 {
     [Description("Печать документа из ФН по номеру ФД")]
-    public class PrintFnDocumentByNumberOperation : Operation<bool>
+    public class PrintFnDocumentByNumberOperation : Operation<PrintFnDocumentByNumberResult>
     {
         /// <summary>
         /// Печать документа из ФН по номеру ФД
         /// </summary>
         /// <param name="fiscalDocumentNumber">Номер фискального документа</param>
-        public PrintFnDocumentByNumberOperation(uint fiscalDocumentNumber) : base("printFnDocument")
+        public PrintFnDocumentByNumberOperation(uint fiscalDocumentNumber) : base("PrintDocFromFN")
         {
-            FiscalDocumentNumber = fiscalDocumentNumber;
+            FiscalDocNum = fiscalDocumentNumber;
         }
 
         /// <summary>
@@ -28,6 +28,6 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Fn.PrintFnDocumentByNumber
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Номер документа")]
-        public uint FiscalDocumentNumber { get; }
+        public uint FiscalDocNum { get; }
     }
 }
