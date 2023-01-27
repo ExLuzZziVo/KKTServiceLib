@@ -65,7 +65,7 @@ namespace KKTServiceLib.Mercury.Types.Operations
         /// Значение <paramref name="driverUrl"/> по умолчанию: "http://127.0.0.1:50010/api.json". Метод остался синхронным для совместимости
         /// </remarks>
         /// <returns>Возвращает результат выполнения операции</returns>
-        public virtual async Task<T> ExecuteAsync(string sessionKey,
+        public async Task<T> ExecuteAsync(string sessionKey,
             string driverUrl = "http://127.0.0.1:50010/api.json")
         {
             using (var httpClient = new HttpClient())
