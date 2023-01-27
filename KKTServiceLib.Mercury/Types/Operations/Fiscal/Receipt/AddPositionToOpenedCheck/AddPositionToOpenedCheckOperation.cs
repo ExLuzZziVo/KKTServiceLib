@@ -268,70 +268,66 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
         public IndustryRequisiteParams[] IndustryAttribute { get; set; }
 
-        protected override IEnumerable<ValidationResult> Validate()
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            var validationResults = base.Validate();
-
             if (Agent != null)
             {
-                var agentValidationResults = new List<ValidationResult>(32);
-
                 switch (Agent.Code)
                 {
                     case AgentType.BankPayingAgent:
                     case AgentType.BankPayingSubagent:
                         if (Agent.PayingOp.IsNullOrEmptyOrWhiteSpace())
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.PayingOp),
-                                true));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.PayingOp),
+                                true);
                         }
 
                         if (Agent.PayingPhone == null)
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.PayingPhone),
-                                true));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.PayingPhone),
+                                true);
                         }
 
                         if (Agent.TransfName.IsNullOrEmptyOrWhiteSpace())
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.TransfName),
-                                true));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.TransfName),
+                                true);
                         }
 
                         if (Agent.TransfINN.IsNullOrEmptyOrWhiteSpace())
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.TransfINN),
-                                true));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.TransfINN),
+                                true);
                         }
 
                         if (Agent.TransfAddress.IsNullOrEmptyOrWhiteSpace())
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.TransfAddress),
-                                true));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.TransfAddress),
+                                true);
                         }
 
                         if (Agent.TransfPhone == null)
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.TransfPhone),
-                                true));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.TransfPhone),
+                                true);
                         }
 
                         if (Agent.OperatorPhone != null)
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.OperatorPhone),
-                                false));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.OperatorPhone),
+                                false);
                         }
 
                         if (Agent.SupplierPhone == null)
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.SupplierPhone),
-                                true));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.SupplierPhone),
+                                true);
                         }
 
                         if (Agent.SupplierName.IsNullOrEmptyOrWhiteSpace())
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.SupplierName),
-                                true));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.SupplierName),
+                                true);
                         }
 
                         break;
@@ -339,56 +335,56 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
                     case AgentType.PayingSubagent:
                         if (!Agent.PayingOp.IsNullOrEmptyOrWhiteSpace())
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.PayingOp),
-                                false));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.PayingOp),
+                                false);
                         }
 
                         if (Agent.PayingPhone == null)
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.PayingPhone),
-                                true));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.PayingPhone),
+                                true);
                         }
 
                         if (!Agent.TransfName.IsNullOrEmptyOrWhiteSpace())
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.TransfName),
-                                false));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.TransfName),
+                                false);
                         }
 
                         if (!Agent.TransfINN.IsNullOrEmptyOrWhiteSpace())
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.TransfINN),
-                                false));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.TransfINN),
+                                false);
                         }
 
                         if (!Agent.TransfAddress.IsNullOrEmptyOrWhiteSpace())
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.TransfAddress),
-                                false));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.TransfAddress),
+                                false);
                         }
 
                         if (Agent.TransfPhone != null)
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.TransfPhone),
-                                false));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.TransfPhone),
+                                false);
                         }
 
                         if (Agent.OperatorPhone == null)
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.OperatorPhone),
-                                true));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.OperatorPhone),
+                                true);
                         }
 
                         if (Agent.SupplierPhone == null)
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.SupplierPhone),
-                                true));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.SupplierPhone),
+                                true);
                         }
 
                         if (Agent.SupplierName.IsNullOrEmptyOrWhiteSpace())
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.SupplierName),
-                                true));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.SupplierName),
+                                true);
                         }
 
                         break;
@@ -396,122 +392,98 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
                     default:
                         if (!Agent.PayingOp.IsNullOrEmptyOrWhiteSpace())
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.PayingOp),
-                                false));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.PayingOp),
+                                false);
                         }
 
                         if (Agent.PayingPhone != null)
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.PayingPhone),
-                                false));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.PayingPhone),
+                                false);
                         }
 
                         if (!Agent.TransfName.IsNullOrEmptyOrWhiteSpace())
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.TransfName),
-                                false));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.TransfName),
+                                false);
                         }
 
                         if (!Agent.TransfINN.IsNullOrEmptyOrWhiteSpace())
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.TransfINN),
-                                false));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.TransfINN),
+                                false);
                         }
 
                         if (!Agent.TransfAddress.IsNullOrEmptyOrWhiteSpace())
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.TransfAddress),
-                                false));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.TransfAddress),
+                                false);
                         }
 
                         if (Agent.TransfPhone != null)
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.TransfPhone),
-                                false));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.TransfPhone),
+                                false);
                         }
 
                         if (Agent.OperatorPhone != null)
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.OperatorPhone),
-                                false));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.OperatorPhone),
+                                false);
                         }
 
                         if (Agent.SupplierPhone != null)
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.SupplierPhone),
-                                false));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.SupplierPhone),
+                                false);
                         }
 
                         if (!Agent.SupplierName.IsNullOrEmptyOrWhiteSpace())
                         {
-                            agentValidationResults.Add(GenerateValidationResult(Agent.Code, nameof(Agent.SupplierName),
-                                false));
+                            yield return GenerateValidationResult(Agent.Code, nameof(Agent.SupplierName),
+                                false);
                         }
 
                         break;
-                }
-
-                if (agentValidationResults.Any())
-                {
-                    validationResults = new List<ValidationResult>(validationResults)
-                    {
-                        new ValidationResult(
-                            string.Format(
-                                ErrorStrings.ResourceManager.GetString("AgentPropertiesRequirementValidationError"),
-                                GetType().GetProperty(nameof(Agent)).GetDisplayName()) +
-                            agentValidationResults.Aggregate(string.Empty,
-                                (current, c) => current + "\n\t" + c.ErrorMessage))
-                    };
                 }
             }
 
             if (McInfo?.Part != null)
             {
-                var partValidationResults = new List<ValidationResult>(8);
-
-                partValidationResults.AddRange(McInfo.Part.Validate());
-
                 if (Qty != 1)
                 {
-                    partValidationResults.Add(new ValidationResult(string.Format(
+                    yield return new ValidationResult(string.Format(
                         ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
-                        GetType().GetProperty(nameof(Qty)).GetDisplayName(), 1)));
+                        GetType().GetProperty(nameof(Qty)).GetDisplayName(), 1), new[] { nameof(Qty) });
                 }
 
                 if (MeasureUnit != ItemUnitType.Piece)
                 {
-                    partValidationResults.Add(new ValidationResult(string.Format(
-                        ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
-                        GetType().GetProperty(nameof(Qty)).GetDisplayName(), ItemUnitType.Piece.GetDisplayName())));
+                    yield return new ValidationResult(string.Format(
+                            ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
+                            GetType().GetProperty(nameof(Qty)).GetDisplayName(), ItemUnitType.Piece.GetDisplayName()),
+                        new[] { nameof(Qty) });
                 }
 
                 if (!(McInfo.PlannedStatus == ItemEstimatedStatus.ItemDryForSale ||
                       McInfo.PlannedStatus == ItemEstimatedStatus.ItemDryReturn))
                 {
-                    partValidationResults.Add(new ValidationResult(string.Format(
-                        ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
-                        GetType().GetProperty(nameof(McInfo.PlannedStatus)).GetDisplayName(),
-                        $"{ItemEstimatedStatus.ItemDryForSale.GetDisplayName()}, {ItemEstimatedStatus.ItemDryReturn.GetDisplayName()}")));
-                }
-
-                if (partValidationResults.Any())
-                {
-                    validationResults = validationResults.Concat(partValidationResults);
+                    yield return new ValidationResult(string.Format(
+                            ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
+                            GetType().GetProperty(nameof(McInfo.PlannedStatus)).GetDisplayName(),
+                            $"{ItemEstimatedStatus.ItemDryForSale.GetDisplayName()}, {ItemEstimatedStatus.ItemDryReturn.GetDisplayName()}"),
+                        new[] { nameof(McInfo.PlannedStatus) });
                 }
             }
-
-            return validationResults;
         }
 
         private static ValidationResult GenerateValidationResult(AgentType agentType, string invalidPropertyName,
             bool isRequired)
         {
             return new ValidationResult(string.Format(
-                isRequired
-                    ? ErrorStrings.ResourceManager.GetString("AgentPropertyIsRequiredValidationError")
-                    : ErrorStrings.ResourceManager.GetString("AgentPropertyIsNotRequiredValidationError"),
+                $"{ErrorStrings.ResourceManager.GetString("AgentPropertiesRequirementValidationError")}: {(isRequired ? ErrorStrings.ResourceManager.GetString("AgentPropertyIsRequiredValidationError") : ErrorStrings.ResourceManager.GetString("AgentPropertyIsNotRequiredValidationError"))}",
                 agentType.GetDisplayName(),
-                typeof(AgentParams).GetProperty(invalidPropertyName).GetDisplayName()));
+                typeof(AgentParams).GetProperty(invalidPropertyName).GetDisplayName()), new[] { invalidPropertyName });
         }
     }
 }

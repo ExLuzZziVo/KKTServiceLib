@@ -171,21 +171,15 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.Register
         [Display(Name = "Причина перерегистрации ККТ")]
         public KKTRegistrationReason? Reason { get; }
 
-        protected override IEnumerable<ValidationResult> Validate()
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            var validationResults = base.Validate();
-
             if (Kkt?.Mode?.Automat == true && Kkt?.Mode?.AutomatNum.IsNullOrEmptyOrWhiteSpace() == true)
             {
-                validationResults = new List<ValidationResult>(validationResults)
-                {
-                    new ValidationResult(string.Format(
+                yield return new ValidationResult(string.Format(
                         ErrorStrings.ResourceManager.GetString("RequiredError"),
-                        typeof(KKTWorkParams).GetProperty(nameof(Kkt.Mode.AutomatNum)).GetDisplayName()))
-                };
+                        typeof(KKTWorkParams).GetProperty(nameof(Kkt.Mode.AutomatNum)).GetDisplayName()),
+                    new[] { nameof(Kkt.Mode.AutomatNum) });
             }
-
-            return validationResults;
         }
     }
 }

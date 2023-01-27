@@ -29,8 +29,10 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// <param name="taxationType">Система налогообложения</param>
         /// <param name="items">Элементы документа (предметы расчета и тд.)</param>
         /// <param name="payments">Оплаты</param>
+        /// <param name="additionalAttributeValue">Дополнительный реквизит чека (БСО)</param>
         public CreateFiscalReceiptOperation(FiscalReceiptType type, OperatorParams operatorParams,
-            TaxationType taxationType, DocumentParams[] items, PaymentParams[] payments) : base(type.ToString()
+            TaxationType taxationType, DocumentParams[] items, PaymentParams[] payments,
+            string additionalAttributeValue = null) : base(type.ToString()
             .ToLowerFirstChar())
         {
             if (items?.Any() != true)
@@ -50,8 +52,24 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
                     nameof(payments));
             }
 
+            if (additionalAttributeValue?.Length > 16)
+            {
+                throw new ArgumentException(
+                    string.Format(
+                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
+                        typeof(AdditionalAttributeDocumentParams)
+                            .GetProperty(nameof(AdditionalAttributeDocumentParams.Value)).GetDisplayName()),
+                    nameof(additionalAttributeValue));
+            }
+
             Operator = operatorParams ?? throw new ArgumentNullException(nameof(operatorParams));
             Items = items;
+
+            if (!additionalAttributeValue.IsNullOrEmptyOrWhiteSpace())
+            {
+                Items = items.Append(new AdditionalAttributeDocumentParams(additionalAttributeValue)).ToArray();
+            }
+
             Payments = payments;
             TaxationType = taxationType;
         }
@@ -237,13 +255,14 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         [Display(Name = "Предварительно проверить имеющиеся в чеке КМ")]
         public bool? ValidateMarkingCodes { get; set; }
 
-        protected override IEnumerable<ValidationResult> Validate()
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            var validationResults = base.Validate();
-
             if (AgentInfo != null)
             {
-                validationResults = validationResults.Concat(AgentInfo.Validate());
+                foreach (var vr in AgentInfo.Validate(validationContext))
+                {
+                    yield return vr;
+                }
             }
 
             foreach (var i in Items)
@@ -252,25 +271,16 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
                 {
                     if (p.AgentInfo != null)
                     {
-                        var positionAgentValidationErrors = p.AgentInfo.Validate();
-
-                        if (positionAgentValidationErrors.Any())
+                        foreach (var vr in p.AgentInfo.Validate(validationContext))
                         {
-                            validationResults = new List<ValidationResult>(validationResults)
-                            {
-                                new ValidationResult(
-                                    string.Format(
-                                        ErrorStrings.ResourceManager.GetString("AgentInPositionValidationError"),
-                                        p.Name) +
-                                    positionAgentValidationErrors.Aggregate(string.Empty,
-                                        (current, c) => current + "\n\t" + c.ErrorMessage))
-                            };
+                            vr.ErrorMessage =
+                                $"{string.Format(ErrorStrings.ResourceManager.GetString("AgentInPositionValidationError"), p.Name)}: {vr.ErrorMessage}";
+
+                            yield return vr;
                         }
                     }
                 }
             }
-
-            return validationResults;
         }
     }
 }

@@ -15,7 +15,7 @@ using KKTServiceLib.Shared.Types.ValidationAttributes;
 namespace KKTServiceLib.Atol.Types.Common.Agent
 {
     [Description("Данные агента")]
-    public class AgentParams
+    public class AgentParams : IValidatableObject
     {
         /// <summary>
         /// Данные агента
@@ -78,10 +78,8 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
         [Display(Name = "Данные оператора перевода")]
         public MoneyTransferOperatorParams MoneyTransferOperator { get; set; }
 
-        internal IEnumerable<ValidationResult> Validate()
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            var agentValidationResults = new List<ValidationResult>(6);
-
             if (Agents?.Any() == true)
             {
                 if (Agents.Contains(AgentType.BankPayingAgent) ||
@@ -91,18 +89,20 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
                 {
                     if (PayingAgent == null)
                     {
-                        agentValidationResults.Add(new ValidationResult(string.Format(
-                            ErrorStrings.ResourceManager.GetString("RequiredError"),
-                            GetType().GetProperty(nameof(PayingAgent)).GetDisplayName())));
+                        yield return new ValidationResult(string.Format(
+                                ErrorStrings.ResourceManager.GetString("RequiredError"),
+                                GetType().GetProperty(nameof(PayingAgent)).GetDisplayName()),
+                            new[] { nameof(PayingAgent) });
                     }
                 }
                 else
                 {
                     if (PayingAgent != null)
                     {
-                        agentValidationResults.Add(new ValidationResult(string.Format(
-                            ErrorStrings.ResourceManager.GetString("MustBeNullError"),
-                            GetType().GetProperty(nameof(PayingAgent)).GetDisplayName())));
+                        yield return new ValidationResult(string.Format(
+                                ErrorStrings.ResourceManager.GetString("MustBeNullError"),
+                                GetType().GetProperty(nameof(PayingAgent)).GetDisplayName()),
+                            new[] { nameof(PayingAgent) });
                     }
                 }
 
@@ -111,18 +111,20 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
                 {
                     if (MoneyTransferOperator == null)
                     {
-                        agentValidationResults.Add(new ValidationResult(string.Format(
-                            ErrorStrings.ResourceManager.GetString("RequiredError"),
-                            GetType().GetProperty(nameof(MoneyTransferOperator)).GetDisplayName())));
+                        yield return new ValidationResult(string.Format(
+                                ErrorStrings.ResourceManager.GetString("RequiredError"),
+                                GetType().GetProperty(nameof(MoneyTransferOperator)).GetDisplayName()),
+                            new[] { nameof(MoneyTransferOperator) });
                     }
                 }
                 else
                 {
                     if (MoneyTransferOperator != null)
                     {
-                        agentValidationResults.Add(new ValidationResult(string.Format(
-                            ErrorStrings.ResourceManager.GetString("MustBeNullError"),
-                            GetType().GetProperty(nameof(MoneyTransferOperator)).GetDisplayName())));
+                        yield return new ValidationResult(string.Format(
+                                ErrorStrings.ResourceManager.GetString("MustBeNullError"),
+                                GetType().GetProperty(nameof(MoneyTransferOperator)).GetDisplayName()),
+                            new[] { nameof(MoneyTransferOperator) });
                     }
                 }
 
@@ -131,23 +133,23 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
                 {
                     if (ReceivePaymentsOperator == null)
                     {
-                        agentValidationResults.Add(new ValidationResult(string.Format(
-                            ErrorStrings.ResourceManager.GetString("RequiredError"),
-                            GetType().GetProperty(nameof(ReceivePaymentsOperator)).GetDisplayName())));
+                        yield return new ValidationResult(string.Format(
+                                ErrorStrings.ResourceManager.GetString("RequiredError"),
+                                GetType().GetProperty(nameof(ReceivePaymentsOperator)).GetDisplayName()),
+                            new[] { nameof(ReceivePaymentsOperator) });
                     }
                 }
                 else
                 {
                     if (ReceivePaymentsOperator != null)
                     {
-                        agentValidationResults.Add(new ValidationResult(string.Format(
-                            ErrorStrings.ResourceManager.GetString("MustBeNullError"),
-                            GetType().GetProperty(nameof(ReceivePaymentsOperator)).GetDisplayName())));
+                        yield return new ValidationResult(string.Format(
+                                ErrorStrings.ResourceManager.GetString("MustBeNullError"),
+                                GetType().GetProperty(nameof(ReceivePaymentsOperator)).GetDisplayName()),
+                            new[] { nameof(ReceivePaymentsOperator) });
                     }
                 }
             }
-
-            return agentValidationResults;
         }
     }
 }

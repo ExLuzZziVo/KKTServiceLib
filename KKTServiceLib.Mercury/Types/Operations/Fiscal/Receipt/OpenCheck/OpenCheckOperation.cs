@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 using KKTServiceLib.Mercury.Types.Common;
 using KKTServiceLib.Mercury.Types.Common.Document;
 using KKTServiceLib.Mercury.Types.Common.FiscalDocuments;
@@ -82,14 +83,14 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
         public bool? PrintDoc { get; set; } = true;
 
         /// <summary>
-        /// Дополнительный реквизит чека
+        /// Дополнительный реквизит чека (БСО)
         /// </summary>
         /// <list type="bullet">
         /// <item>Максимальная длина: 16</item>
         /// </list>
         [MaxLength(16, ErrorMessageResourceType = typeof(ErrorStrings),
             ErrorMessageResourceName = "StringMaxLengthError")]
-        [Display(Name = "Дополнительный реквизит чека")]
+        [Display(Name = "Дополнительный реквизит чека (БСО)")]
         public string AdditionalProps { get; set; }
 
         /// <summary>
@@ -128,10 +129,8 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public UserAttributeDocumentParams UserAttribute { get; set; }
 
-        protected override IEnumerable<ValidationResult> Validate()
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            var validationResults = base.Validate();
-
             switch (CheckType)
             {
                 case FiscalReceiptType.Buy:
@@ -140,39 +139,39 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
                 case FiscalReceiptType.SellReturn:
                     if (CorrectionInfo != null)
                     {
-                        validationResults = new List<ValidationResult>(validationResults)
-                        {
-                            new ValidationResult(
-                                ErrorStrings.ResourceManager.GetString("IsNotCorrectionReceiptError"))
-                        };
+                        yield return new ValidationResult(
+                            ErrorStrings.ResourceManager.GetString("IsNotCorrectionReceiptError"),
+                            new[] { nameof(CorrectionInfo) });
                     }
 
                     break;
                 default:
                     if (CorrectionInfo == null)
                     {
-                        validationResults = new List<ValidationResult>(validationResults)
-                        {
-                            new ValidationResult(string.Format(
+                        yield return new ValidationResult(string.Format(
                                 ErrorStrings.ResourceManager.GetString("RequiredError"),
-                                GetType().GetProperty(nameof(CorrectionInfo)).GetDisplayName()))
-                        };
+                                GetType().GetProperty(nameof(CorrectionInfo)).GetDisplayName()),
+                            new[] { nameof(CorrectionInfo) });
                     }
                     else if (CorrectionInfo.CorrectionType == CorrectionReceiptCorrectionType.Instruction &&
                              CorrectionInfo.CauseDocNum.IsNullOrEmptyOrWhiteSpace())
                     {
-                        validationResults = new List<ValidationResult>(validationResults)
-                        {
-                            new ValidationResult(string.Format(
+                        yield return new ValidationResult(string.Format(
                                 ErrorStrings.ResourceManager.GetString("RequiredError"),
-                                GetType().GetProperty(nameof(CorrectionInfo.CauseDocNum)).GetDisplayName()))
-                        };
+                                GetType().GetProperty(nameof(CorrectionInfo.CauseDocNum)).GetDisplayName()),
+                            new[] { nameof(CorrectionInfo.CauseDocNum) });
+                    }
+
+                    if (AdditionalProps.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(AdditionalProps, @"^[0-9]+$"))
+                    {
+                        yield return new ValidationResult(string.Format(
+                                ErrorStrings.ResourceManager.GetString("StringFormatError"),
+                                GetType().GetProperty(nameof(AdditionalProps)).GetDisplayName()),
+                            new[] { nameof(AdditionalProps) });
                     }
 
                     break;
             }
-
-            return validationResults;
         }
     }
 }

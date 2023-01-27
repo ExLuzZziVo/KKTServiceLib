@@ -8,7 +8,7 @@ using KKTServiceLib.Shared.Resources;
 namespace KKTServiceLib.Mercury.Types.Common.MarkingCodes
 {
     [Description("Дробное число")]
-    public class FractionalNumber
+    public class FractionalNumber : IValidatableObject
     {
         /// <summary>
         /// Дробное число
@@ -64,19 +64,15 @@ namespace KKTServiceLib.Mercury.Types.Common.MarkingCodes
         [Display(Name = "Знаменатель дроби")]
         public int Denominator { get; }
 
-        internal IEnumerable<ValidationResult> Validate()
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            var validationResults = new List<ValidationResult>(1);
-
             if (Numerator >= Denominator)
             {
-                validationResults.Add(new ValidationResult(
+                yield return new ValidationResult(
                     string.Format(ErrorStrings.ResourceManager.GetString("DigitRangeValuesError"),
                         GetType().GetProperty(nameof(Numerator)).GetDisplayName(), 1,
-                        Numerator == Denominator ? Denominator - 1 : Denominator - 2)));
+                        Numerator == Denominator ? Denominator - 1 : Denominator - 2), new[] { nameof(Numerator) });
             }
-
-            return validationResults;
         }
     }
 }

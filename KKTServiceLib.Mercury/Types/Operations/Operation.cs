@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
-using KKTServiceLib.Mercury.Helpers;
 using KKTServiceLib.Shared.Helpers;
 using KKTServiceLib.Shared.Resources;
 using KKTServiceLib.Shared.Types.Exceptions;
@@ -13,7 +13,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace KKTServiceLib.Mercury.Types.Operations
 {
-    public abstract class Operation<T> where T : OperationResult
+    public abstract class Operation<T>: IValidatableObject where T : OperationResult
     {
         /// <summary>
         /// Создание JSON-задания ККТ
@@ -38,7 +38,7 @@ namespace KKTServiceLib.Mercury.Types.Operations
         /// Костыль, который необходим после обновления библиотеки <see cref="System.ComponentModel.DataAnnotations"/> и/или net6.0. Значение по умолчанию: true
         /// </summary>
         protected bool IsSessionKeyRequired { get; set; } = true;
-        
+
         /// <summary>
         /// Имя команды
         /// </summary>
@@ -49,19 +49,11 @@ namespace KKTServiceLib.Mercury.Types.Operations
         [Display(Name = "Имя команды")]
         public string Command { get; }
 
-        /// <summary>
-        /// Проверка текущего задания
-        /// </summary>
-        /// <returns>Список ошибок</returns>
-        protected virtual IEnumerable<ValidationResult> Validate()
+        public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            var validationResults = new List<ValidationResult>(32);
-
-            Validator.TryValidateObject(this, new ValidationContext(this), validationResults, true);
-
-            return validationResults;
+            yield return ValidationResult.Success;
         }
-
+        
         /// <summary>
         /// Запуск выбранной операции
         /// </summary>
@@ -73,13 +65,13 @@ namespace KKTServiceLib.Mercury.Types.Operations
         /// Значение <paramref name="driverUrl"/> по умолчанию: "http://127.0.0.1:50010/api.json". Метод остался синхронным для совместимости
         /// </remarks>
         /// <returns>Возвращает результат выполнения операции</returns>
-        public virtual T Execute(string sessionKey, string driverUrl = "http://127.0.0.1:50010/api.json")
+        public virtual async Task<T> ExecuteAsync(string sessionKey,
+            string driverUrl = "http://127.0.0.1:50010/api.json")
         {
-            var jsonData = CheckAndSerialize(sessionKey);
-
-            var jsonResult = InecrmanServiceConnector.SendJson(jsonData, driverUrl);
-
-            return ProcessJsonResult(jsonResult);
+            using (var httpClient = new HttpClient())
+            {
+                return await ExecuteAsync(httpClient, sessionKey, driverUrl);
+            }
         }
 
         /// <summary>
@@ -97,18 +89,6 @@ namespace KKTServiceLib.Mercury.Types.Operations
         public virtual async Task<T> ExecuteAsync(HttpClient httpClient, string sessionKey,
             string driverUrl = "http://127.0.0.1:50010/api.json")
         {
-            var jsonData = CheckAndSerialize(sessionKey);
-
-            var jsonResult = await InecrmanServiceConnector.SendJsonAsync(httpClient, jsonData, driverUrl);
-
-            return ProcessJsonResult(jsonResult);
-        }
-
-        /// <summary>
-        /// Вспомогательный метод для избежания дублирования кода
-        /// </summary>
-        protected string CheckAndSerialize(string sessionKey)
-        {
             // Костыль. См. описание IsSessionKeyRequired
             if (IsSessionKeyRequired)
             {
@@ -116,11 +96,13 @@ namespace KKTServiceLib.Mercury.Types.Operations
                 {
                     throw new ArgumentNullException(nameof(sessionKey));
                 }
-                
+
                 SessionKey = sessionKey;
             }
 
-            var validationResults = Validate();
+            var validationResults = new List<ValidationResult>(32);
+
+            Validator.TryValidateObject(this, new ValidationContext(this), validationResults, true);
 
             if (validationResults.Count() != 0)
             {
@@ -132,21 +114,25 @@ namespace KKTServiceLib.Mercury.Types.Operations
             {
                 SessionKey = null;
             }
-            
-            return JsonConvert.SerializeObject(this,
+
+            var jsonData = JsonConvert.SerializeObject(this,
                 Formatting.None,
                 new JsonSerializerSettings
                 {
                     NullValueHandling = NullValueHandling.Ignore, TypeNameHandling = TypeNameHandling.None,
                     ContractResolver = new CamelCasePropertyNamesContractResolver()
                 });
-        }
-        
-        /// <summary>
-        /// Вспомогательный метод для избежания дублирования кода
-        /// </summary>
-        protected T ProcessJsonResult(string jsonResult)
-        {
+
+            string jsonResult;
+
+            using (var response = await httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Post, driverUrl)
+                   {
+                       Content = new StringContent(jsonData, Encoding.UTF8, "application/json")
+                   }))
+            {
+                jsonResult = await response.Content.ReadAsStringAsync();
+            }
+
             if (jsonResult.IsNullOrEmptyOrWhiteSpace())
             {
                 return default;

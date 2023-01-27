@@ -155,46 +155,40 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Ism.BeginMarkingCodeVali
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public FractionalNumber Part { get; }
 
-        protected override IEnumerable<ValidationResult> Validate()
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            var validationResults = base.Validate();
-
             if (Part != null)
             {
-                var partValidationResults = new List<ValidationResult>(8);
-
-                partValidationResults.AddRange(Part.Validate());
-
                 if (Qty != 1)
                 {
-                    partValidationResults.Add(new ValidationResult(string.Format(
+                    yield return new ValidationResult(string.Format(
                         ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
-                        GetType().GetProperty(nameof(Qty)).GetDisplayName(), 1)));
+                        GetType().GetProperty(nameof(Qty)).GetDisplayName(), 1), new[] { nameof(Qty) });
                 }
 
                 if (MeasureUnit != ItemUnitType.Piece)
                 {
-                    partValidationResults.Add(new ValidationResult(string.Format(
-                        ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
-                        GetType().GetProperty(nameof(Qty)).GetDisplayName(), ItemUnitType.Piece.GetDisplayName())));
+                    yield return new ValidationResult(string.Format(
+                            ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
+                            GetType().GetProperty(nameof(Qty)).GetDisplayName(), ItemUnitType.Piece.GetDisplayName()),
+                        new[] { nameof(Qty) });
                 }
 
                 if (!(PlannedStatus == ItemEstimatedStatus.ItemDryForSale ||
                       PlannedStatus == ItemEstimatedStatus.ItemDryReturn))
                 {
-                    partValidationResults.Add(new ValidationResult(string.Format(
-                        ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
-                        GetType().GetProperty(nameof(PlannedStatus)).GetDisplayName(),
-                        $"{ItemEstimatedStatus.ItemDryForSale.GetDisplayName()}, {ItemEstimatedStatus.ItemDryReturn.GetDisplayName()}")));
+                    yield return new ValidationResult(string.Format(
+                            ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
+                            GetType().GetProperty(nameof(PlannedStatus)).GetDisplayName(),
+                            $"{ItemEstimatedStatus.ItemDryForSale.GetDisplayName()}, {ItemEstimatedStatus.ItemDryReturn.GetDisplayName()}"),
+                        new[] { nameof(PlannedStatus) });
                 }
 
-                if (partValidationResults.Any())
+                foreach (var vr in Part.Validate(validationContext))
                 {
-                    validationResults = validationResults.Concat(partValidationResults);
+                    yield return vr;
                 }
             }
-
-            return validationResults;
         }
     }
 }

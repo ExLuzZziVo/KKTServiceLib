@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Threading.Tasks;
 using Atol.Drivers10.Fptr;
 using KKTServiceLib.Shared.Helpers;
 using KKTServiceLib.Shared.Resources;
@@ -14,7 +15,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace KKTServiceLib.Atol.Types.Operations
 {
-    public abstract class Operation<T>
+    public abstract class Operation<T> : IValidatableObject
     {
         /// <summary>
         /// Создание JSON-задания ККТ
@@ -35,17 +36,21 @@ namespace KKTServiceLib.Atol.Types.Operations
         [Display(Name = "Тип задания")]
         public string Type { get; }
 
-        /// <summary>
-        /// Проверка текущего задания
-        /// </summary>
-        /// <returns>Список ошибок</returns>
-        protected virtual IEnumerable<ValidationResult> Validate()
+        public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            var validationResults = new List<ValidationResult>(32);
+            yield return ValidationResult.Success;
+        }
 
-            Validator.TryValidateObject(this, new ValidationContext(this), validationResults, true);
-
-            return validationResults;
+        /// <summary>
+        /// Асинхронный запуск выбранной операции
+        /// </summary>
+        /// <param name="fptr">Экземпляр драйвера ККТ АТОЛ</param>
+        /// <exception cref="ExtendedValidationException">Выбрасывает исключение, если задача не прошла проверку перед отправкой на выполнение</exception>
+        /// <exception cref="KKTExecuteOperationException">Выбрасывает исключение, если выполнение задачи не удалось</exception>
+        /// <returns>Задача, асинхронно возвращающая результат выполнения операции</returns>
+        public Task<T> ExecuteAsync(Fptr fptr)
+        {
+            return Task.Run(() => Execute(fptr));
         }
 
         /// <summary>
@@ -57,7 +62,9 @@ namespace KKTServiceLib.Atol.Types.Operations
         /// <returns>Возвращает результат выполнения операции</returns>
         public virtual T Execute(Fptr fptr)
         {
-            var validationResults = Validate();
+            var validationResults = new List<ValidationResult>(32);
+
+            Validator.TryValidateObject(this, new ValidationContext(this), validationResults, true);
 
             if (validationResults.Count() != 0)
             {

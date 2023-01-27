@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.RegularExpressions;
 using KKTServiceLib.Atol.Types.Common;
 using KKTServiceLib.Atol.Types.Common.Agent;
 using KKTServiceLib.Atol.Types.Common.Document;
@@ -28,17 +29,29 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateCorrectionRec
         /// </summary>
         /// <param name="type">Тип чека коррекции</param>
         /// <param name="correctionType">Способ коррекции</param>
+        /// <param name="receiptToCorrectDocumentSign">Фискальный признак ошибочного чека</param>
         /// <param name="correctionBaseDate">Дата совершения корректируемого расчета</param>
         /// <param name="operatorParams">Оператор (кассир)</param>
         /// <param name="taxationType">Система налогообложения</param>
         /// <param name="items">Элементы документа (предметы расчета и тд.)</param>
         /// <param name="payments">Оплаты</param>
         public CreateCorrectionReceiptOperation(CorrectionReceiptType type,
-            CorrectionReceiptCorrectionType correctionType, DateTime correctionBaseDate,
+            CorrectionReceiptCorrectionType correctionType, string receiptToCorrectDocumentSign,
+            DateTime correctionBaseDate,
             OperatorParams operatorParams,
             TaxationType taxationType, DocumentParams[] items, PaymentParams[] payments) : base(type.ToString()
             .ToLowerFirstChar())
         {
+            if (receiptToCorrectDocumentSign.IsNullOrEmptyOrWhiteSpace() || receiptToCorrectDocumentSign.Length > 16 ||
+                !Regex.IsMatch(receiptToCorrectDocumentSign, @"^[0-9]+$"))
+            {
+                throw new ArgumentException(
+                    string.Format(
+                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
+                        "Фискальный признак ошибочного чека"),
+                    nameof(receiptToCorrectDocumentSign));
+            }
+
             if (items?.Any() != true)
             {
                 throw new ArgumentException(
@@ -59,7 +72,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateCorrectionRec
             CorrectionType = correctionType;
             CorrectionBaseDate = correctionBaseDate;
             Operator = operatorParams ?? throw new ArgumentNullException(nameof(operatorParams));
-            Items = items;
+            Items = items.Append(new AdditionalAttributeDocumentParams(receiptToCorrectDocumentSign)).ToArray();
             Payments = payments;
             TaxationType = taxationType;
         }
@@ -244,24 +257,23 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateCorrectionRec
         [Display(Name = "Элементы для печати после документа")]
         public ICommonDocumentElement[] PostItems { get; set; }
 
-        protected override IEnumerable<ValidationResult> Validate()
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            var validationResults = base.Validate();
-
             if (CorrectionType == CorrectionReceiptCorrectionType.Instruction &&
                 CorrectionBaseNumber.IsNullOrEmptyOrWhiteSpace())
             {
-                validationResults = new List<ValidationResult>(validationResults)
-                {
-                    new ValidationResult(string.Format(
+                yield return new ValidationResult(string.Format(
                         ErrorStrings.ResourceManager.GetString("RequiredError"),
-                        GetType().GetProperty(nameof(CorrectionBaseNumber)).GetDisplayName()))
-                };
+                        GetType().GetProperty(nameof(CorrectionBaseNumber)).GetDisplayName()),
+                    new[] { nameof(CorrectionBaseNumber) });
             }
 
             if (AgentInfo != null)
             {
-                validationResults = validationResults.Concat(AgentInfo.Validate());
+                foreach (var vr in AgentInfo.Validate(validationContext))
+                {
+                    yield return vr;
+                }
             }
 
             foreach (var i in Items)
@@ -270,25 +282,16 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateCorrectionRec
                 {
                     if (p.AgentInfo != null)
                     {
-                        var positionAgentValidationErrors = p.AgentInfo.Validate();
-
-                        if (positionAgentValidationErrors.Any())
+                        foreach (var vr in p.AgentInfo.Validate(validationContext))
                         {
-                            validationResults = new List<ValidationResult>(validationResults)
-                            {
-                                new ValidationResult(
-                                    string.Format(
-                                        ErrorStrings.ResourceManager.GetString("AgentInPositionValidationError"),
-                                        p.Name) +
-                                    positionAgentValidationErrors.Aggregate(string.Empty,
-                                        (current, c) => current + "\n\t" + c.ErrorMessage))
-                            };
+                            vr.ErrorMessage =
+                                $"{string.Format(ErrorStrings.ResourceManager.GetString("AgentInPositionValidationError"), p.Name)}: {vr.ErrorMessage}";
+
+                            yield return vr;
                         }
                     }
                 }
             }
-
-            return validationResults;
         }
     }
 }
