@@ -162,12 +162,12 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         public SupplierParams SupplierInfo { get; set; }
 
         /// <summary>
-        /// Сведения об операции
+        /// Операционный реквизит
         /// </summary>
         /// <remarks>
         /// Только для ФФД ≥ 1.2
         /// </remarks>
-        [Display(Name = "Сведения об операции")]
+        [Display(Name = "Операционный реквизит")]
         [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public OperationParams OperationInfo { get; set; }
@@ -255,6 +255,14 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         [Display(Name = "Предварительно проверить имеющиеся в чеке КМ")]
         public bool? ValidateMarkingCodes { get; set; }
 
+        /// <summary>
+        /// Пользовательские параметры
+        /// </summary>
+        [Display(Name = "Пользовательские параметры")]
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+            ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
+        public UserParams[] CustomParameters { get; set; }
+        
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (AgentInfo != null)

@@ -28,5 +28,11 @@ namespace KKTServiceLib.Atol.Types.Common.Exchange
         /// </summary>
         [Display(Name = "Дата и время первого непереданного ФД")]
         public DateTime NotSentFirstDocDateTime { get; set; }
+        
+        /// <summary>
+        /// Дата и время последнего успешного ОКП
+        /// </summary>
+        [Display(Name = "Дата и время последнего успешного ОКП")]
+        public DateTime LastSuccessKeysUpdate { get; set; }
     }
 }

@@ -33,6 +33,6 @@ namespace KKTServiceLib.Atol.Types.Enums
         /// Результат проверки КМ в ККТ получен
         /// </summary>
         [Display(Name = "Результат проверки КМ в ККТ получен")]
-        RecievedResult
+        ReceivedResult
     }
 }

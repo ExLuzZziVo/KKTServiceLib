@@ -204,5 +204,14 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// </summary>
         [Display(Name = "Выравнивание")]
         public AlignmentType Alignment { get; set; }
+
+        /// <summary>
+        /// Сохранять в электронном журнале (только для QR-кода)
+        /// </summary>
+        /// <remarks>
+        /// Значение по умолчанию: true
+        /// </remarks>
+        [Display(Name = "Сохранять в электронном журнале (только для QR-кода)")]
+        public bool StoreInJournal { get; set; } = true;
     }
 }

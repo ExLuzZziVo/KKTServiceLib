@@ -129,6 +129,28 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public UserAttributeDocumentParams UserAttribute { get; set; }
 
+        /// <summary>
+        /// Операционный реквизит
+        /// </summary>
+        /// <remarks>
+        /// Только для ФФД ≥ 1.2
+        /// </remarks>
+        [Display(Name = "Операционный реквизит")]
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+            ErrorMessageResourceName = "ComplexObjectValidationError")]
+        public OperationParams OperationInfo { get; set; }
+
+        /// <summary>
+        /// Отраслевой реквизит
+        /// </summary>
+        /// <remarks>
+        /// Только для ФФД ≥ 1.2
+        /// </remarks>
+        [Display(Name = "Отраслевой реквизит")]
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+            ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
+        public IndustryRequisiteReceiptParams[] IndustryInfo { get; set; }
+
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             switch (CheckType)

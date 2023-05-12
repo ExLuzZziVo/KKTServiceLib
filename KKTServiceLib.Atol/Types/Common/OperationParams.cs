@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace KKTServiceLib.Atol.Types.Common
 {
-    [Description("Сведения об операции")]
+    [Description("Операционный реквизит чека")]
     public class OperationParams
     {
         /// <summary>

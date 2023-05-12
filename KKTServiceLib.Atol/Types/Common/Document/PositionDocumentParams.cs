@@ -298,5 +298,13 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// </summary>
         [Display(Name = "Значение пользовательского параметра 6")]
         public int? UserParam6 { get; set; }
+        
+        /// <summary>
+        /// Пользовательские параметры
+        /// </summary>
+        [Display(Name = "Пользовательские параметры")]
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+            ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
+        public UserParams[] CustomParameters { get; set; }
     }
 }

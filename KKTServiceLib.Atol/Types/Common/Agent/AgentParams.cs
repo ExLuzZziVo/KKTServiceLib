@@ -46,6 +46,24 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
         public ISet<AgentType> Agents { get; }
 
         /// <summary>
+        /// Печатать реквизит "Признак агента" (тег 1222)
+        /// </summary>
+        /// <remarks>
+        /// Значение по умолчанию: true
+        /// </remarks>
+        [Display(Name = "Печатать реквизит \"Признак агента\"")]
+        public bool AgentsPrint { get; set; } = true;
+        
+        /// <summary>
+        /// Печатать реквизит "Данные агента" (тег 1223)
+        /// </summary>
+        /// <remarks>
+        /// Значение по умолчанию: true
+        /// </remarks>
+        [Display(Name = "Печатать реквизит \"Данные агента\"")]
+        public bool AgentDataPrint { get; set; } = true;
+        
+        /// <summary>
         /// Данные платежного агента
         /// </summary>
         /// <list type="bullet">

@@ -42,6 +42,6 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// Значение отраслевого реквизита
         /// </summary>
         [Display(Name = "Значение отраслевого реквизита")]
-        public string Value { get; set; }
+        public virtual string Value { get; set; }
     }
 }

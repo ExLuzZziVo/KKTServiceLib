@@ -27,6 +27,15 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Fn.GetFnDocumentByNumber
         public bool Short { get; set; }
 
         /// <summary>
+        /// QR-код (тег 1196)
+        /// </summary>
+        ///<remarks>
+        /// Только для чеков и БСО
+        /// </remarks>
+        [Display(Name = "QR-код")]
+        public string Qr { get; set; }
+
+        /// <summary>
         /// Состав документа в тегах
         /// </summary>
         [Display(Name = "Состав документа в тегах")]

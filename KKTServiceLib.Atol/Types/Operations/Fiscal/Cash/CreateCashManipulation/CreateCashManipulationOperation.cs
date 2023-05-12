@@ -78,5 +78,14 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Cash.CreateCashManipulation
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
         [Display(Name = "Элементы для печати после документа")]
         public ICommonDocumentElement[] PostItems { get; set; }
+        
+        /// <summary>
+        /// Электронный документ
+        /// </summary>
+        /// <remarks>
+        /// Значение по умолчанию: false
+        /// </remarks>
+        [Display(Name = "Электронный документ")]
+        public bool Electronically { get; set; } = false;
     }
 }

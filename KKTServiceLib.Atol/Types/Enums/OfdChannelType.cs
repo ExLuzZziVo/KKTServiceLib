@@ -39,6 +39,11 @@ namespace KKTServiceLib.Atol.Types.Enums
         /// Средствами протокола ККТ
         /// </summary>
         [Display(Name = "Средствами протокола ККТ")]
-        Proto
+        Proto,
+
+        /// <summary>
+        /// TCP/IP стек ОС
+        /// </summary>
+        [Display(Name = "TCP/IP стек ОС")] TcpipOsStack
     }
 }

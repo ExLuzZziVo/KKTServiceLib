@@ -87,5 +87,23 @@ namespace KKTServiceLib.Atol.Types.Common
         [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "ИНН поставщика")]
         public string Vatin { get; }
+
+        /// <summary>
+        /// Печатать реквизит "Данные поставщика" (тег 1224)
+        /// </summary>
+        /// <remarks>
+        /// Значение по умолчанию: true
+        /// </remarks>
+        [Display(Name = "Печатать реквизит \"Данные поставщика\"")]
+        public bool SupplierPrint { get; set; } = true;
+
+        /// <summary>
+        /// Печатать реквизит "ИНН поставщика" (тег 1226)
+        /// </summary>
+        /// <remarks>
+        /// Значение по умолчанию: true
+        /// </remarks>
+        [Display(Name = "Печатать реквизит \"ИНН поставщика\"")]
+        public bool SupplierVatinPrint { get; set; } = true;
     }
 }

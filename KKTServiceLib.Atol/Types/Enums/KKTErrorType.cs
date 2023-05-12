@@ -1601,6 +1601,18 @@ namespace KKTServiceLib.Atol.Types.Enums
         LIBFPTR_ERROR_ECR_MODEL_NOT_SUPPORTED = 269,
 
         /// <summary>
+        /// Оплата по данному чеку не требуется
+        /// </summary>
+        [Display(Name = "Оплата по данному чеку не требуется")]
+        LIBFPTR_ERROR_PAID_NOT_REQUIRED = 270,
+        
+        /// <summary>
+        /// Непечатаемые символы в реквизите
+        /// </summary>
+        [Display(Name = "Непечатаемые символы в реквизите")]
+        LIBFPTR_ERROR_NON_PRINTABLE_CHAR = 271,
+        
+        /// <summary>
         /// Процедура проверки КМ уже запущена
         /// </summary>
         [Display(Name = "Процедура проверки КМ уже запущена")]
@@ -1737,9 +1749,9 @@ namespace KKTServiceLib.Atol.Types.Enums
         LIBFPTR_ERROR_CHEKING_MARK_IN_PROGRESS = 423,
 
         /// <summary>
-        /// Адрес сервера ИСМ не задан
+        /// Настройки адреса сервера не заданы
         /// </summary>
-        [Display(Name = "Адрес сервера ИСМ не задан")]
+        [Display(Name = "Настройки адреса сервера не заданы")]
         LIBFPTR_ERROR_INVALID_SERVER_ADDRESS = 424,
         
         /// <summary>

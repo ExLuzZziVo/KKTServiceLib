@@ -193,7 +193,7 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
         [RegularExpression(RegexHelper.Base64Pattern, ErrorMessageResourceType = typeof(ErrorStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string ImcBarcode { get; set; }
-        
+
         /// <summary>
         /// Результат проверки сведений о товаре
         /// </summary>
@@ -224,5 +224,14 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
         [RequiredIfValidation(nameof(IsPositionMarkingCodeParams), false,
             ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
         public ItemUnitType? ItemUnits { get; }
+
+        /// <summary>
+        /// Не отправлять запрос на сервер
+        /// </summary>
+        /// <remarks>
+        /// Значение по умолчанию: false
+        /// </remarks>
+        [Display(Name = "Не отправлять запрос на сервер")]
+        public bool NotSendToServer { get; set; } = false;
     }
 }

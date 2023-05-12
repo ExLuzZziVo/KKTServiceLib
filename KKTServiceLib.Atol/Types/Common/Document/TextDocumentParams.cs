@@ -62,5 +62,14 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// </summary>
         [Display(Name = "Выравнивание")]
         public AlignmentType Alignment { get; set; }
+
+        /// <summary>
+        /// Сохранять в электронном журнале
+        /// </summary>
+        /// <remarks>
+        /// Значение по умолчанию: true
+        /// </remarks>
+        [Display(Name = "Сохранять в электронном журнале")]
+        public bool StoreInJournal { get; set; } = true;
     }
 }

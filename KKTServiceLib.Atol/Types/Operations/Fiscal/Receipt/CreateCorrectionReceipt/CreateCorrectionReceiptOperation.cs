@@ -257,6 +257,14 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateCorrectionRec
         [Display(Name = "Элементы для печати после документа")]
         public ICommonDocumentElement[] PostItems { get; set; }
 
+        /// <summary>
+        /// Пользовательские параметры
+        /// </summary>
+        [Display(Name = "Пользовательские параметры")]
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+            ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
+        public UserParams[] CustomParameters { get; set; }
+        
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (CorrectionType == CorrectionReceiptCorrectionType.Instruction &&
