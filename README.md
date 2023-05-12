@@ -22,11 +22,11 @@ fptr.close();
 <br/>
 Пример использования:
 ```csharp
-var sessionKey = new OpenSessionOperation("COM2").Execute(null);
+var sessionKey = await new OpenSessionOperation("COM2").ExecuteAsync(null);
 
-var result = new <Операция>.Execute(sessionKey);
+var result = await new <Операция>.ExecuteAsync(sessionKey);
 
-new CloseSessionOperation().Execute(sessionKey);
+await new CloseSessionOperation().ExecuteAsync(sessionKey);
 ```
 Все доступные операции находятся в пространстве имен <b>KKTServiceLib.Mercury.Types.Operations</b>
 
