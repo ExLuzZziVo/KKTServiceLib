@@ -1,10 +1,15 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using Newtonsoft.Json;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Common
 {
@@ -24,26 +29,26 @@ namespace KKTServiceLib.Mercury.Types.Common
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Name)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Name)).GetPropertyDisplayName()),
                     nameof(name));
             }
 
-            if (vatin.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(vatin, RegexHelper.EntityVatinPattern))
+            if (vatin.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(vatin, RegexExtensions_Ru.EntityVatinPattern))
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Inn)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Inn)).GetPropertyDisplayName()),
                     nameof(vatin));
             }
 
-            if (host.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(host, RegexHelper.UrlPattern))
+            if (host.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(host, RegexExtensions.UrlPattern))
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Url)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Url)).GetPropertyDisplayName()),
                     nameof(host));
             }
 
@@ -62,7 +67,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Наименование ОФД")]
         public string Name { get; }
 
@@ -71,11 +76,11 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.EntityVatinPattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions_Ru.EntityVatinPattern"/></item>
         /// </list>
-        [RegularExpression(RegexHelper.EntityVatinPattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexExtensions_Ru.EntityVatinPattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "ИНН ОФД")]
         public string Inn { get; }
 
@@ -84,11 +89,11 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.UrlPattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions.UrlPattern"/></item>
         /// </list>
-        [RegularExpression(RegexHelper.UrlPattern,
-            ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "StringFormatError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [RegularExpression(RegexExtensions.UrlPattern,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "StringFormatError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Адрес сервера ОФД")]
         public string Url { get; }
 
@@ -99,7 +104,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// <item>Обязательное поле</item>
         /// </list>
         [Display(Name = "Порт сервера ОФД")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public ushort Port { get; set; }
     }
 }

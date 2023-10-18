@@ -3,13 +3,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Atol.Drivers10.Fptr;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
+using CoreLib.CORE.Types;
 using KKTServiceLib.Shared.Types.Exceptions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 #endregion
 
@@ -17,6 +18,16 @@ namespace KKTServiceLib.Atol.Types.Operations
 {
     public abstract class Operation<T> : IValidatableObject
     {
+        protected static readonly JsonSerializerOptions OperationJsonSerializerOptions = new JsonSerializerOptions
+        {
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            WriteIndented = false,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+
+        protected static readonly JsonSerializerOptions OperationResultJsonSerializerOptions =
+            new JsonSerializerOptions(JsonSerializerDefaults.Web);
+
         /// <summary>
         /// Создание JSON-задания ККТ
         /// </summary>
@@ -32,7 +43,7 @@ namespace KKTServiceLib.Atol.Types.Operations
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Тип задания")]
         public string Type { get; }
 
@@ -71,13 +82,7 @@ namespace KKTServiceLib.Atol.Types.Operations
                 throw new ExtendedValidationException(validationResults);
             }
 
-            var jsonData = JsonConvert.SerializeObject(this,
-                Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    NullValueHandling = NullValueHandling.Ignore, TypeNameHandling = TypeNameHandling.None,
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                });
+            var jsonData = JsonSerializer.Serialize(this, GetType(), OperationJsonSerializerOptions);
 
             fptr.setParam(Constants.LIBFPTR_PARAM_JSON_DATA, jsonData);
 
@@ -105,7 +110,7 @@ namespace KKTServiceLib.Atol.Types.Operations
                 return default;
             }
 
-            var result = JsonConvert.DeserializeObject<T>(jsonResult);
+            var result = JsonSerializer.Deserialize<T>(jsonResult, OperationResultJsonSerializerOptions);
 
             return result;
         }

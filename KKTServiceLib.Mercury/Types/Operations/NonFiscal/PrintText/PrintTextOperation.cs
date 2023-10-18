@@ -1,8 +1,13 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintText
 {
@@ -19,8 +24,8 @@ namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintText
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Text)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Text)).GetPropertyDisplayName()),
                     nameof(text));
             }
 
@@ -34,8 +39,8 @@ namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintText
         /// <item>Обязательное поле</item>
         /// <item>Максимальная длина: 1024</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [MaxLength(1024, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [MaxLength(1024, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringMaxLengthError")]
         [Display(Name = "Строка для печати")]
         public string Text { get; }

@@ -1,24 +1,74 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿#region
+
+using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Converters
 {
     /// <summary>
     /// Конвертер параметров типа "Количество". ККТ работает с int
     /// </summary>
-    public class QuantityConverter : JsonConverter<double>
+    public class QuantityConverter : JsonConverter<object>
     {
-        public override void WriteJson(JsonWriter writer, double value, JsonSerializer serializer)
+        public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
         {
-            writer.WriteValue((int)(Math.Round(value, 4, MidpointRounding.AwayFromZero) * 10000));
+            if (value == null)
+            {
+                writer.WriteNullValue();
+
+                return;
+            }
+
+            if (!(value is double doub))
+            {
+                throw new JsonException(
+                    $"Unexpected value when converting amount. Expected Decimal but got {value.GetType()}.");
+            }
+
+            writer.WriteNumberValue((int)(Math.Round(doub, 4, MidpointRounding.AwayFromZero) * 10000));
         }
 
-        public override double ReadJson(JsonReader reader, Type objectType, double existingValue, bool hasExistingValue,
-            JsonSerializer serializer)
+        public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            var value = (long?)reader.Value;
+            var isNullable = typeToConvert.IsNullable();
 
-            return value == null ? 0 : (double)value / 10000;
+            if (reader.TokenType == JsonTokenType.Null)
+            {
+                if (!isNullable)
+                {
+                    throw new JsonException($"Cannot convert null value to {typeToConvert}");
+                }
+
+                return null;
+            }
+
+            if (!reader.TryGetInt64(out var value))
+            {
+                var str = reader.GetString();
+
+                if (isNullable && string.IsNullOrEmpty(str))
+                {
+                    return null;
+                }
+
+                if (!long.TryParse(str, out var val))
+                {
+                    throw new JsonException($"Cannot convert '{str}' to double");
+                }
+
+                value = val;
+            }
+
+            return value / 10000D;
+        }
+
+        public override bool CanConvert(Type typeToConvert)
+        {
+            return typeToConvert == typeof(double) || typeToConvert == typeof(double?);
         }
     }
 }

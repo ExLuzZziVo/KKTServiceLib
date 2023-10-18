@@ -3,9 +3,10 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Atol.Types.Enums;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
 
 #endregion
 
@@ -24,16 +25,16 @@ namespace KKTServiceLib.Atol.Types.Common.Document
             if (name.IsNullOrEmptyOrWhiteSpace())
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Name)).GetDisplayName()),
+                    string.Format(ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Name)).GetPropertyDisplayName()),
                     nameof(name));
             }
 
             if (value.IsNullOrEmptyOrWhiteSpace())
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Value)).GetDisplayName()),
+                    string.Format(ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Value)).GetPropertyDisplayName()),
                     nameof(value));
             }
 
@@ -47,7 +48,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Наименование дополнительного реквизита пользователя")]
         public string Name { get; }
 
@@ -57,7 +58,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Значение дополнительного реквизита пользователя")]
         public string Value { get; }
 

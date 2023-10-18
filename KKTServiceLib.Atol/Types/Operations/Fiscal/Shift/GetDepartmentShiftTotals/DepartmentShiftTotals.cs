@@ -1,5 +1,9 @@
+#region
+
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+
+#endregion
 
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Shift.GetDepartmentShiftTotals
 {

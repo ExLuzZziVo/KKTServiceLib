@@ -1,8 +1,11 @@
+#region
+
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using KKTServiceLib.Shared.Types.Converters;
-using Newtonsoft.Json;
+using CoreLib.CORE.Helpers.Converters;
+
+#endregion
 
 namespace KKTServiceLib.Atol.Types.Common
 {
@@ -19,7 +22,7 @@ namespace KKTServiceLib.Atol.Types.Common
         /// Дата, время операции
         /// </summary>
         [Display(Name = "Дата, время операции")]
-        [JsonConverter(typeof(CustomDateTimeConverter), "yyyy.MM.dd HH:mm:ss")]
+        [CustomDateTimeConverter("yyyy.MM.dd HH:mm:ss")]
         public DateTime? DateTime { get; set; }
 
         /// <summary>

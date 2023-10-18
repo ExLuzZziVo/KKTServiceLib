@@ -1,8 +1,11 @@
+#region
+
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using CoreLib.CORE.Helpers.Converters;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.GetDateTime
 {
@@ -13,7 +16,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.GetDateTime
         /// Дата и время ККТ
         /// </summary>
         [Display(Name = "Дата и время ККТ")]
-        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [CustomDateTimeConverter("yyyy-MM-ddTHH:mm:ss")]
         public DateTime? DateTime { get; set; }
     }
 }

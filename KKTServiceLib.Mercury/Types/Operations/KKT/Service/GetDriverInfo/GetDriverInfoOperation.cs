@@ -1,6 +1,10 @@
-﻿using System.ComponentModel;
+﻿#region
+
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.Service.GetDriverInfo
 {

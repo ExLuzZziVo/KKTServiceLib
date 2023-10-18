@@ -1,20 +1,35 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
+using CoreLib.CORE.Types;
 using KKTServiceLib.Shared.Types.Exceptions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations
 {
-    public abstract class Operation<T>: IValidatableObject where T : OperationResult
+    public abstract class Operation<T> : IValidatableObject where T : OperationResult
     {
+        protected static readonly JsonSerializerOptions OperationJsonSerializerOptions = new JsonSerializerOptions
+        {
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            WriteIndented = false,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+
+        protected static readonly JsonSerializerOptions OperationResultJsonSerializerOptions =
+            new JsonSerializerOptions(JsonSerializerDefaults.Web);
+
         /// <summary>
         /// Создание JSON-задания ККТ
         /// </summary>
@@ -30,7 +45,7 @@ namespace KKTServiceLib.Mercury.Types.Operations
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Сессионный ключ")]
         public virtual string SessionKey { get; protected set; }
 
@@ -45,7 +60,7 @@ namespace KKTServiceLib.Mercury.Types.Operations
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Имя команды")]
         public string Command { get; }
 
@@ -53,7 +68,7 @@ namespace KKTServiceLib.Mercury.Types.Operations
         {
             yield return ValidationResult.Success;
         }
-        
+
         /// <summary>
         /// Запуск выбранной операции
         /// </summary>
@@ -115,13 +130,7 @@ namespace KKTServiceLib.Mercury.Types.Operations
                 SessionKey = null;
             }
 
-            var jsonData = JsonConvert.SerializeObject(this,
-                Formatting.None,
-                new JsonSerializerSettings
-                {
-                    NullValueHandling = NullValueHandling.Ignore, TypeNameHandling = TypeNameHandling.None,
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                });
+            var jsonData = JsonSerializer.Serialize(this, GetType(), OperationJsonSerializerOptions);
 
             string jsonResult;
 
@@ -138,7 +147,7 @@ namespace KKTServiceLib.Mercury.Types.Operations
                 return default;
             }
 
-            var result = JsonConvert.DeserializeObject<T>(jsonResult);
+            var result = JsonSerializer.Deserialize<T>(jsonResult, OperationResultJsonSerializerOptions);
 
             if (result.Result != 0)
             {

@@ -1,11 +1,18 @@
+#region
+
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using CoreLib.CORE.Helpers.EnumHelpers;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Atol.Types.Enums;
-using KKTServiceLib.Shared.Helpers;
 using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.ValidationAttributes;
+
+#endregion
 
 namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
 {
@@ -16,11 +23,6 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
         /// Регулярное выражение для дробного числа
         /// </summary>
         private const string ItemFractionalAmountPattern = @"^[1-9][0-9]*/[1-9][0-9]*$";
-
-        /// <summary>
-        /// Код маркировки используется для позиции
-        /// </summary>
-        public bool IsPositionMarkingCodeParams { get; }
 
         /// <summary>
         /// Код маркировки (ФФД ≥ 1.2) для позиции
@@ -34,11 +36,11 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
             ItemEstimatedStatus itemEstimatedStatus,
             ItemInfoCheckResult itemInfoCheckResult = null)
         {
-            if (imc.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(imc, RegexHelper.Base64Pattern))
+            if (imc.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(imc, RegexExtensions.Base64Pattern))
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Imc)).GetDisplayName()),
+                    string.Format(ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Imc)).GetPropertyDisplayName()),
                     nameof(imc));
             }
 
@@ -64,11 +66,11 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
             ItemEstimatedStatus? itemEstimatedStatus = null, ItemUnitType? itemUnits = null,
             int? itemQuantity = null, string itemFractionalAmount = null)
         {
-            if (imc.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(imc, RegexHelper.Base64Pattern))
+            if (imc.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(imc, RegexExtensions.Base64Pattern))
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Imc)).GetDisplayName()),
+                    string.Format(ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Imc)).GetPropertyDisplayName()),
                     nameof(imc));
             }
 
@@ -78,15 +80,15 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
             {
                 throw new ArgumentOutOfRangeException(nameof(itemEstimatedStatus), string.Format(
                     ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
-                    GetType().GetProperty(nameof(ItemEstimatedStatus)).GetDisplayName(),
+                    GetType().GetProperty(nameof(ItemEstimatedStatus)).GetPropertyDisplayName(),
                     $"{Enums.ItemEstimatedStatus.ItemDryForSale.GetDisplayName()}, {Enums.ItemEstimatedStatus.ItemDryReturn.GetDisplayName()}"));
             }
 
             if (itemQuantity < 0)
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("DigitRangeValuesError"),
-                        GetType().GetProperty(nameof(ItemQuantity)).GetDisplayName(), 0, int.MaxValue),
+                    string.Format(ValidationStrings.ResourceManager.GetString("DigitRangeValuesError"),
+                        GetType().GetProperty(nameof(ItemQuantity)).GetPropertyDisplayName(), 0, int.MaxValue),
                     nameof(itemQuantity));
             }
 
@@ -112,8 +114,8 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
                 {
                     throw new ArgumentException(
                         string.Format(
-                            ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                            GetType().GetProperty(nameof(ItemFractionalAmount)).GetDisplayName()),
+                            ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                            GetType().GetProperty(nameof(ItemFractionalAmount)).GetPropertyDisplayName()),
                         nameof(itemFractionalAmount));
                 }
             }
@@ -130,6 +132,11 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
         }
 
         /// <summary>
+        /// Код маркировки используется для позиции
+        /// </summary>
+        public bool IsPositionMarkingCodeParams { get; }
+
+        /// <summary>
         /// Тип кода маркировки
         /// </summary>
         /// <list type="bullet">
@@ -143,11 +150,11 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.Base64Pattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions.Base64Pattern"/></item>
         /// </list>
         [Display(Name = "base64-представление значения кода маркировки")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [RegularExpression(RegexHelper.Base64Pattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [RegularExpression(RegexExtensions.Base64Pattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string Imc { get; }
 
@@ -158,8 +165,8 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
         /// <item>Обязательное поле если используется для КМ в позициях</item>
         /// </list>
         [Display(Name = "Планируемый статус КМ")]
-        [RequiredIfValidation(nameof(IsPositionMarkingCodeParams), true,
-            ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [RequiredIf(nameof(IsPositionMarkingCodeParams), true,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public ItemEstimatedStatus? ItemEstimatedStatus { get; }
 
         /// <summary>
@@ -169,7 +176,7 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
         /// <item>Обязательное поле</item>
         /// </list>
         [Display(Name = "Режим обработки кода товара")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public int ImcModeProcessing { get; }
 
         /// <summary>
@@ -179,7 +186,7 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
         /// <item>Должно соответствовать регулярному выражению <see cref="ItemFractionalAmountPattern"/></item>
         /// </list>
         [Display(Name = "Дробное количество маркированного товара")]
-        [RegularExpression(ItemFractionalAmountPattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(ItemFractionalAmountPattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string ItemFractionalAmount { get; }
 
@@ -187,10 +194,10 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
         /// Идентификатор маркированного товара
         /// </summary>
         /// <list type="bullet">
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.Base64Pattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions.Base64Pattern"/></item>
         /// </list>
         [Display(Name = "Идентификатор маркированного товара")]
-        [RegularExpression(RegexHelper.Base64Pattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexExtensions.Base64Pattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string ImcBarcode { get; set; }
 
@@ -208,9 +215,9 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
         /// <item>Должно лежать в диапазоне: 0-<see cref="int.MaxValue"/></item>
         /// </list>
         [Display(Name = "Количество товара")]
-        [RequiredIfValidation(nameof(IsPositionMarkingCodeParams), false,
-            ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [Range(0, int.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RequiredIf(nameof(IsPositionMarkingCodeParams), false,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [Range(0, int.MaxValue, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public int? ItemQuantity { get; }
 
@@ -221,8 +228,8 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
         /// <item>Обязательное поле если используется для проверки КМ</item>
         /// </list>
         [Display(Name = "Мера количества товара")]
-        [RequiredIfValidation(nameof(IsPositionMarkingCodeParams), false,
-            ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [RequiredIf(nameof(IsPositionMarkingCodeParams), false,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public ItemUnitType? ItemUnits { get; }
 
         /// <summary>

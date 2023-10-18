@@ -1,9 +1,12 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.Converters;
-using Newtonsoft.Json;
+using CoreLib.CORE.Helpers.Converters;
+using CoreLib.CORE.Resources;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.SetDateTime
 {
@@ -25,9 +28,9 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.SetDateTime
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Дата и время")]
-        [JsonConverter(typeof(CustomDateTimeConverter), "yyyy-MM-ddTHH:mm:ss")]
+        [CustomDateTimeConverter("yyyy-MM-ddTHH:mm:ss")]
         public DateTime DateTime { get; }
     }
 }

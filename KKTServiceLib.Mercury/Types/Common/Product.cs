@@ -1,10 +1,14 @@
-﻿using System.ComponentModel;
+﻿#region
+
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Mercury.Types.Converters;
 using KKTServiceLib.Mercury.Types.Enums;
 using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using Newtonsoft.Json;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Common
 {
@@ -29,7 +33,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Код товара")]
         public uint Code { get; }
 
@@ -40,7 +44,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.BarcodePattern"/></item>
         /// </list>
         [RegularExpression(RegexHelper.BarcodePattern,
-            ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "StringFormatError")]
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "StringFormatError")]
         [Display(Name = "Штриховой код товара")]
         [JsonConverter(typeof(BarcodeValueConverter))]
         public string Barcode { get; set; }
@@ -51,7 +55,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// <list type="bullet">
         /// <item>Максимальная длина: 56</item>
         /// </list>
-        [MaxLength(56, ErrorMessageResourceType = typeof(ErrorStrings),
+        [MaxLength(56, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringMaxLengthError")]
         [Display(Name = "Наименование товара")]
         public string Name { get; set; }
@@ -64,7 +68,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// </list>
         [Display(Name = "Цена товара")]
         [JsonConverter(typeof(MoneyConverter))]
-        [Range(0, 21474836, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0, 21474836, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal? Price { get; set; }
 
@@ -79,7 +83,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// </list>
         [Display(Name = "Сумма акциза, включенная в стоимость предмета расчета")]
         [JsonConverter(typeof(MoneyConverter))]
-        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal? ExciseAmount { get; set; }
 
@@ -92,7 +96,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// <list type="bullet">
         /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.CountryOfOriginCodePattern"/></item>
         /// </list>
-        [RegularExpression(RegexHelper.CountryOfOriginCodePattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexHelper.CountryOfOriginCodePattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         [Display(Name = "Код страны происхождения")]
         public string CountryOfOrigin { get; set; }
@@ -106,7 +110,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// <list type="bullet">
         /// <item>Максимальная длина: 32</item>
         /// </list>
-        [MaxLength(32, ErrorMessageResourceType = typeof(ErrorStrings),
+        [MaxLength(32, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringMaxLengthError")]
         [Display(Name = "Регистрационный номер таможенной декларации")]
         public string CustomsDeclaration { get; set; }
@@ -130,7 +134,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// <remarks>
         /// Значение по умолчанию: 1
         /// </remarks>
-        [Range(1, 16, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(1, 16, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         [Display(Name = "Номер отдела (секции)")]
         public ushort? Section { get; set; } = 1;
@@ -182,7 +186,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// </list>
         [Display(Name = "Цена за одну часть маркированного товара")]
         [JsonConverter(typeof(MoneyConverter))]
-        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal? PartPrice { get; set; }
 

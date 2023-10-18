@@ -3,9 +3,10 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Atol.Types.Enums;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
 
 #endregion
 
@@ -23,8 +24,8 @@ namespace KKTServiceLib.Atol.Types.Common.Document
             if (value.IsNullOrEmptyOrWhiteSpace() || value.Length > 16)
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Value)).GetDisplayName()), nameof(value));
+                    string.Format(ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Value)).GetPropertyDisplayName()), nameof(value));
             }
 
             Value = value;
@@ -37,8 +38,8 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <item>Обязательное поле</item>
         /// <item>Максимальная длина: 16</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [MaxLength(16, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [MaxLength(16, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringMaxLengthError")]
         [Display(Name = "Значение дополнительного реквизита чека (БСО)")]
         public string Value { get; }

@@ -1,8 +1,13 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Common.Document
 {
@@ -20,8 +25,8 @@ namespace KKTServiceLib.Mercury.Types.Common.Document
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(AttrName)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(AttrName)).GetPropertyDisplayName()),
                     nameof(name));
             }
 
@@ -29,8 +34,8 @@ namespace KKTServiceLib.Mercury.Types.Common.Document
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(AttrValue)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(AttrValue)).GetPropertyDisplayName()),
                     nameof(value));
             }
 
@@ -45,8 +50,8 @@ namespace KKTServiceLib.Mercury.Types.Common.Document
         /// <item>Обязательное поле</item>
         /// <item>Максимальная длина: 64</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [MaxLength(64, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [MaxLength(64, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringMaxLengthError")]
         [Display(Name = "Наименование дополнительного реквизита")]
         public string AttrName { get; }
@@ -58,8 +63,8 @@ namespace KKTServiceLib.Mercury.Types.Common.Document
         /// <item>Обязательное поле</item>
         /// <item>Максимальная длина: 256</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [MaxLength(256, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [MaxLength(256, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringMaxLengthError")]
         [Display(Name = "Значение дополнительного реквизита")]
         public string AttrValue { get; }

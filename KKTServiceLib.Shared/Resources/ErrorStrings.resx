@@ -59,8 +59,8 @@
               : using a System.ComponentModel.TypeConverter
               : and then encoded with base64 encoding.
       -->
-    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root"
+                xmlns="">
         <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
         <xsd:element name="root" msdata:IsDataSet="true">
             <xsd:complexType>
@@ -122,47 +122,11 @@
             PublicKeyToken=b77a5c561934e089
         </value>
     </resheader>
-    <data name="ComplexObjectValidationError" xml:space="preserve">
-    <value>Параметр '{0}' имеет следующие ошибки</value>
-  </data>
-    <data name="DateTimeError" xml:space="preserve">
-    <value>Дата в параметре '{0}' должна лежать в диапазоне {1} - {2}</value>
-  </data>
     <data name="DateTimeFormatError" xml:space="preserve">
     <value>Дата в параметре '{0}' введена некорректно</value>
   </data>
-    <data name="DigitRangeValuesError" xml:space="preserve">
-    <value>Параметр '{0}' должен иметь значение не менее {1} и не более {2}</value>
-  </data>
-    <data name="ComplexObjectCollectionValidationError" xml:space="preserve">
-    <value>Последовательность '{0}' содержит элементы со следующими ошибками</value>
-  </data>
-    <data name="ComplexObjectCollectionValidationError_ContainsNull" xml:space="preserve">
-    <value>Не может быть пустым</value>
-  </data>
-    <data name="ComplexObjectCollectionValidationError_Index" xml:space="preserve">
-    <value>Элемент {0}: </value>
-  </data>
-    <data name="MinLengthError" xml:space="preserve">
-    <value>Количество элементов в последовательности '{0}' должно быть не менее {1}</value>
-  </data>
     <data name="RegularExpressionCollectionValidationError" xml:space="preserve">
     <value>Одна или несколько строк в последовательности '{0}' имеют неверный формат: {1}</value>
-  </data>
-    <data name="RequiredError" xml:space="preserve">
-    <value>Параметр '{0}' не может быть пустым</value>
-  </data>
-    <data name="StringFormatError" xml:space="preserve">
-    <value>Параметр '{0}' имеет неверный формат</value>
-  </data>
-    <data name="StringMaxLengthError" xml:space="preserve">
-    <value>Параметр '{0}' должен содержать не более {1} символов</value>
-  </data>
-    <data name="StringMinLengthError" xml:space="preserve">
-    <value>Параметр '{0}' должен содержать не менее {1} символов</value>
-  </data>
-    <data name="StringRangeLengthError" xml:space="preserve">
-    <value>Параметр '{0}' должен содержать не менее {1}  и не более {2} символов</value>
   </data>
     <data name="BarcodeValueFormatError" xml:space="preserve">
     <value>Штрихкод с типом '{0}' имеет неверный формат</value>
@@ -187,8 +151,5 @@
   </data>
     <data name="MustBeEqualError" xml:space="preserve">
         <value>Параметр '{0}' должен быть равен следующим значениям: {1}</value>
-    </data>
-    <data name="MaxLengthError" xml:space="preserve">
-        <value>Количество элементов в последовательности '{0}' должно быть не более {1}</value>
     </data>
 </root>

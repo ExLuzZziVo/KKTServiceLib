@@ -1,8 +1,13 @@
+#region
+
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
+
+#endregion
 
 namespace KKTServiceLib.Atol.Types.Common
 {
@@ -14,8 +19,8 @@ namespace KKTServiceLib.Atol.Types.Common
             if (value.IsNullOrEmptyOrWhiteSpace())
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Value)).GetDisplayName()), nameof(value));
+                    string.Format(ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Value)).GetPropertyDisplayName()), nameof(value));
             }
 
             Id = id;
@@ -29,7 +34,7 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <item>Обязательное поле</item>
         /// </list>
         [Display(Name = "Номер параметра")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public int Id { get; }
 
         /// <summary>
@@ -39,7 +44,7 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <item>Обязательное поле</item>
         /// </list>
         [Display(Name = "Значение параметра")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public string Value { get; }
     }
 }

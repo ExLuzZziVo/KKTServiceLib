@@ -58,12 +58,6 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         public bool DoubleHeight { get; set; }
 
         /// <summary>
-        /// Выравнивание
-        /// </summary>
-        [Display(Name = "Выравнивание")]
-        public AlignmentType Alignment { get; set; }
-
-        /// <summary>
         /// Сохранять в электронном журнале
         /// </summary>
         /// <remarks>
@@ -71,5 +65,11 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// </remarks>
         [Display(Name = "Сохранять в электронном журнале")]
         public bool StoreInJournal { get; set; } = true;
+
+        /// <summary>
+        /// Выравнивание
+        /// </summary>
+        [Display(Name = "Выравнивание")]
+        public AlignmentType Alignment { get; set; }
     }
 }

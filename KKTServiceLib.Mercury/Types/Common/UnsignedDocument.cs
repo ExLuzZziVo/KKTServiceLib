@@ -1,8 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using CoreLib.CORE.Helpers.Converters;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Common
 {
@@ -25,7 +28,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// Дата и время первого непереданного документа
         /// </summary>
         [Display(Name = "Дата и время первого непереданного документа")]
-        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [CustomDateTimeConverter("yyyy-MM-ddTHH:mm:ss")]
         public DateTime? FirstDateTime { get; set; }
     }
 }

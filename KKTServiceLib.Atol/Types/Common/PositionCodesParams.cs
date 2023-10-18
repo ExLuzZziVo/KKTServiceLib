@@ -1,8 +1,13 @@
+#region
+
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
+
+#endregion
 
 namespace KKTServiceLib.Atol.Types.Common
 {
@@ -19,10 +24,10 @@ namespace KKTServiceLib.Atol.Types.Common
         /// КТ EAN-8
         /// </summary>
         /// <list type="bullet">
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.BarcodeEAN8Pattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions.BarcodeEAN8Pattern"/></item>
         /// </list>
         [Display(Name = "КТ EAN-8")]
-        [RegularExpression(RegexHelper.BarcodeEAN8Pattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexExtensions.BarcodeEAN8Pattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string Ean8 { get; set; }
 
@@ -30,10 +35,10 @@ namespace KKTServiceLib.Atol.Types.Common
         /// КТ EAN-13
         /// </summary>
         /// <list type="bullet">
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.BarcodeEAN13Pattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions.BarcodeEAN13Pattern"/></item>
         /// </list>
         [Display(Name = "КТ EAN-13")]
-        [RegularExpression(RegexHelper.BarcodeEAN13Pattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexExtensions.BarcodeEAN13Pattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string Ean13 { get; set; }
 
@@ -41,10 +46,10 @@ namespace KKTServiceLib.Atol.Types.Common
         /// КТ ITF-14
         /// </summary>
         /// <list type="bullet">
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.BarcodeITF14Pattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions.BarcodeITF14Pattern"/></item>
         /// </list>
         [Display(Name = "КТ ITF-14")]
-        [RegularExpression(RegexHelper.BarcodeITF14Pattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexExtensions.BarcodeITF14Pattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string Itf14 { get; set; }
 
@@ -55,7 +60,8 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.BarcodeTags1304_1306Pattern"/></item>
         /// </list>
         [Display(Name = "КТ GS1.0")]
-        [RegularExpression(RegexHelper.BarcodeTags1304_1306Pattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexHelper.BarcodeTags1304_1306Pattern,
+            ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string Gs10 { get; set; }
 
@@ -66,7 +72,8 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.BarcodeTags1304_1306Pattern"/></item>
         /// </list>
         [Display(Name = "КТ GS1.M")]
-        [RegularExpression(RegexHelper.BarcodeTags1304_1306Pattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexHelper.BarcodeTags1304_1306Pattern,
+            ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string Gs1m { get; set; }
 
@@ -77,7 +84,8 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.BarcodeTags1304_1306Pattern"/></item>
         /// </list>
         [Display(Name = "КТ КМК")]
-        [RegularExpression(RegexHelper.BarcodeTags1304_1306Pattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexHelper.BarcodeTags1304_1306Pattern,
+            ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string Short { get; set; }
 
@@ -85,10 +93,10 @@ namespace KKTServiceLib.Atol.Types.Common
         /// КТ МИ
         /// </summary>
         /// <list type="bullet">
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.BarcodeFurPattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions_Ru.BarcodeFurPattern"/></item>
         /// </list>
         [Display(Name = "КТ МИ")]
-        [RegularExpression(RegexHelper.BarcodeFurPattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexExtensions_Ru.BarcodeFurPattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string Furs { get; set; }
 
@@ -99,7 +107,7 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.BarcodeTag1308Pattern"/></item>
         /// </list>
         [Display(Name = "КТ ЕГАИС-2.0")]
-        [RegularExpression(RegexHelper.BarcodeTag1308Pattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexHelper.BarcodeTag1308Pattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string Egais20 { get; set; }
 
@@ -110,7 +118,7 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.BarcodeTag1309Pattern"/></item>
         /// </list>
         [Display(Name = "КТ ЕГАИС-3.0")]
-        [RegularExpression(RegexHelper.BarcodeTag1309Pattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexHelper.BarcodeTag1309Pattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string Egais30 { get; set; }
 

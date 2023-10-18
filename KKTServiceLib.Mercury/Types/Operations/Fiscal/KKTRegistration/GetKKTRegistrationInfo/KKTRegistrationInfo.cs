@@ -1,12 +1,15 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using CoreLib.CORE.Helpers.Converters;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Mercury.Types.Common;
 using KKTServiceLib.Mercury.Types.Enums;
-using KKTServiceLib.Shared.Resources;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.GetKKTRegistrationInfo
 {
@@ -16,7 +19,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.GetKKTRe
         /// <summary>
         /// Дата и время регистрации ККТ
         /// </summary>
-        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [CustomDateTimeConverter("yyyy-MM-ddTHH:mm:ss")]
         [Display(Name = "Дата и время регистрации ККТ")]
         public DateTime DateTime { get; set; }
 
@@ -46,8 +49,9 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.GetKKTRe
         /// <item>Минимальное кол-во элементов: 1</item>
         /// </list>
         [Display(Name = "Системы налогообложения, с которыми работает ККТ")]
-        [MinLength(1, ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "MinLengthError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [MinLength(1, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "CollectionMinLengthError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public ISet<TaxationType> TaxSystem { get; } =
 #if NETSTANDARD2_0
             new HashSet<TaxationType>();

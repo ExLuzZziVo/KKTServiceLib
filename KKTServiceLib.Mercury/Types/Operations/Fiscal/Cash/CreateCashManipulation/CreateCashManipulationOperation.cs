@@ -1,13 +1,17 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Mercury.Types.Common;
 using KKTServiceLib.Mercury.Types.Converters;
 using KKTServiceLib.Mercury.Types.Enums;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.ValidationAttributes;
-using Newtonsoft.Json;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Cash.CreateCashManipulation
 {
@@ -26,8 +30,8 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Cash.CreateCashManipulat
             if (cashSum < (decimal)0.01 || cashSum > 21474836)
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("DigitRangeValuesError"),
-                        GetType().GetProperty(nameof(Cash)).GetDisplayName(), 0.01, 21474836),
+                    string.Format(ValidationStrings.ResourceManager.GetString("DigitRangeValuesError"),
+                        GetType().GetProperty(nameof(Cash)).GetPropertyDisplayName(), 0.01, 21474836),
                     nameof(cashSum));
             }
 
@@ -42,10 +46,10 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Cash.CreateCashManipulat
         /// <item>Обязательное поле</item>
         /// <item>Должно лежать в диапазоне: 0.01-21474836</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Cумма наличных")]
         [JsonConverter(typeof(MoneyConverter))]
-        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal Cash { get; }
 
@@ -55,9 +59,9 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Cash.CreateCashManipulat
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Оператор (кассир)")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public OperatorParams CashierInfo { get; }
     }

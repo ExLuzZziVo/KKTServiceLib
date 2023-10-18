@@ -3,13 +3,13 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Atol.Types.Common;
 using KKTServiceLib.Atol.Types.Common.KKT;
 using KKTServiceLib.Atol.Types.Common.MarkingCodes;
 using KKTServiceLib.Atol.Types.Enums;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.ValidationAttributes;
 
 #endregion
 
@@ -54,9 +54,9 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.KKTRegistration.RegisterKKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Оператор (кассир)")]
         public OperatorParams Operator { get; }
 
@@ -81,9 +81,9 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.KKTRegistration.RegisterKKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Информация об организации")]
         public OrganizationParams Organization { get; }
 
@@ -93,9 +93,9 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.KKTRegistration.RegisterKKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Параметры ККТ")]
         public KKTParams Device { get; }
 
@@ -105,9 +105,9 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.KKTRegistration.RegisterKKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Параметры ОФД")]
         public OfdParams Ofd { get; }
 
@@ -117,7 +117,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.KKTRegistration.RegisterKKT
         /// <remarks>
         /// Только для ФФД ≥ 1.2
         /// </remarks>
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         [Display(Name = "Параметры ИСМ")]
         public IsmParams Ism { get; }

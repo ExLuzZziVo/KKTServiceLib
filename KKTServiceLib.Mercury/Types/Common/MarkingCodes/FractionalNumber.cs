@@ -1,9 +1,13 @@
+#region
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Resources;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Common.MarkingCodes
 {
@@ -20,16 +24,16 @@ namespace KKTServiceLib.Mercury.Types.Common.MarkingCodes
             if (denominator < 2)
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("DigitRangeValuesError"),
-                        GetType().GetProperty(nameof(Denominator)).GetDisplayName(), 2, int.MaxValue),
+                    string.Format(ValidationStrings.ResourceManager.GetString("DigitRangeValuesError"),
+                        GetType().GetProperty(nameof(Denominator)).GetPropertyDisplayName(), 2, int.MaxValue),
                     nameof(denominator));
             }
 
             if (numerator < 1 || numerator >= denominator)
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("DigitRangeValuesError"),
-                        GetType().GetProperty(nameof(Numerator)).GetDisplayName(), 1,
+                    string.Format(ValidationStrings.ResourceManager.GetString("DigitRangeValuesError"),
+                        GetType().GetProperty(nameof(Numerator)).GetPropertyDisplayName(), 1,
                         numerator == denominator ? denominator - 1 : denominator - 2),
                     nameof(numerator));
             }
@@ -45,8 +49,8 @@ namespace KKTServiceLib.Mercury.Types.Common.MarkingCodes
         /// <item>Обязательное поле</item>
         /// <item>Должно лежать в диапазоне: 1-(<see cref="int.MaxValue"/> - 1)</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [Range(1, int.MaxValue - 1, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [Range(1, int.MaxValue - 1, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         [Display(Name = "Числитель дроби")]
         public int Numerator { get; }
@@ -58,8 +62,8 @@ namespace KKTServiceLib.Mercury.Types.Common.MarkingCodes
         /// <item>Обязательное поле</item>
         /// <item>Должно лежать в диапазоне: 2-<see cref="int.MaxValue"/></item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [Range(2, int.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [Range(2, int.MaxValue, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         [Display(Name = "Знаменатель дроби")]
         public int Denominator { get; }
@@ -69,8 +73,8 @@ namespace KKTServiceLib.Mercury.Types.Common.MarkingCodes
             if (Numerator >= Denominator)
             {
                 yield return new ValidationResult(
-                    string.Format(ErrorStrings.ResourceManager.GetString("DigitRangeValuesError"),
-                        GetType().GetProperty(nameof(Numerator)).GetDisplayName(), 1,
+                    string.Format(ValidationStrings.ResourceManager.GetString("DigitRangeValuesError"),
+                        GetType().GetProperty(nameof(Numerator)).GetPropertyDisplayName(), 1,
                         Numerator == Denominator ? Denominator - 1 : Denominator - 2), new[] { nameof(Numerator) });
             }
         }

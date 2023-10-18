@@ -2,8 +2,8 @@
 
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using KKTServiceLib.Shared.Resources;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+using CoreLib.CORE.Resources;
 
 #endregion
 
@@ -39,7 +39,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <item>Обязательное поле</item>
         /// </list>
         [Display(Name = "Номер настройки")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public uint Key { get; }
 
         /// <summary>

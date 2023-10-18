@@ -1,6 +1,10 @@
+#region
+
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using KKTServiceLib.Mercury.Types.Common.MarkingCodes;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Ism.BeginMarkingCodeValidation
 {

@@ -4,10 +4,10 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Atol.Types.Interfaces;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.ValidationAttributes;
 
 #endregion
 
@@ -26,8 +26,8 @@ namespace KKTServiceLib.Atol.Types.Operations.NonFiscal.CreateNonFiscalDocument
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        GetType().GetProperty(nameof(Items)).GetDisplayName(), 1),
+                        ValidationStrings.ResourceManager.GetString("CollectionMinLengthError"),
+                        GetType().GetProperty(nameof(Items)).GetPropertyDisplayName(), 1),
                     nameof(items));
             }
 
@@ -41,11 +41,12 @@ namespace KKTServiceLib.Atol.Types.Operations.NonFiscal.CreateNonFiscalDocument
         /// <item>Обязательное поле</item>
         /// <item>Минимальное кол-во элементов: 1</item>
         /// </list>
-        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
-        [MinLength(1, ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "MinLengthError")]
+        [MinLength(1, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "CollectionMinLengthError")]
         [Display(Name = "Элементы документа")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public ICommonDocumentElement[] Items { get; }
 
         /// <summary>

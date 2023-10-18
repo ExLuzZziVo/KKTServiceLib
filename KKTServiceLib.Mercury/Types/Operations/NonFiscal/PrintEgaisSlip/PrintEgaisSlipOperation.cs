@@ -1,9 +1,14 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintEgaisSlip
 {
@@ -21,21 +26,21 @@ namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintEgaisSlip
         public PrintEgaisSlipOperation(int shiftNumber, int receiptNumber, string kpp, string url, string sign) : base(
             "PrintEgaisSlip")
         {
-            if (kpp.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(kpp, RegexHelper.KPPPattern))
+            if (kpp.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(kpp, RegexExtensions_Ru.KPPPattern))
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(KPP)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(KPP)).GetPropertyDisplayName()),
                     nameof(kpp));
             }
 
-            if (url.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(url, RegexHelper.UrlPattern))
+            if (url.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(url, RegexExtensions.UrlPattern))
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Url)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Url)).GetPropertyDisplayName()),
                     nameof(url));
             }
 
@@ -43,8 +48,8 @@ namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintEgaisSlip
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Sign)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Sign)).GetPropertyDisplayName()),
                     nameof(sign));
             }
 
@@ -61,7 +66,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintEgaisSlip
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Номер текущей кассовой смены")]
         public int ShiftNum { get; }
 
@@ -71,7 +76,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintEgaisSlip
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Номер чека")]
         public int CheckNum { get; }
 
@@ -80,23 +85,23 @@ namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintEgaisSlip
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.KPPPattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions_Ru.KPPPattern"/></item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "КПП организации, продавшей алкогольную продукцию")]
-        [RegularExpression(RegexHelper.KPPPattern,
-            ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "StringFormatError")]
+        [RegularExpression(RegexExtensions_Ru.KPPPattern,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "StringFormatError")]
         public string KPP { get; }
 
         /// <summary>
         /// ИНН организации, продавшей алкогольную продукцию
         /// </summary>
         /// <list type="bullet">
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.VatinPattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions_Ru.VatinPattern"/></item>
         /// </list>
         [Display(Name = "ИНН организации, продавшей алкогольную продукцию")]
-        [RegularExpression(RegexHelper.VatinPattern,
-            ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "StringFormatError")]
+        [RegularExpression(RegexExtensions_Ru.VatinPattern,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "StringFormatError")]
         public string INN { get; set; }
 
         /// <summary>
@@ -104,12 +109,12 @@ namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintEgaisSlip
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.UrlPattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions.UrlPattern"/></item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Текст ссылки, полученной от УТМ при подписывании чека")]
-        [RegularExpression(RegexHelper.UrlPattern,
-            ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "StringFormatError")]
+        [RegularExpression(RegexExtensions.UrlPattern,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "StringFormatError")]
         public string Url { get; }
 
         /// <summary>
@@ -118,7 +123,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintEgaisSlip
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Отпечаток КЭП, полученный от УТМ при подписывании чека")]
         public string Sign { get; }
     }

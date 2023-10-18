@@ -5,14 +5,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Atol.Types.Common;
 using KKTServiceLib.Atol.Types.Common.Agent;
 using KKTServiceLib.Atol.Types.Common.Document;
 using KKTServiceLib.Atol.Types.Enums;
 using KKTServiceLib.Atol.Types.Interfaces;
-using KKTServiceLib.Shared.Helpers;
 using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.ValidationAttributes;
 
 #endregion
 
@@ -39,16 +41,16 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        GetType().GetProperty(nameof(Items)).GetDisplayName(), 1),
+                        ValidationStrings.ResourceManager.GetString("CollectionMinLengthError"),
+                        GetType().GetProperty(nameof(Items)).GetPropertyDisplayName(), 1),
                     nameof(items));
             }
 
             if (payments?.Any() != true)
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        GetType().GetProperty(nameof(Payments)).GetDisplayName(), 1),
+                    string.Format(ValidationStrings.ResourceManager.GetString("CollectionMinLengthError"),
+                        GetType().GetProperty(nameof(Payments)).GetPropertyDisplayName(), 1),
                     nameof(payments));
             }
 
@@ -56,9 +58,9 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
                         typeof(AdditionalAttributeDocumentParams)
-                            .GetProperty(nameof(AdditionalAttributeDocumentParams.Value)).GetDisplayName()),
+                            .GetProperty(nameof(AdditionalAttributeDocumentParams.Value)).GetPropertyDisplayName()),
                     nameof(additionalAttributeValue));
             }
 
@@ -93,7 +95,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// <item>Обязательное поле</item>
         /// </list>
         [Display(Name = "Система налогообложения")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public TaxationType TaxationType { get; }
 
         /// <summary>
@@ -123,16 +125,16 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         [Display(Name = "Оператор (кассир)")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public OperatorParams Operator { get; }
 
         /// <summary>
         /// Данные покупателя
         /// </summary>
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         [Display(Name = "Данные покупателя")]
         public BuyerParams ClientInfo { get; set; }
@@ -140,7 +142,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// <summary>
         /// Данные продавца
         /// </summary>
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         [Display(Name = "Данные продавца")]
         public SellerParams CompanyInfo { get; set; }
@@ -148,7 +150,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// <summary>
         /// Данные агента
         /// </summary>
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         [Display(Name = "Данные агента")]
         public AgentParams AgentInfo { get; set; }
@@ -156,7 +158,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// <summary>
         /// Данные поставщика
         /// </summary>
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         [Display(Name = "Данные поставщика")]
         public SupplierParams SupplierInfo { get; set; }
@@ -168,7 +170,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// Только для ФФД ≥ 1.2
         /// </remarks>
         [Display(Name = "Операционный реквизит")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public OperationParams OperationInfo { get; set; }
 
@@ -179,7 +181,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// Только для ФФД ≥ 1.2
         /// </remarks>
         [Display(Name = "Отраслевой реквизит")]
-        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
         public IndustryRequisiteParams[] IndustryInfo { get; set; }
 
@@ -190,10 +192,11 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// <item>Обязательное поле</item>
         /// <item>Минимальное кол-во элементов: 1</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
-        [MinLength(1, ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "MinLengthError")]
+        [MinLength(1, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "CollectionMinLengthError")]
         [Display(Name = "Элементы документа")]
         public DocumentParams[] Items { get; }
 
@@ -204,17 +207,18 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// <item>Обязательное поле</item>
         /// <item>Минимальное кол-во элементов: 1</item>
         /// </list>
-        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [MinLength(1, ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "MinLengthError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [MinLength(1, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "CollectionMinLengthError")]
         [Display(Name = "Оплаты")]
         public PaymentParams[] Payments { get; }
 
         /// <summary>
         /// Налоги на чек
         /// </summary>
-        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
         [Display(Name = "Налоги на чек")]
         public TaxParams[] Taxes { get; set; }
@@ -226,14 +230,14 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// <item>Должно лежать в диапазоне: 0.01-<see cref="decimal.MaxValue"/></item>
         /// </list>
         [Display(Name = "Итог чека")]
-        [Range(0.01, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0.01, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal? Total { get; set; }
 
         /// <summary>
         /// Элементы для печати до документа
         /// </summary>
-        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
         [Display(Name = "Элементы для печати до документа")]
         public ICommonDocumentElement[] PreItems { get; set; }
@@ -241,7 +245,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// <summary>
         /// Элементы для печати после документа
         /// </summary>
-        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
         [Display(Name = "Элементы для печати после документа")]
         public ICommonDocumentElement[] PostItems { get; set; }
@@ -259,10 +263,10 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// Пользовательские параметры
         /// </summary>
         [Display(Name = "Пользовательские параметры")]
-        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
         public UserParams[] CustomParameters { get; set; }
-        
+
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (AgentInfo != null)

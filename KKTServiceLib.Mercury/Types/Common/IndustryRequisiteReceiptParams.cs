@@ -1,9 +1,14 @@
+#region
+
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Common
 {
@@ -20,8 +25,8 @@ namespace KKTServiceLib.Mercury.Types.Common
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Value)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Value)).GetPropertyDisplayName()),
                     nameof(value));
             }
 
@@ -35,8 +40,8 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// <item>Обязательное поле</item>
         /// </list>
         [Display(Name = "Значение отраслевого реквизита")]
-        [JsonProperty("attrValue")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [JsonPropertyName("attrValue")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public sealed override string Value { get; set; }
     }
 }

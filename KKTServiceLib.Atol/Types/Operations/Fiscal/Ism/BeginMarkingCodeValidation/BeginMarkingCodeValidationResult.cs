@@ -1,6 +1,10 @@
+#region
+
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using KKTServiceLib.Atol.Types.Common.MarkingCodes;
+
+#endregion
 
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.BeginMarkingCodeValidation
 {

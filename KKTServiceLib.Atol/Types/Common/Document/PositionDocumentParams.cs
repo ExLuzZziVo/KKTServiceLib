@@ -3,17 +3,21 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Atol.Types.Common.Agent;
 using KKTServiceLib.Atol.Types.Enums;
 using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.ValidationAttributes;
 
 #endregion
 
 namespace KKTServiceLib.Atol.Types.Common.Document
 {
     [Description("Предмет расчета (ФФД < 1.2)")]
+    [JsonDerivedType(typeof(PositionDocumentParams_12))]
     public class PositionDocumentParams : DocumentParams
     {
         private MarkingCodeParams _markingCode;
@@ -35,24 +39,24 @@ namespace KKTServiceLib.Atol.Types.Common.Document
             if (name.IsNullOrEmptyOrWhiteSpace())
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Name)).GetDisplayName()),
+                    string.Format(ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Name)).GetPropertyDisplayName()),
                     nameof(name));
             }
 
             if (price < 0)
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("DigitRangeValuesError"),
-                        GetType().GetProperty(nameof(Price)).GetDisplayName(), 0, decimal.MaxValue),
+                    string.Format(ValidationStrings.ResourceManager.GetString("DigitRangeValuesError"),
+                        GetType().GetProperty(nameof(Price)).GetPropertyDisplayName(), 0, decimal.MaxValue),
                     nameof(price));
             }
 
             if (quantity < 0.001)
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("DigitRangeValuesError"),
-                        GetType().GetProperty(nameof(Price)).GetDisplayName(), 0.001, double.MaxValue),
+                    string.Format(ValidationStrings.ResourceManager.GetString("DigitRangeValuesError"),
+                        GetType().GetProperty(nameof(Price)).GetPropertyDisplayName(), 0.001, double.MaxValue),
                     nameof(price));
             }
 
@@ -70,7 +74,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Наименование предмета расчета")]
         public string Name { get; }
 
@@ -81,9 +85,9 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <item>Обязательное поле</item>
         /// <item>Должно лежать в диапазоне: 0-<see cref="decimal.MaxValue"/></item>
         /// </list>
-        [Range(0, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Цена единицы предмета расчета")]
         public decimal Price { get; }
 
@@ -94,9 +98,9 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <item>Обязательное поле</item>
         /// <item>Должно лежать в диапазоне: 0.001-<see cref="double.MaxValue"/></item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Количество предмета расчета")]
-        [Range(0.001, double.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0.001, double.MaxValue, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public double Quantity { get; }
 
@@ -108,9 +112,9 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <item>Обязательное поле</item>
         /// <item>Должно лежать в диапазоне: 0-<see cref="decimal.MaxValue"/></item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Стоимость предмета расчета")]
-        [Range(0, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal Amount => Price * (decimal)Quantity;
 
@@ -121,7 +125,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <item>Должно лежать в диапазоне: 0-<see cref="decimal.MaxValue"/></item>
         /// </list>
         [Display(Name = "Информационная скидка")]
-        [Range(0, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal? InfoDiscountAmount { get; set; }
 
@@ -153,7 +157,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <item>Обязательное поле</item>
         /// </list>
         [Display(Name = "Способ расчета")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public PaymentMethodType PaymentMethod { get; }
 
         /// <summary>
@@ -163,7 +167,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <item>Обязательное поле</item>
         /// </list>
         [Display(Name = "Тип предмета расчета")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public PaymentObjectType PaymentObject { get; }
 
         /// <summary>
@@ -172,7 +176,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <remarks>
         /// При установке значения параметр <see cref="MarkingCode"/> становится равным null
         /// </remarks>
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         [Display(Name = "Код товара (маркировка)")]
         public object NomenclatureCode
@@ -191,7 +195,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <remarks>
         /// При установке значения параметр <see cref="NomenclatureCode"/> становится равным null
         /// </remarks>
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         [Display(Name = "Код маркировки")]
         public MarkingCodeParams MarkingCode
@@ -210,16 +214,16 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Налог")]
         public TaxParams Tax { get; }
 
         /// <summary>
         /// Данные платежного агента
         /// </summary>
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         [Display(Name = "Данные платежного агента")]
         public AgentParams AgentInfo { get; set; }
@@ -227,7 +231,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <summary>
         /// Данные поставщика
         /// </summary>
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         [Display(Name = "Данные поставщика")]
         public SupplierParams SupplierInfo { get; set; }
@@ -254,7 +258,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <item>Должно лежать в диапазоне: 0.01-<see cref="decimal.MaxValue"/></item>
         /// </list>
         [Display(Name = "Сумма акциза, включенная в стоимость предмета расчета")]
-        [Range(0.01, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0.01, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal? ExciseSum { get; set; }
 
@@ -264,7 +268,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <list type="bullet">
         /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.CountryOfOriginCodePattern"/></item>
         /// </list>
-        [RegularExpression(RegexHelper.CountryOfOriginCodePattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexHelper.CountryOfOriginCodePattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         [Display(Name = "Код страны происхождения")]
         public string CountryCode { get; set; }
@@ -298,12 +302,12 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// </summary>
         [Display(Name = "Значение пользовательского параметра 6")]
         public int? UserParam6 { get; set; }
-        
+
         /// <summary>
         /// Пользовательские параметры
         /// </summary>
         [Display(Name = "Пользовательские параметры")]
-        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
         public UserParams[] CustomParameters { get; set; }
     }

@@ -4,10 +4,11 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Atol.Types.Enums;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.ValidationAttributes;
 
 #endregion
 
@@ -24,20 +25,20 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <param name="serial">Код</param>
         public NomenclatureCodeParams(NomenclatureCodeType type, string gtin, string serial)
         {
-            if (gtin.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(gtin, RegexHelper.GTINPattern))
+            if (gtin.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(gtin, RegexExtensions.GTINPattern))
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Gtin)).GetDisplayName()),
+                    string.Format(ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Gtin)).GetPropertyDisplayName()),
                     nameof(gtin));
             }
 
-            if (serial.IsNullOrEmptyOrWhiteSpace() || type == NomenclatureCodeType.Furs &&
-                !Regex.IsMatch(serial, RegexHelper.BarcodeFurPattern))
+            if (serial.IsNullOrEmptyOrWhiteSpace() || (type == NomenclatureCodeType.Furs &&
+                                                       !Regex.IsMatch(serial, RegexExtensions_Ru.BarcodeFurPattern)))
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Serial)).GetDisplayName()),
+                    string.Format(ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Serial)).GetPropertyDisplayName()),
                     nameof(serial));
             }
 
@@ -52,11 +53,11 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <param name="serial">Код</param>
         public NomenclatureCodeParams(string serial)
         {
-            if (serial.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(serial, RegexHelper.BarcodeFurPattern))
+            if (serial.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(serial, RegexExtensions_Ru.BarcodeFurPattern))
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Serial)).GetDisplayName()),
+                    string.Format(ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Serial)).GetPropertyDisplayName()),
                     nameof(serial));
             }
 
@@ -70,7 +71,7 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Тип маркировки")]
         public NomenclatureCodeType Type { get; }
 
@@ -79,12 +80,12 @@ namespace KKTServiceLib.Atol.Types.Common
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле, если не <see cref="NomenclatureCodeType.Furs"/></item>
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.GTINPattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions.GTINPattern"/></item>
         /// </list>
-        [RegularExpression(RegexHelper.GTINPattern,
-            ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "StringFormatError")]
-        [RequiredIfValidation(nameof(Type), NomenclatureCodeType.Furs, true,
-            ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [RegularExpression(RegexExtensions.GTINPattern,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "StringFormatError")]
+        [RequiredIf(nameof(Type), NomenclatureCodeType.Furs, ComparisonType.NotEqual,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Идентификатор продукта GTIN")]
         public string Gtin { get; }
 
@@ -93,9 +94,9 @@ namespace KKTServiceLib.Atol.Types.Common
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
-        /// <item>Для <see cref="NomenclatureCodeType.Furs"/> должно соответствовать регулярному выражению <see cref="RegexHelper.BarcodeFurPattern"/></item>
+        /// <item>Для <see cref="NomenclatureCodeType.Furs"/> должно соответствовать регулярному выражению <see cref="RegexExtensions_Ru.BarcodeFurPattern"/></item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Код")]
         public string Serial { get; }
     }

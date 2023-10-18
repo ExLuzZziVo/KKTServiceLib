@@ -1,21 +1,26 @@
+#region
+
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using CoreLib.CORE.Helpers.Converters;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.Converters;
-using Newtonsoft.Json;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Common
 {
     [Description("Отраслевой реквизит")]
+    [JsonDerivedType(typeof(IndustryRequisiteReceiptParams))]
     public class IndustryRequisiteParams
     {
         /// <summary>
         /// Дата документа основания
         /// </summary>
         [Display(Name = "Дата документа основания")]
-        [JsonConverter(typeof(CustomDateTimeConverter), "yyyy-MM-dd")]
+        [CustomDateTimeConverter("yyyy-MM-dd")]
         public DateTime? DocDate { get; set; }
 
         /// <summary>
@@ -26,9 +31,9 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// <item>Максимальная длина: 3</item>
         /// </list>
         [Display(Name = "Идентификатор ФОИВ")]
-        [MaxLength(3, ErrorMessageResourceType = typeof(ErrorStrings),
+        [MaxLength(3, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringMaxLengthError")]
-        [RegularExpression(RegexHelper.CountryOfOriginCodePattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexHelper.CountryOfOriginCodePattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string IdFOIV { get; set; }
 

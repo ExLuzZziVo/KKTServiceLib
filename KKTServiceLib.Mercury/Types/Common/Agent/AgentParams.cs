@@ -1,12 +1,18 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Mercury.Types.Enums;
 using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
 using KKTServiceLib.Shared.Types.ValidationAttributes;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Common.Agent
 {
@@ -20,12 +26,13 @@ namespace KKTServiceLib.Mercury.Types.Common.Agent
         /// <param name="supplierVatin">ИНН поставщика</param>
         public AgentParams(AgentType agentType, string supplierVatin)
         {
-            if (supplierVatin.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(supplierVatin, RegexHelper.VatinPattern))
+            if (supplierVatin.IsNullOrEmptyOrWhiteSpace() ||
+                !Regex.IsMatch(supplierVatin, RegexExtensions_Ru.VatinPattern))
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(SupplierINN)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(SupplierINN)).GetPropertyDisplayName()),
                     nameof(supplierVatin));
             }
 
@@ -39,7 +46,7 @@ namespace KKTServiceLib.Mercury.Types.Common.Agent
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Вид агента")]
         public AgentType Code { get; }
 
@@ -62,7 +69,8 @@ namespace KKTServiceLib.Mercury.Types.Common.Agent
         /// </list>
         [Display(Name = "Телефоны платежного агента")]
         [RegularExpressionCollectionValidation(RegexHelper.PhoneNumberPattern)]
-        [MinLength(1, ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "MinLengthError")]
+        [MinLength(1, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "CollectionMinLengthError")]
         public ISet<string> PayingPhone { get; set; }
 
         /// <summary>
@@ -79,12 +87,12 @@ namespace KKTServiceLib.Mercury.Types.Common.Agent
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.VatinPattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions_Ru.VatinPattern"/></item>
         /// </list>
         [Display(Name = "ИНН оператора перевода")]
-        [RegularExpression(RegexHelper.VatinPattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexExtensions_Ru.VatinPattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public string TransfINN { get; set; }
 
         /// <summary>
@@ -106,7 +114,8 @@ namespace KKTServiceLib.Mercury.Types.Common.Agent
         /// </list>
         [Display(Name = "Телефоны оператора перевода")]
         [RegularExpressionCollectionValidation(RegexHelper.PhoneNumberPattern)]
-        [MinLength(1, ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "MinLengthError")]
+        [MinLength(1, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "CollectionMinLengthError")]
         public ISet<string> TransfPhone { get; set; }
 
         /// <summary>
@@ -119,7 +128,8 @@ namespace KKTServiceLib.Mercury.Types.Common.Agent
         /// </list>
         [Display(Name = "Телефоны оператора по приему платежей")]
         [RegularExpressionCollectionValidation(RegexHelper.PhoneNumberPattern)]
-        [MinLength(1, ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "MinLengthError")]
+        [MinLength(1, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "CollectionMinLengthError")]
         public ISet<string> OperatorPhone { get; set; }
 
         /// <summary>
@@ -132,7 +142,8 @@ namespace KKTServiceLib.Mercury.Types.Common.Agent
         /// </list>
         [Display(Name = "Телефоны поставщика")]
         [RegularExpressionCollectionValidation(RegexHelper.PhoneNumberPattern)]
-        [MinLength(1, ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "MinLengthError")]
+        [MinLength(1, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "CollectionMinLengthError")]
         public ISet<string> SupplierPhone { get; set; }
 
         /// <summary>
@@ -140,11 +151,11 @@ namespace KKTServiceLib.Mercury.Types.Common.Agent
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.VatinPattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions_Ru.VatinPattern"/></item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "ИНН поставщика")]
-        [RegularExpression(RegexHelper.VatinPattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexExtensions_Ru.VatinPattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string SupplierINN { get; }
 

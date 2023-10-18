@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Resources;
 
 #endregion
 
@@ -23,8 +23,9 @@ namespace KKTServiceLib.Atol.Types.Operations.KKT.Settings.ReadKKTSettings
         {
             if (keys?.Any() != true)
             {
-                throw new ArgumentException(string.Format(ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        GetType().GetProperty(nameof(Keys)).GetDisplayName(), 1),
+                throw new ArgumentException(string.Format(
+                        ValidationStrings.ResourceManager.GetString("CollectionMinLengthError"),
+                        GetType().GetProperty(nameof(Keys)).GetPropertyDisplayName(), 1),
                     nameof(keys));
             }
 
@@ -38,8 +39,9 @@ namespace KKTServiceLib.Atol.Types.Operations.KKT.Settings.ReadKKTSettings
         /// <item>Обязательное поле</item>
         /// <item>Минимальное кол-во элементов: 1</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [MinLength(1, ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "MinLengthError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [MinLength(1, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "CollectionMinLengthError")]
         [Display(Name = "Список номеров настроек для чтения")]
         public ISet<uint> Keys { get; }
     }

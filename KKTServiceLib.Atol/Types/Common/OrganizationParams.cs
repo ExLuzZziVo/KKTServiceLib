@@ -5,11 +5,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Atol.Types.Enums;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using Newtonsoft.Json;
 
 #endregion
 
@@ -31,17 +32,17 @@ namespace KKTServiceLib.Atol.Types.Common
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Name)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Name)).GetPropertyDisplayName()),
                     nameof(name));
             }
 
-            if (vatin.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(vatin, RegexHelper.VatinPattern))
+            if (vatin.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(vatin, RegexExtensions_Ru.VatinPattern))
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Vatin)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Vatin)).GetPropertyDisplayName()),
                     nameof(vatin));
             }
 
@@ -49,15 +50,16 @@ namespace KKTServiceLib.Atol.Types.Common
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Address)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Address)).GetPropertyDisplayName()),
                     nameof(address));
             }
 
             if (taxationTypes?.Any() != true)
             {
-                throw new ArgumentException(string.Format(ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        GetType().GetProperty(nameof(TaxationTypes)).GetDisplayName(), 1),
+                throw new ArgumentException(string.Format(
+                        ValidationStrings.ResourceManager.GetString("CollectionMinLengthError"),
+                        GetType().GetProperty(nameof(TaxationTypes)).GetPropertyDisplayName(), 1),
                     nameof(taxationTypes));
             }
 
@@ -76,7 +78,7 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Название организации-пользователя")]
         public string Name { get; }
 
@@ -85,11 +87,11 @@ namespace KKTServiceLib.Atol.Types.Common
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.VatinPattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions_Ru.VatinPattern"/></item>
         /// </list>
-        [RegularExpression(RegexHelper.VatinPattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexExtensions_Ru.VatinPattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "ИНН организации-пользователя")]
         public string Vatin { get; }
 
@@ -97,10 +99,10 @@ namespace KKTServiceLib.Atol.Types.Common
         /// E-mail организации (адрес отравителя электронных чеков)
         /// </summary>
         /// <list type="bullet">
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.EmailAddressPattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions.EmailAddressPattern"/></item>
         /// </list>
-        [RegularExpression(RegexHelper.EmailAddressPattern,
-            ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "StringFormatError")]
+        [RegularExpression(RegexExtensions.EmailAddressPattern,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "StringFormatError")]
         [Display(Name = "E-mail организации (адрес отравителя электронных чеков)")]
         public string Email { get; set; }
 
@@ -110,7 +112,7 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Адрес расчетов")]
         public string Address { get; }
 
@@ -121,8 +123,9 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <item>Обязательное поле</item>
         /// <item>Минимальное кол-во элементов: 1</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [MinLength(1, ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "MinLengthError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [MinLength(1, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "CollectionMinLengthError")]
         [Display(Name = "Список систем налогообложения")]
         public ISet<TaxationType> TaxationTypes { get; }
 

@@ -3,12 +3,17 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 #endregion
 
 namespace KKTServiceLib.Atol.Types.Common.FiscalDocuments
 {
     [Description("Фискальный документ")]
+    [JsonDerivedType(typeof(CloseShiftFiscalDocumentParams))]
+    [JsonDerivedType(typeof(CorrectionReceiptFiscalDocumentParams))]
+    [JsonDerivedType(typeof(ExchangeStatusReportDocumentParams))]
+    [JsonDerivedType(typeof(ReceiptFiscalDocumentParams))]
     public class FiscalDocumentParams
     {
         /// <summary>

@@ -4,11 +4,14 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using CoreLib.CORE.Helpers.EnumHelpers;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Atol.Types.Enums;
 using KKTServiceLib.Atol.Types.Interfaces;
-using KKTServiceLib.Shared.Helpers;
 using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.ValidationAttributes;
 
 #endregion
 
@@ -27,8 +30,8 @@ namespace KKTServiceLib.Atol.Types.Common.Document
             if (barcodeValue.IsNullOrEmptyOrWhiteSpace())
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("RequiredError"),
-                        GetType().GetProperty(nameof(Barcode)).GetDisplayName()),
+                    string.Format(ValidationStrings.ResourceManager.GetString("RequiredError"),
+                        GetType().GetProperty(nameof(Barcode)).GetPropertyDisplayName()),
                     nameof(barcodeValue));
             }
 
@@ -37,21 +40,21 @@ namespace KKTServiceLib.Atol.Types.Common.Document
             switch (barcodeType)
             {
                 case BarcodeType.EAN8:
-                    if (Regex.IsMatch(barcodeValue, RegexHelper.BarcodeEAN8Pattern))
+                    if (Regex.IsMatch(barcodeValue, RegexExtensions.BarcodeEAN8Pattern))
                     {
                         isBarcodeValueValid = true;
                     }
 
                     break;
                 case BarcodeType.EAN13:
-                    if (Regex.IsMatch(barcodeValue, RegexHelper.BarcodeEAN13Pattern))
+                    if (Regex.IsMatch(barcodeValue, RegexExtensions.BarcodeEAN13Pattern))
                     {
                         isBarcodeValueValid = true;
                     }
 
                     break;
                 case BarcodeType.CODE39:
-                    if (Regex.IsMatch(barcodeValue, RegexHelper.BarcodeCODE39Pattern))
+                    if (Regex.IsMatch(barcodeValue, RegexExtensions.BarcodeCODE39Pattern))
                     {
                         isBarcodeValueValid = true;
                     }
@@ -65,70 +68,70 @@ namespace KKTServiceLib.Atol.Types.Common.Document
 
                     break;
                 case BarcodeType.UPCA:
-                    if (Regex.IsMatch(barcodeValue, RegexHelper.BarcodeUPCAPattern))
+                    if (Regex.IsMatch(barcodeValue, RegexExtensions.BarcodeUPCAPattern))
                     {
                         isBarcodeValueValid = true;
                     }
 
                     break;
                 case BarcodeType.UPCE:
-                    if (Regex.IsMatch(barcodeValue, RegexHelper.BarcodeUPCEPattern))
+                    if (Regex.IsMatch(barcodeValue, RegexExtensions.BarcodeUPCEPattern))
                     {
                         isBarcodeValueValid = true;
                     }
 
                     break;
                 case BarcodeType.CODE93:
-                    if (Regex.IsMatch(barcodeValue, RegexHelper.BarcodeCODE93Pattern))
+                    if (Regex.IsMatch(barcodeValue, RegexExtensions.BarcodeCODE93Pattern))
                     {
                         isBarcodeValueValid = true;
                     }
 
                     break;
                 case BarcodeType.CODE128:
-                    if (Regex.IsMatch(barcodeValue, RegexHelper.BarcodeCODE128Pattern))
+                    if (Regex.IsMatch(barcodeValue, RegexExtensions.BarcodeCODE128Pattern))
                     {
                         isBarcodeValueValid = true;
                     }
 
                     break;
                 case BarcodeType.CODABAR:
-                    if (Regex.IsMatch(barcodeValue, RegexHelper.BarcodeCODABARPattern))
+                    if (Regex.IsMatch(barcodeValue, RegexExtensions.BarcodeCODABARPattern))
                     {
                         isBarcodeValueValid = true;
                     }
 
                     break;
                 case BarcodeType.ITF:
-                    if (Regex.IsMatch(barcodeValue, RegexHelper.BarcodeITFPattern))
+                    if (Regex.IsMatch(barcodeValue, RegexExtensions.BarcodeITFPattern))
                     {
                         isBarcodeValueValid = true;
                     }
 
                     break;
                 case BarcodeType.ITF14:
-                    if (Regex.IsMatch(barcodeValue, RegexHelper.BarcodeITF14Pattern))
+                    if (Regex.IsMatch(barcodeValue, RegexExtensions.BarcodeITF14Pattern))
                     {
                         isBarcodeValueValid = true;
                     }
 
                     break;
                 case BarcodeType.GS1_128:
-                    if (Regex.IsMatch(barcodeValue, RegexHelper.BarcodeGS1_128Pattern))
+                    if (Regex.IsMatch(barcodeValue, RegexExtensions.BarcodeGS1_128Pattern))
                     {
                         isBarcodeValueValid = true;
                     }
 
                     break;
                 case BarcodeType.PDF417:
-                    if (Regex.IsMatch(barcodeValue, RegexHelper.BarcodePDF417Pattern))
+                    if (Regex.IsMatch(barcodeValue, RegexExtensions.BarcodePDF417Pattern))
                     {
                         isBarcodeValueValid = true;
                     }
 
                     break;
                 case BarcodeType.CODE39_EXTENDED:
-                    if (Regex.IsMatch(barcodeValue, RegexHelper.BarcodeCODE39_EXTENDEDPattern))
+                    if (Regex.IsMatch(barcodeValue, RegexExtensions.BarcodeCODE39_EXTENDEDPattern))
                     {
                         isBarcodeValueValid = true;
                     }
@@ -153,7 +156,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Данные ШК")]
         public string Barcode { get; }
 
@@ -163,7 +166,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Тип ШК")]
         public BarcodeType BarcodeType { get; }
 
@@ -194,16 +197,10 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <summary>
         /// Текст для печати рядом с ШК
         /// </summary>
-        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
         [Display(Name = "Текст для печати рядом с ШК")]
         public TextDocumentParams[] Overlay { get; set; }
-
-        /// <summary>
-        /// Выравнивание
-        /// </summary>
-        [Display(Name = "Выравнивание")]
-        public AlignmentType Alignment { get; set; }
 
         /// <summary>
         /// Сохранять в электронном журнале (только для QR-кода)
@@ -213,5 +210,11 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// </remarks>
         [Display(Name = "Сохранять в электронном журнале (только для QR-кода)")]
         public bool StoreInJournal { get; set; } = true;
+
+        /// <summary>
+        /// Выравнивание
+        /// </summary>
+        [Display(Name = "Выравнивание")]
+        public AlignmentType Alignment { get; set; }
     }
 }

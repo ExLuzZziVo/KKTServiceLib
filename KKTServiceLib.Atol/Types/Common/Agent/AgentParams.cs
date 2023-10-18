@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Atol.Types.Enums;
-using KKTServiceLib.Shared.Helpers;
 using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.ValidationAttributes;
 
 #endregion
 
@@ -25,8 +26,9 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
         {
             if (agents?.Any() != true)
             {
-                throw new ArgumentException(string.Format(ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        GetType().GetProperty(nameof(Agents)).GetDisplayName(), 1),
+                throw new ArgumentException(string.Format(
+                        ValidationStrings.ResourceManager.GetString("CollectionMinLengthError"),
+                        GetType().GetProperty(nameof(Agents)).GetPropertyDisplayName(), 1),
                     nameof(agents));
             }
 
@@ -41,8 +43,9 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
         /// <item>Минимальное кол-во элементов: 1</item>
         /// </list>
         [Display(Name = "Агенты")]
-        [MinLength(1, ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "MinLengthError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [MinLength(1, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "CollectionMinLengthError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public ISet<AgentType> Agents { get; }
 
         /// <summary>
@@ -53,7 +56,7 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
         /// </remarks>
         [Display(Name = "Печатать реквизит \"Признак агента\"")]
         public bool AgentsPrint { get; set; } = true;
-        
+
         /// <summary>
         /// Печатать реквизит "Данные агента" (тег 1223)
         /// </summary>
@@ -62,14 +65,14 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
         /// </remarks>
         [Display(Name = "Печатать реквизит \"Данные агента\"")]
         public bool AgentDataPrint { get; set; } = true;
-        
+
         /// <summary>
         /// Данные платежного агента
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле, если коллекция агентов содержит любой из следующих агентов: <see cref="AgentType.BankPayingAgent"/>, <see cref="AgentType.BankPayingSubagent"/>, <see cref="AgentType.PayingAgent"/>, <see cref="AgentType.PayingSubagent"/>. В остальных случаях должно отсутствовать</item>
         /// </list>
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         [Display(Name = "Данные платежного агента")]
         public PayingAgentParams PayingAgent { get; set; }
@@ -80,7 +83,7 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
         /// <list type="bullet">
         /// <item>Обязательное поле, если коллекция агентов содержит <see cref="AgentType.PayingAgent"/> или <see cref="AgentType.PayingSubagent"/>. В остальных случаях должно отсутствовать</item>
         /// </list>
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         [Display(Name = "Данные оператора по приему платежей")]
         public ReceivePaymentsOperatorParams ReceivePaymentsOperator { get; set; }
@@ -91,7 +94,7 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
         /// <list type="bullet">
         /// <item>Обязательное поле, если коллекция агентов содержит <see cref="AgentType.BankPayingAgent"/> или <see cref="AgentType.BankPayingSubagent"/>. В остальных случаях должно отсутствовать</item>
         /// </list>
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         [Display(Name = "Данные оператора перевода")]
         public MoneyTransferOperatorParams MoneyTransferOperator { get; set; }
@@ -108,8 +111,8 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
                     if (PayingAgent == null)
                     {
                         yield return new ValidationResult(string.Format(
-                                ErrorStrings.ResourceManager.GetString("RequiredError"),
-                                GetType().GetProperty(nameof(PayingAgent)).GetDisplayName()),
+                                ValidationStrings.ResourceManager.GetString("RequiredError"),
+                                GetType().GetProperty(nameof(PayingAgent)).GetPropertyDisplayName()),
                             new[] { nameof(PayingAgent) });
                     }
                 }
@@ -119,7 +122,7 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
                     {
                         yield return new ValidationResult(string.Format(
                                 ErrorStrings.ResourceManager.GetString("MustBeNullError"),
-                                GetType().GetProperty(nameof(PayingAgent)).GetDisplayName()),
+                                GetType().GetProperty(nameof(PayingAgent)).GetPropertyDisplayName()),
                             new[] { nameof(PayingAgent) });
                     }
                 }
@@ -130,8 +133,8 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
                     if (MoneyTransferOperator == null)
                     {
                         yield return new ValidationResult(string.Format(
-                                ErrorStrings.ResourceManager.GetString("RequiredError"),
-                                GetType().GetProperty(nameof(MoneyTransferOperator)).GetDisplayName()),
+                                ValidationStrings.ResourceManager.GetString("RequiredError"),
+                                GetType().GetProperty(nameof(MoneyTransferOperator)).GetPropertyDisplayName()),
                             new[] { nameof(MoneyTransferOperator) });
                     }
                 }
@@ -141,7 +144,7 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
                     {
                         yield return new ValidationResult(string.Format(
                                 ErrorStrings.ResourceManager.GetString("MustBeNullError"),
-                                GetType().GetProperty(nameof(MoneyTransferOperator)).GetDisplayName()),
+                                GetType().GetProperty(nameof(MoneyTransferOperator)).GetPropertyDisplayName()),
                             new[] { nameof(MoneyTransferOperator) });
                     }
                 }
@@ -152,8 +155,8 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
                     if (ReceivePaymentsOperator == null)
                     {
                         yield return new ValidationResult(string.Format(
-                                ErrorStrings.ResourceManager.GetString("RequiredError"),
-                                GetType().GetProperty(nameof(ReceivePaymentsOperator)).GetDisplayName()),
+                                ValidationStrings.ResourceManager.GetString("RequiredError"),
+                                GetType().GetProperty(nameof(ReceivePaymentsOperator)).GetPropertyDisplayName()),
                             new[] { nameof(ReceivePaymentsOperator) });
                     }
                 }
@@ -163,7 +166,7 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
                     {
                         yield return new ValidationResult(string.Format(
                                 ErrorStrings.ResourceManager.GetString("MustBeNullError"),
-                                GetType().GetProperty(nameof(ReceivePaymentsOperator)).GetDisplayName()),
+                                GetType().GetProperty(nameof(ReceivePaymentsOperator)).GetPropertyDisplayName()),
                             new[] { nameof(ReceivePaymentsOperator) });
                     }
                 }

@@ -1,6 +1,10 @@
+#region
+
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using KKTServiceLib.Atol.Types.Enums;
+
+#endregion
 
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.CheckMarkingCodeWorkStatus
 {

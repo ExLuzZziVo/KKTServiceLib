@@ -1,15 +1,21 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Mercury.Types.Common;
 using KKTServiceLib.Mercury.Types.Common.Document;
 using KKTServiceLib.Mercury.Types.Common.FiscalDocuments;
 using KKTServiceLib.Mercury.Types.Enums;
-using KKTServiceLib.Shared.Helpers;
 using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.ValidationAttributes;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
 {
@@ -36,7 +42,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Тип открываемого чека")]
         public FiscalReceiptType CheckType { get; }
 
@@ -46,7 +52,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Система налогообложения")]
         public TaxationType TaxSystem { get; }
 
@@ -66,10 +72,10 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
         /// Адрес электронной почты отправителя чека
         /// </summary>
         /// <list type="bullet">
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.EmailAddressPattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions.EmailAddressPattern"/></item>
         /// </list>
-        [RegularExpression(RegexHelper.EmailAddressPattern,
-            ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "StringFormatError")]
+        [RegularExpression(RegexExtensions.EmailAddressPattern,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "StringFormatError")]
         [Display(Name = "Адрес электронной почты отправителя чека")]
         public string SenderEmail { get; set; }
 
@@ -88,7 +94,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
         /// <list type="bullet">
         /// <item>Максимальная длина: 16</item>
         /// </list>
-        [MaxLength(16, ErrorMessageResourceType = typeof(ErrorStrings),
+        [MaxLength(16, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringMaxLengthError")]
         [Display(Name = "Дополнительный реквизит чека (БСО)")]
         public string AdditionalProps { get; set; }
@@ -99,9 +105,9 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Оператор (кассир)")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public OperatorParams CashierInfo { get; }
 
@@ -109,7 +115,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
         /// Данные покупателя
         /// </summary>
         [Display(Name = "Данные покупателя")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public BuyerParams BuyerInfo { get; set; }
 
@@ -117,7 +123,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
         /// Информация о чеке коррекции
         /// </summary>
         [Display(Name = "Информация о чеке коррекции")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public CorrectionReceiptFiscalDocumentParams CorrectionInfo { get; set; }
 
@@ -125,7 +131,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
         /// Дополнительный реквизит пользователя
         /// </summary>
         [Display(Name = "Дополнительный реквизит пользователя")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public UserAttributeDocumentParams UserAttribute { get; set; }
 
@@ -136,7 +142,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
         /// Только для ФФД ≥ 1.2
         /// </remarks>
         [Display(Name = "Операционный реквизит")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public OperationParams OperationInfo { get; set; }
 
@@ -147,7 +153,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
         /// Только для ФФД ≥ 1.2
         /// </remarks>
         [Display(Name = "Отраслевой реквизит")]
-        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
         public IndustryRequisiteReceiptParams[] IndustryInfo { get; set; }
 
@@ -171,24 +177,24 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
                     if (CorrectionInfo == null)
                     {
                         yield return new ValidationResult(string.Format(
-                                ErrorStrings.ResourceManager.GetString("RequiredError"),
-                                GetType().GetProperty(nameof(CorrectionInfo)).GetDisplayName()),
+                                ValidationStrings.ResourceManager.GetString("RequiredError"),
+                                GetType().GetProperty(nameof(CorrectionInfo)).GetPropertyDisplayName()),
                             new[] { nameof(CorrectionInfo) });
                     }
                     else if (CorrectionInfo.CorrectionType == CorrectionReceiptCorrectionType.Instruction &&
                              CorrectionInfo.CauseDocNum.IsNullOrEmptyOrWhiteSpace())
                     {
                         yield return new ValidationResult(string.Format(
-                                ErrorStrings.ResourceManager.GetString("RequiredError"),
-                                GetType().GetProperty(nameof(CorrectionInfo.CauseDocNum)).GetDisplayName()),
+                                ValidationStrings.ResourceManager.GetString("RequiredError"),
+                                GetType().GetProperty(nameof(CorrectionInfo.CauseDocNum)).GetPropertyDisplayName()),
                             new[] { nameof(CorrectionInfo.CauseDocNum) });
                     }
 
                     if (AdditionalProps.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(AdditionalProps, @"^[0-9]+$"))
                     {
                         yield return new ValidationResult(string.Format(
-                                ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                                GetType().GetProperty(nameof(AdditionalProps)).GetDisplayName()),
+                                ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                                GetType().GetProperty(nameof(AdditionalProps)).GetPropertyDisplayName()),
                             new[] { nameof(AdditionalProps) });
                     }
 

@@ -1,9 +1,12 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using CoreLib.CORE.Helpers.Converters;
 using KKTServiceLib.Mercury.Types.Common;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.GetKKTStatus
 {
@@ -14,7 +17,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.GetKKTStatus
         /// Текущие дата и время ККТ
         /// </summary>
         [Display(Name = "Текущие дата и время ККТ")]
-        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [CustomDateTimeConverter("yyyy-MM-ddTHH:mm:ss")]
         public DateTime? DateTime { get; set; }
 
         /// <summary>

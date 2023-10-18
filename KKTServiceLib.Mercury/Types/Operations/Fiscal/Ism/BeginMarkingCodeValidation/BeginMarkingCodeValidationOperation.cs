@@ -1,16 +1,22 @@
+#region
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
+using CoreLib.CORE.Helpers.EnumHelpers;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Mercury.Types.Common.MarkingCodes;
 using KKTServiceLib.Mercury.Types.Converters;
 using KKTServiceLib.Mercury.Types.Enums;
-using KKTServiceLib.Shared.Helpers;
 using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.ValidationAttributes;
-using Newtonsoft.Json;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Ism.BeginMarkingCodeValidation
 {
@@ -28,19 +34,19 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Ism.BeginMarkingCodeVali
             ItemUnitType itemUnits,
             int quantity) : base("CheckMarkingCode")
         {
-            if (imc.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(imc, RegexHelper.Base64Pattern))
+            if (imc.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(imc, RegexExtensions.Base64Pattern))
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Mc)).GetDisplayName()),
+                    string.Format(ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Mc)).GetPropertyDisplayName()),
                     nameof(imc));
             }
 
             if (quantity < 0.001 || quantity > 214748)
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("DigitRangeValuesError"),
-                        GetType().GetProperty(nameof(Qty)).GetDisplayName(), 0.001, 214748),
+                    string.Format(ValidationStrings.ResourceManager.GetString("DigitRangeValuesError"),
+                        GetType().GetProperty(nameof(Qty)).GetPropertyDisplayName(), 0.001, 214748),
                     nameof(quantity));
             }
 
@@ -59,11 +65,11 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Ism.BeginMarkingCodeVali
         public BeginMarkingCodeValidationOperation(string imc, ItemEstimatedStatus itemEstimatedStatus,
             FractionalNumber itemFractionalAmount) : base("CheckMarkingCode")
         {
-            if (imc.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(imc, RegexHelper.Base64Pattern))
+            if (imc.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(imc, RegexExtensions.Base64Pattern))
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Mc)).GetDisplayName()),
+                    string.Format(ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Mc)).GetPropertyDisplayName()),
                     nameof(imc));
             }
 
@@ -72,7 +78,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Ism.BeginMarkingCodeVali
             {
                 throw new ArgumentOutOfRangeException(nameof(itemEstimatedStatus), string.Format(
                     ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
-                    GetType().GetProperty(nameof(PlannedStatus)).GetDisplayName(),
+                    GetType().GetProperty(nameof(PlannedStatus)).GetPropertyDisplayName(),
                     $"{ItemEstimatedStatus.ItemDryForSale.GetDisplayName()}, {ItemEstimatedStatus.ItemDryReturn.GetDisplayName()}"));
             }
 
@@ -88,11 +94,11 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Ism.BeginMarkingCodeVali
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.Base64Pattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions.Base64Pattern"/></item>
         /// </list>
         [Display(Name = "base64-представление значения кода маркировки")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [RegularExpression(RegexHelper.Base64Pattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [RegularExpression(RegexExtensions.Base64Pattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string Mc { get; }
 
@@ -103,7 +109,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Ism.BeginMarkingCodeVali
         /// <item>Обязательное поле</item>
         /// </list>
         [Display(Name = "Планируемый статус КМ")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public ItemEstimatedStatus PlannedStatus { get; }
 
         /// <summary>
@@ -113,8 +119,8 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Ism.BeginMarkingCodeVali
         /// <item>Обязательное поле</item>
         /// <item>Должно лежать в диапазоне: 0.001-214748</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [Range(0.001, 214748, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [Range(0.001, 214748, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         [Display(Name = "Количество товара")]
         [JsonConverter(typeof(QuantityConverter))]
@@ -151,7 +157,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Ism.BeginMarkingCodeVali
         /// Дробное количество маркированного товара, выраженное в виде правильной дроби
         /// </summary>
         [Display(Name = "Дробное количество маркированного товара, выраженное в виде правильной дроби")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public FractionalNumber Part { get; }
 
@@ -163,14 +169,15 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Ism.BeginMarkingCodeVali
                 {
                     yield return new ValidationResult(string.Format(
                         ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
-                        GetType().GetProperty(nameof(Qty)).GetDisplayName(), 1), new[] { nameof(Qty) });
+                        GetType().GetProperty(nameof(Qty)).GetPropertyDisplayName(), 1), new[] { nameof(Qty) });
                 }
 
                 if (MeasureUnit != ItemUnitType.Piece)
                 {
                     yield return new ValidationResult(string.Format(
                             ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
-                            GetType().GetProperty(nameof(Qty)).GetDisplayName(), ItemUnitType.Piece.GetDisplayName()),
+                            GetType().GetProperty(nameof(Qty)).GetPropertyDisplayName(),
+                            ItemUnitType.Piece.GetDisplayName()),
                         new[] { nameof(Qty) });
                 }
 
@@ -179,7 +186,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Ism.BeginMarkingCodeVali
                 {
                     yield return new ValidationResult(string.Format(
                             ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
-                            GetType().GetProperty(nameof(PlannedStatus)).GetDisplayName(),
+                            GetType().GetProperty(nameof(PlannedStatus)).GetPropertyDisplayName(),
                             $"{ItemEstimatedStatus.ItemDryForSale.GetDisplayName()}, {ItemEstimatedStatus.ItemDryReturn.GetDisplayName()}"),
                         new[] { nameof(PlannedStatus) });
                 }

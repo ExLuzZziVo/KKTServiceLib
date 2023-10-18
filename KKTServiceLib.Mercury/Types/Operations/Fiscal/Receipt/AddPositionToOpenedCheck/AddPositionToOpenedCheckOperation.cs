@@ -1,8 +1,15 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
+using System.Text.Json.Serialization;
+using CoreLib.CORE.Helpers.EnumHelpers;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Mercury.Types.Common;
 using KKTServiceLib.Mercury.Types.Common.Agent;
 using KKTServiceLib.Mercury.Types.Common.MarkingCodes;
@@ -10,8 +17,8 @@ using KKTServiceLib.Mercury.Types.Converters;
 using KKTServiceLib.Mercury.Types.Enums;
 using KKTServiceLib.Shared.Helpers;
 using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.ValidationAttributes;
-using Newtonsoft.Json;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpenedCheck
 {
@@ -34,24 +41,24 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(ProductName)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(ProductName)).GetPropertyDisplayName()),
                     nameof(name));
             }
 
             if (price < 0 || price > 21474836)
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("DigitRangeValuesError"),
-                        GetType().GetProperty(nameof(Price)).GetDisplayName(), 0, 21474836),
+                    string.Format(ValidationStrings.ResourceManager.GetString("DigitRangeValuesError"),
+                        GetType().GetProperty(nameof(Price)).GetPropertyDisplayName(), 0, 21474836),
                     nameof(price));
             }
 
             if (quantity < 0.001 || quantity > 214748)
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("DigitRangeValuesError"),
-                        GetType().GetProperty(nameof(Qty)).GetDisplayName(), 0.001, 214748),
+                    string.Format(ValidationStrings.ResourceManager.GetString("DigitRangeValuesError"),
+                        GetType().GetProperty(nameof(Qty)).GetPropertyDisplayName(), 0.001, 214748),
                     nameof(quantity));
             }
 
@@ -85,7 +92,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         /// Информация о маркированном товаре (ФФД ≥ 1.2)
         /// </summary>
         [Display(Name = "Информация о маркированном товаре")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public MarkingCodeFullInfo McInfo { get; set; }
 
@@ -95,7 +102,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Наименование предмета расчета")]
         public string ProductName { get; }
 
@@ -106,8 +113,8 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         /// <item>Обязательное поле</item>
         /// <item>Должно лежать в диапазоне: 0.001-214748</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [Range(0.001, 214748, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [Range(0.001, 214748, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         [Display(Name = "Количество предмета расчета")]
         [JsonConverter(typeof(QuantityConverter))]
@@ -129,7 +136,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         /// <remarks>
         /// Значение по умолчанию: 1
         /// </remarks>
-        [Range(1, 16, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(1, 16, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         [Display(Name = "Номер отдела (секции)")]
         public ushort? Section { get; set; } = 1;
@@ -140,7 +147,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Налоговая ставка")]
         public WatType TaxCode { get; }
 
@@ -150,7 +157,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Способ расчета")]
         public PaymentMethodType PaymentFormCode { get; }
 
@@ -160,7 +167,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Тип предмета расчета")]
         public PaymentObjectType ProductTypeCode { get; }
 
@@ -170,7 +177,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         /// <list type="bullet">
         /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.CountryOfOriginCodePattern"/></item>
         /// </list>
-        [RegularExpression(RegexHelper.CountryOfOriginCodePattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexHelper.CountryOfOriginCodePattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         [Display(Name = "Код страны происхождения")]
         public string CountryOfOrigin { get; set; }
@@ -181,7 +188,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         /// <list type="bullet">
         /// <item>Максимальная длина: 32</item>
         /// </list>
-        [MaxLength(32, ErrorMessageResourceType = typeof(ErrorStrings),
+        [MaxLength(32, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringMaxLengthError")]
         [Display(Name = "Регистрационный номер таможенной декларации")]
         public string CustomsDeclaration { get; set; }
@@ -192,7 +199,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         /// <list type="bullet">
         /// <item>Максимальная длина: 64</item>
         /// </list>
-        [MaxLength(64, ErrorMessageResourceType = typeof(ErrorStrings),
+        [MaxLength(64, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringMaxLengthError")]
         [Display(Name = "Дополнительный реквизит предмета расчета")]
         public string AdditionalAttribute { get; set; }
@@ -204,10 +211,10 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         /// <item>Обязательное поле</item>
         /// <item>Должно лежать в диапазоне: 0-21474836</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Цена единицы предмета расчета")]
         [JsonConverter(typeof(MoneyConverter))]
-        [Range(0, 21474836, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0, 21474836, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal Price { get; }
 
@@ -220,7 +227,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         /// </list>
         [Display(Name = "Стоимость предмета расчета")]
         [JsonConverter(typeof(MoneyConverter))]
-        [Range(0, 21474836, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0, 21474836, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal? Sum => Price * (decimal)Qty;
 
@@ -232,7 +239,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         /// </list>
         [Display(Name = "Сумма акциза, включенная в стоимость предмета расчета")]
         [JsonConverter(typeof(MoneyConverter))]
-        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal? ExciseAmount { get; set; }
 
@@ -242,7 +249,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         /// <list type="bullet">
         /// <item>Максимальная длина: 64</item>
         /// </list>
-        [MaxLength(64, ErrorMessageResourceType = typeof(ErrorStrings),
+        [MaxLength(64, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringMaxLengthError")]
         [Display(Name = "Дополнительная информация")]
         public string AddInfo { get; set; }
@@ -251,7 +258,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         /// Данные платежного агента
         /// </summary>
         [Display(Name = "Данные платежного агента")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public AgentParams Agent { get; set; }
 
@@ -262,9 +269,9 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         /// <item>Максимальное кол-во элементов: 3</item>
         /// </list>
         [Display(Name = "Отраслевой реквизит")]
-        [MaxLength(3, ErrorMessageResourceType = typeof(ErrorStrings),
-            ErrorMessageResourceName = "MaxLengthError")]
-        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+        [MaxLength(3, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "CollectionMaxLengthError")]
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
         public IndustryRequisiteParams[] IndustryAttribute { get; set; }
 
@@ -454,14 +461,15 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
                 {
                     yield return new ValidationResult(string.Format(
                         ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
-                        GetType().GetProperty(nameof(Qty)).GetDisplayName(), 1), new[] { nameof(Qty) });
+                        GetType().GetProperty(nameof(Qty)).GetPropertyDisplayName(), 1), new[] { nameof(Qty) });
                 }
 
                 if (MeasureUnit != ItemUnitType.Piece)
                 {
                     yield return new ValidationResult(string.Format(
                             ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
-                            GetType().GetProperty(nameof(Qty)).GetDisplayName(), ItemUnitType.Piece.GetDisplayName()),
+                            GetType().GetProperty(nameof(Qty)).GetPropertyDisplayName(),
+                            ItemUnitType.Piece.GetDisplayName()),
                         new[] { nameof(Qty) });
                 }
 
@@ -470,7 +478,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
                 {
                     yield return new ValidationResult(string.Format(
                             ErrorStrings.ResourceManager.GetString("MustBeEqualError"),
-                            GetType().GetProperty(nameof(McInfo.PlannedStatus)).GetDisplayName(),
+                            GetType().GetProperty(nameof(McInfo.PlannedStatus)).GetPropertyDisplayName(),
                             $"{ItemEstimatedStatus.ItemDryForSale.GetDisplayName()}, {ItemEstimatedStatus.ItemDryReturn.GetDisplayName()}"),
                         new[] { nameof(McInfo.PlannedStatus) });
                 }
@@ -481,9 +489,10 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
             bool isRequired)
         {
             return new ValidationResult(string.Format(
-                $"{ErrorStrings.ResourceManager.GetString("AgentPropertiesRequirementValidationError")}: {(isRequired ? ErrorStrings.ResourceManager.GetString("AgentPropertyIsRequiredValidationError") : ErrorStrings.ResourceManager.GetString("AgentPropertyIsNotRequiredValidationError"))}",
-                agentType.GetDisplayName(),
-                typeof(AgentParams).GetProperty(invalidPropertyName).GetDisplayName()), new[] { invalidPropertyName });
+                    $"{ErrorStrings.ResourceManager.GetString("AgentPropertiesRequirementValidationError")}: {(isRequired ? ErrorStrings.ResourceManager.GetString("AgentPropertyIsRequiredValidationError") : ErrorStrings.ResourceManager.GetString("AgentPropertyIsNotRequiredValidationError"))}",
+                    agentType.GetDisplayName(),
+                    typeof(AgentParams).GetProperty(invalidPropertyName).GetPropertyDisplayName()),
+                new[] { invalidPropertyName });
         }
     }
 }

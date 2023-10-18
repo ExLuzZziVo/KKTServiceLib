@@ -3,11 +3,12 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Atol.Types.Enums;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using Newtonsoft.Json;
 
 #endregion
 
@@ -62,24 +63,24 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(RegistrationNumber)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(RegistrationNumber)).GetPropertyDisplayName()),
                     nameof(registrationNumber));
             }
 
             if (address.IsNullOrEmptyOrWhiteSpace())
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(address)).GetDisplayName()),
+                    string.Format(ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(address)).GetPropertyDisplayName()),
                     nameof(address));
             }
 
-            if (fnsUrl.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(fnsUrl, RegexHelper.UrlPattern))
+            if (fnsUrl.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(fnsUrl, RegexExtensions.UrlPattern))
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(FnsUrl)).GetDisplayName()),
+                    string.Format(ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(FnsUrl)).GetPropertyDisplayName()),
                     nameof(fnsUrl));
             }
 
@@ -113,7 +114,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Регистрационный номер ККТ")]
         public string RegistrationNumber { get; }
 
@@ -122,12 +123,12 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.UrlPattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions.UrlPattern"/></item>
         /// </list>
         [RegularExpression(
-            RegexHelper.UrlPattern,
-            ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "StringFormatError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+            RegexExtensions.UrlPattern,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "StringFormatError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Адрес сайта ФНС")]
         public string FnsUrl { get; }
 
@@ -137,7 +138,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Работа в автономном режиме")]
         public bool OfflineMode { get; }
 
@@ -147,7 +148,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Признак установки принтера в автомате")]
         public bool MachineInstallation { get; }
 
@@ -157,7 +158,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Автоматизированная система печати БСО")]
         public bool Bso { get; }
 
@@ -167,7 +168,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Шифрование данных")]
         public bool Encryption { get; }
 
@@ -177,7 +178,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Признак автоматического режима")]
         public bool AutoMode { get; }
 
@@ -193,7 +194,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "ККТ для расчетов только в сети Интернет")]
         public bool Internet { get; }
 
@@ -203,7 +204,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Использование для услуг")]
         public bool Service { get; }
 
@@ -213,7 +214,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Продажа подакцизного товара")]
         public bool Excise { get; }
 
@@ -223,7 +224,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Признак проведения азартных игр")]
         public bool Gambling { get; }
 
@@ -233,7 +234,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Признак проведения лотереи")]
         public bool Lottery { get; }
 
@@ -243,7 +244,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Система налогообложения по умолчанию")]
         public TaxationType DefaultTaxationType { get; }
 
@@ -253,7 +254,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Канал обмена с ОФД")]
         public OfdChannelType OfdChannel { get; }
 
@@ -263,7 +264,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Версия ФФД")]
         public FfdVersionType FfdVersion { get; }
 
@@ -273,7 +274,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Место расчетов")]
         public string PaymentsAddress { get; }
 
@@ -284,7 +285,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <item>Обязательное поле</item>
         /// </list>
         [Display(Name = "Признак осуществления страховой деятельности")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public bool Insurance { get; }
 
         /// <summary>
@@ -294,7 +295,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <item>Обязательное поле</item>
         /// </list>
         [Display(Name = "Признак торговли маркированными товарами")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public bool Marking { get; }
 
         /// <summary>
@@ -304,7 +305,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <item>Обязательное поле</item>
         /// </list>
         [Display(Name = "Признак осуществления ломбардной деятельности")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public bool PawnShop { get; }
     }
 }

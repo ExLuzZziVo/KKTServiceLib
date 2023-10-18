@@ -1,10 +1,15 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Mercury.Types.Enums;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using Newtonsoft.Json;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.Session.OpenSession
 {
@@ -21,8 +26,8 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.Session.OpenSession
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(PortName)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(PortName)).GetPropertyDisplayName()),
                     nameof(portName));
             }
 
@@ -34,8 +39,9 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.Session.OpenSession
         /// Сессионный ключ
         /// </summary>
         [Display(Name = "Сессионный ключ")]
-        [JsonProperty(NullValueHandling = NullValueHandling.Include)]
-        [Required(AllowEmptyStrings = true)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+        [Required(AllowEmptyStrings = true, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "RequiredError")]
         public override string SessionKey { get; protected set; } = string.Empty;
 
         /// <summary>
@@ -47,7 +53,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.Session.OpenSession
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Имя порта")]
         public string PortName { get; }
 
@@ -60,7 +66,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.Session.OpenSession
         /// <list type="bullet">
         /// <item>Должно лежать в диапазоне: 1-230400</item>
         /// </list>
-        [Range(1, 230400, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(1, 230400, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         [Display(Name = "Скорость обмена с ККТ")]
         public int? BaudRate { get; set; } = 115200;

@@ -2,9 +2,9 @@
 
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using KKTServiceLib.Atol.Types.Converters;
 using KKTServiceLib.Atol.Types.Enums;
-using Newtonsoft.Json;
 
 #endregion
 
@@ -40,6 +40,12 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Fn.GetFnDocumentByNumber
         /// </summary>
         [Display(Name = "Состав документа в тегах")]
         public string DocumentTLV { get; set; }
+
+        /// <summary>
+        /// Состав документа в декодированных тегах
+        /// </summary>
+        [Display(Name = "Состав документа в декодированных тегах")]
+        public string DecodedDocumentTLV { get; set; }
 
         /// <summary>
         /// 'Сырые' данные документа в TLV, закодированные в base64

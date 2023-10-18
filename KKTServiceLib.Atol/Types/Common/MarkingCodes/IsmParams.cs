@@ -1,10 +1,16 @@
+#region
+
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using Newtonsoft.Json;
+
+#endregion
 
 namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
 {
@@ -22,8 +28,8 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Host)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Host)).GetPropertyDisplayName()),
                     nameof(host));
             }
 
@@ -44,8 +50,8 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
         [Display(Name = "Адрес сервера ИСМ")]
         [RegularExpression(
             RegexHelper.IPAddressOrUrlPattern,
-            ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "StringFormatError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "StringFormatError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public string Host { get; }
 
         /// <summary>
@@ -55,7 +61,7 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
         /// <item>Обязательное поле</item>
         /// </list>
         [Display(Name = "Порт сервера ИСМ")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public ushort Port { get; }
     }
 }

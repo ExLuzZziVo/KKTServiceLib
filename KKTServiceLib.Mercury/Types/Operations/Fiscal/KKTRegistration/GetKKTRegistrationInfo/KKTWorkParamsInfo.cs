@@ -1,6 +1,10 @@
+#region
+
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using KKTServiceLib.Mercury.Types.Common.KKT;
-using Newtonsoft.Json;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.GetKKTRegistrationInfo
 {

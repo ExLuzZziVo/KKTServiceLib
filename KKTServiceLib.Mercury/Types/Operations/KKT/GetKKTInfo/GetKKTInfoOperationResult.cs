@@ -1,9 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using KKTServiceLib.Shared.Types.Converters;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using CoreLib.CORE.Helpers.Converters;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.GetKKTInfo
 {
@@ -56,14 +58,14 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.GetKKTInfo
         /// Дата выпуска прошивки ККТ
         /// </summary>
         [Display(Name = "Дата выпуска прошивки ККТ")]
-        [JsonConverter(typeof(CustomDateTimeConverter), "yyyy-MM-dd")]
+        [CustomDateTimeConverter("yyyy-MM-dd")]
         public DateTime ProgramDate { get; set; }
 
         /// <summary>
         /// Текущие дата и время ККТ
         /// </summary>
         [Display(Name = "Текущие дата и время ККТ")]
-        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [CustomDateTimeConverter("yyyy-MM-ddTHH:mm:ss")]
         public DateTime? DateTime { get; set; }
 
         /// <summary>

@@ -1,11 +1,17 @@
-﻿using System.ComponentModel;
+﻿#region
+
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using KKTServiceLib.Shared.Resources;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+using CoreLib.CORE.Resources;
+using KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.GetKKTRegistrationInfo;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Common.KKT
 {
     [Description("Параметры работы ККТ")]
+    [JsonDerivedType(typeof(KKTWorkParamsInfo))]
     public class KKTWorkParams
     {
         /// <summary>
@@ -36,7 +42,7 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Шифрование данных")]
         public bool EncryptData { get; }
 
@@ -46,7 +52,7 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Работа в автономном режиме")]
         public bool Offline { get; }
 
@@ -56,7 +62,7 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Использование для услуг")]
         public bool ForService { get; }
 
@@ -66,7 +72,7 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Автоматизированная система печати БСО")]
         public bool ASBSO { get; }
 
@@ -76,7 +82,7 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "ККТ для расчетов только в сети Интернет")]
         public bool ForInternet { get; }
 
@@ -86,7 +92,7 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Работа в составе автоматического устройства для расчетов")]
         public bool Automat { get; }
 

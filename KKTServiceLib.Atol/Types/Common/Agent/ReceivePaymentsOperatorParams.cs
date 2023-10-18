@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
 using KKTServiceLib.Shared.Types.ValidationAttributes;
 
 #endregion
@@ -24,8 +25,9 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
         {
             if (phones?.Any() != true)
             {
-                throw new ArgumentException(string.Format(ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        GetType().GetProperty(nameof(Phones)).GetDisplayName(), 1),
+                throw new ArgumentException(string.Format(
+                        ValidationStrings.ResourceManager.GetString("CollectionMinLengthError"),
+                        GetType().GetProperty(nameof(Phones)).GetPropertyDisplayName(), 1),
                     nameof(phones));
             }
 
@@ -41,8 +43,9 @@ namespace KKTServiceLib.Atol.Types.Common.Agent
         /// <item>Все элементы должны соответствовать регулярному выражению <see cref="RegexHelper.PhoneNumberPattern"/></item>
         /// </list>
         [RegularExpressionCollectionValidation(RegexHelper.PhoneNumberPattern)]
-        [MinLength(1, ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "MinLengthError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [MinLength(1, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "CollectionMinLengthError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Телефоны оператора по приему платежей")]
         public ISet<string> Phones { get; }
     }

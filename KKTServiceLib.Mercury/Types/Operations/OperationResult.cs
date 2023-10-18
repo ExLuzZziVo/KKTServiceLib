@@ -1,5 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using KKTServiceLib.Shared.Resources;
+﻿#region
+
+using System.ComponentModel.DataAnnotations;
+using CoreLib.CORE.Resources;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations
 {
@@ -14,7 +18,7 @@ namespace KKTServiceLib.Mercury.Types.Operations
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Код завершения операции")]
         public int Result { get; set; }
 

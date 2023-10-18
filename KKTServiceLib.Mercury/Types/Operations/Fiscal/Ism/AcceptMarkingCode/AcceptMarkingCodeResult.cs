@@ -1,5 +1,9 @@
+#region
+
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Ism.AcceptMarkingCode
 {

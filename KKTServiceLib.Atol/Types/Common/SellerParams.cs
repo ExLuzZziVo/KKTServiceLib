@@ -4,8 +4,9 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
 
 #endregion
 
@@ -20,12 +21,12 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <param name="email">E-mail отправителя электронной формы чека</param>
         public SellerParams(string email)
         {
-            if (email.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(email, RegexHelper.EmailAddressPattern))
+            if (email.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(email, RegexExtensions.EmailAddressPattern))
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Email)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Email)).GetPropertyDisplayName()),
                     nameof(email));
             }
 
@@ -37,12 +38,12 @@ namespace KKTServiceLib.Atol.Types.Common
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.EmailAddressPattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions.EmailAddressPattern"/></item>
         /// </list>
         [RegularExpression(
-            RegexHelper.EmailAddressPattern,
-            ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "StringFormatError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+            RegexExtensions.EmailAddressPattern,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "StringFormatError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "E-mail отправителя электронной формы чека")]
         public string Email { get; }
     }

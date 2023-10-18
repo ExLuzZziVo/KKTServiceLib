@@ -1,15 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿#region
+
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json.Serialization;
+using CoreLib.CORE.Helpers.Converters;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Enums
 {
     /// <summary>
     /// Версия формата базы товаров ККТ
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter), typeof(CamelCaseNamingStrategy))]
+    [JsonConverter(typeof(JsonStringEnumMemberConverter))]
     public enum KKTDatabaseVersion
     {
         /// <summary>

@@ -2,9 +2,9 @@
 
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Atol.Types.Enums;
 using KKTServiceLib.Atol.Types.Interfaces;
-using KKTServiceLib.Shared.Resources;
 
 #endregion
 
@@ -28,7 +28,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Номер картинки")]
         public uint PictureNumber { get; }
 

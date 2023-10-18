@@ -1,9 +1,13 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using CoreLib.CORE.Helpers.Converters;
 using KKTServiceLib.Mercury.Types.Converters;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Common
 {
@@ -32,7 +36,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// Дата и время последнего открытия смены
         /// </summary>
         [Display(Name = "Дата и время последнего открытия смены")]
-        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [CustomDateTimeConverter("yyyy-MM-ddTHH:mm:ss")]
         public DateTime? LastOpen { get; set; }
 
         /// <summary>

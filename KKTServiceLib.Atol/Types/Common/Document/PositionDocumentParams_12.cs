@@ -1,10 +1,14 @@
+#region
+
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Atol.Types.Common.MarkingCodes;
 using KKTServiceLib.Atol.Types.Enums;
-using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.ValidationAttributes;
-using Newtonsoft.Json;
+
+#endregion
 
 namespace KKTServiceLib.Atol.Types.Common.Document
 {
@@ -56,7 +60,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// При установке значения параметр <see cref="ImcParams"/> становится равным null
         /// </remarks>
         [Display(Name = "Код товара (маркировка)")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public new object NomenclatureCode
         {
@@ -75,7 +79,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// При установке значения параметр <see cref="NomenclatureCode"/> становится равным null
         /// </remarks>
         [Display(Name = "Код маркировки")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public MarkingCodeParams_12 ImcParams
         {
@@ -91,7 +95,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// Отраслевой реквизит
         /// </summary>
         [Display(Name = "Отраслевой реквизит")]
-        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
         public IndustryRequisiteParams[] IndustryInfo { get; set; }
 
@@ -99,7 +103,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// Коды товара
         /// </summary>
         [Display(Name = "Коды товара")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public PositionCodesParams ProductCodes { get; set; }
     }

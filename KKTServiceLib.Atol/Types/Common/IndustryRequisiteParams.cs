@@ -1,10 +1,13 @@
+#region
+
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using CoreLib.CORE.Helpers.Converters;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.Converters;
-using Newtonsoft.Json;
+
+#endregion
 
 namespace KKTServiceLib.Atol.Types.Common
 {
@@ -15,7 +18,7 @@ namespace KKTServiceLib.Atol.Types.Common
         /// Дата документа основания
         /// </summary>
         [Display(Name = "Дата документа основания")]
-        [JsonConverter(typeof(CustomDateTimeConverter), "yyyy.MM.dd")]
+        [CustomDateTimeConverter("yyyy.MM.dd")]
         public DateTime? Date { get; set; }
 
         /// <summary>
@@ -26,9 +29,9 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <item>Максимальная длина: 3</item>
         /// </list>
         [Display(Name = "Идентификатор ФОИВ")]
-        [MaxLength(3, ErrorMessageResourceType = typeof(ErrorStrings),
+        [MaxLength(3, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringMaxLengthError")]
-        [RegularExpression(RegexHelper.CountryOfOriginCodePattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexHelper.CountryOfOriginCodePattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string Fois { get; set; }
 

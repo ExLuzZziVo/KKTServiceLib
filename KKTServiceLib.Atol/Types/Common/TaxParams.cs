@@ -2,8 +2,8 @@
 
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Atol.Types.Enums;
-using KKTServiceLib.Shared.Resources;
 
 #endregion
 
@@ -27,7 +27,7 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Налоговая ставка")]
         public WatType Type { get; }
 
@@ -38,7 +38,7 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <item>Должно лежать в диапазоне: 0-<see cref="decimal.MaxValue"/></item>
         /// </list>
         [Display(Name = "Сумма налога")]
-        [Range(0, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0, (double)decimal.MaxValue, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal? Sum { get; set; }
     }

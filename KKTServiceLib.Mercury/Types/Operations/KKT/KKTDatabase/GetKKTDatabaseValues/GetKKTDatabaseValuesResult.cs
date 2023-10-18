@@ -1,6 +1,10 @@
-﻿using System.ComponentModel;
+﻿#region
+
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using KKTServiceLib.Mercury.Types.Common;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.GetKKTDatabaseValues
 {

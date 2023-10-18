@@ -1,11 +1,14 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 using KKTServiceLib.Atol.Types.Enums;
 using KKTServiceLib.Atol.Types.Operations.Fiscal.Fn.GetFnDocumentByNumber;
-using KKTServiceLib.Shared.Helpers;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+
+#endregion
 
 namespace KKTServiceLib.Atol.Types.Converters
 {
@@ -144,72 +147,83 @@ namespace KKTServiceLib.Atol.Types.Converters
             { "2109", "markingCodeParamsItemStatus" }
         };
 
-        public override void WriteJson(JsonWriter writer, GetFnDocumentByNumberResult value, JsonSerializer serializer)
+        public override void Write(Utf8JsonWriter writer, GetFnDocumentByNumberResult value,
+            JsonSerializerOptions options)
         {
             throw new NotSupportedException();
         }
 
-        public override GetFnDocumentByNumberResult ReadJson(JsonReader reader, Type objectType,
-            GetFnDocumentByNumberResult existingValue,
-            bool hasExistingValue,
-            JsonSerializer serializer)
+        public override GetFnDocumentByNumberResult Read(ref Utf8JsonReader reader, Type typeToConvert,
+            JsonSerializerOptions options)
         {
-            var jo = JObject.Load(reader);
+            if (reader.TokenType != JsonTokenType.StartObject)
+            {
+                throw new JsonException($"Cannot convert null value to {nameof(GetFnDocumentByNumberResult)}");
+            }
 
             var result = new GetFnDocumentByNumberResult();
 
-            result.RawData = jo.Property(nameof(result.RawData).ToLowerFirstChar())?.Value.ToObject<string>();
-
-            if (jo.Property(nameof(result.DocumentTLV).ToLowerFirstChar())?.Value is JObject documentTLVJObject)
+            while (reader.Read())
             {
-                foreach (var pr in documentTLVJObject.Properties().ToArray())
+                if (reader.TokenType == JsonTokenType.EndObject)
                 {
-                    ProcessProperty(pr);
-
-                    if (pr.Name.Equals(nameof(result.FiscalDocumentType), StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        result.FiscalDocumentType = pr.Value.ToObject<FiscalDocumentType>();
-                        pr.Remove();
-                    }
-                    else if (pr.Name.Equals(nameof(result.Short), StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        result.Short = pr.Value.ToObject<bool>();
-                        pr.Remove();
-                    }
+                    return result;
                 }
 
-                result.DocumentTLV = documentTLVJObject.ToString(Formatting.Indented);
+                if (reader.TokenType == JsonTokenType.PropertyName)
+                {
+                    var propertyName = reader.GetString();
+
+                    reader.Read();
+
+                    if (propertyName.Equals(nameof(result.RawData), StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        result.RawData = reader.GetString();
+                    }
+                    else if (propertyName.Equals(nameof(result.DocumentTLV),
+                                 StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        var jsonObject = JsonNode
+                            .Parse(ref reader, new JsonNodeOptions { PropertyNameCaseInsensitive = true }).AsObject();
+
+                        if (jsonObject.TryGetPropertyValue(nameof(result.FiscalDocumentType),
+                                out var fiscalDocumentTypeNode))
+                        {
+                            result.FiscalDocumentType = (FiscalDocumentType)Enum.Parse(typeof(FiscalDocumentType),
+                                fiscalDocumentTypeNode.GetValue<string>(), true);
+
+                            jsonObject.Remove(nameof(result.FiscalDocumentType));
+                        }
+
+                        if (jsonObject.TryGetPropertyValue(nameof(result.Short), out var shortNode))
+                        {
+                            result.Short = shortNode.GetValue<bool>();
+
+                            jsonObject.Remove(nameof(result.Short));
+                        }
+
+                        if (jsonObject.TryGetPropertyValue(nameof(result.Qr), out var qrNode))
+                        {
+                            result.Qr = qrNode.GetValue<string>();
+
+                            jsonObject.Remove(nameof(result.Qr));
+                        }
+
+                        result.DocumentTLV =
+                            jsonObject.ToJsonString(new JsonSerializerOptions { WriteIndented = true });
+
+                        result.DecodedDocumentTLV = result.DocumentTLV;
+
+                        foreach (var req in FnRequisites)
+                        {
+                            result.DecodedDocumentTLV =
+                                result.DecodedDocumentTLV.Replace($"\"{req.Key}\": ", $"\"{req.Value}\": ");
+                        }
+                    }
+                }
             }
 
             return result;
-        }
-
-        private static void ProcessProperty(JProperty property)
-        {
-            if (property.Value.Type == JTokenType.Array)
-            {
-                foreach (var jToken in property.Value)
-                {
-                    var jo = (JObject)jToken;
-
-                    foreach (var pr in jo.Properties().ToArray())
-                    {
-                        ProcessProperty(pr);
-                    }
-                }
-            }
-            else if (property.Value.Type == JTokenType.Object)
-            {
-                foreach (var pr in ((JObject)property.Value).Properties().ToArray())
-                {
-                    ProcessProperty(pr);
-                }
-            }
-
-            if (FnRequisites.TryGetValue(property.Name, out var name))
-            {
-                property.Replace(new JProperty(name, property.Value));
-            }
         }
     }
 }

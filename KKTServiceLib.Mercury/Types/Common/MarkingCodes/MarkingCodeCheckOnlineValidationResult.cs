@@ -1,6 +1,10 @@
+#region
+
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using KKTServiceLib.Mercury.Types.Enums;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Common.MarkingCodes
 {

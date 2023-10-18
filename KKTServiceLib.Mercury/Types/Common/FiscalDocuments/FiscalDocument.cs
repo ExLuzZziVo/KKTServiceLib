@@ -1,8 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using CoreLib.CORE.Helpers.Converters;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Common.FiscalDocuments
 {
@@ -19,7 +22,7 @@ namespace KKTServiceLib.Mercury.Types.Common.FiscalDocuments
         /// Дата и время регистрации документа в ФН
         /// </summary>
         [Display(Name = "Дата и время регистрации документа в ФН")]
-        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [CustomDateTimeConverter("yyyy-MM-ddTHH:mm:ss")]
         public DateTime DateTime { get; set; }
     }
 }

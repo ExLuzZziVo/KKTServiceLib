@@ -3,11 +3,11 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using CoreLib.CORE.Helpers.Converters;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Atol.Types.Enums;
 using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.Converters;
-using Newtonsoft.Json;
 
 #endregion
 
@@ -24,7 +24,7 @@ namespace KKTServiceLib.Atol.Types.Common
         /// </list>
         [RegularExpression(
             RegexHelper.EmailAddressOrPhoneNumberPattern,
-            ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "StringFormatError")]
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "StringFormatError")]
         [Display(Name = "E-mail или номер телефона покупателя")]
         public string EmailOrPhone { get; set; }
 
@@ -32,9 +32,9 @@ namespace KKTServiceLib.Atol.Types.Common
         /// ИНН покупателя
         /// </summary>
         /// <list type="bullet">
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.VatinPattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions_Ru.VatinPattern"/></item>
         /// </list>
-        [RegularExpression(RegexHelper.VatinPattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexExtensions_Ru.VatinPattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         [Display(Name = "ИНН покупателя")]
         public string Vatin { get; set; }
@@ -52,7 +52,7 @@ namespace KKTServiceLib.Atol.Types.Common
         /// Только для ФФД ≥ 1.2
         /// </remarks>
         [Display(Name = "Дата рождения")]
-        [JsonConverter(typeof(CustomDateTimeConverter), "dd.MM.yyyy")]
+        [CustomDateTimeConverter("dd.MM.yyyy")]
         public DateTime? BirthDate { get; set; }
 
         /// <summary>
@@ -66,9 +66,9 @@ namespace KKTServiceLib.Atol.Types.Common
         /// Только для ФФД ≥ 1.2
         /// </remarks>
         [Display(Name = "Гражданство")]
-        [MaxLength(3, ErrorMessageResourceType = typeof(ErrorStrings),
+        [MaxLength(3, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringMaxLengthError")]
-        [RegularExpression(RegexHelper.CountryOfOriginCodePattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexHelper.CountryOfOriginCodePattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string Citizenship { get; set; }
 

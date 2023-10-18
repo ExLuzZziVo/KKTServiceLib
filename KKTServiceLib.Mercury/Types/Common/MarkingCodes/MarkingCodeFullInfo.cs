@@ -1,11 +1,16 @@
+#region
+
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Mercury.Types.Enums;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.ValidationAttributes;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Common.MarkingCodes
 {
@@ -18,11 +23,11 @@ namespace KKTServiceLib.Mercury.Types.Common.MarkingCodes
         /// <param name="imc">Base64-представление значения кода маркировки</param>
         public MarkingCodeFullInfo(string imc)
         {
-            if (imc.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(imc, RegexHelper.Base64Pattern))
+            if (imc.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(imc, RegexExtensions.Base64Pattern))
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Mc)).GetDisplayName()),
+                    string.Format(ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Mc)).GetPropertyDisplayName()),
                     nameof(imc));
             }
 
@@ -34,11 +39,11 @@ namespace KKTServiceLib.Mercury.Types.Common.MarkingCodes
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.Base64Pattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions.Base64Pattern"/></item>
         /// </list>
         [Display(Name = "base64-представление значения кода маркировки")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [RegularExpression(RegexHelper.Base64Pattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [RegularExpression(RegexExtensions.Base64Pattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string Mc { get; }
 
@@ -49,8 +54,8 @@ namespace KKTServiceLib.Mercury.Types.Common.MarkingCodes
         /// Передаётся только для подакцизной алкогольной продукции
         /// </remarks>
         [Display(Name = "Штриховой код формата EAN-8 или EAN-13")]
-        [RegularExpression(RegexHelper.BarcodeEAN8Pattern + "|" + RegexHelper.BarcodeEAN13Pattern,
-            ErrorMessageResourceType = typeof(ErrorStrings),
+        [RegularExpression(RegexExtensions.BarcodeEAN8Pattern + "|" + RegexExtensions.BarcodeEAN13Pattern,
+            ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string Ean { get; set; }
 
@@ -73,7 +78,7 @@ namespace KKTServiceLib.Mercury.Types.Common.MarkingCodes
         /// Дробное количество маркированного товара, выраженное в виде правильной дроби
         /// </summary>
         [Display(Name = "Дробное количество маркированного товара, выраженное в виде правильной дроби")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public FractionalNumber Part { get; set; }
     }

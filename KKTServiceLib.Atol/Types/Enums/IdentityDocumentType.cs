@@ -1,4 +1,8 @@
+#region
+
 using System.ComponentModel.DataAnnotations;
+
+#endregion
 
 namespace KKTServiceLib.Atol.Types.Enums
 {

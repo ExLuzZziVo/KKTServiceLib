@@ -1,16 +1,20 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using CoreLib.CORE.Helpers.Converters;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Mercury.Types.Common;
 using KKTServiceLib.Mercury.Types.Common.KKT;
 using KKTServiceLib.Mercury.Types.Enums;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.ValidationAttributes;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.RegisterKKT
 {
@@ -45,8 +49,9 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.Register
 
             if (taxationTypes?.Any() != true)
             {
-                throw new ArgumentException(string.Format(ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        GetType().GetProperty(nameof(TaxSystem)).GetDisplayName(), 1),
+                throw new ArgumentException(string.Format(
+                        ValidationStrings.ResourceManager.GetString("CollectionMinLengthError"),
+                        GetType().GetProperty(nameof(TaxSystem)).GetPropertyDisplayName(), 1),
                     nameof(taxationTypes));
             }
 
@@ -66,8 +71,8 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.Register
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [CustomDateTimeConverter("yyyy-MM-ddTHH:mm:ss")]
         [Display(Name = "Локальные дата и время в месте (по адресу) осуществления расчетов")]
         public DateTime DateTime { get; }
 
@@ -77,9 +82,9 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.Register
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Оператор (кассир)")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public OperatorParams CashierInfo { get; }
 
@@ -89,9 +94,9 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.Register
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Информация об организации")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public OrganizationParams Owner { get; }
 
@@ -101,9 +106,9 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.Register
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Параметры ККТ")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public KKTParams Kkt { get; }
 
@@ -113,9 +118,9 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.Register
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Параметры ОФД")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public OfdParams Ofd { get; }
 
@@ -126,9 +131,10 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.Register
         /// <item>Обязательное поле</item>
         /// <item>Минимальное кол-во элементов: 1</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Системы налогообложения, с которыми работает ККТ")]
-        [MinLength(1, ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "MinLengthError")]
+        [MinLength(1, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "CollectionMinLengthError")]
         public ISet<TaxationType> TaxSystem { get; }
 
         /// <summary>
@@ -141,10 +147,10 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.Register
         /// Адрес электронной почты отправителя чека
         /// </summary>
         /// <list type="bullet">
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.EmailAddressPattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions.EmailAddressPattern"/></item>
         /// </list>
-        [RegularExpression(RegexHelper.EmailAddressPattern,
-            ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "StringFormatError")]
+        [RegularExpression(RegexExtensions.EmailAddressPattern,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "StringFormatError")]
         [Display(Name = "Адрес электронной почты отправителя чека")]
         public string SenderEmail { get; set; }
 
@@ -152,13 +158,13 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.Register
         /// Адрес сайта ФНС
         /// </summary>
         /// <list type="bullet">
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.UrlPattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions.UrlPattern"/></item>
         /// </list>
         /// <remarks>
         /// Значение по умолчанию: www.nalog.ru
         /// </remarks>
-        [RegularExpression(RegexHelper.UrlPattern,
-            ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "StringFormatError")]
+        [RegularExpression(RegexExtensions.UrlPattern,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "StringFormatError")]
         [Display(Name = "Адрес сайта ФНС")]
         public string SiteFNS { get; set; } = "www.nalog.ru";
 
@@ -176,8 +182,8 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.Register
             if (Kkt?.Mode?.Automat == true && Kkt?.Mode?.AutomatNum.IsNullOrEmptyOrWhiteSpace() == true)
             {
                 yield return new ValidationResult(string.Format(
-                        ErrorStrings.ResourceManager.GetString("RequiredError"),
-                        typeof(KKTWorkParams).GetProperty(nameof(Kkt.Mode.AutomatNum)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("RequiredError"),
+                        typeof(KKTWorkParams).GetProperty(nameof(Kkt.Mode.AutomatNum)).GetPropertyDisplayName()),
                     new[] { nameof(Kkt.Mode.AutomatNum) });
             }
         }

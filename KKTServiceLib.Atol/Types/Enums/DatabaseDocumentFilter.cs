@@ -1,14 +1,17 @@
+#region
+
 using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json.Serialization;
+using CoreLib.CORE.Helpers.Converters;
+
+#endregion
 
 namespace KKTServiceLib.Atol.Types.Enums
 {
     /// <summary>
     /// Фильтр документов БД ККТ
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter), typeof(CamelCaseNamingStrategy))]
+    [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
     public enum DatabaseDocumentFilter : byte
     {
         /// <summary>

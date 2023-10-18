@@ -1,6 +1,10 @@
-﻿using System.ComponentModel;
+﻿#region
+
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using KKTServiceLib.Atol.Types.Common.ReceiptsStat;
+
+#endregion
 
 namespace KKTServiceLib.Atol.Types.Operations.NonFiscal.GetOverallTotals
 {

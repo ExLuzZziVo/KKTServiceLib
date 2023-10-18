@@ -1605,13 +1605,13 @@ namespace KKTServiceLib.Atol.Types.Enums
         /// </summary>
         [Display(Name = "Оплата по данному чеку не требуется")]
         LIBFPTR_ERROR_PAID_NOT_REQUIRED = 270,
-        
+
         /// <summary>
         /// Непечатаемые символы в реквизите
         /// </summary>
         [Display(Name = "Непечатаемые символы в реквизите")]
         LIBFPTR_ERROR_NON_PRINTABLE_CHAR = 271,
-        
+
         /// <summary>
         /// Процедура проверки КМ уже запущена
         /// </summary>
@@ -1753,19 +1753,19 @@ namespace KKTServiceLib.Atol.Types.Enums
         /// </summary>
         [Display(Name = "Настройки адреса сервера не заданы")]
         LIBFPTR_ERROR_INVALID_SERVER_ADDRESS = 424,
-        
+
         /// <summary>
         /// Истёк таймаут обновления ключей проверки
         /// </summary>
         [Display(Name = "Истёк таймаут обновления ключей проверки")]
         LIBFPTR_ERROR_UPDATE_KEYS_TIMEOUT = 425,
-        
+
         /// <summary>
         /// Данный реквизит разрешён только для маркированной позиции
         /// </summary>
         [Display(Name = "Данный реквизит разрешён только для маркированной позиции")]
         LIBFPTR_ERROR_PROPERTY_FOR_MARKING_POSITION_ONLY = 426,
-        
+
         /// <summary>
         /// Ошибка парсинга запроса
         /// </summary>

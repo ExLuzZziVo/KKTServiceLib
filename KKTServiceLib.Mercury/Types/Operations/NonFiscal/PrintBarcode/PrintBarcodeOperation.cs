@@ -1,10 +1,17 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using CoreLib.CORE.Helpers.EnumHelpers;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Mercury.Types.Enums;
-using KKTServiceLib.Shared.Helpers;
 using KKTServiceLib.Shared.Resources;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintBarcode
 {
@@ -22,8 +29,8 @@ namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintBarcode
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Value)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Value)).GetPropertyDisplayName()),
                     nameof(barcodeValue));
             }
 
@@ -32,21 +39,21 @@ namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintBarcode
             switch (barcodeType)
             {
                 case BarcodeType.EAN8:
-                    if (Regex.IsMatch(barcodeValue, RegexHelper.BarcodeEAN8Pattern))
+                    if (Regex.IsMatch(barcodeValue, RegexExtensions.BarcodeEAN8Pattern))
                     {
                         isBarcodeValueValid = true;
                     }
 
                     break;
                 case BarcodeType.EAN13:
-                    if (Regex.IsMatch(barcodeValue, RegexHelper.BarcodeEAN13Pattern))
+                    if (Regex.IsMatch(barcodeValue, RegexExtensions.BarcodeEAN13Pattern))
                     {
                         isBarcodeValueValid = true;
                     }
 
                     break;
                 case BarcodeType.CODE39:
-                    if (Regex.IsMatch(barcodeValue, RegexHelper.BarcodeCODE39Pattern))
+                    if (Regex.IsMatch(barcodeValue, RegexExtensions.BarcodeCODE39Pattern))
                     {
                         isBarcodeValueValid = true;
                     }
@@ -78,7 +85,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintBarcode
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Тип ШК")]
         public BarcodeType BcType { get; }
 
@@ -88,7 +95,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintBarcode
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Данные ШК")]
         public string Value { get; }
     }

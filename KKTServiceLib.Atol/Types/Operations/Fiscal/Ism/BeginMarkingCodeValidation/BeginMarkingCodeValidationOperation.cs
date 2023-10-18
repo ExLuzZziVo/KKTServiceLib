@@ -1,9 +1,14 @@
+#region
+
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
+using CoreLib.CORE.Resources;
+using KKTServiceLib.Atol.Resources;
 using KKTServiceLib.Atol.Types.Common.MarkingCodes;
-using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.ValidationAttributes;
+
+#endregion
 
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.BeginMarkingCodeValidation
 {
@@ -25,7 +30,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.BeginMarkingCodeValidat
             if (markingCodeParams.IsPositionMarkingCodeParams)
             {
                 throw new ArgumentException(
-                    Resources.ErrorStrings.ResourceManager.GetString("MarkingCodeCheckTypeError"));
+                    ErrorStrings.ResourceManager.GetString("MarkingCodeCheckTypeError"));
             }
 
             Params = markingCodeParams;
@@ -38,9 +43,9 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.BeginMarkingCodeValidat
         /// <item>Обязательное поле</item>
         /// </list>
         [Display(Name = "КМ для проверки")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public MarkingCodeParams_12 Params { get; }
     }
 }

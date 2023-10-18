@@ -1,11 +1,16 @@
+#region
+
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Atol.Types.Enums;
 using KKTServiceLib.Atol.Types.Interfaces;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
+
+#endregion
 
 namespace KKTServiceLib.Atol.Types.Common.Document
 {
@@ -19,19 +24,19 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <param name="width">Ширина картинки в пикселях</param>
         public PixelsDocumentParams(string pixels, int width) : base(PrintDocumentType.Pixels)
         {
-            if (pixels.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(pixels, RegexHelper.Base64Pattern))
+            if (pixels.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(pixels, RegexExtensions.Base64Pattern))
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Pixels)).GetDisplayName()),
+                    string.Format(ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Pixels)).GetPropertyDisplayName()),
                     nameof(pixels));
             }
 
             if (width <= 0 || pixels.Length % width != 0)
             {
                 throw new ArgumentException(
-                    string.Format(ErrorStrings.ResourceManager.GetString("DigitRangeValuesError"),
-                        GetType().GetProperty(nameof(Width)).GetDisplayName(), 1, int.MaxValue),
+                    string.Format(ValidationStrings.ResourceManager.GetString("DigitRangeValuesError"),
+                        GetType().GetProperty(nameof(Width)).GetPropertyDisplayName(), 1, int.MaxValue),
                     nameof(width));
             }
 
@@ -44,11 +49,11 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
-        /// <item>Должно соответствовать регулярному выражению <see cref="RegexHelper.Base64Pattern"/></item>
+        /// <item>Должно соответствовать регулярному выражению <see cref="RegexExtensions.Base64Pattern"/></item>
         /// </list>
         [Display(Name = "Массив пикселей в base64")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [RegularExpression(RegexHelper.Base64Pattern, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [RegularExpression(RegexExtensions.Base64Pattern, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringFormatError")]
         public string Pixels { get; }
 
@@ -63,7 +68,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// Размер массива пикселей должен быть кратен этому значению
         /// </remarks>
         [Display(Name = "Ширина картинки в пикселях")]
-        [Range(1, int.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(1, int.MaxValue, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public int Width { get; }
 
@@ -77,7 +82,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// Значение по умолчанию: 100
         /// </remarks>
         [Display(Name = "Процент увеличения картинки")]
-        [Range(1, int.MaxValue, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(1, int.MaxValue, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public int Scale { get; set; } = 100;
 

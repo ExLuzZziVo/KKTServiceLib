@@ -1,14 +1,21 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.ValidationAttributes;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
+using CoreLib.CORE.Resources;
+using KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.GetKKTRegistrationInfo;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Common.KKT
 {
     [Description("Параметры ККТ")]
+    [JsonDerivedType(typeof(KKTParamsInfo))]
     public class KKTParams
     {
         /// <summary>
@@ -24,8 +31,8 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(RegNum)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(RegNum)).GetPropertyDisplayName()),
                     nameof(registrationNumber));
             }
 
@@ -33,8 +40,8 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Address)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Address)).GetPropertyDisplayName()),
                     nameof(address));
             }
 
@@ -42,8 +49,8 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Location)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(Location)).GetPropertyDisplayName()),
                     nameof(location));
             }
 
@@ -63,7 +70,7 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Регистрационный номер ККТ")]
         public string RegNum { get; }
 
@@ -73,7 +80,7 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Адрес расчетов")]
         public string Address { get; }
 
@@ -83,7 +90,7 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Место расчетов")]
         public string Location { get; }
 
@@ -93,9 +100,9 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Параметры работы ККТ")]
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public KKTWorkParams Mode { get; }
     }

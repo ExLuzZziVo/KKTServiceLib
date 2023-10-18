@@ -2,12 +2,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.Common;
+using System.Text.Json.Serialization;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Resources;
+using KKTServiceLib.Atol.Types.Converters;
 
 #endregion
 
@@ -24,12 +26,13 @@ namespace KKTServiceLib.Atol.Types.Operations.KKT.Settings.SetKKTSettings
         {
             if (deviceParameters?.Any() != true)
             {
-                throw new ArgumentException(string.Format(ErrorStrings.ResourceManager.GetString("MinLengthError"),
-                        GetType().GetProperty(nameof(DeviceParameters)).GetDisplayName(), 1),
+                throw new ArgumentException(string.Format(
+                        ValidationStrings.ResourceManager.GetString("CollectionMinLengthError"),
+                        GetType().GetProperty(nameof(DeviceParameters)).GetPropertyDisplayName(), 1),
                     nameof(deviceParameters));
             }
 
-            DeviceParameters = new JsonArrayReadOnlyDictionary<uint, string>(deviceParameters);
+            DeviceParameters = new ReadOnlyDictionary<uint, string>(deviceParameters);
         }
 
         /// <summary>
@@ -39,9 +42,11 @@ namespace KKTServiceLib.Atol.Types.Operations.KKT.Settings.SetKKTSettings
         /// <item>Обязательное поле</item>
         /// <item>Минимальное кол-во элементов: 1</item>
         /// </list>
-        [MinLength(1, ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "MinLengthError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [JsonConverter(typeof(DictionaryToArrayConverter<uint, string>))]
+        [MinLength(1, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "CollectionMinLengthError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Настройки ККТ")]
-        public JsonArrayReadOnlyDictionary<uint, string> DeviceParameters { get; }
+        public ReadOnlyDictionary<uint, string> DeviceParameters { get; }
     }
 }

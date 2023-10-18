@@ -1,4 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿#region
+
+using System.ComponentModel.DataAnnotations;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Operations
 {

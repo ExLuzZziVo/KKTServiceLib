@@ -1,10 +1,16 @@
+#region
+
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using KKTServiceLib.Mercury.Types.Enums;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Common.MarkingCodes
 {
     [Description("Информация о коде маркировки")]
+    [JsonDerivedType(typeof(MarkingCodeCorrectedInfo))]
     public class MarkingCodeInfo
     {
         /// <summary>

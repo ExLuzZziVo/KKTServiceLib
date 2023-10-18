@@ -1,10 +1,14 @@
+#region
+
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using KKTServiceLib.Shared.Helpers;
-using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.Converters;
-using Newtonsoft.Json;
+using CoreLib.CORE.Helpers.Converters;
+using CoreLib.CORE.Helpers.ObjectHelpers;
+using CoreLib.CORE.Helpers.StringHelpers;
+using CoreLib.CORE.Resources;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Common
 {
@@ -23,8 +27,8 @@ namespace KKTServiceLib.Mercury.Types.Common
             {
                 throw new ArgumentException(
                     string.Format(
-                        ErrorStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(AttrValue)).GetDisplayName()),
+                        ValidationStrings.ResourceManager.GetString("StringFormatError"),
+                        GetType().GetProperty(nameof(AttrValue)).GetPropertyDisplayName()),
                     nameof(data));
             }
 
@@ -40,7 +44,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// <item>Обязательное поле</item>
         /// </list>
         [Display(Name = "Идентификатор операции")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public byte OpID { get; }
 
         /// <summary>
@@ -50,8 +54,8 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// <item>Обязательное поле</item>
         /// </list>
         [Display(Name = "Дата, время операции")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [JsonConverter(typeof(CustomDateTimeConverter), "yyyy-MM-ddTHH:mm:ss")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [CustomDateTimeConverter("yyyy-MM-ddTHH:mm:ss")]
         public DateTime OpTime { get; }
 
         /// <summary>
@@ -62,8 +66,8 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// <item>Максимальная длина: 64</item>
         /// </list>
         [Display(Name = "Данные операции")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [MaxLength(64, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [MaxLength(64, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "StringMaxLengthError")]
         public string AttrValue { get; }
     }

@@ -1,10 +1,13 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using CoreLib.CORE.Helpers.Converters;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Mercury.Types.Enums;
-using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.Converters;
-using Newtonsoft.Json;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Common.FiscalDocuments
 {
@@ -29,7 +32,7 @@ namespace KKTServiceLib.Mercury.Types.Common.FiscalDocuments
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Тип коррекции")]
         public CorrectionReceiptCorrectionType CorrectionType { get; }
 
@@ -45,8 +48,8 @@ namespace KKTServiceLib.Mercury.Types.Common.FiscalDocuments
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
-        [JsonConverter(typeof(CustomDateTimeConverter), "yyyy-MM-dd")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [CustomDateTimeConverter("yyyy-MM-dd")]
         [Display(Name = "Дата совершения корректируемого расчета")]
         public DateTime CauseDocDate { get; }
 

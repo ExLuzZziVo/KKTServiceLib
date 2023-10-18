@@ -3,10 +3,10 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Atol.Types.Common;
 using KKTServiceLib.Atol.Types.Interfaces;
-using KKTServiceLib.Shared.Resources;
-using KKTServiceLib.Shared.Types.ValidationAttributes;
 
 #endregion
 
@@ -30,16 +30,16 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Shift.OpenShift
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Оператор (кассир)")]
         public OperatorParams Operator { get; }
 
         /// <summary>
         /// Элементы для печати до документа
         /// </summary>
-        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
         [Display(Name = "Элементы для печати до документа")]
         public ICommonDocumentElement[] PreItems { get; set; }
@@ -47,7 +47,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Shift.OpenShift
         /// <summary>
         /// Элементы для печати после документа
         /// </summary>
-        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ErrorStrings),
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
         [Display(Name = "Элементы для печати после документа")]
         public ICommonDocumentElement[] PostItems { get; set; }

@@ -1,8 +1,12 @@
-﻿using System.ComponentModel;
+﻿#region
+
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Mercury.Types.Converters;
-using KKTServiceLib.Shared.Resources;
-using Newtonsoft.Json;
+
+#endregion
 
 namespace KKTServiceLib.Mercury.Types.Common
 {
@@ -17,7 +21,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// </list>
         [Display(Name = "Сумма наличными")]
         [JsonConverter(typeof(MoneyConverter))]
-        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal? Cash { get; set; }
 
@@ -29,7 +33,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// </list>
         [Display(Name = "Сумма безналичными")]
         [JsonConverter(typeof(MoneyConverter))]
-        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal? Ecash { get; set; }
 
@@ -41,7 +45,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// </list>
         [Display(Name = "Сумма предоплатой (аванс)")]
         [JsonConverter(typeof(MoneyConverter))]
-        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal? Prepayment { get; set; }
 
@@ -53,7 +57,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// </list>
         [Display(Name = "Сумма постоплатой (кредит)")]
         [JsonConverter(typeof(MoneyConverter))]
-        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal? Credit { get; set; }
 
@@ -65,7 +69,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// </list>
         [Display(Name = "Сумма встречным предоставлением")]
         [JsonConverter(typeof(MoneyConverter))]
-        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ErrorStrings),
+        [Range(0.01, 21474836, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public decimal? Consideration { get; set; }
     }

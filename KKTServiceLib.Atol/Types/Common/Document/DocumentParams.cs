@@ -2,14 +2,23 @@
 
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using CoreLib.CORE.Resources;
 using KKTServiceLib.Atol.Types.Enums;
-using KKTServiceLib.Shared.Resources;
 
 #endregion
 
 namespace KKTServiceLib.Atol.Types.Common.Document
 {
     [Description("Элемент документа")]
+    [JsonDerivedType(typeof(AdditionalAttributeDocumentParams))]
+    [JsonDerivedType(typeof(BarcodeDocumentParams))]
+    [JsonDerivedType(typeof(PictureDocumentParams))]
+    [JsonDerivedType(typeof(PixelsDocumentParams))]
+    [JsonDerivedType(typeof(PositionDocumentParams))]
+    [JsonDerivedType(typeof(PositionDocumentParams_12))]
+    [JsonDerivedType(typeof(TextDocumentParams))]
+    [JsonDerivedType(typeof(UserAttributeDocumentParams))]
     public abstract class DocumentParams
     {
         /// <summary>
@@ -27,7 +36,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Required(ErrorMessageResourceType = typeof(ErrorStrings), ErrorMessageResourceName = "RequiredError")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Тип элемента")]
         public PrintDocumentType Type { get; }
     }

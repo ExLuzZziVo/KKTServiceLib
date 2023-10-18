@@ -1,10 +1,17 @@
+#region
+
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using KKTServiceLib.Atol.Types.Common.MarkingCodes;
+using KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.BeginMarkingCodesValidation;
+
+#endregion
 
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.GetMarkingCodeValidationStatus
 {
     [Description("Результат получения результата проверки КМ")]
+    [JsonDerivedType(typeof(BeginMarkingCodesValidationResult))]
     public class GetMarkingCodeValidationStatusResult
     {
         /// <summary>
