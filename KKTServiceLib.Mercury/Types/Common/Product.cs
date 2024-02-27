@@ -210,5 +210,14 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// </summary>
         [Display(Name = "Платёжный агент")]
         public AgentType? Agent { get; set; }
+        
+        /// <summary>
+        /// Признак блокировки товара для продажи
+        /// </summary>
+        /// <remarks>
+        /// Значение по умолчанию: false
+        /// </remarks>
+        [Display(Name = "Признак блокировки товара для продажи")]
+        public bool? Blocked { get; set; } = false;
     }
 }

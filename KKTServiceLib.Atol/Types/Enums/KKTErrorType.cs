@@ -1611,6 +1611,12 @@ namespace KKTServiceLib.Atol.Types.Enums
         /// </summary>
         [Display(Name = "Непечатаемые символы в реквизите")]
         LIBFPTR_ERROR_NON_PRINTABLE_CHAR = 271,
+        
+        /// <summary>
+        /// Неизвестный пользовательский тег
+        /// </summary>
+        [Display(Name = "Неизвестный пользовательский тег")]
+        LIBFPTR_ERROR_INVALID_USER_TAG = 272,
 
         /// <summary>
         /// Процедура проверки КМ уже запущена
