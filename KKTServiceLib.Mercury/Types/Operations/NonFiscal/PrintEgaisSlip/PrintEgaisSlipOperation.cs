@@ -13,7 +13,7 @@ using CoreLib.CORE.Resources;
 namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintEgaisSlip
 {
     [Description("Печать слипа к чеку, содержащему АП")]
-    public class PrintEgaisSlipOperation : Operation<PrintEgaisSlipResult>
+    public class PrintEgaisSlipOperation: Operation<PrintEgaisSlipResult>
     {
         /// <summary>
         /// Печать слипа к чеку, содержащему АП
@@ -23,7 +23,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintEgaisSlip
         /// <param name="kpp">КПП организации, продавшей алкогольную продукцию</param>
         /// <param name="url">Текст ссылки, полученной от УТМ при подписывании чека</param>
         /// <param name="sign">Отпечаток КЭП, полученный от УТМ при подписывании чека</param>
-        public PrintEgaisSlipOperation(int shiftNumber, int receiptNumber, string kpp, string url, string sign) : base(
+        public PrintEgaisSlipOperation(int shiftNumber, int receiptNumber, string kpp, string url, string sign): base(
             "PrintEgaisSlip")
         {
             if (kpp.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(kpp, RegexExtensions_Ru.KPPPattern))

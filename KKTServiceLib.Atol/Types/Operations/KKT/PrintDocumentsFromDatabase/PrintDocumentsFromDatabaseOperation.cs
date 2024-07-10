@@ -9,7 +9,7 @@ using KKTServiceLib.Atol.Types.Enums;
 namespace KKTServiceLib.Atol.Types.Operations.KKT.PrintDocumentsFromDatabase
 {
     [Description("Печать документов из БД документов")]
-    public class PrintDocumentsFromDatabaseOperation : Operation<bool>
+    public class PrintDocumentsFromDatabaseOperation: Operation<bool>
     {
         /// <summary>
         /// Печать документов из БД документов
@@ -17,7 +17,7 @@ namespace KKTServiceLib.Atol.Types.Operations.KKT.PrintDocumentsFromDatabase
         /// <param name="filter">Фильтр документов</param>
         /// <param name="from">Начало диапазона выгрузки</param>
         /// <param name="to">Конец диапазона выгрузки</param>
-        public PrintDocumentsFromDatabaseOperation(DatabaseDocumentFilter filter, uint from, uint to) : base(
+        public PrintDocumentsFromDatabaseOperation(DatabaseDocumentFilter filter, uint from, uint to): base(
             "printDocumentsFromJournal")
         {
             Filter = filter;

@@ -9,7 +9,7 @@ using KKTServiceLib.Mercury.Types.Common.MarkingCodes;
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Ism.GetMarkingCodeValidationStatus
 {
     [Description("Результат получения результата проверки КМ")]
-    public class GetMarkingCodeValidationStatusResult : OperationResult
+    public class GetMarkingCodeValidationStatusResult: OperationResult
     {
         /// <summary>
         /// Признак готовности результата проверки КМ

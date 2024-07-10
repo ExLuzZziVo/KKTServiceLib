@@ -11,7 +11,7 @@ using KKTServiceLib.Mercury.Types.Common;
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.GetKKTStatus
 {
     [Description("Результат запроса состояния ККТ")]
-    public class GetKKTStatusResult : OperationResult
+    public class GetKKTStatusResult: OperationResult
     {
         /// <summary>
         /// Текущие дата и время ККТ

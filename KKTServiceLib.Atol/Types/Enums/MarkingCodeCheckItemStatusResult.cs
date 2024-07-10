@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Сведения о статусе товара
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum MarkingCodeCheckItemStatusResult : byte
+    public enum MarkingCodeCheckItemStatusResult: byte
     {
         /// <summary>
         /// Планируемый статус товара корректен

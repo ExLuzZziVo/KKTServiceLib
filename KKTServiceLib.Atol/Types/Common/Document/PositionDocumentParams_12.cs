@@ -13,7 +13,7 @@ using KKTServiceLib.Atol.Types.Enums;
 namespace KKTServiceLib.Atol.Types.Common.Document
 {
     [Description("Предмет расчета (ФФД ≥ 1.2)")]
-    public class PositionDocumentParams_12 : PositionDocumentParams
+    public class PositionDocumentParams_12: PositionDocumentParams
     {
         private MarkingCodeParams_12 _imcParams;
 
@@ -28,7 +28,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <param name="paymentMethodType">Способ расчета</param>
         /// <param name="paymentObjectType">Тип предмета расчета</param>
         public PositionDocumentParams_12(string name, decimal price, double quantity, ItemUnitType itemUnitType,
-            TaxParams tax, PaymentMethodType paymentMethodType, PaymentObjectType paymentObjectType) : base(name, price,
+            TaxParams tax, PaymentMethodType paymentMethodType, PaymentObjectType paymentObjectType): base(name, price,
             quantity, tax, paymentMethodType, paymentObjectType)
         {
             MeasurementUnit = itemUnitType;

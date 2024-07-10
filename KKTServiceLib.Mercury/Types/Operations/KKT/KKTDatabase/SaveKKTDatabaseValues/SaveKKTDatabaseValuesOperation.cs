@@ -12,12 +12,12 @@ using KKTServiceLib.Mercury.Types.Common;
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.SaveKKTDatabaseValues
 {
     [Description("Запись товаров в базу данных ККТ")]
-    public class SaveKKTDatabaseValuesOperation : Operation<SaveKKTDatabaseValuesResult>
+    public class SaveKKTDatabaseValuesOperation: Operation<SaveKKTDatabaseValuesResult>
     {
         /// <summary>
         /// Запись товаров в базу данных ККТ
         /// </summary>
-        public SaveKKTDatabaseValuesOperation() : base("WriteGoodsBase") { }
+        public SaveKKTDatabaseValuesOperation(): base("WriteGoodsBase") { }
 
         /// <summary>
         /// Товары

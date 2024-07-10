@@ -13,13 +13,13 @@ using KKTServiceLib.Shared.Helpers;
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.CloseCheck
 {
     [Description("Закрытие фискального чека")]
-    public class CloseCheckOperation : Operation<CloseCheckResult>
+    public class CloseCheckOperation: Operation<CloseCheckResult>
     {
         /// <summary>
         /// Закрытие фискального чека
         /// </summary>
         /// <param name="payments">Суммы оплат по чеку</param>
-        public CloseCheckOperation(PaymentParams payments) : base("CloseCheck")
+        public CloseCheckOperation(PaymentParams payments): base("CloseCheck")
         {
             Payment = payments ?? throw new ArgumentNullException(nameof(payments));
         }

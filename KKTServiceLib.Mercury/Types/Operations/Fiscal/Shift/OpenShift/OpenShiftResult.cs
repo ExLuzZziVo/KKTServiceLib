@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Shift.OpenShift
 {
     [Description("Результат открытия смены")]
-    public class OpenShiftResult : FiscalOperationResult
+    public class OpenShiftResult: FiscalOperationResult
     {
         /// <summary>
         /// Номер открытой смены

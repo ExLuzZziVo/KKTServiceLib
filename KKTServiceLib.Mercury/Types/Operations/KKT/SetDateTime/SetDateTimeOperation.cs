@@ -11,13 +11,13 @@ using CoreLib.CORE.Resources;
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.SetDateTime
 {
     [Description("Установка даты и времени ККТ")]
-    public class SetDateTimeOperation : Operation<SetDateTimeResult>
+    public class SetDateTimeOperation: Operation<SetDateTimeResult>
     {
         /// <summary>
         /// Установка даты и времени
         /// </summary>
         /// <param name="dateTime">Текущие дата и время</param>
-        public SetDateTimeOperation(DateTime dateTime) : base("SetDateTime")
+        public SetDateTimeOperation(DateTime dateTime): base("SetDateTime")
         {
             DateTime = dateTime;
         }

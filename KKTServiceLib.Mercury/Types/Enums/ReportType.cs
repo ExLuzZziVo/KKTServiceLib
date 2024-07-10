@@ -9,7 +9,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// <summary>
     /// Тип отчета
     /// </summary>
-    public enum ReportType : byte
+    public enum ReportType: byte
     {
         /// <summary>
         /// Полный отчёт за смену из ФН

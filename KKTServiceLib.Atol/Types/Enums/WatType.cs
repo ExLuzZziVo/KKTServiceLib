@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Налоговая ставка
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum WatType : byte
+    public enum WatType: byte
     {
         /// <summary>
         /// НДС не облагается

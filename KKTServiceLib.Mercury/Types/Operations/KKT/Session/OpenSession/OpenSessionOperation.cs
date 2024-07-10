@@ -14,13 +14,13 @@ using KKTServiceLib.Mercury.Types.Enums;
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.Session.OpenSession
 {
     [Description("Открытие сессии")]
-    public class OpenSessionOperation : Operation<OpenSessionResult>
+    public class OpenSessionOperation: Operation<OpenSessionResult>
     {
         /// <summary>
         /// Открытие сессии
         /// </summary>
         /// <param name="portName">Имя порта (например: COM1, COM2, USB, /dev/ttyS0)</param>
-        public OpenSessionOperation(string portName) : base("OpenSession")
+        public OpenSessionOperation(string portName): base("OpenSession")
         {
             if (portName.IsNullOrEmptyOrWhiteSpace())
             {

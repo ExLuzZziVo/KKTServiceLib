@@ -13,7 +13,7 @@ using CoreLib.CORE.Resources;
 namespace KKTServiceLib.Mercury.Types.Common
 {
     [Description("Отраслевой реквизит чека")]
-    public class IndustryRequisiteReceiptParams : IndustryRequisiteParams
+    public class IndustryRequisiteReceiptParams: IndustryRequisiteParams
     {
         /// <summary>
         /// Отраслевой реквизит чека

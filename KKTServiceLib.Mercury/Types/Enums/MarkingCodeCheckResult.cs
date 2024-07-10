@@ -9,7 +9,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// <summary>
     /// Результат проверки КМ
     /// </summary>
-    public enum MarkingCodeCheckResult : byte
+    public enum MarkingCodeCheckResult: byte
     {
         /// <summary>
         /// КМ успешно проверен

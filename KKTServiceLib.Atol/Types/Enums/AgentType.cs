@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Тип агента
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum AgentType : byte
+    public enum AgentType: byte
     {
         /// <summary>
         /// Банковский платежный агент

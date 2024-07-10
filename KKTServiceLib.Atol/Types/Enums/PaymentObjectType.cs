@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Тип предмета расчета
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum PaymentObjectType : byte
+    public enum PaymentObjectType: byte
     {
         /// <summary>
         /// Товар

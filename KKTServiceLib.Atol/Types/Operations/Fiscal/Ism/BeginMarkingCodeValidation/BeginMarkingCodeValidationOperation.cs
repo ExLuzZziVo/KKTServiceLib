@@ -13,13 +13,13 @@ using KKTServiceLib.Atol.Types.Common.MarkingCodes;
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.BeginMarkingCodeValidation
 {
     [Description("Начало проверки КМ")]
-    public class BeginMarkingCodeValidationOperation : Operation<BeginMarkingCodeValidationResult>
+    public class BeginMarkingCodeValidationOperation: Operation<BeginMarkingCodeValidationResult>
     {
         /// <summary>
         /// Начало проверки КМ
         /// </summary>
         /// <param name="markingCodeParams">КМ для проверки</param>
-        public BeginMarkingCodeValidationOperation(MarkingCodeParams_12 markingCodeParams) : base(
+        public BeginMarkingCodeValidationOperation(MarkingCodeParams_12 markingCodeParams): base(
             "beginMarkingCodeValidation")
         {
             if (markingCodeParams == null)

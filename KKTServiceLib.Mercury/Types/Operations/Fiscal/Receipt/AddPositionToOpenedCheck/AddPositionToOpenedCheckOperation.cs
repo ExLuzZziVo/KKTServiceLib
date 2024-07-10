@@ -23,7 +23,7 @@ using KKTServiceLib.Shared.Resources;
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpenedCheck
 {
     [Description("Добавление позиции в открытый фискальный чек")]
-    public class AddPositionToOpenedCheckOperation : Operation<AddPositionToOpenedCheckResult>
+    public class AddPositionToOpenedCheckOperation: Operation<AddPositionToOpenedCheckResult>
     {
         /// <summary>
         /// Добавление позиции в открытый фискальный чек
@@ -35,7 +35,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpe
         /// <param name="paymentMethodType">Способ расчета</param>
         /// <param name="paymentObjectType">Тип предмета расчета</param>
         public AddPositionToOpenedCheckOperation(string name, decimal price, double quantity, WatType watType,
-            PaymentMethodType paymentMethodType, PaymentObjectType paymentObjectType) : base("AddGoods")
+            PaymentMethodType paymentMethodType, PaymentObjectType paymentObjectType): base("AddGoods")
         {
             if (name.IsNullOrEmptyOrWhiteSpace())
             {

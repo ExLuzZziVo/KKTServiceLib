@@ -10,7 +10,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Тип ШК
     /// </summary>
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum BarcodeType : byte
+    public enum BarcodeType: byte
     {
         EAN8,
         EAN13,

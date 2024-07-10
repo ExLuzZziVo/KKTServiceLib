@@ -16,7 +16,7 @@ using KKTServiceLib.Atol.Types.Enums;
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.KKTRegistration.RegisterKKT
 {
     [Description("Регистрация/перерегистрация ККТ")]
-    public class RegisterKKTOperation : Operation<RegisterKKTOperation>
+    public class RegisterKKTOperation: Operation<RegisterKKTOperation>
     {
         /// <summary>
         /// Регистрация/перерегистрация ККТ
@@ -30,7 +30,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.KKTRegistration.RegisterKKT
         /// <param name="kktRegistrationReason">Причина перерегистрации ККТ</param>
         public RegisterKKTOperation(KKTRegistrationType type, OperatorParams operatorParams,
             OrganizationParams organizationParams, KKTParams kktParams, OfdParams ofdParams, IsmParams ismParams = null,
-            KKTRegistrationReason? kktRegistrationReason = null) : base(type.ToString()
+            KKTRegistrationReason? kktRegistrationReason = null): base(type.ToString()
             .ToLowerFirstChar())
         {
             Operator = operatorParams ?? throw new ArgumentNullException(nameof(operatorParams));

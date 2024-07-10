@@ -21,7 +21,7 @@ using KKTServiceLib.Shared.Resources;
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Ism.BeginMarkingCodeValidation
 {
     [Description("Проверка кода маркировки")]
-    public class BeginMarkingCodeValidationOperation : Operation<BeginMarkingCodeValidationResult>
+    public class BeginMarkingCodeValidationOperation: Operation<BeginMarkingCodeValidationResult>
     {
         /// <summary>
         /// Проверка кода маркировки
@@ -32,7 +32,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Ism.BeginMarkingCodeVali
         /// <param name="quantity">Количество товара</param>
         public BeginMarkingCodeValidationOperation(string imc, ItemEstimatedStatus itemEstimatedStatus,
             ItemUnitType itemUnits,
-            int quantity) : base("CheckMarkingCode")
+            int quantity): base("CheckMarkingCode")
         {
             if (imc.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(imc, RegexExtensions.Base64Pattern))
             {
@@ -63,7 +63,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Ism.BeginMarkingCodeVali
         /// <param name="itemEstimatedStatus">Режим обработки кода товара. Допустимые значения: <see cref="ItemEstimatedStatus.ItemDryForSale"/>, <see cref="ItemEstimatedStatus.ItemDryReturn"/></param>
         /// <param name="itemFractionalAmount">Дробное количество маркированного товара</param>
         public BeginMarkingCodeValidationOperation(string imc, ItemEstimatedStatus itemEstimatedStatus,
-            FractionalNumber itemFractionalAmount) : base("CheckMarkingCode")
+            FractionalNumber itemFractionalAmount): base("CheckMarkingCode")
         {
             if (imc.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(imc, RegexExtensions.Base64Pattern))
             {

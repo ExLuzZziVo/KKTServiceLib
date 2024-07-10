@@ -18,7 +18,7 @@ using KKTServiceLib.Shared.Types.Exceptions;
 
 namespace KKTServiceLib.Mercury.Types.Operations
 {
-    public abstract class Operation<T> : IValidatableObject where T : OperationResult
+    public abstract class Operation<T>: IValidatableObject where T : OperationResult
     {
         protected static readonly JsonSerializerOptions OperationJsonSerializerOptions = new JsonSerializerOptions
         {

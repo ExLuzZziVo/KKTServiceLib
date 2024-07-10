@@ -10,7 +10,7 @@ using CoreLib.CORE.Helpers.Converters;
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.GetKKTInfo
 {
     [Description("Результат запроса информации о ККТ")]
-    public class GetKKTInfoOperationResult : OperationResult
+    public class GetKKTInfoOperationResult: OperationResult
     {
         /// <summary>
         /// Название модели ККТ

@@ -11,13 +11,13 @@ using CoreLib.CORE.Resources;
 namespace KKTServiceLib.Atol.Types.Operations.KKT.SetDateTime
 {
     [Description("Установка даты и времени")]
-    public class SetDateTimeOperation : Operation<bool>
+    public class SetDateTimeOperation: Operation<bool>
     {
         /// <summary>
         /// Установка даты и времени
         /// </summary>
         /// <param name="dateTime">Текущие дата и время</param>
-        public SetDateTimeOperation(DateTime dateTime) : base("setDateTime")
+        public SetDateTimeOperation(DateTime dateTime): base("setDateTime")
         {
             DateTime = dateTime;
         }

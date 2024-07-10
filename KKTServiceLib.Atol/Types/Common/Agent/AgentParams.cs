@@ -16,7 +16,7 @@ using KKTServiceLib.Shared.Resources;
 namespace KKTServiceLib.Atol.Types.Common.Agent
 {
     [Description("Данные агента")]
-    public class AgentParams : IValidatableObject
+    public class AgentParams: IValidatableObject
     {
         /// <summary>
         /// Данные агента

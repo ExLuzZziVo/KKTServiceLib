@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Ошибка драйвера при проверки КМ в ИСМ
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum MarkingCodeCheckDriverError : byte
+    public enum MarkingCodeCheckDriverError: byte
     {
         /// <summary>
         /// Процедура проверки уже запущена

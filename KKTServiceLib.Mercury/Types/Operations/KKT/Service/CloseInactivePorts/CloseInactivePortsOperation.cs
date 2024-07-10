@@ -9,12 +9,12 @@ using System.Text.Json.Serialization;
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.Service.CloseInactivePorts
 {
     [Description("Закрытие неактивных портов")]
-    public class CloseInactivePortsOperation : Operation<CloseInactivePortsResult>
+    public class CloseInactivePortsOperation: Operation<CloseInactivePortsResult>
     {
         /// <summary>
         /// Закрытие неактивных портов
         /// </summary>
-        public CloseInactivePortsOperation() : base("ClosePorts")
+        public CloseInactivePortsOperation(): base("ClosePorts")
         {
             IsSessionKeyRequired = false;
         }

@@ -12,7 +12,7 @@ namespace KKTServiceLib.Mercury.Types.Converters
     /// <summary>
     /// Конвертер параметров типа "Количество". ККТ работает с int
     /// </summary>
-    public class QuantityConverter : JsonConverter<object>
+    public class QuantityConverter: JsonConverter<object>
     {
         public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
         {

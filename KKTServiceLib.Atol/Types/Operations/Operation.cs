@@ -16,7 +16,7 @@ using KKTServiceLib.Shared.Types.Exceptions;
 
 namespace KKTServiceLib.Atol.Types.Operations
 {
-    public abstract class Operation<T> : IValidatableObject
+    public abstract class Operation<T>: IValidatableObject
     {
         protected static readonly JsonSerializerOptions OperationJsonSerializerOptions = new JsonSerializerOptions
         {

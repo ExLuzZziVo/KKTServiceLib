@@ -12,13 +12,13 @@ using KKTServiceLib.Atol.Types.Common;
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Fn.CloseFn
 {
     [Description("Закрытие ФН")]
-    public class CloseFnOperation : Operation<CloseFnResult>
+    public class CloseFnOperation: Operation<CloseFnResult>
     {
         /// <summary>
         /// Закрытие ФН
         /// </summary>
         /// <param name="operatorParams">Оператор (кассир)</param>
-        public CloseFnOperation(OperatorParams operatorParams) : base("closeArchive")
+        public CloseFnOperation(OperatorParams operatorParams): base("closeArchive")
         {
             Operator = operatorParams ?? throw new ArgumentNullException(nameof(operatorParams));
         }

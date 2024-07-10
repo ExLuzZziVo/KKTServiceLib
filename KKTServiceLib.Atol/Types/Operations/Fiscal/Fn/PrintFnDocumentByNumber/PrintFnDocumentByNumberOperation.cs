@@ -9,13 +9,13 @@ using CoreLib.CORE.Resources;
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Fn.PrintFnDocumentByNumber
 {
     [Description("Печать документа из ФН по номеру ФД")]
-    public class PrintFnDocumentByNumberOperation : Operation<bool>
+    public class PrintFnDocumentByNumberOperation: Operation<bool>
     {
         /// <summary>
         /// Печать документа из ФН по номеру ФД
         /// </summary>
         /// <param name="fiscalDocumentNumber">Номер фискального документа</param>
-        public PrintFnDocumentByNumberOperation(uint fiscalDocumentNumber) : base("printFnDocument")
+        public PrintFnDocumentByNumberOperation(uint fiscalDocumentNumber): base("printFnDocument")
         {
             FiscalDocumentNumber = fiscalDocumentNumber;
         }

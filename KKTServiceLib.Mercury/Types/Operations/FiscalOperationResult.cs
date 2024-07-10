@@ -9,7 +9,7 @@ namespace KKTServiceLib.Mercury.Types.Operations
     /// <summary>
     /// Результат выполнения фискальной операции
     /// </summary>
-    public abstract class FiscalOperationResult : OperationResult
+    public abstract class FiscalOperationResult: OperationResult
     {
         /// <summary>
         /// Номер ФД

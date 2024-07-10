@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Тип фискального документа
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum FiscalDocumentType : byte
+    public enum FiscalDocumentType: byte
     {
         /// <summary>
         /// Регистрация ККТ

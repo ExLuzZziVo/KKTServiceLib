@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.AddPositionToOpenedCheck
 {
     [Description("Результат добавления позиции в открытый фискальный чек")]
-    public class AddPositionToOpenedCheckResult : OperationResult
+    public class AddPositionToOpenedCheckResult: OperationResult
     {
         /// <summary>
         /// Номер текущей кассовой смены

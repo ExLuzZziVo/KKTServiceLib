@@ -1,56 +1,56 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;</TargetFrameworks>
-        <AssemblyName>KKTServiceLib.Atol</AssemblyName>
-        <RootNamespace>KKTServiceLib.Atol</RootNamespace>
-        <PackageId>KKTServiceLib.Atol</PackageId>
-        <VersionPrefix>1.0.1</VersionPrefix>
-        <Authors>Khatin S.A.</Authors>
-        <Description>Библиотека для работы с кассами АТОЛ через JSON</Description>
-        <PackageProjectUrl>https://github.com/ExLuzZziVo/KKTServiceLib</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/ExLuzZziVo/KKTServiceLib</RepositoryUrl>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageTags>kkt;ккт;касса;кассы;контрольно-кассовая техника;atol;fptr;атол</PackageTags>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-    </PropertyGroup>
-    <ItemGroup>
-        <None Include="..\README.md">
-            <Pack>True</Pack>
-            <PackagePath>\</PackagePath>
-        </None>
-    </ItemGroup>
-    <ItemGroup>
-        <Reference Include="Atol.Drivers10.Fptr, Version=10.9.5.0, Culture=neutral, PublicKeyToken=null">
-            <HintPath>C:\Program Files\ATOL\Drivers10\KKT\langs\netcore\Atol.Drivers10.Fptr.dll</HintPath>
-        </Reference>
-    </ItemGroup>
-    <ItemGroup>
-        <PackageReference Include="System.Text.Json" Version="8.0.2"/>
-        <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Folder Include="Types\Operations\Fiscal\Cash"/>
-        <Folder Include="Types\Operations\Fiscal\Fn"/>
-        <Folder Include="Types\Operations\Fiscal\KKTRegistration"/>
-        <Folder Include="Types\Operations\Fiscal\Receipt"/>
-        <Folder Include="Types\Operations\KKT\Settings"/>
-        <Folder Include="Types\Operations\NonFiscal\CashDrawer"/>
-    </ItemGroup>
-    <ItemGroup>
-        <ProjectReference Include="..\KKTServiceLib.Shared\KKTServiceLib.Shared.csproj"/>
-    </ItemGroup>
-    <ItemGroup>
-        <EmbeddedResource Update="Resources\ErrorStrings.resx">
-            <Generator>PublicResXFileCodeGenerator</Generator>
-            <LastGenOutput>ErrorStrings.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Update="Resources\ErrorStrings.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>ErrorStrings.resx</DependentUpon>
-        </Compile>
-    </ItemGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;</TargetFrameworks>
+		<AssemblyName>KKTServiceLib.Atol</AssemblyName>
+		<RootNamespace>KKTServiceLib.Atol</RootNamespace>
+		<PackageId>KKTServiceLib.Atol</PackageId>
+		<VersionPrefix>1.0.2</VersionPrefix>
+		<Authors>Khatin S.A.</Authors>
+		<Description>Библиотека для работы с кассами АТОЛ через JSON</Description>
+		<PackageProjectUrl>https://github.com/ExLuzZziVo/KKTServiceLib</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/ExLuzZziVo/KKTServiceLib</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageTags>kkt;ккт;касса;кассы;контрольно-кассовая техника;atol;fptr;атол</PackageTags>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="Atol.Drivers10.Fptr, Version=10.10.3.0, Culture=neutral, PublicKeyToken=null">
+			<HintPath>C:\Program Files\ATOL\Drivers10\KKT\langs\netcore\Atol.Drivers10.Fptr.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="System.Text.Json" Version="8.0.4"/>
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0"/>
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Types\Operations\Fiscal\Cash"/>
+		<Folder Include="Types\Operations\Fiscal\Fn"/>
+		<Folder Include="Types\Operations\Fiscal\KKTRegistration"/>
+		<Folder Include="Types\Operations\Fiscal\Receipt"/>
+		<Folder Include="Types\Operations\KKT\Settings"/>
+		<Folder Include="Types\Operations\NonFiscal\CashDrawer"/>
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\KKTServiceLib.Shared\KKTServiceLib.Shared.csproj"/>
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="Resources\ErrorStrings.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>ErrorStrings.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Update="Resources\ErrorStrings.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>ErrorStrings.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
 </Project>

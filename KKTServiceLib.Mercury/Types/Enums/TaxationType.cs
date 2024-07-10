@@ -9,7 +9,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// <summary>
     /// Система налогообложения
     /// </summary>
-    public enum TaxationType : byte
+    public enum TaxationType: byte
     {
         /// <summary>
         /// Общая

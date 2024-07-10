@@ -10,7 +10,7 @@ using KKTServiceLib.Mercury.Types.Common.KKT;
 
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.GetKKTRegistrationInfo
 {
-    public class KKTParamsInfo : KKTParams
+    public class KKTParamsInfo: KKTParams
     {
         [JsonConstructor]
         private KKTParamsInfo() { }

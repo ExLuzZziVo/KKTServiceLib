@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Ism.AcceptMarkingCode
 {
     [Description("Результат подтверждения операции с КМ")]
-    public class AcceptMarkingCodeResult : OperationResult
+    public class AcceptMarkingCodeResult: OperationResult
     {
         /// <summary>
         /// Итоговый результат проверки КМ

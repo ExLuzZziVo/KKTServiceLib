@@ -11,13 +11,13 @@ using KKTServiceLib.Atol.Types.Interfaces;
 namespace KKTServiceLib.Atol.Types.Common.Document
 {
     [Description("Картинка из памяти ККТ")]
-    public class PictureDocumentParams : DocumentParams, ICommonDocumentElement
+    public class PictureDocumentParams: DocumentParams, ICommonDocumentElement
     {
         /// <summary>
         /// Картинка из памяти ККТ
         /// </summary>
         /// <param name="pictureNumber">Номер картинки</param>
-        public PictureDocumentParams(uint pictureNumber) : base(PrintDocumentType.PictureFromMemory)
+        public PictureDocumentParams(uint pictureNumber): base(PrintDocumentType.PictureFromMemory)
         {
             PictureNumber = pictureNumber;
         }

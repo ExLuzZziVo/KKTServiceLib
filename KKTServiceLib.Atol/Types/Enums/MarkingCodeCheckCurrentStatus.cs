@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Состояние проверки КМ
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum MarkingCodeCheckCurrentStatus : byte
+    public enum MarkingCodeCheckCurrentStatus: byte
     {
         /// <summary>
         /// Работа с КМ временно заблокирована (переполнение области уведомлений)

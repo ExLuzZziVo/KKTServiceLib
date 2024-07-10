@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
 {
     [Description("Результат открытия фискального чека")]
-    public class OpenCheckResult : OperationResult
+    public class OpenCheckResult: OperationResult
     {
         /// <summary>
         /// Номер текущей кассовой смены

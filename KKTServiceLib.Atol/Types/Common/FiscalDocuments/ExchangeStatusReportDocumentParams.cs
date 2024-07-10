@@ -9,7 +9,7 @@ using KKTServiceLib.Atol.Types.Operations.Fiscal.CreateExchangeStatusReport;
 namespace KKTServiceLib.Atol.Types.Common.FiscalDocuments
 {
     [Description("Фискальный документ отчета о состоянии расчетов")]
-    public class ExchangeStatusReportDocumentParams : FiscalDocumentParams
+    public class ExchangeStatusReportDocumentParams: FiscalDocumentParams
     {
         /// <summary>
         /// Счетчики количеств операций

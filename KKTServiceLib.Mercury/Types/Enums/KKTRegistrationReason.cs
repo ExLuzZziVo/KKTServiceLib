@@ -9,7 +9,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// <summary>
     /// Причина перерегистрации ККТ
     /// </summary>
-    public enum KKTRegistrationReason : byte
+    public enum KKTRegistrationReason: byte
     {
         /// <summary>
         /// Замена ФН

@@ -16,13 +16,13 @@ using KKTServiceLib.Atol.Types.Converters;
 namespace KKTServiceLib.Atol.Types.Operations.KKT.Settings.SetKKTSettings
 {
     [Description("Запись настроек ККТ")]
-    public class SetKKTSettingsOperation : Operation<SetKKTSettingsResult>
+    public class SetKKTSettingsOperation: Operation<SetKKTSettingsResult>
     {
         /// <summary>
         /// Запись настроек ККТ
         /// </summary>
         /// <param name="deviceParameters">Список номеров настроек и их значений для записи</param>
-        public SetKKTSettingsOperation(IDictionary<uint, string> deviceParameters) : base("setDeviceParameters")
+        public SetKKTSettingsOperation(IDictionary<uint, string> deviceParameters): base("setDeviceParameters")
         {
             if (deviceParameters?.Any() != true)
             {

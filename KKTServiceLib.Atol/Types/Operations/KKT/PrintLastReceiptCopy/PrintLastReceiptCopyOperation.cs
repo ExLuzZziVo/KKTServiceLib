@@ -7,11 +7,11 @@ using System.ComponentModel;
 namespace KKTServiceLib.Atol.Types.Operations.KKT.PrintLastReceiptCopy
 {
     [Description("Печать копии последнего чека")]
-    public class PrintLastReceiptCopyOperation : Operation<bool>
+    public class PrintLastReceiptCopyOperation: Operation<bool>
     {
         /// <summary>
         /// Печать копии последнего чека
         /// </summary>
-        public PrintLastReceiptCopyOperation() : base("printLastReceiptCopy") { }
+        public PrintLastReceiptCopyOperation(): base("printLastReceiptCopy") { }
     }
 }

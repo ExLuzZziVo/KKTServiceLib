@@ -9,7 +9,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// <summary>
     /// Сведения о статусе товара
     /// </summary>
-    public enum MarkingCodeCheckItemStatusResult : byte
+    public enum MarkingCodeCheckItemStatusResult: byte
     {
         /// <summary>
         /// Планируемый статус товара корректен

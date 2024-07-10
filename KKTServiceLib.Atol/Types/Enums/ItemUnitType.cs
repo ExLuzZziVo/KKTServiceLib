@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Мера количества товара
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum ItemUnitType : byte
+    public enum ItemUnitType: byte
     {
         /// <summary>
         /// Штуки, единицы

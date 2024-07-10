@@ -23,7 +23,7 @@ using KKTServiceLib.Shared.Resources;
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateCorrectionReceipt
 {
     [Description("Создание чека коррекции")]
-    public class CreateCorrectionReceiptOperation : Operation<CreateCorrectionReceiptResult>
+    public class CreateCorrectionReceiptOperation: Operation<CreateCorrectionReceiptResult>
     {
         /// <summary>
         /// Создание чека коррекции
@@ -40,7 +40,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateCorrectionRec
             CorrectionReceiptCorrectionType correctionType, string receiptToCorrectDocumentSign,
             DateTime correctionBaseDate,
             OperatorParams operatorParams,
-            TaxationType taxationType, DocumentParams[] items, PaymentParams[] payments) : base(type.ToString()
+            TaxationType taxationType, DocumentParams[] items, PaymentParams[] payments): base(type.ToString()
             .ToLowerFirstChar())
         {
             if (receiptToCorrectDocumentSign.IsNullOrEmptyOrWhiteSpace() || receiptToCorrectDocumentSign.Length > 16 ||

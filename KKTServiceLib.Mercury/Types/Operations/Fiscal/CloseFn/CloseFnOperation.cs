@@ -12,13 +12,13 @@ using KKTServiceLib.Mercury.Types.Common;
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.CloseFn
 {
     [Description("Закрытие ФН")]
-    public class CloseFnOperation : Operation<CloseFnResult>
+    public class CloseFnOperation: Operation<CloseFnResult>
     {
         /// <summary>
         /// Закрытие ФН
         /// </summary>
         /// <param name="operatorParams">Оператор (кассир)</param>
-        public CloseFnOperation(OperatorParams operatorParams) : base("CloseFN")
+        public CloseFnOperation(OperatorParams operatorParams): base("CloseFN")
         {
             CashierInfo = operatorParams ?? throw new ArgumentNullException(nameof(operatorParams));
         }

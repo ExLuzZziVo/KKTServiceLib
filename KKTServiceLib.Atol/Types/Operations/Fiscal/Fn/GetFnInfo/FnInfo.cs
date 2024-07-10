@@ -56,6 +56,12 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Fn.GetFnInfo
         public string FfdVersion { get; set; }
 
         /// <summary>
+        /// ФН содержит URI сервера ОКП
+        /// </summary>
+        [Display(Name = "ФН содержит URI сервера ОКП")]
+        public bool FnContainsKeysUpdaterServerUri { get; set; }
+
+        /// <summary>
         /// Версия ФФД ФН
         /// </summary>
         [Display(Name = "Версия ФФД ФН")]

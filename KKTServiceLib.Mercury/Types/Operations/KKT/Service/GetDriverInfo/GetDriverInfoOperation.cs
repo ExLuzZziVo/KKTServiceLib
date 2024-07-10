@@ -9,9 +9,9 @@ using System.Text.Json.Serialization;
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.Service.GetDriverInfo
 {
     [Description("Получение информации о драйвере ККТ")]
-    public class GetDriverInfoOperation : Operation<GetDriverInfoResult>
+    public class GetDriverInfoOperation: Operation<GetDriverInfoResult>
     {
-        public GetDriverInfoOperation() : base("GetDriverInfo")
+        public GetDriverInfoOperation(): base("GetDriverInfo")
         {
             IsSessionKeyRequired = false;
         }

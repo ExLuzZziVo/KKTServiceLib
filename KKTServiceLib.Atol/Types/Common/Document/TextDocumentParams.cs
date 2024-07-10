@@ -11,18 +11,18 @@ using KKTServiceLib.Atol.Types.Interfaces;
 namespace KKTServiceLib.Atol.Types.Common.Document
 {
     [Description("Текстовый элемент")]
-    public class TextDocumentParams : DocumentParams, ICommonDocumentElement
+    public class TextDocumentParams: DocumentParams, ICommonDocumentElement
     {
         /// <summary>
         /// Текстовый элемент
         /// </summary>
-        public TextDocumentParams() : base(PrintDocumentType.Text) { }
+        public TextDocumentParams(): base(PrintDocumentType.Text) { }
 
         /// <summary>
         /// Текстовый элемент
         /// </summary>
         /// <param name="text">Строка для печати</param>
-        public TextDocumentParams(string text) : base(PrintDocumentType.Text)
+        public TextDocumentParams(string text): base(PrintDocumentType.Text)
         {
             Text = text ?? throw new ArgumentNullException(nameof(text));
         }

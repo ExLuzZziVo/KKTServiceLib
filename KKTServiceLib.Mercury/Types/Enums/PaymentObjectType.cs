@@ -9,7 +9,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// <summary>
     /// Тип предмета расчета
     /// </summary>
-    public enum PaymentObjectType : byte
+    public enum PaymentObjectType: byte
     {
         /// <summary>
         /// Товар

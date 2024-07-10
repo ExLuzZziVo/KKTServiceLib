@@ -9,7 +9,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// <summary>
     /// Мера количества товара
     /// </summary>
-    public enum ItemUnitType : byte
+    public enum ItemUnitType: byte
     {
         /// <summary>
         /// Штуки, единицы

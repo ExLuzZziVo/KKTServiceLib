@@ -11,21 +11,21 @@ namespace KKTServiceLib.Atol.Types.Operations.KKT.GetMCUInfo
     public class GetMCUInfoResult
     {
         /// <summary>
-        /// Номер модели микроконтроллера
+        /// Информация о DataFlash
         /// </summary>
-        [Display(Name = "Номер модели микроконтроллера")]
-        public string PartId { get; set; }
+        [Display(Name = "Информация о DataFlash")]
+        public DataFlashInfo DataFlash { get; set; }
 
         /// <summary>
-        /// Название модели микроконтроллера
+        /// Информация о FRAM/EEPROM
         /// </summary>
-        [Display(Name = "Название модели микроконтроллера")]
-        public string PartName { get; set; }
+        [Display(Name = "Информация о FRAM/EEPROM")]
+        public EEPROMInfo FramEeprom { get; set; }
 
         /// <summary>
-        /// Уникальный номер микроконтроллера
+        /// Информация о микроконтроллере
         /// </summary>
-        [Display(Name = "Уникальный номер микроконтроллера")]
-        public string Sn { get; set; }
+        [Display(Name = "Информация о микроконтроллере")]
+        public MCUInfo Mcu { get; set; }
     }
 }

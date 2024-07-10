@@ -9,7 +9,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// <summary>
     /// Тип кода маркировки
     /// </summary>
-    public enum MarkingCodeCheckImcType : ushort
+    public enum MarkingCodeCheckImcType: ushort
     {
         /// <summary>
         /// Неопознанный КМ

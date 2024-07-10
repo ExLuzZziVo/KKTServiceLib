@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Тип фискального чека
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum FiscalReceiptType : byte
+    public enum FiscalReceiptType: byte
     {
         /// <summary>
         /// Чек прихода

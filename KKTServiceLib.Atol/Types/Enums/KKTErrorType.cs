@@ -9,7 +9,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// <summary>
     /// Тип ошибки ККТ
     /// </summary>
-    public enum KKTErrorType : uint
+    public enum KKTErrorType: uint
     {
         /// <summary>
         /// Ошибок нет
@@ -484,13 +484,13 @@ namespace KKTServiceLib.Atol.Types.Enums
         /// <summary>
         /// Чек закрыт – операция невозможна
         /// </summary>
-        [Display(Name = "Чек закрыт – операция невозможна")]
+        [Display(Name = "Документ закрыт – операция невозможна")]
         LIBFPTR_ERROR_DENIED_IN_CLOSED_RECEIPT = 081,
 
         /// <summary>
         /// Чек открыт – операция невозможна
         /// </summary>
-        [Display(Name = "Чек открыт – операция невозможна")]
+        [Display(Name = "Документ открыт – операция невозможна")]
         LIBFPTR_ERROR_DENIED_IN_OPENED_RECEIPT = 082,
 
         /// <summary>
@@ -1611,12 +1611,42 @@ namespace KKTServiceLib.Atol.Types.Enums
         /// </summary>
         [Display(Name = "Непечатаемые символы в реквизите")]
         LIBFPTR_ERROR_NON_PRINTABLE_CHAR = 271,
-        
+
         /// <summary>
         /// Неизвестный пользовательский тег
         /// </summary>
         [Display(Name = "Неизвестный пользовательский тег")]
         LIBFPTR_ERROR_INVALID_USER_TAG = 272,
+
+        /// <summary>
+        /// Перебор окончен без найденных данных
+        /// </summary>
+        [Display(Name = "Перебор окончен без найденных данных")]
+        LIBFPTR_ERROR_COMMODITIES_TABLE_ITERATION_STOPPED = 273,
+
+        /// <summary>
+        /// Некорректный формат CSV
+        /// </summary>
+        [Display(Name = "Некорректный формат CSV")]
+        LIBFPTR_ERROR_COMMODITIES_TABLE_INVALID_CSV_FORMAT = 274,
+
+        /// <summary>
+        /// Нет файла на USB-носителе
+        /// </summary>
+        [Display(Name = "Нет файла на USB-носителе")]
+        LIBFPTR_ERROR_MINIPOS_NO_FILE_ON_USB_STORE = 275,
+
+        /// <summary>
+        /// Не задан признак агента по предмету расчета
+        /// </summary>
+        [Display(Name = "Не задан признак агента по предмету расчета")]
+        LIBFPTR_ERROR_MINIPOS_NO_AGENT_FISCAL_PROPERTY = 276,
+
+        /// <summary>
+        /// Отсутствует подключение к сервису печати
+        /// </summary>
+        [Display(Name = "Отсутствует подключение к сервису печати")]
+        LIBFPTR_ERROR_NO_CONNECTION_WITH_PRINT_SERVICE = 277,
 
         /// <summary>
         /// Процедура проверки КМ уже запущена

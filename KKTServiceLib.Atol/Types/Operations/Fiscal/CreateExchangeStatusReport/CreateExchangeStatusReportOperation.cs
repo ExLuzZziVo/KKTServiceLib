@@ -13,13 +13,13 @@ using KKTServiceLib.Atol.Types.Interfaces;
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.CreateExchangeStatusReport
 {
     [Description("Создание отчета о текущем состоянии расчетов")]
-    public class CreateExchangeStatusReportOperation : Operation<CreateExchangeStatusReportResult>
+    public class CreateExchangeStatusReportOperation: Operation<CreateExchangeStatusReportResult>
     {
         /// <summary>
         /// Отчет о текущем состоянии расчетов
         /// </summary>
         /// <param name="operatorParams">Оператор (кассир)</param>
-        public CreateExchangeStatusReportOperation(OperatorParams operatorParams) : base("reportOfdExchangeStatus")
+        public CreateExchangeStatusReportOperation(OperatorParams operatorParams): base("reportOfdExchangeStatus")
         {
             Operator = operatorParams ?? throw new ArgumentNullException(nameof(operatorParams));
         }

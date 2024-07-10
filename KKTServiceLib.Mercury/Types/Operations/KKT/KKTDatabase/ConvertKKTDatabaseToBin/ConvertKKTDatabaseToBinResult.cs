@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.ConvertKKTDatabaseToBin
 {
     [Description("Результат конвертации базы товаров во внутренний формат ККТ")]
-    public class ConvertKKTDatabaseToBinResult : OperationResult
+    public class ConvertKKTDatabaseToBinResult: OperationResult
     {
         /// <summary>
         /// База товаров ККТ в base64

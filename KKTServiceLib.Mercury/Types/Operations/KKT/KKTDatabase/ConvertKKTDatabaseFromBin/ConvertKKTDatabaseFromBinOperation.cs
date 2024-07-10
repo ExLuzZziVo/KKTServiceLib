@@ -13,13 +13,13 @@ using CoreLib.CORE.Resources;
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.ConvertKKTDatabaseFromBin
 {
     [Description("Конвертация базы товаров из внутреннего формата ККТ")]
-    public class ConvertKKTDatabaseFromBinOperation : Operation<ConvertKKTDatabaseFromBinResult>
+    public class ConvertKKTDatabaseFromBinOperation: Operation<ConvertKKTDatabaseFromBinResult>
     {
         /// <summary>
         /// Конвертация базы товаров из внутреннего формата ККТ
         /// </summary>
         /// <param name="base64Content">База товаров ККТ в base64</param>
-        public ConvertKKTDatabaseFromBinOperation(string base64Content) : base("ConvertBaseFromBin")
+        public ConvertKKTDatabaseFromBinOperation(string base64Content): base("ConvertBaseFromBin")
         {
             if (base64Content.IsNullOrEmptyOrWhiteSpace())
             {

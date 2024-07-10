@@ -210,7 +210,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// </summary>
         [Display(Name = "Платёжный агент")]
         public AgentType? Agent { get; set; }
-        
+
         /// <summary>
         /// Признак блокировки товара для продажи
         /// </summary>

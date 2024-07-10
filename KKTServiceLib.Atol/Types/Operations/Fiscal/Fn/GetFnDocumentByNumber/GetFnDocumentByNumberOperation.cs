@@ -9,13 +9,13 @@ using CoreLib.CORE.Resources;
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Fn.GetFnDocumentByNumber
 {
     [Description("Чтение документа из ФН")]
-    public class GetFnDocumentByNumberOperation : Operation<GetFnDocumentByNumberResult>
+    public class GetFnDocumentByNumberOperation: Operation<GetFnDocumentByNumberResult>
     {
         /// <summary>
         /// Чтение документа из ФН
         /// </summary>
         /// <param name="fiscalDocumentNumber">Номер фискального документа</param>
-        public GetFnDocumentByNumberOperation(uint fiscalDocumentNumber) : base("getFnDocument")
+        public GetFnDocumentByNumberOperation(uint fiscalDocumentNumber): base("getFnDocument")
         {
             FiscalDocumentNumber = fiscalDocumentNumber;
         }

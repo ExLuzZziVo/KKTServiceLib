@@ -11,7 +11,7 @@ using System.Text.Json.Serialization;
 
 namespace KKTServiceLib.Atol.Types.Converters
 {
-    public class DictionaryToArrayConverter<TKey, TValue> : JsonConverter<IDictionary<TKey, TValue>>
+    public class DictionaryToArrayConverter<TKey, TValue>: JsonConverter<IDictionary<TKey, TValue>>
     {
         public override void Write(Utf8JsonWriter writer, IDictionary<TKey, TValue> value,
             JsonSerializerOptions options)

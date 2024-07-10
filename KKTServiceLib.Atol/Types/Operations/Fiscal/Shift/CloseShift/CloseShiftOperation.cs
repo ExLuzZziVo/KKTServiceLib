@@ -13,13 +13,13 @@ using KKTServiceLib.Atol.Types.Interfaces;
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Shift.CloseShift
 {
     [Description("Закрытие смены")]
-    public class CloseShiftOperation : Operation<CloseShiftResult>
+    public class CloseShiftOperation: Operation<CloseShiftResult>
     {
         /// <summary>
         /// Закрытие смены
         /// </summary>
         /// <param name="operatorParams">Оператор (кассир)</param>
-        public CloseShiftOperation(OperatorParams operatorParams) : base("closeShift")
+        public CloseShiftOperation(OperatorParams operatorParams): base("closeShift")
         {
             Operator = operatorParams ?? throw new ArgumentNullException(nameof(operatorParams));
         }

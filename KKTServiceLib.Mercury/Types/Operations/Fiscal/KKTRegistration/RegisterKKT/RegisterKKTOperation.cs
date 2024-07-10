@@ -19,7 +19,7 @@ using KKTServiceLib.Mercury.Types.Enums;
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.RegisterKKT
 {
     [Description("Регистрация/перерегистрация ККТ")]
-    public class RegisterKKTOperation : Operation<RegisterKKTResult>
+    public class RegisterKKTOperation: Operation<RegisterKKTResult>
     {
         /// <summary>
         /// Регистрация/перерегистрация ККТ
@@ -38,7 +38,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.Register
             KKTParams kktParams,
             OfdParams ofdParams,
             DateTime localDateTime, ISet<TaxationType> taxationTypes,
-            KKTRegistrationReason? kktRegistrationReason = null) : base(type.ToString())
+            KKTRegistrationReason? kktRegistrationReason = null): base(type.ToString())
         {
             DateTime = localDateTime;
 

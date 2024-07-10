@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.GetKKTRegistrationInfo
 {
     [Description("Результат запроса параметров регистрации ККТ")]
-    public class GetKKTRegistrationInfoResult : OperationResult
+    public class GetKKTRegistrationInfoResult: OperationResult
     {
         /// <summary>
         /// ККТ зарегистрирована

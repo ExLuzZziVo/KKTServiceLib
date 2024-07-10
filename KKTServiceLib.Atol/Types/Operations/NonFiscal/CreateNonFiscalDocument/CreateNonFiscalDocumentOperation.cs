@@ -14,13 +14,13 @@ using KKTServiceLib.Atol.Types.Interfaces;
 namespace KKTServiceLib.Atol.Types.Operations.NonFiscal.CreateNonFiscalDocument
 {
     [Description("Создание нефискального документа")]
-    public class CreateNonFiscalDocumentOperation : Operation<bool>
+    public class CreateNonFiscalDocumentOperation: Operation<bool>
     {
         /// <summary>
         /// Создание нефискального документа
         /// </summary>
         /// <param name="items">Элементы документа</param>
-        public CreateNonFiscalDocumentOperation(ICommonDocumentElement[] items) : base("nonFiscal")
+        public CreateNonFiscalDocumentOperation(ICommonDocumentElement[] items): base("nonFiscal")
         {
             if (items?.Any() != true)
             {

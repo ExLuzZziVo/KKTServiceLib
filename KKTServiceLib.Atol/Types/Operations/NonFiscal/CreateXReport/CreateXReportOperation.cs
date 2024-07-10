@@ -13,13 +13,13 @@ using KKTServiceLib.Atol.Types.Interfaces;
 namespace KKTServiceLib.Atol.Types.Operations.NonFiscal.CreateXReport
 {
     [Description("Создание X-отчета")]
-    public class CreateXReportOperation : Operation<bool>
+    public class CreateXReportOperation: Operation<bool>
     {
         /// <summary>
         /// Создание X-отчета
         /// </summary>
         /// <param name="operatorParams">Оператор (кассир)</param>
-        public CreateXReportOperation(OperatorParams operatorParams) : base("reportX")
+        public CreateXReportOperation(OperatorParams operatorParams): base("reportX")
         {
             Operator = operatorParams ?? throw new ArgumentNullException(nameof(operatorParams));
         }

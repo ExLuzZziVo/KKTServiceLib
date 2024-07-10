@@ -12,7 +12,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// Тип регистрации ККТ
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum KKTRegistrationType : byte
+    public enum KKTRegistrationType: byte
     {
         /// <summary>
         /// Регистрация ККТ

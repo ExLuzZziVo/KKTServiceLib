@@ -10,7 +10,7 @@ using KKTServiceLib.Mercury.Types.Enums;
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.ConvertKKTDatabaseFromBin
 {
     [Description("Результат конвертации базы товаров из внутреннего формата ККТ")]
-    public class ConvertKKTDatabaseFromBinResult : OperationResult
+    public class ConvertKKTDatabaseFromBinResult: OperationResult
     {
         /// <summary>
         /// Версия внутренней базы товаров ККТ

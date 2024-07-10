@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Тип чека коррекции
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum CorrectionReceiptType : byte
+    public enum CorrectionReceiptType: byte
     {
         /// <summary>
         /// Чек коррекции прихода

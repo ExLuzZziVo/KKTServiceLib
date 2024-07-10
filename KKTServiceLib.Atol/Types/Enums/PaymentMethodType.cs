@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Способ расчета
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum PaymentMethodType : byte
+    public enum PaymentMethodType: byte
     {
         /// <summary>
         /// Предоплата 100%

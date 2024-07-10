@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Причина перерегистрации ККТ
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum KKTRegistrationReason : byte
+    public enum KKTRegistrationReason: byte
     {
         /// <summary>
         /// Смена ОФД

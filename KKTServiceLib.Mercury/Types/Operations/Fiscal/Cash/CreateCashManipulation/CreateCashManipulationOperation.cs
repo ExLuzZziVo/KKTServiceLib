@@ -16,7 +16,7 @@ using KKTServiceLib.Mercury.Types.Enums;
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Cash.CreateCashManipulation
 {
     [Description("Создание операции по внесению или выплате наличных")]
-    public class CreateCashManipulationOperation : Operation<CreateCashManipulationResult>
+    public class CreateCashManipulationOperation: Operation<CreateCashManipulationResult>
     {
         /// <summary>
         /// Создание операции по внесению или выплате наличных
@@ -25,7 +25,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Cash.CreateCashManipulat
         /// <param name="operatorParams">Оператор (кассир)</param>
         /// <param name="cashSum">Сумма наличных</param>
         public CreateCashManipulationOperation(CashManipulationType type, OperatorParams operatorParams,
-            decimal cashSum) : base(type.ToString())
+            decimal cashSum): base(type.ToString())
         {
             if (cashSum < (decimal)0.01 || cashSum > 21474836)
             {

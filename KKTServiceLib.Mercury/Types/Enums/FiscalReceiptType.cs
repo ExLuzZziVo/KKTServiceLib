@@ -9,7 +9,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// <summary>
     /// Тип фискального чека
     /// </summary>
-    public enum FiscalReceiptType : byte
+    public enum FiscalReceiptType: byte
     {
         [Display(Name = "Приход")] Sell = 0,
         [Display(Name = "Возврат прихода")] SellReturn = 1,

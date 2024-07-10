@@ -9,7 +9,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// <summary>
     /// Налоговая ставка
     /// </summary>
-    public enum WatType : byte
+    public enum WatType: byte
     {
         /// <summary>
         /// НДС 20%

@@ -15,7 +15,7 @@ namespace KKTServiceLib.Atol.Types.Converters
     /// <summary>
     /// Конвертер для десериализации документа ФН в более читабельный вид  
     /// </summary>
-    public class FnDocumentConverter : JsonConverter<GetFnDocumentByNumberResult>
+    public class FnDocumentConverter: JsonConverter<GetFnDocumentByNumberResult>
     {
         /// <summary>
         /// Словарь реквизитов ФН

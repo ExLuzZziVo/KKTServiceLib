@@ -13,7 +13,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Ресурс области уведомлений
     /// </summary>
     [JsonConverter(typeof(JsonStringEnumMemberConverter))]
-    public enum MarkingCodeCheckMemoryStatus : byte
+    public enum MarkingCodeCheckMemoryStatus: byte
     {
         /// <summary>
         /// Область заполнена менее чем на 50%

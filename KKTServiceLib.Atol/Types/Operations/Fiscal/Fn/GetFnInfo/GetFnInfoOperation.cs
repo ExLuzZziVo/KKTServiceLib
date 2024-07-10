@@ -7,11 +7,11 @@ using System.ComponentModel;
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Fn.GetFnInfo
 {
     [Description("Запрос информации о ФН")]
-    public class GetFnInfoOperation : Operation<GetFnInfoResult>
+    public class GetFnInfoOperation: Operation<GetFnInfoResult>
     {
         /// <summary>
         /// Запрос информации о ФН
         /// </summary>
-        public GetFnInfoOperation() : base("getFnInfo") { }
+        public GetFnInfoOperation(): base("getFnInfo") { }
     }
 }

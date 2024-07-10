@@ -18,14 +18,14 @@ using KKTServiceLib.Shared.Resources;
 namespace KKTServiceLib.Atol.Types.Common.Document
 {
     [Description("Элемент штрихкода")]
-    public class BarcodeDocumentParams : DocumentParams, ICommonDocumentElement
+    public class BarcodeDocumentParams: DocumentParams, ICommonDocumentElement
     {
         /// <summary>
         /// Элемент штрихкода
         /// </summary>
         /// <param name="barcodeValue">Данные ШК</param>
         /// <param name="barcodeType">Тип ШК</param>
-        public BarcodeDocumentParams(string barcodeValue, BarcodeType barcodeType) : base(PrintDocumentType.Barcode)
+        public BarcodeDocumentParams(string barcodeValue, BarcodeType barcodeType): base(PrintDocumentType.Barcode)
         {
             if (barcodeValue.IsNullOrEmptyOrWhiteSpace())
             {

@@ -16,14 +16,14 @@ using KKTServiceLib.Shared.Resources;
 namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintBarcode
 {
     [Description("Печать штрихового кода")]
-    public class PrintBarcodeOperation : Operation<PrintBarcodeResult>
+    public class PrintBarcodeOperation: Operation<PrintBarcodeResult>
     {
         /// <summary>
         /// Печать штрихового кода
         /// </summary>
         /// <param name="barcodeValue">Данные ШК</param>
         /// <param name="barcodeType">Тип ШК</param>
-        public PrintBarcodeOperation(string barcodeValue, BarcodeType barcodeType) : base("PrintBarCode")
+        public PrintBarcodeOperation(string barcodeValue, BarcodeType barcodeType): base("PrintBarCode")
         {
             if (barcodeValue.IsNullOrEmptyOrWhiteSpace())
             {

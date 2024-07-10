@@ -9,7 +9,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// <summary>
     /// Тип коррекции
     /// </summary>
-    public enum CorrectionReceiptCorrectionType : byte
+    public enum CorrectionReceiptCorrectionType: byte
     {
         /// <summary>
         /// Самостоятельно

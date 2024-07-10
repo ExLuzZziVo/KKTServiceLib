@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.Session.OpenSession
 {
     [Description("Результат открытия сессии")]
-    public class OpenSessionResult : OperationResult
+    public class OpenSessionResult: OperationResult
     {
         /// <summary>
         /// Сессионный ключ

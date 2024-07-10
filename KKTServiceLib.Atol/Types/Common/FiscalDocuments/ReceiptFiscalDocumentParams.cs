@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace KKTServiceLib.Atol.Types.Common.FiscalDocuments
 {
     [Description("Фискальный документ чека")]
-    public class ReceiptFiscalDocumentParams : FiscalDocumentParams
+    public class ReceiptFiscalDocumentParams: FiscalDocumentParams
     {
         /// <summary>
         /// Итог

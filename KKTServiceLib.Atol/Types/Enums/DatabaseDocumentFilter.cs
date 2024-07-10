@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Фильтр документов БД ККТ
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum DatabaseDocumentFilter : byte
+    public enum DatabaseDocumentFilter: byte
     {
         /// <summary>
         /// По номерам смен

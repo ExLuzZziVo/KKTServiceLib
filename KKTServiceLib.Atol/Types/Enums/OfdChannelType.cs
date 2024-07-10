@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Канал связи с ОФД
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum OfdChannelType : byte
+    public enum OfdChannelType: byte
     {
         /// <summary>
         /// USB (EoU)

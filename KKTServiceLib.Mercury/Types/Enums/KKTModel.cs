@@ -13,7 +13,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// Модель ККТ
     /// </summary>
     [JsonConverter(typeof(JsonStringEnumMemberConverter))]
-    public enum KKTModel : byte
+    public enum KKTModel: byte
     {
         /// <summary>
         /// 119Ф

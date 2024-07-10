@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Фаза жизни ФН
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum FnLivePhaseType : byte
+    public enum FnLivePhaseType: byte
     {
         /// <summary>
         /// Настройка ФН

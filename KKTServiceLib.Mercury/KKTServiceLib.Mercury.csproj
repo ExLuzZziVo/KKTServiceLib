@@ -1,34 +1,34 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;</TargetFrameworks>
-        <AssemblyName>KKTServiceLib.Mercury</AssemblyName>
-        <RootNamespace>KKTServiceLib.Mercury</RootNamespace>
-        <PackageId>KKTServiceLib.Mercury</PackageId>
-        <VersionPrefix>1.0.1</VersionPrefix>
-        <Authors>Khatin S.A.</Authors>
-        <Description>Библиотека для работы с кассами Меркурий через JSON</Description>
-        <PackageProjectUrl>https://github.com/ExLuzZziVo/KKTServiceLib</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/ExLuzZziVo/KKTServiceLib</RepositoryUrl>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageTags>kkt;ккт;касса;кассы;контрольно-кассовая техника;mercury;inecrman;меркурий</PackageTags>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-    </PropertyGroup>
-    <ItemGroup>
-        <None Include="..\README.md">
-            <Pack>True</Pack>
-            <PackagePath>\</PackagePath>
-        </None>
-    </ItemGroup>
-    <ItemGroup>
-        <PackageReference Include="System.Text.Json" Version="8.0.2"/>
-        <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Folder Include="Types\Operations\Fiscal\Receipt"/>
-        <Folder Include="Types\Operations\NonFiscal"/>
-    </ItemGroup>
-    <ItemGroup>
-        <ProjectReference Include="..\KKTServiceLib.Shared\KKTServiceLib.Shared.csproj"/>
-    </ItemGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;</TargetFrameworks>
+		<AssemblyName>KKTServiceLib.Mercury</AssemblyName>
+		<RootNamespace>KKTServiceLib.Mercury</RootNamespace>
+		<PackageId>KKTServiceLib.Mercury</PackageId>
+		<VersionPrefix>1.0.2</VersionPrefix>
+		<Authors>Khatin S.A.</Authors>
+		<Description>Библиотека для работы с кассами Меркурий через JSON</Description>
+		<PackageProjectUrl>https://github.com/ExLuzZziVo/KKTServiceLib</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/ExLuzZziVo/KKTServiceLib</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageTags>kkt;ккт;касса;кассы;контрольно-кассовая техника;mercury;inecrman;меркурий</PackageTags>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="System.Text.Json" Version="8.0.4"/>
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0"/>
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Types\Operations\Fiscal\Receipt"/>
+		<Folder Include="Types\Operations\NonFiscal"/>
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\KKTServiceLib.Shared\KKTServiceLib.Shared.csproj"/>
+	</ItemGroup>
 </Project>

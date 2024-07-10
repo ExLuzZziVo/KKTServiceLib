@@ -8,7 +8,7 @@ using KKTServiceLib.Mercury.Types.Common.KKT;
 
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.GetKKTRegistrationInfo
 {
-    public class KKTWorkParamsInfo : KKTWorkParams
+    public class KKTWorkParamsInfo: KKTWorkParams
     {
         [JsonConstructor]
         private KKTWorkParamsInfo() { }

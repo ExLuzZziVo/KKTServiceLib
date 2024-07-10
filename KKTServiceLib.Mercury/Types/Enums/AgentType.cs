@@ -9,7 +9,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// <summary>
     /// Тип агента
     /// </summary>
-    public enum AgentType : byte
+    public enum AgentType: byte
     {
         /// <summary>
         /// Банковский платежный агент

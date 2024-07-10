@@ -14,13 +14,13 @@ using KKTServiceLib.Mercury.Types.Enums;
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.ConvertKKTDatabaseToBin
 {
     [Description("Конвертация базы товаров во внутренний формат ККТ")]
-    public class ConvertKKTDatabaseToBinOperation : Operation<ConvertKKTDatabaseToBinResult>
+    public class ConvertKKTDatabaseToBinOperation: Operation<ConvertKKTDatabaseToBinResult>
     {
         /// <summary>
         /// Конвертация базы товаров во внутренний формат ККТ
         /// </summary>
         /// <param name="kktDatabaseVersion">Версия внутренней базы товаров ККТ</param>
-        public ConvertKKTDatabaseToBinOperation(KKTDatabaseVersion kktDatabaseVersion) : base("ConvertBaseToBin")
+        public ConvertKKTDatabaseToBinOperation(KKTDatabaseVersion kktDatabaseVersion): base("ConvertBaseToBin")
         {
             BaseVer = kktDatabaseVersion;
             IsSessionKeyRequired = false;

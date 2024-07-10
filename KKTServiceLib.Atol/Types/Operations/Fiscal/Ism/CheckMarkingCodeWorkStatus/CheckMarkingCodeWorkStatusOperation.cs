@@ -7,11 +7,11 @@ using System.ComponentModel;
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.CheckMarkingCodeWorkStatus
 {
     [Description("Запрос состояния работы с КМ")]
-    public class CheckMarkingCodeWorkStatusOperation : Operation<CheckMarkingCodeWorkStatusResult>
+    public class CheckMarkingCodeWorkStatusOperation: Operation<CheckMarkingCodeWorkStatusResult>
     {
         /// <summary>
         /// Запрос состояния работы с КМ
         /// </summary>
-        public CheckMarkingCodeWorkStatusOperation() : base("checkImcWorkState") { }
+        public CheckMarkingCodeWorkStatusOperation(): base("checkImcWorkState") { }
     }
 }

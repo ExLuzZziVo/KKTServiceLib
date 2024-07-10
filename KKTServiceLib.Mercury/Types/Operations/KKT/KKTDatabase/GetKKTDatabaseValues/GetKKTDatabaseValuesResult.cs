@@ -9,7 +9,7 @@ using KKTServiceLib.Mercury.Types.Common;
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.GetKKTDatabaseValues
 {
     [Description("Результат получения товаров в результате чтения базы данных ККТ")]
-    public class GetKKTDatabaseValuesResult : OperationResult
+    public class GetKKTDatabaseValuesResult: OperationResult
     {
         /// <summary>
         /// Товары

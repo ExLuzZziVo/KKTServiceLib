@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Тип кода маркировки
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum ImcType : ushort
+    public enum ImcType: ushort
     {
         /// <summary>
         /// Определить тип КМ автоматически

@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.GetKKTDatabaseVersion
 {
     [Description("Результат получения версии базы данных ККТ")]
-    public class GetKKTDatabaseVersionResult : OperationResult
+    public class GetKKTDatabaseVersionResult: OperationResult
     {
         /// <summary>
         /// Текущая версия базы товаров в ККТ

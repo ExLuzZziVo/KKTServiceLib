@@ -9,7 +9,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// <summary>
     /// Виды документов, удостоверяющих личность
     /// </summary>
-    public enum IdentityDocumentType : byte
+    public enum IdentityDocumentType: byte
     {
         /// <summary>
         /// Паспорт гражданина Российской Федерации

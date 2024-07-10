@@ -15,14 +15,14 @@ using KKTServiceLib.Atol.Types.Interfaces;
 namespace KKTServiceLib.Atol.Types.Common.Document
 {
     [Description("Картинка (массив пикселей)")]
-    public class PixelsDocumentParams : DocumentParams, ICommonDocumentElement
+    public class PixelsDocumentParams: DocumentParams, ICommonDocumentElement
     {
         /// <summary>
         /// Картинка (массив пикселей)
         /// </summary>
         /// <param name="pixels">Массив пикселей в base64</param>
         /// <param name="width">Ширина картинки в пикселях</param>
-        public PixelsDocumentParams(string pixels, int width) : base(PrintDocumentType.Pixels)
+        public PixelsDocumentParams(string pixels, int width): base(PrintDocumentType.Pixels)
         {
             if (pixels.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(pixels, RegexExtensions.Base64Pattern))
             {

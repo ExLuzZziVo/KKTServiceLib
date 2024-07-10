@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Тип маркируемого предмета
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum NomenclatureCodeType : byte
+    public enum NomenclatureCodeType: byte
     {
         /// <summary>
         /// Меховые изделия

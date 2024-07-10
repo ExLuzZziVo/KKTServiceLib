@@ -16,7 +16,7 @@ using KKTServiceLib.Atol.Types.Interfaces;
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Cash.CreateCashManipulation
 {
     [Description("Создание операции по внесению или выплате")]
-    public class CreateCashManipulationOperation : Operation<CreateCashManipulationResult>
+    public class CreateCashManipulationOperation: Operation<CreateCashManipulationResult>
     {
         /// <summary>
         /// Операция по внесению или выплате
@@ -25,7 +25,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Cash.CreateCashManipulation
         /// <param name="operatorParams">Оператор (кассир)</param>
         /// <param name="cashSum">Сумма наличных</param>
         public CreateCashManipulationOperation(CashManipulationType type, OperatorParams operatorParams,
-            decimal cashSum) : base(type.ToString().ToLowerFirstChar())
+            decimal cashSum): base(type.ToString().ToLowerFirstChar())
         {
             if (cashSum < (decimal)0.01)
             {

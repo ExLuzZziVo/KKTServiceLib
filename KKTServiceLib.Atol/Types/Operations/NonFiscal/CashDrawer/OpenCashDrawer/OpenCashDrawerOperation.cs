@@ -7,11 +7,11 @@ using System.ComponentModel;
 namespace KKTServiceLib.Atol.Types.Operations.NonFiscal.CashDrawer.OpenCashDrawer
 {
     [Description("Открыть денежный ящик")]
-    public class OpenCashDrawerOperation : Operation<bool>
+    public class OpenCashDrawerOperation: Operation<bool>
     {
         /// <summary>
         /// Открыть денежный ящик
         /// </summary>
-        public OpenCashDrawerOperation() : base("openCashDrawer") { }
+        public OpenCashDrawerOperation(): base("openCashDrawer") { }
     }
 }

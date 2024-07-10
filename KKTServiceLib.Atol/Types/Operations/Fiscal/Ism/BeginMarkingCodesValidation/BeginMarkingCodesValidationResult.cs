@@ -10,7 +10,7 @@ using KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.GetMarkingCodeValidationSta
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.BeginMarkingCodesValidation
 {
     [Description("Результат начала проверки элемента массива КМ")]
-    public class BeginMarkingCodesValidationResult : GetMarkingCodeValidationStatusResult
+    public class BeginMarkingCodesValidationResult: GetMarkingCodeValidationStatusResult
     {
         /// <summary>
         /// Локальная проверка

@@ -7,11 +7,11 @@ using System.ComponentModel;
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Fn.GetFnStatus
 {
     [Description("Запрос состояния ФН")]
-    public class GetFnStatusOperation : Operation<GetFnStatusResult>
+    public class GetFnStatusOperation: Operation<GetFnStatusResult>
     {
         /// <summary>
         /// Запрос состояния ФН
         /// </summary>
-        public GetFnStatusOperation() : base("getFnStatus") { }
+        public GetFnStatusOperation(): base("getFnStatus") { }
     }
 }

@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Код обработки запроса
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum MarkingCodeCheckResponseResult : byte
+    public enum MarkingCodeCheckResponseResult: byte
     {
         /// <summary>
         /// Запрос имеет корректный формат, в том числе корректный формат кода маркировки

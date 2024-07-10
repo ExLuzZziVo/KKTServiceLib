@@ -13,7 +13,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Версия ФФД
     /// </summary>
     [JsonConverter(typeof(JsonStringEnumMemberConverter))]
-    public enum FfdVersionType : byte
+    public enum FfdVersionType: byte
     {
         /// <summary>
         /// 1.05

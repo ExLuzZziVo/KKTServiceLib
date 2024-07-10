@@ -12,13 +12,13 @@ using KKTServiceLib.Mercury.Types.Common;
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Shift.CloseShift
 {
     [Description("Закрытие смены")]
-    public class CloseShiftOperation : Operation<CloseShiftResult>
+    public class CloseShiftOperation: Operation<CloseShiftResult>
     {
         /// <summary>
         /// Закрытие смены
         /// </summary>
         /// <param name="operatorParams">Оператор (кассир)</param>
-        public CloseShiftOperation(OperatorParams operatorParams) : base("CloseShift")
+        public CloseShiftOperation(OperatorParams operatorParams): base("CloseShift")
         {
             CashierInfo = operatorParams ?? throw new ArgumentNullException(nameof(operatorParams));
         }

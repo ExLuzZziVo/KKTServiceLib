@@ -9,7 +9,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// <summary>
     /// Тип ШК
     /// </summary>
-    public enum BarcodeType : byte
+    public enum BarcodeType: byte
     {
         /// <summary>
         /// EAN-8

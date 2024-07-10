@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Состояние смены
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum ShiftStatus : byte
+    public enum ShiftStatus: byte
     {
         /// <summary>
         /// Закрыта

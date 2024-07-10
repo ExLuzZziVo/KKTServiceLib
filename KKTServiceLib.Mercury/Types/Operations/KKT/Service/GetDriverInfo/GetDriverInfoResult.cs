@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.Service.GetDriverInfo
 {
     [Description("Результат получения информации о драйвере ККТ")]
-    public class GetDriverInfoResult : OperationResult
+    public class GetDriverInfoResult: OperationResult
     {
         /// <summary>
         /// Версия драйвера

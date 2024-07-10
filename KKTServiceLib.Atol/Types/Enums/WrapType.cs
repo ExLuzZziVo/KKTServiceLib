@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Обрезание текста
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum WrapType : byte
+    public enum WrapType: byte
     {
         /// <summary>
         /// Не переносить, обрезать по ширине ленты

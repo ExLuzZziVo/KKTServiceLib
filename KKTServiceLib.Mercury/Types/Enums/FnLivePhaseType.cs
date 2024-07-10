@@ -9,7 +9,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// <summary>
     /// Фаза жизни ФН
     /// </summary>
-    public enum FnLivePhaseType : byte
+    public enum FnLivePhaseType: byte
     {
         /// <summary>
         /// Готов к фискализации

@@ -10,7 +10,7 @@ using CoreLib.CORE.Helpers.Converters;
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.GetDateTime
 {
     [Description("Результат запроса даты и времени ККТ")]
-    public class GetDateTimeResult : OperationResult
+    public class GetDateTimeResult: OperationResult
     {
         /// <summary>
         /// Дата и время ККТ

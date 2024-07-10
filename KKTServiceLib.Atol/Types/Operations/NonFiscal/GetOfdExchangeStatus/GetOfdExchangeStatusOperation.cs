@@ -7,11 +7,11 @@ using System.ComponentModel;
 namespace KKTServiceLib.Atol.Types.Operations.NonFiscal.GetOfdExchangeStatus
 {
     [Description("Запрос состояния обмена с ОФД")]
-    public class GetOfdExchangeStatusOperation : Operation<GetOfdExchangeStatusResult>
+    public class GetOfdExchangeStatusOperation: Operation<GetOfdExchangeStatusResult>
     {
         /// <summary>
         /// Запрос состояния обмена с ОФД
         /// </summary>
-        public GetOfdExchangeStatusOperation() : base("ofdExchangeStatus") { }
+        public GetOfdExchangeStatusOperation(): base("ofdExchangeStatus") { }
     }
 }

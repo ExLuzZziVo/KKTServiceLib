@@ -13,13 +13,13 @@ using KKTServiceLib.Atol.Types.Enums;
 namespace KKTServiceLib.Atol.Types.Common.Document
 {
     [Description("Дополнительный реквизит чека (БСО)")]
-    public class AdditionalAttributeDocumentParams : DocumentParams
+    public class AdditionalAttributeDocumentParams: DocumentParams
     {
         /// <summary>
         /// Дополнительный реквизит чека (БСО)
         /// </summary>
         /// <param name="value">Значение</param>
-        public AdditionalAttributeDocumentParams(string value) : base(PrintDocumentType.AdditionalAttribute)
+        public AdditionalAttributeDocumentParams(string value): base(PrintDocumentType.AdditionalAttribute)
         {
             if (value.IsNullOrEmptyOrWhiteSpace() || value.Length > 16)
             {

@@ -12,7 +12,7 @@ namespace KKTServiceLib.Mercury.Types.Converters
     /// <summary>
     /// Конвертер для денежных величин. ККТ работает с int
     /// </summary>
-    public class MoneyConverter : JsonConverter<object>
+    public class MoneyConverter: JsonConverter<object>
     {
         public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
         {

@@ -18,7 +18,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
 {
     [Description("Предмет расчета (ФФД < 1.2)")]
     [JsonDerivedType(typeof(PositionDocumentParams_12))]
-    public class PositionDocumentParams : DocumentParams
+    public class PositionDocumentParams: DocumentParams
     {
         private MarkingCodeParams _markingCode;
         protected object _nomenclatureCode;
@@ -33,7 +33,7 @@ namespace KKTServiceLib.Atol.Types.Common.Document
         /// <param name="paymentMethodType">Способ расчета</param>
         /// <param name="paymentObjectType">Тип предмета расчета</param>
         public PositionDocumentParams(string name, decimal price, double quantity, TaxParams tax,
-            PaymentMethodType paymentMethodType, PaymentObjectType paymentObjectType) : base(
+            PaymentMethodType paymentMethodType, PaymentObjectType paymentObjectType): base(
             PrintDocumentType.Position)
         {
             if (name.IsNullOrEmptyOrWhiteSpace())

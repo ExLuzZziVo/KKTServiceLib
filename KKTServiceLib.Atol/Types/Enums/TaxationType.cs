@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Система налогообложения
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum TaxationType : byte
+    public enum TaxationType: byte
     {
         /// <summary>
         /// Общая

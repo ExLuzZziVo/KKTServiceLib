@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Тип документа для печати
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum PrintDocumentType : byte
+    public enum PrintDocumentType: byte
     {
         /// <summary>
         /// Товар

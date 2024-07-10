@@ -9,7 +9,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// <summary>
     /// Код обработки запроса
     /// </summary>
-    public enum MarkingCodeCheckResponseResult : byte
+    public enum MarkingCodeCheckResponseResult: byte
     {
         /// <summary>
         /// Запрос имеет корректный формат, в том числе корректный формат кода маркировки

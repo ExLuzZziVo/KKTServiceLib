@@ -13,13 +13,13 @@ using CoreLib.CORE.Resources;
 namespace KKTServiceLib.Atol.Types.Operations.KKT.Settings.ReadKKTSettings
 {
     [Description("Чтение настроек ККТ")]
-    public class ReadKKTSettingsOperation : Operation<ReadKKTSettingsResult>
+    public class ReadKKTSettingsOperation: Operation<ReadKKTSettingsResult>
     {
         /// <summary>
         /// Чтение настроек ККТ
         /// </summary>
         /// <param name="keys">Список номеров настроек для чтения</param>
-        public ReadKKTSettingsOperation(ISet<uint> keys) : base("getDeviceParameters")
+        public ReadKKTSettingsOperation(ISet<uint> keys): base("getDeviceParameters")
         {
             if (keys?.Any() != true)
             {

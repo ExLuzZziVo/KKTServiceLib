@@ -12,7 +12,7 @@ using CoreLib.CORE.Resources;
 namespace KKTServiceLib.Mercury.Types.Common.MarkingCodes
 {
     [Description("Дробное число")]
-    public class FractionalNumber : IValidatableObject
+    public class FractionalNumber: IValidatableObject
     {
         /// <summary>
         /// Дробное число

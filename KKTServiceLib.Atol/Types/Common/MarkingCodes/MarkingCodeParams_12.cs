@@ -236,9 +236,20 @@ namespace KKTServiceLib.Atol.Types.Common.MarkingCodes
         /// Не отправлять запрос на сервер
         /// </summary>
         /// <remarks>
+        /// Применяется в случаях, когда при продаже маркированного товара указывать код маркировки в чеке необязательно.
         /// Значение по умолчанию: false
         /// </remarks>
         [Display(Name = "Не отправлять запрос на сервер")]
         public bool NotSendToServer { get; set; } = false;
+
+        /// <summary>
+        /// Не формировать запрос
+        /// </summary>
+        /// <remarks>
+        /// Запрос не будет сформирован в ФН и, соответственно, отправлен на сервер. Параметр <see cref="NotSendToServer"/> не актуален для данного запроса.
+        /// Значение по умолчанию: false
+        /// </remarks>
+        [Display(Name = "Не формировать запрос")]
+        public bool NotFormRequest { get; set; } = false;
     }
 }

@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace KKTServiceLib.Mercury.Types.Operations.KKT.KKTDatabase.GetKKTDatabaseProgress
 {
     [Description("Результат получения прогресса выполнения операции с базой данных ККТ")]
-    public class GetKKTDatabaseProgressResult : OperationResult
+    public class GetKKTDatabaseProgressResult: OperationResult
     {
         /// <summary>
         /// Имя команды

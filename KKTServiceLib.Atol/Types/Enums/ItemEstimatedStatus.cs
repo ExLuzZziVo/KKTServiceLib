@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Планируемый статус КМ
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum ItemEstimatedStatus : byte
+    public enum ItemEstimatedStatus: byte
     {
         /// <summary>
         /// Штучный товар, реализован

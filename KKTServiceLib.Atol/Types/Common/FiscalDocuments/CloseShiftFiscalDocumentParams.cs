@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace KKTServiceLib.Atol.Types.Common.FiscalDocuments
 {
     [Description("Фискальный документ о закрытии смены")]
-    public class CloseShiftFiscalDocumentParams : FiscalDocumentParams
+    public class CloseShiftFiscalDocumentParams: FiscalDocumentParams
     {
         /// <summary>
         /// Количество чеков за смену

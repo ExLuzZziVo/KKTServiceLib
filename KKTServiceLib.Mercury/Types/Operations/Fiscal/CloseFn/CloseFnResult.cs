@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.CloseFn
 {
     [Description("Результат закрытия ФН")]
-    public class CloseFnResult : FiscalOperationResult
+    public class CloseFnResult: FiscalOperationResult
     {
         /// <summary>
         /// Номер фискального накопителя

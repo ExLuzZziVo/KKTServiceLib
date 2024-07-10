@@ -12,13 +12,13 @@ using CoreLib.CORE.Resources;
 namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintText
 {
     [Description("Печать текста")]
-    public class PrintTextOperation : Operation<PrintTextResult>
+    public class PrintTextOperation: Operation<PrintTextResult>
     {
         /// <summary>
         /// Печать текста
         /// </summary>
         /// <param name="text"></param>
-        public PrintTextOperation(string text) : base("PrintText")
+        public PrintTextOperation(string text): base("PrintText")
         {
             if (text.IsNullOrEmptyOrWhiteSpace())
             {

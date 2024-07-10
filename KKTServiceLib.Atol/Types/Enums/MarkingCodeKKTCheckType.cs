@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Тип проверки КМ в ККТ
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum MarkingCodeKKTCheckType : byte
+    public enum MarkingCodeKKTCheckType: byte
     {
         /// <summary>
         /// Автономный режим
@@ -35,6 +35,12 @@ namespace KKTServiceLib.Atol.Types.Enums
         /// Проверка без отправления на сервер
         /// </summary>
         [Display(Name = "Проверка без отправления на сервер")]
-        NotSendToServer
+        NotSendToServer,
+
+        /// <summary>
+        /// Проверка без формирования запроса в ФН
+        /// </summary>
+        [Display(Name = "Проверка без формирования запроса в ФН")]
+        NotFormRequest
     }
 }

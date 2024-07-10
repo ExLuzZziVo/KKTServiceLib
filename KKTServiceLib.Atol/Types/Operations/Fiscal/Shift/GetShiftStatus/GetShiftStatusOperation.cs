@@ -7,11 +7,11 @@ using System.ComponentModel;
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Shift.GetShiftStatus
 {
     [Description("Запрос состояния смены")]
-    public class GetShiftStatusOperation : Operation<GetShiftStatusResult>
+    public class GetShiftStatusOperation: Operation<GetShiftStatusResult>
     {
         /// <summary>
         /// Запрос состояния смены
         /// </summary>
-        public GetShiftStatusOperation() : base("getShiftStatus") { }
+        public GetShiftStatusOperation(): base("getShiftStatus") { }
     }
 }

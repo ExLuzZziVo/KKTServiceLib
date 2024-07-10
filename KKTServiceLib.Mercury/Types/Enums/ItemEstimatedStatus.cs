@@ -9,7 +9,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// <summary>
     /// Планируемый статус КМ
     /// </summary>
-    public enum ItemEstimatedStatus : byte
+    public enum ItemEstimatedStatus: byte
     {
         /// <summary>
         /// Штучный товар, реализован

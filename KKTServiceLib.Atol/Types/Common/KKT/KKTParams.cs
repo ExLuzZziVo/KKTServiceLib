@@ -39,6 +39,9 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// <param name="insurance">Признак осуществления страховой деятельности</param>
         /// <param name="marking">Признак торговли маркированными товарами</param>
         /// <param name="pawnShop">Признак осуществления ломбардной деятельности</param>
+        /// <param name="vending">Признак применения в торговом автомате</param>
+        /// <param name="catering">Признак осуществления услуг общ. питания</param>
+        /// <param name="wholesale">Признак оптовой торговли</param>
         public KKTParams(string registrationNumber,
             string address,
             bool encryption,
@@ -57,7 +60,10 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
             FfdVersionType ffdVersion,
             bool insurance,
             bool marking,
-            bool pawnShop)
+            bool pawnShop,
+            bool vending,
+            bool catering,
+            bool wholesale)
         {
             if (registrationNumber.IsNullOrEmptyOrWhiteSpace())
             {
@@ -103,6 +109,9 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
             Insurance = insurance;
             Marking = marking;
             PawnShop = pawnShop;
+            Vending = vending;
+            Catering = catering;
+            Wholesale = wholesale;
         }
 
         [JsonConstructor]
@@ -307,5 +316,35 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         [Display(Name = "Признак осуществления ломбардной деятельности")]
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public bool PawnShop { get; }
+
+        /// <summary>
+        /// Признак применения в торговом автомате
+        /// </summary>
+        /// <list type="bullet">
+        /// <item>Обязательное поле</item>
+        /// </list>
+        [Display(Name = "Признак применения в торговом автомате")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        public bool Vending { get; }
+
+        /// <summary>
+        /// Признак осуществления услуг общ. питания
+        /// </summary>
+        /// <list type="bullet">
+        /// <item>Обязательное поле</item>
+        /// </list>
+        [Display(Name = "Признак осуществления услуг общ. питания")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        public bool Catering { get; }
+
+        /// <summary>
+        /// Признак оптовой торговли
+        /// </summary>
+        /// <list type="bullet">
+        /// <item>Обязательное поле</item>
+        /// </list>
+        [Display(Name = "Признак оптовой торговли")]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        public bool Wholesale { get; }
     }
 }

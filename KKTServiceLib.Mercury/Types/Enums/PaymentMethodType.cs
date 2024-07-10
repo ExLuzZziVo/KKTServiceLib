@@ -9,7 +9,7 @@ namespace KKTServiceLib.Mercury.Types.Enums
     /// <summary>
     /// Способ расчета
     /// </summary>
-    public enum PaymentMethodType : byte
+    public enum PaymentMethodType: byte
     {
         /// <summary>
         /// Предоплата 100%

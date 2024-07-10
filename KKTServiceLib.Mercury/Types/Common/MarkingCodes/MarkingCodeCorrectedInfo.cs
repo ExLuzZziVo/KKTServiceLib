@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace KKTServiceLib.Mercury.Types.Common.MarkingCodes
 {
     [Description("Исправленная информация о коде маркировки")]
-    public class MarkingCodeCorrectedInfo : MarkingCodeInfo
+    public class MarkingCodeCorrectedInfo: MarkingCodeInfo
     {
         /// <summary>
         /// Режим обработки кода товара

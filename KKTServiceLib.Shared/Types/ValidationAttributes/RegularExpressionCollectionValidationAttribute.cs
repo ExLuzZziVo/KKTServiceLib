@@ -13,7 +13,7 @@ namespace KKTServiceLib.Shared.Types.ValidationAttributes
     /// <summary>
     /// Атрибут валидации коллекции строк по регулярному выражению
     /// </summary>
-    public class RegularExpressionCollectionValidationAttribute : ValidationAttribute
+    public class RegularExpressionCollectionValidationAttribute: ValidationAttribute
     {
         /// <summary>
         /// Атрибут валидации коллекции строк по регулярному выражению

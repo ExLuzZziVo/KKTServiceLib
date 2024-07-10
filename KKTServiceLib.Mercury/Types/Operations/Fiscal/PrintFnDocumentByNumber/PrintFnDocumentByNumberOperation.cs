@@ -9,13 +9,13 @@ using CoreLib.CORE.Resources;
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.PrintFnDocumentByNumber
 {
     [Description("Печать документа из ФН по номеру ФД")]
-    public class PrintFnDocumentByNumberOperation : Operation<PrintFnDocumentByNumberResult>
+    public class PrintFnDocumentByNumberOperation: Operation<PrintFnDocumentByNumberResult>
     {
         /// <summary>
         /// Печать документа из ФН по номеру ФД
         /// </summary>
         /// <param name="fiscalDocumentNumber">Номер фискального документа</param>
-        public PrintFnDocumentByNumberOperation(uint fiscalDocumentNumber) : base("PrintDocFromFN")
+        public PrintFnDocumentByNumberOperation(uint fiscalDocumentNumber): base("PrintDocFromFN")
         {
             FiscalDocNum = fiscalDocumentNumber;
         }

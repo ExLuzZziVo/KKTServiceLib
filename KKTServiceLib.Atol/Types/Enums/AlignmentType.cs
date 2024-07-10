@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Выравнивание
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum AlignmentType : byte
+    public enum AlignmentType: byte
     {
         /// <summary>
         /// Выравнивание по левому краю

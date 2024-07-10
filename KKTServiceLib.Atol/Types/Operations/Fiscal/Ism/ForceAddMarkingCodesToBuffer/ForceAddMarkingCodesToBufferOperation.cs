@@ -15,13 +15,13 @@ using KKTServiceLib.Atol.Types.Common.MarkingCodes;
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Ism.ForceAddMarkingCodesToBuffer
 {
     [Description("Принудительное добавление массива КМ в таблицу проверенных КМ")]
-    public class ForceAddMarkingCodesToBufferOperation : Operation<ForceAddMarkingCodesToBufferResult[]>
+    public class ForceAddMarkingCodesToBufferOperation: Operation<ForceAddMarkingCodesToBufferResult[]>
     {
         /// <summary>
         /// Принудительное добавление массива КМ в таблицу проверенных КМ
         /// </summary>
         /// <param name="markingCodeParams">Массив КМ для проверки</param>
-        public ForceAddMarkingCodesToBufferOperation(MarkingCodeParams_12[] markingCodeParams) : base(
+        public ForceAddMarkingCodesToBufferOperation(MarkingCodeParams_12[] markingCodeParams): base(
             "addMarksToBuffer")
         {
             if (markingCodeParams?.Any() != true)

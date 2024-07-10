@@ -12,13 +12,13 @@ using KKTServiceLib.Mercury.Types.Common;
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.CreateExchangeStatusReport
 {
     [Description("Создание отчета о текущем состоянии расчетов")]
-    public class CreateExchangeStatusReportOperation : Operation<CreateExchangeStatusReportResult>
+    public class CreateExchangeStatusReportOperation: Operation<CreateExchangeStatusReportResult>
     {
         /// <summary>
         /// Создание отчета о текущем состоянии расчетов
         /// </summary>
         /// <param name="operatorParams">Оператор (кассир)</param>
-        public CreateExchangeStatusReportOperation(OperatorParams operatorParams) : base("ReportStatusOfSettlements")
+        public CreateExchangeStatusReportOperation(OperatorParams operatorParams): base("ReportStatusOfSettlements")
         {
             CashierInfo = operatorParams ?? throw new ArgumentNullException(nameof(operatorParams));
         }

@@ -10,13 +10,13 @@ using KKTServiceLib.Mercury.Types.Enums;
 namespace KKTServiceLib.Mercury.Types.Operations.NonFiscal.PrintReport
 {
     [Description("Печать отчета")]
-    public class PrintReportOperation : Operation<PrintReportResult>
+    public class PrintReportOperation: Operation<PrintReportResult>
     {
         /// <summary>
         /// Печать отчета
         /// </summary>
         /// <param name="reportType">Тип отчета</param>
-        public PrintReportOperation(ReportType reportType) : base("PrintReport")
+        public PrintReportOperation(ReportType reportType): base("PrintReport")
         {
             ReportCode = reportType;
         }

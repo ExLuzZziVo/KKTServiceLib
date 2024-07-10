@@ -7,11 +7,11 @@ using System.ComponentModel;
 namespace KKTServiceLib.Atol.Types.Operations.KKT.ContinuePrint
 {
     [Description("Допечатать документ")]
-    public class ContinuePrintOperation : Operation<bool>
+    public class ContinuePrintOperation: Operation<bool>
     {
         /// <summary>
         /// Допечатать документ
         /// </summary>
-        public ContinuePrintOperation() : base("continuePrint") { }
+        public ContinuePrintOperation(): base("continuePrint") { }
     }
 }

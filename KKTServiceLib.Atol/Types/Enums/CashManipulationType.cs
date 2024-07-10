@@ -12,7 +12,7 @@ namespace KKTServiceLib.Atol.Types.Enums
     /// Тип операции с наличными
     /// </summary>
     [JsonConverter(typeof(JsonCamelCaseStringEnumConverter))]
-    public enum CashManipulationType : byte
+    public enum CashManipulationType: byte
     {
         /// <summary>
         /// Внесение наличных

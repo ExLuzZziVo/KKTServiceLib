@@ -21,7 +21,7 @@ using KKTServiceLib.Shared.Resources;
 namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
 {
     [Description("Создание фискального чека")]
-    public class CreateFiscalReceiptOperation : Operation<CreateFiscalReceiptResult>
+    public class CreateFiscalReceiptOperation: Operation<CreateFiscalReceiptResult>
     {
         /// <summary>
         /// Создание фискального чека
@@ -34,7 +34,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// <param name="additionalAttributeValue">Дополнительный реквизит чека (БСО)</param>
         public CreateFiscalReceiptOperation(FiscalReceiptType type, OperatorParams operatorParams,
             TaxationType taxationType, DocumentParams[] items, PaymentParams[] payments,
-            string additionalAttributeValue = null) : base(type.ToString()
+            string additionalAttributeValue = null): base(type.ToString()
             .ToLowerFirstChar())
         {
             if (items?.Any() != true)
@@ -266,6 +266,14 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
         public UserParams[] CustomParameters { get; set; }
+
+        /// <summary>
+        /// Данные уведомления
+        /// </summary>
+        [Display(Name = "Данные уведомления")]
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
+        public NotificationData[] SalesNotice { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

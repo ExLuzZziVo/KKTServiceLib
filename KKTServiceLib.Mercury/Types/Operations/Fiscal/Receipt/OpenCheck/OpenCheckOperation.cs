@@ -20,7 +20,7 @@ using KKTServiceLib.Shared.Resources;
 namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
 {
     [Description("Открытие фискального чека")]
-    public class OpenCheckOperation : Operation<OpenCheckResult>
+    public class OpenCheckOperation: Operation<OpenCheckResult>
     {
         /// <summary>
         /// Открытие фискального чека
@@ -29,7 +29,7 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
         /// <param name="operatorParams">Оператор (кассир)</param>
         /// <param name="taxationType">Система налогообложения</param>
         public OpenCheckOperation(FiscalReceiptType fiscalReceiptType, OperatorParams operatorParams,
-            TaxationType taxationType) : base("OpenCheck")
+            TaxationType taxationType): base("OpenCheck")
         {
             CheckType = fiscalReceiptType;
             TaxSystem = taxationType;
