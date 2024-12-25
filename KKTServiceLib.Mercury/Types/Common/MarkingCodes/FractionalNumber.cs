@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using CoreLib.CORE.Helpers.ObjectHelpers;
 using CoreLib.CORE.Resources;
 
@@ -41,6 +42,9 @@ namespace KKTServiceLib.Mercury.Types.Common.MarkingCodes
             Numerator = numerator;
             Denominator = denominator;
         }
+
+        [JsonConstructor]
+        private FractionalNumber() { }
 
         /// <summary>
         /// Числитель дроби

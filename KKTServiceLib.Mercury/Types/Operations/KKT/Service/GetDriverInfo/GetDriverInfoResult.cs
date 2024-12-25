@@ -27,5 +27,11 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.Service.GetDriverInfo
         /// </summary>
         [Display(Name = "Максимальная версия базы товаров ККТ")]
         public string DriverBaseVer { get; set; }
+
+        /// <summary>
+        /// Максимальная версия формата журналов продаж ККТ
+        /// </summary>
+        [Display(Name = "Максимальная версия формата журналов продаж ККТ")]
+        public string DriverSalesVer { get; set; }
     }
 }

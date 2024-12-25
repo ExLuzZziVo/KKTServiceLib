@@ -39,6 +39,26 @@ namespace KKTServiceLib.Mercury.Types.Enums
         /// <summary>
         /// НДС не облагается
         /// </summary>
-        [Display(Name = "НДС не облагается")] None = 6
+        [Display(Name = "НДС не облагается")] None = 6,
+
+        /// <summary>
+        /// НДС 5%
+        /// </summary>
+        [Display(Name = "НДС 5%")] Vat5 = 7,
+
+        /// <summary>
+        /// НДС 7%
+        /// </summary>
+        [Display(Name = "НДС 7%")] Vat7 = 8,
+
+        /// <summary>
+        /// НДС 5/105
+        /// </summary>
+        [Display(Name = "5/105")] Vat105 = 9,
+
+        /// <summary>
+        /// НДС 7/107
+        /// </summary>
+        [Display(Name = "7/107")] Vat107 = 10
     }
 }

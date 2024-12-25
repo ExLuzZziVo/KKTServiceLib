@@ -3,6 +3,7 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using CoreLib.CORE.Helpers.Converters;
 using CoreLib.CORE.Resources;
 using KKTServiceLib.Mercury.Types.Enums;
@@ -25,6 +26,9 @@ namespace KKTServiceLib.Mercury.Types.Common.FiscalDocuments
             CorrectionType = correctionType;
             CauseDocDate = receiptToCorrectDate;
         }
+
+        [JsonConstructor]
+        private CorrectionReceiptFiscalDocumentParams() { }
 
         /// <summary>
         /// Тип коррекции

@@ -1,4 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
+
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;</TargetFrameworks>
 		<AssemblyName>KKTServiceLib.Shared</AssemblyName>
@@ -14,16 +15,25 @@
 		<PackageTags>kkt;ккт;касса;кассы;контрольно-кассовая техника</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\CoreLib\CoreLib.CORE.Extensions.Json\CoreLib.CORE.Extensions.Json.csproj"/>
+		<ProjectReference Include="..\..\CoreLib\CoreLib.CORE.Extensions.Ru\CoreLib.CORE.Extensions.Ru.csproj"/>
+		<ProjectReference Include="..\..\CoreLib\CoreLib.CORE\CoreLib.CORE.csproj"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Text.Json" Version="8.0.5"/>
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0"/>
+	</ItemGroup>
+
 	<ItemGroup>
 		<None Include="..\README.md">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
 	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="System.Text.Json" Version="8.0.4"/>
-		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0"/>
-	</ItemGroup>
+
 	<ItemGroup>
 		<Compile Update="Resources\ErrorStrings.Designer.cs">
 			<DependentUpon>ErrorStrings.resx</DependentUpon>
@@ -31,15 +41,12 @@
 			<AutoGen>True</AutoGen>
 		</Compile>
 	</ItemGroup>
+
 	<ItemGroup>
 		<EmbeddedResource Update="Resources\ErrorStrings.resx">
 			<LastGenOutput>ErrorStrings.Designer.cs</LastGenOutput>
 			<Generator>PublicResXFileCodeGenerator</Generator>
 		</EmbeddedResource>
 	</ItemGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\..\CoreLib\CoreLib.CORE.Extensions.Json\CoreLib.CORE.Extensions.Json.csproj"/>
-		<ProjectReference Include="..\..\CoreLib\CoreLib.CORE.Extensions.Ru\CoreLib.CORE.Extensions.Ru.csproj"/>
-		<ProjectReference Include="..\..\CoreLib\CoreLib.CORE\CoreLib.CORE.csproj"/>
-	</ItemGroup>
+
 </Project>

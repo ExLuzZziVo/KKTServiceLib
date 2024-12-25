@@ -330,9 +330,9 @@ namespace KKTServiceLib.Atol.Types.Enums
         LIBFPTR_ERROR_PAYMENTS_OVERFLOW = 054,
 
         /// <summary>
-        /// Предыдущая операция незавершена
+        /// Предыдущая операция не завершена
         /// </summary>
-        [Display(Name = "Предыдущая операция незавершена")]
+        [Display(Name = "Предыдущая операция не завершена")]
         LIBFPTR_ERROR_BUSY = 055,
 
         /// <summary>
@@ -1202,9 +1202,9 @@ namespace KKTServiceLib.Atol.Types.Enums
         LIBFPTR_ERROR_LICENSE_MEMORY_OVERFLOW = 202,
 
         /// <summary>
-        /// Произошла критичная ошибка, документ необходимо отменить
+        /// Произошла критическая ошибка, документ необходимо отменить
         /// </summary>
-        [Display(Name = "Произошла критичная ошибка, документ необходимо отменить")]
+        [Display(Name = "Произошла критическая ошибка, документ необходимо отменить")]
         LIBFPTR_ERROR_NEED_CANCEL_DOCUMENT = 203,
 
         /// <summary>
@@ -1647,6 +1647,12 @@ namespace KKTServiceLib.Atol.Types.Enums
         /// </summary>
         [Display(Name = "Отсутствует подключение к сервису печати")]
         LIBFPTR_ERROR_NO_CONNECTION_WITH_PRINT_SERVICE = 277,
+
+        /// <summary>
+        /// Универсальные счетчики отключены в настройках ядра
+        /// </summary>
+        [Display(Name = "Универсальные счетчики отключены в настройках ядра")]
+        LIBFPTR_ERROR_UNIVERSAL_COUNTERS_ARE_DISABLED = 278,
 
         /// <summary>
         /// Процедура проверки КМ уже запущена

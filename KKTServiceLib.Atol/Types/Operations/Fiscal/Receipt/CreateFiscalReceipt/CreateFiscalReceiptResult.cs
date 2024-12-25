@@ -23,5 +23,23 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// </summary>
         [Display(Name = "Флаги предупреждений")]
         public WarningFlags Warnings { get; set; }
+
+        /// <summary>
+        /// Приблизительный размера чека в байтах
+        /// </summary>
+        /// <remarks>
+        /// Значение присваивается только при выполнении предварительной проверки размера чека
+        /// </remarks>
+        [Display(Name = "Приблизительный размера чека в байтах")]
+        public ushort? ReceiptSize { get; set; }
+
+        /// <summary>
+        /// Приблизительный размера чека в процентах от максимально возможного
+        /// </summary>
+        /// <remarks>
+        /// Значение присваивается только при выполнении предварительной проверки размера чека
+        /// </remarks>
+        [Display(Name = "Приблизительный размера чека в процентах от максимально возможного")]
+        public byte? ReceiptPercentageSize { get; set; }
     }
 }

@@ -15,6 +15,9 @@ namespace KKTServiceLib.Mercury.Types.Common
     [Description("Товар")]
     public class Product
     {
+        private bool? _alcohol = false;
+        private PaymentObjectType? _typeCode = PaymentObjectType.Commodity;
+
         /// <summary>
         /// Товар
         /// </summary>
@@ -146,7 +149,19 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// Значение по умолчанию: <see cref="PaymentObjectType.Commodity"/>
         /// </remarks>
         [Display(Name = "Признак предмета расчета")]
-        public PaymentObjectType? TypeCode { get; set; } = PaymentObjectType.Commodity;
+        public PaymentObjectType? TypeCode
+        {
+            get => _typeCode;
+            set
+            {
+                _typeCode = value;
+
+                if (_typeCode != PaymentObjectType.Excise && _alcohol == true)
+                {
+                    _alcohol = false;
+                }
+            }
+        }
 
         /// <summary>
         /// Штучный товар
@@ -215,9 +230,33 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// Признак блокировки товара для продажи
         /// </summary>
         /// <remarks>
-        /// Значение по умолчанию: false
+        /// Значение по умолчанию: false<br/>
+        /// Версия базы ККТ: <b>0.4</b>
         /// </remarks>
         [Display(Name = "Признак блокировки товара для продажи")]
         public bool? Blocked { get; set; } = false;
+
+        /// <summary>
+        /// Признак алкогольной продукции, маркированной федеральными специальными марками
+        /// </summary>
+        /// <remarks>
+        /// Значение по умолчанию: false<br/>
+        /// Версия базы ККТ: <b>0.5</b><br/>
+        /// Если значение поля устанавливается в true, то код признака предмета расчёта будет иметь значение <see cref="PaymentObjectType.Excise"/>
+        /// </remarks>
+        [Display(Name = "Признак алкогольной продукции, маркированной федеральными специальными марками")]
+        public bool? Alcohol
+        {
+            get => _alcohol;
+            set
+            {
+                _alcohol = value;
+
+                if (_alcohol == true && _typeCode != PaymentObjectType.Excise)
+                {
+                    _typeCode = PaymentObjectType.Excise;
+                }
+            }
+        }
     }
 }

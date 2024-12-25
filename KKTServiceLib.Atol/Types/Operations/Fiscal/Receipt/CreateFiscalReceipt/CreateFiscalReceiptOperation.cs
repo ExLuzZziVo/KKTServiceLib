@@ -83,6 +83,16 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         public bool IgnoreNonFiscalPrintErrors { get; set; }
 
         /// <summary>
+        /// Выполнить предварительную проверку размера чека
+        /// </summary>
+        /// <remarks>
+        /// Чек пробит не будет.
+        /// Значение по умолчанию: false
+        /// </remarks>
+        [Display(Name = "Выполнить предварительную проверку размера чека")]
+        public bool CheckSize { get; set; } = false;
+
+        /// <summary>
         /// Электронный чек
         /// </summary>
         [Display(Name = "Электронный чек")]

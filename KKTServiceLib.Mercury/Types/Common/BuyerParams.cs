@@ -3,6 +3,7 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using CoreLib.CORE.Helpers.Converters;
 using CoreLib.CORE.Helpers.ObjectHelpers;
@@ -46,6 +47,9 @@ namespace KKTServiceLib.Mercury.Types.Common
             BuyerName = name;
             BuyerINN = vatin;
         }
+
+        [JsonConstructor]
+        private BuyerParams() { }
 
         /// <summary>
         /// Наименование покупателя

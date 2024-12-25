@@ -1,4 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
+
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;</TargetFrameworks>
 		<AssemblyName>KKTServiceLib.Mercury</AssemblyName>
@@ -14,21 +15,21 @@
 		<PackageTags>kkt;ккт;касса;кассы;контрольно-кассовая техника;mercury;inecrman;меркурий</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\KKTServiceLib.Shared\KKTServiceLib.Shared.csproj"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Text.Json" Version="8.0.5"/>
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0"/>
+	</ItemGroup>
+
 	<ItemGroup>
 		<None Include="..\README.md">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
 	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="System.Text.Json" Version="8.0.4"/>
-		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0"/>
-	</ItemGroup>
-	<ItemGroup>
-		<Folder Include="Types\Operations\Fiscal\Receipt"/>
-		<Folder Include="Types\Operations\NonFiscal"/>
-	</ItemGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\KKTServiceLib.Shared\KKTServiceLib.Shared.csproj"/>
-	</ItemGroup>
+
 </Project>

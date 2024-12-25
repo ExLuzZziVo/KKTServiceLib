@@ -1,5 +1,6 @@
 ﻿#region
 
+using System;
 using System.ComponentModel.DataAnnotations;
 
 #endregion
@@ -22,5 +23,11 @@ namespace KKTServiceLib.Mercury.Types.Operations
         /// </summary>
         [Display(Name = "Фискальный признак документа")]
         public string FiscalSign { get; set; }
+
+        /// <summary>
+        /// Дата и время регистрации документа в ФН
+        /// </summary>
+        [Display(Name = "Дата и время регистрации документа в ФН")]
+        public DateTime? DateTime { get; set; }
     }
 }
