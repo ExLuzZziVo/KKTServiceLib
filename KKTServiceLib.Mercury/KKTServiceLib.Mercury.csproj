@@ -5,7 +5,7 @@
 		<AssemblyName>KKTServiceLib.Mercury</AssemblyName>
 		<RootNamespace>KKTServiceLib.Mercury</RootNamespace>
 		<PackageId>KKTServiceLib.Mercury</PackageId>
-		<VersionPrefix>1.0.2</VersionPrefix>
+		<VersionPrefix>1.0.3</VersionPrefix>
 		<Authors>Khatin S.A.</Authors>
 		<Description>Библиотека для работы с кассами Меркурий через JSON</Description>
 		<PackageProjectUrl>https://github.com/ExLuzZziVo/KKTServiceLib</PackageProjectUrl>
