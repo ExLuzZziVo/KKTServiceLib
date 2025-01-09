@@ -33,6 +33,9 @@ namespace KKTServiceLib.Mercury.Types.Common
             Value = value;
         }
 
+        [JsonConstructor]
+        private IndustryRequisiteReceiptParams() { }
+
         /// <summary>
         /// Значение отраслевого реквизита
         /// </summary>

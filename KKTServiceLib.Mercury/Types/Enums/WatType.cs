@@ -54,11 +54,11 @@ namespace KKTServiceLib.Mercury.Types.Enums
         /// <summary>
         /// НДС 5/105
         /// </summary>
-        [Display(Name = "5/105")] Vat105 = 9,
+        [Display(Name = "НДС 5/105")] Vat105 = 9,
 
         /// <summary>
         /// НДС 7/107
         /// </summary>
-        [Display(Name = "7/107")] Vat107 = 10
+        [Display(Name = "НДС 7/107")] Vat107 = 10
     }
 }
