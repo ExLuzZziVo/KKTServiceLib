@@ -5,7 +5,7 @@
 		<AssemblyName>KKTServiceLib.Shared</AssemblyName>
 		<RootNamespace>KKTServiceLib.Shared</RootNamespace>
 		<PackageId>KKTServiceLib.Shared</PackageId>
-		<VersionPrefix>1.0.4</VersionPrefix>
+		<VersionPrefix>1.0.5</VersionPrefix>
 		<Authors>Khatin S.A.</Authors>
 		<Description>Общая библиотека для работы с кассами АТОЛ и Меркурий через JSON</Description>
 		<PackageProjectUrl>https://github.com/ExLuzZziVo/KKTServiceLib</PackageProjectUrl>
@@ -23,7 +23,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="System.Text.Json" Version="8.0.5"/>
+		<PackageReference Include="System.Text.Json" Version="8.0.6"/>
 		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0"/>
 	</ItemGroup>
 

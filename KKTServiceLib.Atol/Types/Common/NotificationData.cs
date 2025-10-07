@@ -42,6 +42,9 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <summary>
         /// Название реквизита
         /// </summary>
+        /// <list type="bullet">
+        /// <item>Обязательное поле</item>
+        /// </list>
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Название реквизита")]
         public string Name { get; }
@@ -49,6 +52,9 @@ namespace KKTServiceLib.Atol.Types.Common
         /// <summary>
         /// Значение реквизита
         /// </summary>
+        /// <list type="bullet">
+        /// <item>Обязательное поле</item>
+        /// </list>
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Значение реквизита")]
         public string Value { get; }

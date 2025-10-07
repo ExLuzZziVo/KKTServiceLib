@@ -133,6 +133,15 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateCorrectionRec
         public bool Electronically { get; set; }
 
         /// <summary>
+        /// Признак расчета в 'Интернет'
+        /// </summary>
+        /// <remarks>
+        /// Значение по умолчанию: false
+        /// </remarks>
+        [Display(Name = "Признак расчета в 'Интернет'")]
+        public bool Internet { get; set; } = false;
+
+        /// <summary>
         /// Система налогообложения
         /// </summary>
         /// <list type="bullet">
@@ -145,16 +154,18 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateCorrectionRec
         /// <summary>
         /// Место проведения расчетов
         /// </summary>
-        /// <list type="bullet">
-        /// <item>Обязательное поле, если чек является электронным</item>
-        /// </list>
         [Display(Name = "Место проведения расчета")]
         public string PaymentsPlace { get; set; }
 
         /// <summary>
         /// Адрес расчётов
         /// </summary>
+        /// <list type="bullet">
+        /// <item>Обязательное поле, если <see cref="Internet"/> имеет значение true</item>
+        /// </list>
         [Display(Name = "Адрес расчётов")]
+        [RequiredIf(nameof(Internet), true,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public string PaymentsAddress { get; set; }
 
         /// <summary>
@@ -270,6 +281,14 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateCorrectionRec
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (Internet && ClientInfo?.EmailOrPhone.IsNullOrEmptyOrWhiteSpace() != false)
+            {
+                yield return new ValidationResult(string.Format(
+                        ValidationStrings.ResourceManager.GetString("RequiredError"),
+                        GetType().GetProperty(nameof(ClientInfo.EmailOrPhone)).GetPropertyDisplayName()),
+                    new[] { nameof(ClientInfo.EmailOrPhone) });
+            }
+
             if (CorrectionType == CorrectionReceiptCorrectionType.Instruction &&
                 CorrectionBaseNumber.IsNullOrEmptyOrWhiteSpace())
             {

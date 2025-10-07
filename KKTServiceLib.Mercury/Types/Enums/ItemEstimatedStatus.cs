@@ -36,6 +36,18 @@ namespace KKTServiceLib.Mercury.Types.Enums
         ItemDryReturn = 4,
 
         /// <summary>
+        /// Штучный товар, в стадии реализации
+        /// </summary>
+        [Display(Name = "Штучный товар, в стадии реализации")]
+        ItemPieceForSale = 5,
+
+        /// <summary>
+        /// Мерный товар, реализован
+        /// </summary>
+        [Display(Name = "Мерный товар, реализован")]
+        ItemDrySold = 6,
+
+        /// <summary>
         /// Статус товара не изменился
         /// </summary>
         [Display(Name = "Статус товара не изменился")]

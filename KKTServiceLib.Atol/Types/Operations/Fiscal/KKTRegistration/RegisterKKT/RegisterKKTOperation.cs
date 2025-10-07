@@ -127,5 +127,13 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.KKTRegistration.RegisterKKT
         /// </summary>
         [Display(Name = "Электронный отчет")]
         public bool Electronically { get; set; }
+
+        /// <summary>
+        /// Дополнительный реквизит отчета
+        /// </summary>
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "ComplexObjectValidationError")]
+        [Display(Name = "Дополнительный реквизит отчета")]
+        public AdditionalAttributeReportParams AdditionalAttribute { get; set; }
     }
 }

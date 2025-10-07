@@ -28,11 +28,6 @@ namespace KKTServiceLib.Mercury.Types.Enums
         UsnIncomeOutcome = 2,
 
         /// <summary>
-        /// ЕНВД
-        /// </summary>
-        [Display(Name = "ЕНВД")] Envd = 3,
-
-        /// <summary>
         /// Единый сельскохозяйственный налог
         /// </summary>
         [Display(Name = "Единый сельскохозяйственный налог")]

@@ -51,5 +51,25 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.CreateExchangeStatusReport
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
         [Display(Name = "Элементы для печати после документа")]
         public ICommonDocumentElement[] PostItems { get; set; }
+
+        /// <summary>
+        /// Дополнительный реквизит отчета
+        /// </summary>
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "ComplexObjectValidationError")]
+        [Display(Name = "Дополнительный реквизит отчета")]
+        public AdditionalAttributeReportParams AdditionalAttribute { get; set; }
+
+        /// <summary>
+        /// Адрес расчетов
+        /// </summary>
+        [Display(Name = "Адрес расчетов")]
+        public string Address { get; set; }
+
+        /// <summary>
+        /// Место расчетов
+        /// </summary>
+        [Display(Name = "Место расчетов")]
+        public string PaymentAddress { get; set; }
     }
 }

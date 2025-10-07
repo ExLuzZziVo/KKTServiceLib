@@ -1,12 +1,15 @@
 ﻿#region
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
 using CoreLib.CORE.Resources;
 using KKTServiceLib.Mercury.Types.Common;
 using KKTServiceLib.Shared.Helpers;
+using KKTServiceLib.Shared.Resources;
 
 #endregion
 
@@ -53,5 +56,28 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.CloseCheck
         [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectValidationError")]
         public PaymentParams Payment { get; }
+
+        /// <summary>
+        /// Сведения обо всех оплатах по чеку безналичными
+        /// </summary>
+        [Display(Name = "Сведения обо всех оплатах по чеку безналичными")]
+        [ComplexObjectValidation(ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "ComplexObjectValidationError")]
+        public ElectronicallyPaymentParams[] EcashPaymentInfo { get; set; }
+
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (EcashPaymentInfo != null)
+            {
+                var electronicallyTotalPaymentsSum = EcashPaymentInfo.Sum(p => p.Sum);
+
+                if (electronicallyTotalPaymentsSum != Payment.Ecash)
+                {
+                    yield return new ValidationResult(
+                        ErrorStrings.ResourceManager.GetString("ElectronicallyTotalPaymentSumError"),
+                        new[] { nameof(Payment.Ecash) });
+                }
+            }
+        }
     }
 }

@@ -114,6 +114,15 @@ namespace KKTServiceLib.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Общая сумма из всех сведений об оплате безналичными должна быть равна сумме оплат безналичными.
+        /// </summary>
+        public static string ElectronicallyTotalPaymentSumError {
+            get {
+                return ResourceManager.GetString("ElectronicallyTotalPaymentSumError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Фискальный документ выбранного типа не может иметь параметры чека коррекции.
         /// </summary>
         public static string IsNotCorrectionReceiptError {

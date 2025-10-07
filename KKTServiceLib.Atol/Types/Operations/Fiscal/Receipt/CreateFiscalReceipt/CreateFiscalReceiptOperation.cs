@@ -86,7 +86,7 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// Выполнить предварительную проверку размера чека
         /// </summary>
         /// <remarks>
-        /// Чек пробит не будет.
+        /// Доступна только при активной лицензии 19. Чек пробит не будет.
         /// Значение по умолчанию: false
         /// </remarks>
         [Display(Name = "Выполнить предварительную проверку размера чека")]
@@ -97,6 +97,15 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// </summary>
         [Display(Name = "Электронный чек")]
         public bool Electronically { get; set; }
+
+        /// <summary>
+        /// Признак расчета в 'Интернет'
+        /// </summary>
+        /// <remarks>
+        /// Значение по умолчанию: false
+        /// </remarks>
+        [Display(Name = "Признак расчета в 'Интернет'")]
+        public bool Internet { get; set; } = false;
 
         /// <summary>
         /// Система налогообложения
@@ -111,16 +120,18 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// <summary>
         /// Место проведения расчётов
         /// </summary>
-        /// <list type="bullet">
-        /// <item>Обязательное поле, если чек является электронным</item>
-        /// </list>
         [Display(Name = "Место проведения расчётов")]
         public string PaymentsPlace { get; set; }
 
         /// <summary>
         /// Адрес расчётов
         /// </summary>
+        /// <list type="bullet">
+        /// <item>Обязательное поле, если <see cref="Internet"/> имеет значение true</item>
+        /// </list>
         [Display(Name = "Адрес расчётов")]
+        [RequiredIf(nameof(Internet), true,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public string PaymentsAddress { get; set; }
 
         /// <summary>
@@ -226,6 +237,14 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         public PaymentParams[] Payments { get; }
 
         /// <summary>
+        /// Сведения обо всех оплатах по чеку безналичными
+        /// </summary>
+        [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
+        [Display(Name = "Сведения обо всех оплатах по чеку безналичными")]
+        public ElectronicallyPaymentParams[] PaymentsAddInfo { get; set; }
+
+        /// <summary>
         /// Налоги на чек
         /// </summary>
         [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
@@ -287,6 +306,14 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (Internet && ClientInfo?.EmailOrPhone.IsNullOrEmptyOrWhiteSpace() != false)
+            {
+                yield return new ValidationResult(string.Format(
+                        ValidationStrings.ResourceManager.GetString("RequiredError"),
+                        GetType().GetProperty(nameof(ClientInfo.EmailOrPhone)).GetPropertyDisplayName()),
+                    new[] { nameof(ClientInfo.EmailOrPhone) });
+            }
+
             if (AgentInfo != null)
             {
                 foreach (var vr in AgentInfo.Validate(validationContext))

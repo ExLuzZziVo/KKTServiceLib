@@ -100,6 +100,12 @@ namespace KKTServiceLib.Mercury.Types.Operations.KKT.SalesJournal.GetSalesJourna
         public string CountryOfOrigin { get; set; }
 
         /// <summary>
+        /// Уникальный идентификационный номер ювелирного изделия
+        /// </summary>
+        [Display(Name = "Уникальный идентификационный номер ювелирного изделия")]
+        public string Uin { get; set; }
+
+        /// <summary>
         /// Отраслевой реквизит
         /// </summary>
         [Display(Name = "Отраслевой реквизит")]

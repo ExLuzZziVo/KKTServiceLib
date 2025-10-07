@@ -3,6 +3,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using CoreLib.CORE.Helpers.ValidationHelpers.Attributes;
 using CoreLib.CORE.Resources;
 using KKTServiceLib.Mercury.Types.Converters;
 using KKTServiceLib.Mercury.Types.Enums;
@@ -16,6 +17,7 @@ namespace KKTServiceLib.Mercury.Types.Common
     public class Product
     {
         private bool? _alcohol = false;
+        private bool? _jewelry = false;
         private PaymentObjectType? _typeCode = PaymentObjectType.Commodity;
 
         /// <summary>
@@ -252,9 +254,51 @@ namespace KKTServiceLib.Mercury.Types.Common
             {
                 _alcohol = value;
 
-                if (_alcohol == true && _typeCode != PaymentObjectType.Excise)
+                if (_alcohol == true)
                 {
+                    _jewelry = false;
+
                     _typeCode = PaymentObjectType.Excise;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Объём потребительской упаковки алкогольной продукции в миллилитрах
+        /// </summary>
+        /// <list type="bullet">
+        /// <item>Обязательное поле, если <see cref="Alcohol"/> имеет значение true</item>
+        /// <item>Должно лежать в диапазоне: 1-<see cref="int.MaxValue"/></item>
+        /// </list>
+        /// <remarks>
+        /// Версия базы ККТ: <b>0.5</b><br/>
+        /// </remarks>
+        [Display(Name = "Объём потребительской упаковки алкогольной продукции в миллилитрах")]
+        [RequiredIf(nameof(Alcohol), true,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
+        [Range(1, int.MaxValue, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "DigitRangeValuesError")]
+        public int? Volume { get; set; }
+
+        /// <summary>
+        /// Признак маркированной ювелирной продукции
+        /// </summary>
+        /// <remarks>
+        /// Значение по умолчанию: false<br/>
+        /// Версия базы ККТ: <b>0.6</b>
+        /// </remarks>
+        [Display(Name = "Признак маркированной ювелирной продукции")]
+        public bool? Jewelry
+        {
+            get => _jewelry;
+            set
+            {
+                _jewelry = value;
+
+                if (_jewelry == true)
+                {
+                    _alcohol = false;
+                    Volume = null;
                 }
             }
         }

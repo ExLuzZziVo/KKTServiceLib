@@ -65,7 +65,12 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
         /// <summary>
         /// Место проведения расчета
         /// </summary>
+        /// <list type="bullet">
+        /// <item>Обязательное поле, если <see cref="Internet"/> имеет значение true</item>
+        /// </list>
         [Display(Name = "Место проведения расчета")]
+        [RequiredIf(nameof(Internet), true,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public string Location { get; set; }
 
         /// <summary>
@@ -156,6 +161,30 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.Receipt.OpenCheck
         [ComplexObjectCollectionValidation(AllowNullItems = false, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "ComplexObjectCollectionValidationError")]
         public IndustryRequisiteReceiptParams[] IndustryInfo { get; set; }
+
+        /// <summary>
+        /// Номер часовой зоны места (адреса) осуществления расчётов
+        /// </summary>
+        /// <list type="bullet">
+        /// <item>Должно лежать в диапазоне: 2-12</item>
+        /// </list>
+        /// <remarks>
+        /// При отсутствии ключа будет использовано значение из настроек ККТ
+        /// </remarks>
+        [Display(Name = "Номер часовой зоны места (адреса) осуществления расчётов")]
+        [Range(2, 12, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "DigitRangeValuesError")]
+        public int? TimeZone { get; set; }
+
+        /// <summary>
+        /// Признак расчета в 'Интернет'
+        /// </summary>
+        /// <remarks>
+        /// Значение по умолчанию: false<br/>
+        /// Если признак установлен в значение true, то в команде <see cref="CloseCheck.CloseCheckOperation"/> значение для ключа <see cref="CloseCheck.CloseCheckOperation.SendCheckTo"/> обязательно
+        /// </remarks>
+        [Display(Name = "Признак расчета в 'Интернет'")]
+        public bool? Internet { get; set; } = false;
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

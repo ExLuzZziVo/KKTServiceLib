@@ -106,9 +106,9 @@ namespace KKTServiceLib.Mercury.Types.Enums
         [Display(Name = "Торговый сбор")] MerchantTax = 17,
 
         /// <summary>
-        /// Курортный сбор
+        /// Туристический налог
         /// </summary>
-        [Display(Name = "Курортный сбор")] ResortFee = 18,
+        [Display(Name = "Туристический налог")] TouristTax = 18,
 
         /// <summary>
         /// Залог

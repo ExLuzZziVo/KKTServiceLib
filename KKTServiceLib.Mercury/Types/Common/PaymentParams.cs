@@ -17,7 +17,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// Сумма наличными
         /// </summary>
         /// <list type="bullet">
-        /// <item>Должно лежать в диапазоне: 0.01-21474836/></item>
+        /// <item>Должно лежать в диапазоне: 0.01-21474836</item>
         /// </list>
         [Display(Name = "Сумма наличными")]
         [JsonConverter(typeof(MoneyConverter))]
@@ -29,7 +29,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// Сумма безналичными
         /// </summary>
         /// <list type="bullet">
-        /// <item>Должно лежать в диапазоне: 0.01-21474836/></item>
+        /// <item>Должно лежать в диапазоне: 0.01-21474836</item>
         /// </list>
         [Display(Name = "Сумма безналичными")]
         [JsonConverter(typeof(MoneyConverter))]
@@ -41,7 +41,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// Сумма предоплатой (аванс)
         /// </summary>
         /// <list type="bullet">
-        /// <item>Должно лежать в диапазоне: 0.01-21474836/></item>
+        /// <item>Должно лежать в диапазоне: 0.01-21474836</item>
         /// </list>
         [Display(Name = "Сумма предоплатой (аванс)")]
         [JsonConverter(typeof(MoneyConverter))]
@@ -53,7 +53,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// Сумма постоплатой (кредит)
         /// </summary>
         /// <list type="bullet">
-        /// <item>Должно лежать в диапазоне: 0.01-21474836/></item>
+        /// <item>Должно лежать в диапазоне: 0.01-21474836</item>
         /// </list>
         [Display(Name = "Сумма постоплатой (кредит)")]
         [JsonConverter(typeof(MoneyConverter))]
@@ -65,7 +65,7 @@ namespace KKTServiceLib.Mercury.Types.Common
         /// Сумма встречным предоставлением
         /// </summary>
         /// <list type="bullet">
-        /// <item>Должно лежать в диапазоне: 0.01-21474836/></item>
+        /// <item>Должно лежать в диапазоне: 0.01-21474836</item>
         /// </list>
         [Display(Name = "Сумма встречным предоставлением")]
         [JsonConverter(typeof(MoneyConverter))]

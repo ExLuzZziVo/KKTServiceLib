@@ -37,6 +37,18 @@ namespace KKTServiceLib.Mercury.Types.Enums
         /// 0.4
         /// </summary>
         [EnumMember(Value = "0.4")] [Display(Name = "0.4")]
-        _04
+        _04,
+
+        /// <summary>
+        /// 0.5
+        /// </summary>
+        [EnumMember(Value = "0.5")] [Display(Name = "0.5")]
+        _05,
+
+        /// <summary>
+        /// 0.6
+        /// </summary>
+        [EnumMember(Value = "0.6")] [Display(Name = "0.6")]
+        _06
     }
 }

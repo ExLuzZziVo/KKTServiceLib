@@ -13,7 +13,7 @@ using KKTServiceLib.Atol.Types.Operations.Fiscal.Fn.GetFnDocumentByNumber;
 namespace KKTServiceLib.Atol.Types.Converters
 {
     /// <summary>
-    /// Конвертер для десериализации документа ФН в более читабельный вид  
+    /// Конвертер для десериализации документа ФН в более читабельный вид
     /// </summary>
     public class FnDocumentConverter: JsonConverter<GetFnDocumentByNumberResult>
     {
@@ -30,6 +30,7 @@ namespace KKTServiceLib.Atol.Types.Converters
             { "1005", "moneyTransferOperatorAddress" },
             { "1008", "buyerEmailOrPhone" },
             { "1009", "organizationAddress" },
+            { "1011", "timeZone" },
             { "1012", "fiscalDocumentDateTime" },
             { "1016", "moneyTransferOperatorVatin" },
             { "1017", "ofdVatin" },
@@ -63,6 +64,7 @@ namespace KKTServiceLib.Atol.Types.Converters
             { "1077", "fiscalDocumentSign" },
             { "1079", "receiptPositionPrice" },
             { "1081", "paymentElectronicallySum" },
+            { "1082", "electronicallyPaymentSum" },
             { "1097", "ofdNotSentCount" },
             { "1098", "ofdNotSentFirstDocNumber" },
             { "1102", "receiptWatVat20Sum" },
@@ -75,6 +77,7 @@ namespace KKTServiceLib.Atol.Types.Converters
             { "1109", "kktService" },
             { "1110", "kktBso" },
             { "1117", "organizationEmail" },
+            { "1125", "internet" },
             { "1126", "kktLottery" },
             { "1162", "receiptPositionNomenclatureCode" },
             { "1171", "supplierPhones" },
@@ -103,6 +106,11 @@ namespace KKTServiceLib.Atol.Types.Converters
             { "1229", "receiptPositionExciseSum" },
             { "1230", "receiptPositionCountryCode" },
             { "1231", "receiptPositionCustomsDeclaration" },
+            { "1234", "electronicallyPaymentTotalInfo" },
+            { "1235", "electronicallyPaymentInfo" },
+            { "1236", "electronicallyPaymentMethod" },
+            { "1237", "electronicallyPaymentIds" },
+            { "1238", "electronicallyPaymentAdditionalInfo" },
             { "1244", "buyerCitizenship" },
             { "1245", "buyerIdentityDocumentCode" },
             { "1246", "buyerIdentityDocumentData" },
@@ -117,6 +125,16 @@ namespace KKTServiceLib.Atol.Types.Converters
             { "1271", "operationParamsId" },
             { "1272", "operationParamsData" },
             { "1273", "operationParamsDateTime" },
+            { "1274", "registrationReportAdditionalAttribute_1" },
+            { "1275", "registrationReportAdditionalAttribute_2" },
+            { "1276", "openShiftReportAdditionalAttribute_1" },
+            { "1277", "openShiftReportAdditionalAttribute_2" },
+            { "1278", "closeShiftReportAdditionalAttribute_1" },
+            { "1279", "closeShiftReportAdditionalAttribute_2" },
+            { "1280", "exchangeStatusReportAdditionalAttribute_1" },
+            { "1281", "exchangeStatusReportAdditionalAttribute_2" },
+            { "1282", "closeFnReportAdditionalAttribute_1" },
+            { "1283", "closeFnReportAdditionalAttribute_2" },
             { "1291", "markingCodeParamsItemFractionalAmount" },
             { "1300", "positionCodeUndefined" },
             { "1301", "positionCodeEan8" },
