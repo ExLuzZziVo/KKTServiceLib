@@ -120,18 +120,18 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
         /// <summary>
         /// Место проведения расчётов
         /// </summary>
+        /// <list type="bullet">
+        /// <item>Обязательное поле, если <see cref="Internet"/> имеет значение true</item>
+        /// </list>
         [Display(Name = "Место проведения расчётов")]
+        [RequiredIf(nameof(Internet), true,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public string PaymentsPlace { get; set; }
 
         /// <summary>
         /// Адрес расчётов
         /// </summary>
-        /// <list type="bullet">
-        /// <item>Обязательное поле, если <see cref="Internet"/> имеет значение true</item>
-        /// </list>
         [Display(Name = "Адрес расчётов")]
-        [RequiredIf(nameof(Internet), true,
-            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public string PaymentsAddress { get; set; }
 
         /// <summary>
@@ -312,6 +312,20 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateFiscalReceipt
                         ValidationStrings.ResourceManager.GetString("RequiredError"),
                         GetType().GetProperty(nameof(ClientInfo.EmailOrPhone)).GetPropertyDisplayName()),
                     new[] { nameof(ClientInfo.EmailOrPhone) });
+            }
+
+            if (PaymentsAddInfo != null)
+            {
+                var electronicallyPaymentsSum =
+                    Payments.Where(p => p.Type == PaymentType.Electronically).Sum(p => p.Sum);
+                var electronicallyTotalPaymentsSum = PaymentsAddInfo.Sum(p => p.Sum);
+
+                if (electronicallyTotalPaymentsSum != electronicallyPaymentsSum)
+                {
+                    yield return new ValidationResult(
+                        ErrorStrings.ResourceManager.GetString("ElectronicallyTotalPaymentSumError"),
+                        new[] { nameof(Payments) });
+                }
             }
 
             if (AgentInfo != null)

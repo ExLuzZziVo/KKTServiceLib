@@ -5,7 +5,7 @@
 		<AssemblyName>KKTServiceLib.Atol</AssemblyName>
 		<RootNamespace>KKTServiceLib.Atol</RootNamespace>
 		<PackageId>KKTServiceLib.Atol</PackageId>
-		<VersionPrefix>1.0.5</VersionPrefix>
+		<VersionPrefix>1.0.5.1</VersionPrefix>
 		<Authors>Khatin S.A.</Authors>
 		<Description>Библиотека для работы с кассами АТОЛ через JSON</Description>
 		<PackageProjectUrl>https://github.com/ExLuzZziVo/KKTServiceLib</PackageProjectUrl>

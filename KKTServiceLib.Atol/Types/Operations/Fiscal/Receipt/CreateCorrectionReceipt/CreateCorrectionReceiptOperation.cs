@@ -154,18 +154,18 @@ namespace KKTServiceLib.Atol.Types.Operations.Fiscal.Receipt.CreateCorrectionRec
         /// <summary>
         /// Место проведения расчетов
         /// </summary>
+        /// <list type="bullet">
+        /// <item>Обязательное поле, если <see cref="Internet"/> имеет значение true</item>
+        /// </list>
         [Display(Name = "Место проведения расчета")]
+        [RequiredIf(nameof(Internet), true,
+            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public string PaymentsPlace { get; set; }
 
         /// <summary>
         /// Адрес расчётов
         /// </summary>
-        /// <list type="bullet">
-        /// <item>Обязательное поле, если <see cref="Internet"/> имеет значение true</item>
-        /// </list>
         [Display(Name = "Адрес расчётов")]
-        [RequiredIf(nameof(Internet), true,
-            ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public string PaymentsAddress { get; set; }
 
         /// <summary>
