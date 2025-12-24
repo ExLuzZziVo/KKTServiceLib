@@ -27,5 +27,11 @@ namespace KKTServiceLib.Atol.Types.Operations.KKT.GetMCUInfo
         /// </summary>
         [Display(Name = "Информация о микроконтроллере")]
         public MCUInfo Mcu { get; set; }
+
+        /// <summary>
+        /// Информация о принтере
+        /// </summary>
+        [Display(Name = "Информация о принтере")]
+        public PrinterInfo Printer { get; set; }
     }
 }

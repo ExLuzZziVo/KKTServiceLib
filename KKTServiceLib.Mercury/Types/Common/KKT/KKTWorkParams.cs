@@ -17,12 +17,12 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
         /// <summary>
         /// Параметры работы ККТ
         /// </summary>
-        /// <param name="encryption">Шифрование данных</param>
-        /// <param name="offlineMode">Работа в автономном режиме</param>
-        /// <param name="service">Использование для услуг</param>
-        /// <param name="bso">Автоматизированная система печати БСО</param>
-        /// <param name="internet">ККТ для расчетов только в сети Интернет</param>
-        /// <param name="autoMode">Работа в составе автоматического устройства для расчетов</param>
+        /// <param name="encryption">Признак шифрования данных</param>
+        /// <param name="offlineMode">Признак работы в автономном режиме</param>
+        /// <param name="service">Признак применения ККТ для расчетов за услуги</param>
+        /// <param name="bso">Признак автоматизированной системы печати БСО</param>
+        /// <param name="internet">Признак применения ККТ для расчетов только в сети Интернет</param>
+        /// <param name="autoMode">Признак автоматического режима</param>
         public KKTWorkParams(bool encryption, bool offlineMode, bool service, bool bso, bool internet, bool autoMode)
         {
             EncryptData = encryption;
@@ -37,63 +37,63 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
         protected internal KKTWorkParams() { }
 
         /// <summary>
-        /// Шифрование данных
+        /// Признак шифрования данных
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
-        [Display(Name = "Шифрование данных")]
+        [Display(Name = "Признак шифрования данных")]
         public bool EncryptData { get; }
 
         /// <summary>
-        /// Работа в автономном режиме
+        /// Признак работы в автономном режиме
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
-        [Display(Name = "Работа в автономном режиме")]
+        [Display(Name = "Признак работы в автономном режиме")]
         public bool Offline { get; }
 
         /// <summary>
-        /// Использование для услуг
+        /// Признак применения ККТ для расчетов за услуги
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
-        [Display(Name = "Использование для услуг")]
+        [Display(Name = "Признак применения ККТ для расчетов за услуги")]
         public bool ForService { get; }
 
         /// <summary>
-        /// Автоматизированная система печати БСО
+        /// Признак автоматизированной системы печати БСО
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
-        [Display(Name = "Автоматизированная система печати БСО")]
+        [Display(Name = "Признак автоматизированной системы печати БСО")]
         public bool ASBSO { get; }
 
         /// <summary>
-        /// ККТ для расчетов только в сети Интернет
+        /// Признак применения ККТ для расчетов только в сети Интернет
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
-        [Display(Name = "ККТ для расчетов только в сети Интернет")]
+        [Display(Name = "Признак применения ККТ для расчетов только в сети Интернет")]
         public bool ForInternet { get; }
 
         /// <summary>
-        /// Работа в составе автоматического устройства для расчетов
+        /// Признак автоматического режима
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
-        [Display(Name = "Работа в составе автоматического устройства для расчетов")]
+        [Display(Name = "Признак автоматического режима")]
         public bool Automat { get; }
 
         /// <summary>
@@ -106,12 +106,12 @@ namespace KKTServiceLib.Mercury.Types.Common.KKT
         public string AutomatNum { get; set; }
 
         /// <summary>
-        /// Продажа подакцизного товара
+        /// Признак работы с подакцизными товарами
         /// </summary>
         /// <remarks>
         /// Значение по умолчанию: false
         /// </remarks>
-        [Display(Name = "Продажа подакцизного товара")]
+        [Display(Name = "Признак работы с подакцизными товарами")]
         public bool? ForExcisableGoods { get; set; } = false;
     }
 }

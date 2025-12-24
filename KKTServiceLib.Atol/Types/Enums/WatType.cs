@@ -62,6 +62,16 @@ namespace KKTServiceLib.Atol.Types.Enums
         /// <summary>
         /// НДС 7/107
         /// </summary>
-        [Display(Name = "НДС 7/107")] Vat107
+        [Display(Name = "НДС 7/107")] Vat107,
+
+        /// <summary>
+        /// НДС 22%
+        /// </summary>
+        [Display(Name = "НДС 22%")] Vat22,
+
+        /// <summary>
+        /// НДС 22/122
+        /// </summary>
+        [Display(Name = "НДС 22/122")] Vat122
     }
 }

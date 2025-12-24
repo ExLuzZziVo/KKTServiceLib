@@ -13,7 +13,7 @@ using CoreLib.CORE.Resources;
 namespace KKTServiceLib.Atol.Types.Operations.KKT.UploadPicture
 {
     [Description("Загрузка картинки клише")]
-    public class UploadPictureOperation: Operation<bool>
+    public class UploadPictureOperation: Operation<UploadPictureResult>
     {
         /// <summary>
         /// Загрузка картинки клише
@@ -62,5 +62,32 @@ namespace KKTServiceLib.Atol.Types.Operations.KKT.UploadPicture
         [Range(1, int.MaxValue, ErrorMessageResourceType = typeof(ValidationStrings),
             ErrorMessageResourceName = "DigitRangeValuesError")]
         public int ScalePercent { get; set; } = 100;
+
+        /// <summary>
+        /// Перезаписывать картинку клише
+        /// </summary>
+        /// <remarks>
+        /// true - картинка клише перезаписывается, в ККТ картинка клише единственная, номер картинки всегда 0
+        /// <br/>
+        /// false - картинки клише добавляются в конец буфера картинок ККТ, в ККТ картинок может быть несколько, номер картинки увеличивается
+        /// <br/>
+        /// Значение по умолчанию: true
+        /// </remarks>
+        [Display(Name = "Перезаписывать картинку клише")]
+        public bool Overwrite { get; set; } = true;
+
+        /// <summary>
+        /// Смещение слева (в пикселях)
+        /// </summary>
+        /// <list type="bullet">
+        /// <item>Должно лежать в диапазоне: 0-<see cref="int.MaxValue"/></item>
+        /// </list>
+        /// <remarks>
+        /// Значение по умолчанию: 0
+        /// </remarks>
+        [Display(Name = "Смещение слева (в пикселях)")]
+        [Range(0, int.MaxValue, ErrorMessageResourceType = typeof(ValidationStrings),
+            ErrorMessageResourceName = "DigitRangeValuesError")]
+        public int PictureOffset { get; set; } = 0;
     }
 }

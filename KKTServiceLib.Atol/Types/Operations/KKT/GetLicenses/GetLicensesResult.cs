@@ -7,13 +7,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KKTServiceLib.Atol.Types.Operations.KKT.GetLicenses
 {
-    [Description("Результат запроса введенных в ККТ лицензий/кодов защиты")]
+    [Description("Результат запроса введенных в ККТ лицензий")]
     public class GetLicensesResult
     {
         /// <summary>
-        /// Лицензии/коды защиты
+        /// Лицензии
         /// </summary>
-        [Display(Name = "Лицензии/коды защиты")]
+        [Display(Name = "Лицензии")]
         public LicenseInfo[] Licenses { get; set; }
     }
 }

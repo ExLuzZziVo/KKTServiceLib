@@ -24,9 +24,9 @@ namespace KKTServiceLib.Atol.Types.Common
         /// </summary>
         /// <param name="name">Название</param>
         /// <param name="vatin">ИНН</param>
-        /// <param name="address">Адрес расчетов</param>
+        /// <param name="paymentsAddress">Адрес расчетов</param>
         /// <param name="taxationTypes">Список систем налогообложения</param>
-        public OrganizationParams(string name, string vatin, string address, ISet<TaxationType> taxationTypes)
+        public OrganizationParams(string name, string vatin, string paymentsAddress, ISet<TaxationType> taxationTypes)
         {
             if (name.IsNullOrEmptyOrWhiteSpace())
             {
@@ -46,13 +46,13 @@ namespace KKTServiceLib.Atol.Types.Common
                     nameof(vatin));
             }
 
-            if (address.IsNullOrEmptyOrWhiteSpace())
+            if (paymentsAddress.IsNullOrEmptyOrWhiteSpace())
             {
                 throw new ArgumentException(
                     string.Format(
                         ValidationStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(Address)).GetPropertyDisplayName()),
-                    nameof(address));
+                        GetType().GetProperty(nameof(PaymentsAddress)).GetPropertyDisplayName()),
+                    nameof(paymentsAddress));
             }
 
             if (taxationTypes?.Any() != true)
@@ -65,7 +65,7 @@ namespace KKTServiceLib.Atol.Types.Common
 
             Name = name;
             Vatin = vatin;
-            Address = address;
+            PaymentsAddress = paymentsAddress;
             TaxationTypes = taxationTypes;
         }
 
@@ -114,7 +114,7 @@ namespace KKTServiceLib.Atol.Types.Common
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Адрес расчетов")]
-        public string Address { get; }
+        public string PaymentsAddress { get; }
 
         /// <summary>
         /// Список систем налогообложения

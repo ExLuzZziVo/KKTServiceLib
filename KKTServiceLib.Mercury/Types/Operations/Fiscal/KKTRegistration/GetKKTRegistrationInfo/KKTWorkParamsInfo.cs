@@ -67,5 +67,32 @@ namespace KKTServiceLib.Mercury.Types.Operations.Fiscal.KKTRegistration.GetKKTRe
         /// </remarks>
         [Display(Name = "Признак применения ККТ при осуществлении деятельности по страхованию")]
         public bool? ForInsurance { get; set; } = false;
+
+        /// <summary>
+        /// Признак применения ККТ в торговом автомате
+        /// </summary>
+        /// <remarks>
+        /// Значение по умолчанию: false
+        /// </remarks>
+        [Display(Name = "Признак применения ККТ в торговом автомате")]
+        public bool? ForVendingAutomat { get; set; } = false;
+
+        /// <summary>
+        /// Признак применения ККТ в общественном питании
+        /// </summary>
+        /// <remarks>
+        /// Значение по умолчанию: false
+        /// </remarks>
+        [Display(Name = "Признак применения ККТ в общественном питании")]
+        public bool? ForCatering { get; set; } = false;
+
+        /// <summary>
+        /// Признак применения ККТ в оптовой торговле с организациями и ИП
+        /// </summary>
+        /// <remarks>
+        /// Значение по умолчанию: false
+        /// </remarks>
+        [Display(Name = "Признак применения ККТ в оптовой торговле с организациями и ИП")]
+        public bool? ForWholesaleTrade { get; set; } = false;
     }
 }

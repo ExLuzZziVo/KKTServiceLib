@@ -21,29 +21,29 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// Параметры ККТ
         /// </summary>
         /// <param name="registrationNumber">Регистрационный номер</param>
-        /// <param name="address">Место расчетов</param>
-        /// <param name="encryption">Шифрование данных</param>
-        /// <param name="offlineMode">Работа в автономном режиме</param>
-        /// <param name="service">Использование для услуг</param>
-        /// <param name="bso">Автоматизированная система печати БСО</param>
-        /// <param name="internet">ККТ для расчетов только в сети Интернет</param>
+        /// <param name="paymentsPlace">Место расчетов</param>
+        /// <param name="encryption">Признак шифрования данных</param>
+        /// <param name="offlineMode">Признак работы в автономном режиме</param>
+        /// <param name="service">Признак применения ККТ для расчетов за услуги</param>
+        /// <param name="bso">Признак автоматизированной системы печати БСО</param>
+        /// <param name="internet">Признак применения ККТ для расчетов только в сети Интернет</param>
         /// <param name="autoMode">Признак автоматического режима</param>
         /// <param name="fnsUrl">Адрес сайта ФНС</param>
-        /// <param name="machineInstallation">Признак установки принтера в автомате</param>
-        /// <param name="excise">Продажа подакцизного товара</param>
-        /// <param name="gambling">Признак проведения азартных игр</param>
-        /// <param name="lottery">Признак проведения лотереи</param>
+        /// <param name="machineInstallation">Признак работы в составе автоматического устройства для расчётов</param>
+        /// <param name="excise">Признак работы с подакцизными товарами</param>
+        /// <param name="gambling">Признак применения ККТ для приёма ставок и выплате выигрышей при проведении азартных игр</param>
+        /// <param name="lottery">Признак применения ККТ для реализации лотерейных билетов и выплате выигрышей при проведении лотерей</param>
         /// <param name="defaultTaxationType">Система налогообложения по умолчанию</param>
         /// <param name="ofdChannel">Канал обмена с ОФД</param>
         /// <param name="ffdVersion">Версия ФФД</param>
-        /// <param name="insurance">Признак осуществления страховой деятельности</param>
-        /// <param name="marking">Признак торговли маркированными товарами</param>
-        /// <param name="pawnShop">Признак осуществления ломбардной деятельности</param>
-        /// <param name="vending">Признак применения в торговом автомате</param>
-        /// <param name="catering">Признак осуществления услуг общ. питания</param>
-        /// <param name="wholesale">Признак оптовой торговли</param>
+        /// <param name="insurance">Признак применения ККТ при осуществлении деятельности по страхованию</param>
+        /// <param name="marking">Признак работы с маркированными товарами</param>
+        /// <param name="pawnShop">Признак применения ККТ в ломбардах</param>
+        /// <param name="vending">Признак применения ККТ в торговом автомате</param>
+        /// <param name="catering">Признак применения ККТ в общественном питании</param>
+        /// <param name="wholesale">Признак применения ККТ в оптовой торговле с организациями и ИП</param>
         public KKTParams(string registrationNumber,
-            string address,
+            string paymentsPlace,
             bool encryption,
             bool offlineMode,
             bool service,
@@ -74,12 +74,12 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
                     nameof(registrationNumber));
             }
 
-            if (address.IsNullOrEmptyOrWhiteSpace())
+            if (paymentsPlace.IsNullOrEmptyOrWhiteSpace())
             {
                 throw new ArgumentException(
                     string.Format(ValidationStrings.ResourceManager.GetString("StringFormatError"),
-                        GetType().GetProperty(nameof(address)).GetPropertyDisplayName()),
-                    nameof(address));
+                        GetType().GetProperty(nameof(paymentsPlace)).GetPropertyDisplayName()),
+                    nameof(paymentsPlace));
             }
 
             if (fnsUrl.IsNullOrEmptyOrWhiteSpace() || !Regex.IsMatch(fnsUrl, RegexExtensions.UrlPattern))
@@ -91,7 +91,7 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
             }
 
             RegistrationNumber = registrationNumber;
-            PaymentsAddress = address;
+            PaymentsPlace = paymentsPlace;
             FnsUrl = fnsUrl;
             Encryption = encryption;
             OfflineMode = offlineMode;
@@ -142,43 +142,43 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         public string FnsUrl { get; }
 
         /// <summary>
-        /// Работа в автономном режиме
+        /// Признак работы в автономном режиме
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
-        [Display(Name = "Работа в автономном режиме")]
+        [Display(Name = "Признак работы в автономном режиме")]
         public bool OfflineMode { get; }
 
         /// <summary>
-        /// Признак установки принтера в автомате
+        /// Признак работы в составе автоматического устройства для расчётов
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
-        [Display(Name = "Признак установки принтера в автомате")]
+        [Display(Name = "Признак работы в составе автоматического устройства для расчётов")]
         public bool MachineInstallation { get; }
 
         /// <summary>
-        /// Автоматизированная система печати БСО
+        /// Признак автоматизированной системы печати БСО
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
-        [Display(Name = "Автоматизированная система печати БСО")]
+        [Display(Name = "Признак автоматизированной системы печати БСО")]
         public bool Bso { get; }
 
         /// <summary>
-        /// Шифрование данных
+        /// Признак шифрования данных
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
-        [Display(Name = "Шифрование данных")]
+        [Display(Name = "Признак шифрования данных")]
         public bool Encryption { get; }
 
         /// <summary>
@@ -198,53 +198,53 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         public string MachineNumber { get; set; }
 
         /// <summary>
-        /// ККТ для расчетов только в сети Интернет
+        /// Признак применения ККТ для расчетов только в сети Интернет
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
-        [Display(Name = "ККТ для расчетов только в сети Интернет")]
+        [Display(Name = "Признак применения ККТ для расчетов только в сети Интернет")]
         public bool Internet { get; }
 
         /// <summary>
-        /// Использование для услуг
+        /// Признак применения ККТ для расчетов за услуги
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
-        [Display(Name = "Использование для услуг")]
+        [Display(Name = "Признак применения ККТ для расчетов за услуги")]
         public bool Service { get; }
 
         /// <summary>
-        /// Продажа подакцизного товара
+        /// Признак работы с подакцизными товарами
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
-        [Display(Name = "Продажа подакцизного товара")]
+        [Display(Name = "Признак работы с подакцизными товарами")]
         public bool Excise { get; }
 
         /// <summary>
-        /// Признак проведения азартных игр
+        /// Признак применения ККТ для приёма ставок и выплате выигрышей при проведении азартных игр
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
-        [Display(Name = "Признак проведения азартных игр")]
+        [Display(Name = "Признак применения ККТ для приёма ставок и выплате выигрышей при проведении азартных игр")]
         public bool Gambling { get; }
 
         /// <summary>
-        /// Признак проведения лотереи
+        /// Признак применения ККТ для реализации лотерейных билетов и выплате выигрышей при проведении лотерей
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
-        [Display(Name = "Признак проведения лотереи")]
+        [Display(Name = "Признак применения ККТ для реализации лотерейных билетов и выплате выигрышей при проведении лотерей")]
         public bool Lottery { get; }
 
         /// <summary>
@@ -285,65 +285,65 @@ namespace KKTServiceLib.Atol.Types.Common.KKT
         /// </list>
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         [Display(Name = "Место расчетов")]
-        public string PaymentsAddress { get; }
+        public string PaymentsPlace { get; }
 
         /// <summary>
-        /// Признак осуществления страховой деятельности
+        /// Признак применения ККТ при осуществлении деятельности по страхованию
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Display(Name = "Признак осуществления страховой деятельности")]
+        [Display(Name = "Признак применения ККТ при осуществлении деятельности по страхованию")]
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public bool Insurance { get; }
 
         /// <summary>
-        /// Признак торговли маркированными товарами
+        /// Признак работы с маркированными товарами
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Display(Name = "Признак торговли маркированными товарами")]
+        [Display(Name = "Признак работы с маркированными товарами")]
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public bool Marking { get; }
 
         /// <summary>
-        /// Признак осуществления ломбардной деятельности
+        /// Признак применения ККТ в ломбардах
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Display(Name = "Признак осуществления ломбардной деятельности")]
+        [Display(Name = "Признак применения ККТ в ломбардах")]
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public bool PawnShop { get; }
 
         /// <summary>
-        /// Признак применения в торговом автомате
+        /// Признак применения ККТ в торговом автомате
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Display(Name = "Признак применения в торговом автомате")]
+        [Display(Name = "Признак применения ККТ в торговом автомате")]
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public bool Vending { get; }
 
         /// <summary>
-        /// Признак осуществления услуг общ. питания
+        /// Признак применения ККТ в общественном питании
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Display(Name = "Признак осуществления услуг общ. питания")]
+        [Display(Name = "Признак применения ККТ в общественном питании")]
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public bool Catering { get; }
 
         /// <summary>
-        /// Признак оптовой торговли
+        /// Признак применения ККТ в оптовой торговле с организациями и ИП
         /// </summary>
         /// <list type="bullet">
         /// <item>Обязательное поле</item>
         /// </list>
-        [Display(Name = "Признак оптовой торговли")]
+        [Display(Name = "Признак применения ККТ в оптовой торговле с организациями и ИП")]
         [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = "RequiredError")]
         public bool Wholesale { get; }
     }

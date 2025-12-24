@@ -6,11 +6,11 @@ using System.ComponentModel;
 
 namespace KKTServiceLib.Atol.Types.Operations.KKT.GetLicenses
 {
-    [Description("Запрос введенных в ККТ лицензий/кодов защиты")]
+    [Description("Запрос введенных в ККТ лицензий")]
     public class GetLicensesOperation: Operation<GetLicensesResult>
     {
         /// <summary>
-        /// Запрос введенных в ККТ лицензий/кодов защиты
+        /// Запрос введенных в ККТ лицензий
         /// </summary>
         public GetLicensesOperation(): base("getLicenses") { }
     }
